@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    haumail:{ 
+    email:{ 
         type: mongoose.SchemaTypes.Email, 
         required: true
     },

@@ -7,6 +7,7 @@ import { ROLES } from "../../config/roles"
 import useTitle from "../../hooks/useTitle"
 
 const USER_REGEX = /^[A-z]{3,20}$/
+const EMAIL_REGEX =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
 const NewUserForm = () => {
@@ -23,6 +24,8 @@ const NewUserForm = () => {
 
     const [username, setUsername] = useState('')
     const [validUsername, setValidUsername] = useState(false)
+    const [email, setEmail] = useState('')
+    const [validEmail, setValidEmail] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
     const [roles, setRoles] = useState(["Student"])
@@ -32,12 +35,17 @@ const NewUserForm = () => {
     }, [username])
 
     useEffect(() => {
+        setValidEmail(EMAIL_REGEX.test(email))
+    }, [email])
+
+    useEffect(() => {
         setValidPassword(PWD_REGEX.test(password))
     }, [password])
 
     useEffect(() => {
         if (isSuccess) {
             setUsername('')
+            setEmail('')
             setPassword('')
             setRoles([])
             navigate('/dash/users')
@@ -45,6 +53,7 @@ const NewUserForm = () => {
     }, [isSuccess, navigate])
 
     const onUsernameChanged = e => setUsername(e.target.value)
+    const onEmailChanged = e => setEmail(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
 
     const onRolesChanged = e => {
@@ -55,12 +64,12 @@ const NewUserForm = () => {
         setRoles(values)
     }
 
-    const canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
+    const canSave = [roles.length, validEmail, validUsername, validPassword].every(Boolean) && !isLoading
 
     const onSaveUserClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewUser({ username, password, roles })
+            await addNewUser({ username, email, password, roles })
         }
     }
 
@@ -76,6 +85,7 @@ const NewUserForm = () => {
 
     const errClass = isError ? "errmsg" : "offscreen"
     const validUserClass = !validUsername ? 'form__input--incomplete' : ''
+    const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
     const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
 
@@ -107,6 +117,18 @@ const NewUserForm = () => {
                     autoComplete="off"
                     value={username}
                     onChange={onUsernameChanged}
+                />
+
+                <label className="form__label" htmlFor="username">
+                    HAU Email: <span className="nowrap">[@hau.edu.ph]</span></label>
+                <input
+                    className={`form__input ${validEmailClass}`}
+                    id="email"
+                    name="email"
+                    type="text"
+                    autoComplete="off"
+                    value={email}
+                    onChange={onEmailChanged}
                 />
 
                 <label className="form__label" htmlFor="password">
