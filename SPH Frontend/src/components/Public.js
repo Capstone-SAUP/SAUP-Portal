@@ -4,15 +4,16 @@ const Public = () => {
     const content = (
         <section className="public">
             <header>
-                <h1>Welcome to <span className="nowrap">SAUP Portal!</span></h1>
+                <h1>Welcome to <span className="nowrap">Office of the Community Extension Services (OCES)!</span></h1>
             </header>
             <main className="public__main">
-                <p>Located in Beautiful Downtown Foo City, Dan D. Repairs  provides a trained staff ready to meet your tech repair needs.</p>
+                <p>Head, Office of the Community Extension Services and National Service Training Program</p>
                 <address className="public__addr">
-                    Dan D. Repairs<br />
-                    555 Foo Drive<br />
-                    Foo City, CA 12345<br />
-                    <a href="tel:+15555555555">(555) 555-5555</a>
+                    Ms. Shirley Mae B. Marcos<br />
+                    smbarrera@hau.edu.ph<br />
+                    Monday to Friday 8:00 a.m. to 5:00 p.m.<br />
+                    <a href="tel:045887-5478">(045) 887-5478</a>
+                    
                 </address>
                 <br />
             </main>
