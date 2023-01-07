@@ -25,16 +25,16 @@ const EditUserForm = ({ user }) => {
 
     const navigate = useNavigate()
 
-    const [username, setUsername] = useState(user.username)
-    const [validUsername, setValidUsername] = useState(false)
+    const [user_id, setUser_id] = useState(user.user_id)
+    const [validUser_id, setValidUser_id] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
     const [roles, setRoles] = useState(user.roles)
     const [active, setActive] = useState(user.active)
 
     useEffect(() => {
-        setValidUsername(USER_REGEX.test(username))
-    }, [username])
+        setValidUser_id(USER_REGEX.test(user_id))
+    }, [user_id])
 
     useEffect(() => {
         setValidPassword(PWD_REGEX.test(password))
@@ -43,7 +43,7 @@ const EditUserForm = ({ user }) => {
     useEffect(() => {
         console.log(isSuccess)
         if (isSuccess || isDelSuccess) {
-            setUsername('')
+            setUser_id('')
             setPassword('')
             setRoles([])
             navigate('/dash/users')
@@ -51,7 +51,7 @@ const EditUserForm = ({ user }) => {
 
     }, [isSuccess, isDelSuccess, navigate])
 
-    const onUsernameChanged = e => setUsername(e.target.value)
+    const onUser_idChanged = e => setUser_id(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
 
     const onRolesChanged = e => {
@@ -66,9 +66,9 @@ const EditUserForm = ({ user }) => {
 
     const onSaveUserClicked = async (e) => {
         if (password) {
-            await updateUser({ id: user.id, username, password, roles, active })
+            await updateUser({ id: user.id, user_id, password, roles, active })
         } else {
-            await updateUser({ id: user.id, username, roles, active })
+            await updateUser({ id: user.id, user_id, roles, active })
         }
     }
 
@@ -88,13 +88,13 @@ const EditUserForm = ({ user }) => {
 
     let canSave
     if (password) {
-        canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
+        canSave = [roles.length, validUser_id, validPassword].every(Boolean) && !isLoading
     } else {
-        canSave = [roles.length, validUsername].every(Boolean) && !isLoading
+        canSave = [roles.length, validUser_id].every(Boolean) && !isLoading
     }
 
     const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
-    const validUserClass = !validUsername ? 'form__input--incomplete' : ''
+    const validUserClass = !validUser_id ? 'form__input--incomplete' : ''
     const validPwdClass = password && !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
 
@@ -126,16 +126,16 @@ const EditUserForm = ({ user }) => {
                         </button>
                     </div>
                 </div>
-                <label className="form__label" htmlFor="username">
-                    Username: <span className="nowrap">[3-20 letters]</span></label>
+                <label className="form__label" htmlFor="user_id">
+                    User_id: <span className="nowrap">[3-20 letters]</span></label>
                 <input
                     className={`form__input ${validUserClass}`}
-                    id="username"
-                    name="username"
+                    id="user_id"
+                    name="user_id"
                     type="text"
                     autoComplete="off"
-                    value={username}
-                    onChange={onUsernameChanged}
+                    value={user_id}
+                    onChange={onUser_idChanged}
                 />
 
                 <label className="form__label" htmlFor="password">

@@ -237,7 +237,7 @@ tr {
 
 .note__created,
 .note__updated,
-.note__username {
+.note__user_id {
   display: none;
 }
 
@@ -368,7 +368,7 @@ tr {
 
   .note__created,
   .note__updated,
-  .note__username {
+  .note__user_id {
     display: block
   }
 
