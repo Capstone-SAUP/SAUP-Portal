@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 require('mongoose-type-email');
 
 const userSchema = new mongoose.Schema({
-    student_id: {
+    username: {
         type: Number,
         required: true
     },
-    //student_id: {
+    //username: {
     //    type: String,
     //    required: true
     //},

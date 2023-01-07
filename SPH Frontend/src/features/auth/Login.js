@@ -12,7 +12,7 @@ const Login = () => {
 
     const userRef = useRef()
     const errRef = useRef()
-    const [student_id, setstudent_id] = useState('')
+    const [username, setusername] = useState('')
     const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [persist, setPersist] = usePersist()
@@ -28,22 +28,22 @@ const Login = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [student_id, password])
+    }, [username, password])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { accessToken } = await login({ student_id, password }).unwrap()
+            const { accessToken } = await login({ username, password }).unwrap()
             dispatch(setCredentials({ accessToken }))
-            setstudent_id('')
+            setusername('')
             setPassword('')
             navigate('/dash')
         } catch (err) {
             if (!err.status) {
                 setErrMsg('No Server Response');
             } else if (err.status === 400) {
-                setErrMsg('Missing student_id or Password');
+                setErrMsg('Missing username or Password');
             } else if (err.status === 401) {
                 setErrMsg('Unauthorized');
             } else {
@@ -53,7 +53,7 @@ const Login = () => {
         }
     }
 
-    const handleUserInput = (e) => setstudent_id(e.target.value)
+    const handleUserInput = (e) => setusername(e.target.value)
     const handlePwdInput = (e) => setPassword(e.target.value)
     const handleToggle = () => setPersist(prev => !prev)
 
@@ -70,13 +70,13 @@ const Login = () => {
                 <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
 
                 <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="student_id">Student ID:</label>
+                    <label htmlFor="username">Student ID:</label>
                     <input
                         className="form__input"
                         type="text"
-                        id="student_id"
+                        id="username"
                         ref={userRef}
-                        value={student_id}
+                        value={username}
                         onChange={handleUserInput}
                         autoComplete="off"
                         required

@@ -6,7 +6,7 @@ import { faSave } from "@fortawesome/free-solid-svg-icons"
 import { ROLES } from "../../config/roles"
 import useTitle from "../../hooks/useTitle"
 
-const USER_REGEX = /^[A-z]{3,20}$/
+const USER_REGEX = /^[0-9]{3,20}$/
 const EMAIL_REGEX =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
@@ -22,8 +22,8 @@ const NewUserForm = () => {
 
     const navigate = useNavigate()
 
-    const [student_id, setstudent_id] = useState('')
-    const [validstudent_id, setValidstudent_id] = useState(false)
+    const [username, setusername] = useState('')
+    const [validusername, setValidusername] = useState(false)
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false)
     const [password, setPassword] = useState('')
@@ -31,8 +31,8 @@ const NewUserForm = () => {
     const [roles, setRoles] = useState(["Student"])
 
     useEffect(() => {
-        setValidstudent_id(USER_REGEX.test(student_id))
-    }, [student_id])
+        setValidusername(USER_REGEX.test(username))
+    }, [username])
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email))
@@ -44,7 +44,7 @@ const NewUserForm = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            setstudent_id('')
+            setusername('')
             setEmail('')
             setPassword('')
             setRoles([])
@@ -52,7 +52,7 @@ const NewUserForm = () => {
         }
     }, [isSuccess, navigate])
 
-    const onstudent_idChanged = e => setstudent_id(e.target.value)
+    const onusernameChanged = e => setusername(e.target.value)
     const onEmailChanged = e => setEmail(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
 
@@ -64,12 +64,12 @@ const NewUserForm = () => {
         setRoles(values)
     }
 
-    const canSave = [roles.length, validEmail, validstudent_id, validPassword].every(Boolean) && !isLoading
+    const canSave = [roles.length, validEmail, validusername, validPassword].every(Boolean) && !isLoading
 
     const onSaveUserClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewUser({ student_id, email, password, roles })
+            await addNewUser({ username, email, password, roles })
         }
     }
 
@@ -84,7 +84,7 @@ const NewUserForm = () => {
     })
 
     const errClass = isError ? "errmsg" : "offscreen"
-    const validUserClass = !validstudent_id ? 'form__input--incomplete' : ''
+    const validUserClass = !validusername ? 'form__input--incomplete' : ''
     const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
     const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
@@ -107,19 +107,19 @@ const NewUserForm = () => {
                         </button>
                     </div>
                 </div>
-                <label className="form__label" htmlFor="student_id">
-                    student_id: <span className="nowrap">[3-20 letters]</span></label>
+                <label className="form__label" htmlFor="username">
+                    username: <span className="nowrap">[3-20 letters]</span></label>
                 <input
                     className={`form__input ${validUserClass}`}
-                    id="student_id"
-                    name="student_id"
+                    id="username"
+                    name="username"
                     type="text"
                     autoComplete="off"
-                    value={student_id}
-                    onChange={onstudent_idChanged}
+                    value={username}
+                    onChange={onusernameChanged}
                 />
 
-                <label className="form__label" htmlFor="student_id">
+                <label className="form__label" htmlFor="username">
                     HAU Email: <span className="nowrap">[@hau.edu.ph]</span></label>
                 <input
                     className={`form__input ${validEmailClass}`}
