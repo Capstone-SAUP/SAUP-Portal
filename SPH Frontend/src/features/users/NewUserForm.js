@@ -22,8 +22,8 @@ const NewUserForm = () => {
 
     const navigate = useNavigate()
 
-    const [username, setUsername] = useState('')
-    const [validUsername, setValidUsername] = useState(false)
+    const [student_id, setstudent_id] = useState('')
+    const [validstudent_id, setValidstudent_id] = useState(false)
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false)
     const [password, setPassword] = useState('')
@@ -31,8 +31,8 @@ const NewUserForm = () => {
     const [roles, setRoles] = useState(["Student"])
 
     useEffect(() => {
-        setValidUsername(USER_REGEX.test(username))
-    }, [username])
+        setValidstudent_id(USER_REGEX.test(student_id))
+    }, [student_id])
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email))
@@ -44,7 +44,7 @@ const NewUserForm = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            setUsername('')
+            setstudent_id('')
             setEmail('')
             setPassword('')
             setRoles([])
@@ -52,7 +52,7 @@ const NewUserForm = () => {
         }
     }, [isSuccess, navigate])
 
-    const onUsernameChanged = e => setUsername(e.target.value)
+    const onstudent_idChanged = e => setstudent_id(e.target.value)
     const onEmailChanged = e => setEmail(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
 
@@ -64,12 +64,12 @@ const NewUserForm = () => {
         setRoles(values)
     }
 
-    const canSave = [roles.length, validEmail, validUsername, validPassword].every(Boolean) && !isLoading
+    const canSave = [roles.length, validEmail, validstudent_id, validPassword].every(Boolean) && !isLoading
 
     const onSaveUserClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewUser({ username, email, password, roles })
+            await addNewUser({ student_id, email, password, roles })
         }
     }
 
@@ -84,7 +84,7 @@ const NewUserForm = () => {
     })
 
     const errClass = isError ? "errmsg" : "offscreen"
-    const validUserClass = !validUsername ? 'form__input--incomplete' : ''
+    const validUserClass = !validstudent_id ? 'form__input--incomplete' : ''
     const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
     const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
@@ -107,19 +107,19 @@ const NewUserForm = () => {
                         </button>
                     </div>
                 </div>
-                <label className="form__label" htmlFor="username">
-                    Username: <span className="nowrap">[3-20 letters]</span></label>
+                <label className="form__label" htmlFor="student_id">
+                    student_id: <span className="nowrap">[3-20 letters]</span></label>
                 <input
                     className={`form__input ${validUserClass}`}
-                    id="username"
-                    name="username"
+                    id="student_id"
+                    name="student_id"
                     type="text"
                     autoComplete="off"
-                    value={username}
-                    onChange={onUsernameChanged}
+                    value={student_id}
+                    onChange={onstudent_idChanged}
                 />
 
-                <label className="form__label" htmlFor="username">
+                <label className="form__label" htmlFor="student_id">
                     HAU Email: <span className="nowrap">[@hau.edu.ph]</span></label>
                 <input
                     className={`form__input ${validEmailClass}`}
