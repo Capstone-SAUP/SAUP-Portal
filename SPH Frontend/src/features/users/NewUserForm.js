@@ -7,6 +7,8 @@ import { ROLES } from "../../config/roles"
 import useTitle from "../../hooks/useTitle"
 
 const USER_REGEX = /^[0-9]{3,20}$/
+const FNAME_REGEX = /^[a-zA-Z]{3,20}$/
+const LNAME_REGEX = /^[a-zA-Z]{3,20}$/
 const EMAIL_REGEX =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
@@ -22,8 +24,12 @@ const NewUserForm = () => {
 
     const navigate = useNavigate()
 
-    const [user_id, setuser_id] = useState('')
+    const [user_id, setUser_id] = useState('')
     const [validuser_id, setValiduser_id] = useState(false)
+    const [firstname, setFirstname] = useState('')
+    const [validFirstname, setValidFirstname] = useState(false)
+    const [lastname, setLastname] = useState('')
+    const [validLastname, setValidLastname] = useState(false)
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false)
     const [password, setPassword] = useState('')
@@ -35,6 +41,14 @@ const NewUserForm = () => {
     }, [user_id])
 
     useEffect(() => {
+        setValidLastname(LNAME_REGEX.test(lastname))
+    }, [lastname])
+
+    useEffect(() => {
+        setValidFirstname(FNAME_REGEX.test(firstname))
+    }, [firstname])
+    
+    useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email))
     }, [email])
 
@@ -44,7 +58,9 @@ const NewUserForm = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            setuser_id('')
+            setUser_id('')
+            setLastname('')
+            setFirstname('')
             setEmail('')
             setPassword('')
             setRoles([])
@@ -52,7 +68,9 @@ const NewUserForm = () => {
         }
     }, [isSuccess, navigate])
 
-    const onuser_idChanged = e => setuser_id(e.target.value)
+    const onUser_idChanged = e => setUser_id(e.target.value)
+    const onLastnameChanged = e => setLastname(e.target.value)
+    const onFirstnameChanged = e => setFirstname(e.target.value)
     const onEmailChanged = e => setEmail(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
 
@@ -64,12 +82,12 @@ const NewUserForm = () => {
         setRoles(values)
     }
 
-    const canSave = [roles.length, validEmail, validuser_id, validPassword].every(Boolean) && !isLoading
+    const canSave = [roles.length, validLastname, validFirstname, validEmail, validuser_id, validPassword].every(Boolean) && !isLoading
 
     const onSaveUserClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewUser({ user_id, email, password, roles })
+            await addNewUser({ user_id, lastname, firstname, email, password, roles })
         }
     }
 
@@ -85,6 +103,8 @@ const NewUserForm = () => {
 
     const errClass = isError ? "errmsg" : "offscreen"
     const validUserClass = !validuser_id ? 'form__input--incomplete' : ''
+    const validLastnameClass = !validLastname ? 'form__input--incomplete' : ''
+    const validFirstnameClass = !validFirstname ? 'form__input--incomplete' : ''
     const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
     const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
@@ -117,10 +137,36 @@ const NewUserForm = () => {
                     type="text"
                     autoComplete="off"
                     value={user_id}
-                    onChange={onuser_idChanged}
+                    onChange={onUser_idChanged}
                 />
 
-                <label className="form__label" htmlFor="user_id">
+                <label className="form__label" htmlFor="first_name">
+                    First Name:</label>
+                <input
+                    className={`form__input ${validFirstnameClass}`}
+                    onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
+                    id="fname"
+                    name="fname"
+                    type="text"
+                    autoComplete="off"
+                    value={firstname}
+                    onChange={onFirstnameChanged}
+                />
+                
+                <label className="form__label" htmlFor="last_name">
+                    Last Name:</label>
+                <input
+                    className={`form__input ${validLastnameClass}`}
+                    onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
+                    id="lname"
+                    name="lname"
+                    type="text"
+                    autoComplete="off"
+                    value={lastname}
+                    onChange={onLastnameChanged}
+                />
+
+                <label className="form__label" htmlFor="email">
                     HAU Email: <span className="nowrap">[@hau.edu.ph]</span></label>
                 <input
                     className={`form__input ${validEmailClass}`}
