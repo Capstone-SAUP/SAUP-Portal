@@ -7,7 +7,7 @@ import PulseLoader from 'react-spinners/PulseLoader'
 const NotesList = () => {
     useTitle('SAUP Portal: Notes List')
 
-    const { username, isManager, isAdmin } = useAuth()
+    const { user_id, isManager, isAdmin } = useAuth()
 
     const {
         data: notes,
@@ -36,7 +36,7 @@ const NotesList = () => {
         if (isManager || isAdmin) {
             filteredIds = [...ids]
         } else {
-            filteredIds = ids.filter(noteId => entities[noteId].username === username)
+            filteredIds = ids.filter(noteId => entities[noteId].user_id === user_id)
         }
 
         const tableContent = ids?.length && filteredIds.map(noteId => <Note key={noteId} noteId={noteId} />)
@@ -45,11 +45,11 @@ const NotesList = () => {
             <table className="table table--notes">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th note__status">Username</th>
+                        <th scope="col" className="table__th note__status">User_id</th>
                         <th scope="col" className="table__th note__created">Created</th>
                         <th scope="col" className="table__th note__updated">Updated</th>
                         <th scope="col" className="table__th note__title">Title</th>
-                        <th scope="col" className="table__th note__username">Owner</th>
+                        <th scope="col" className="table__th note__user_id">Owner</th>
                         <th scope="col" className="table__th note__edit">Edit</th>
                     </tr>
                 </thead>

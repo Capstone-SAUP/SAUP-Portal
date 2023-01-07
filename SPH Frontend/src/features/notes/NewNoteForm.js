@@ -46,7 +46,7 @@ const NewNoteForm = ({ users }) => {
             <option
                 key={user.id}
                 value={user.id}
-            > {user.username}</option >
+            > {user.user_id}</option >
         )
     })
 
@@ -93,11 +93,11 @@ const NewNoteForm = ({ users }) => {
                     onChange={onTextChanged}
                 />
 
-                <label className="form__label form__checkbox-container" htmlFor="username">
+                <label className="form__label form__checkbox-container" htmlFor="user_id">
                     ASSIGNED TO:</label>
                 <select
-                    id="username"
-                    name="username"
+                    id="user_id"
+                    name="user_id"
                     className="form__select"
                     value={userId}
                     onChange={onUserIdChanged}
