@@ -1,5 +1,5 @@
 {
-  "name": "SAUP Portal HAU",
+  "name": "SAUP-Portal-HAU",
   "version": "0.1.0",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
