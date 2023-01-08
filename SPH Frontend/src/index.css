@@ -1,4 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@700&display=swap');
+
 
 * {
   margin: 0;
@@ -66,14 +73,11 @@
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   min-height: 100vh;
-  background-color: var(--BGCOLOR);
   color: var(--COLOR);
-  background-image: url('./img/background.jpg');
   background-size: cover;
-  background-position: top right;
-  background-blend-mode: multiply;
+
 }
 
 input,

@@ -6,6 +6,7 @@ import { useLoginMutation } from './authApiSlice'
 import usePersist from '../../hooks/usePersist'
 import useTitle from '../../hooks/useTitle'
 import PulseLoader from 'react-spinners/PulseLoader'
+import '../../index.css'
 
 const Login = () => {
     useTitle('Employee Login')
@@ -62,18 +63,17 @@ const Login = () => {
     if (isLoading) return <PulseLoader color={"#FFF"} />
 
     const content = (
-        <section className="public">
-            <header>
-                <h1>Employee Login</h1>
-            </header>
-            <main className="login">
+        <section className="">
+            <main className="">
                 <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
-
-                <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="user_id">Student ID:</label>
+                <img className=' w-1/2 h-screen float-left mix-blend-multiply object-cover 'src={require('../../img/background.jpg')} alt='background'></img>
+                <form className="w-2xl grid place-content-center" onSubmit={handleSubmit}>
+                <br></br>
+                <h1 className="text-5xl font-bold pb-2 text-black mb-4 font-sans">Sign <span className="text-rose-900">In</span></h1>
+                    <label className="mb-1 text-black" htmlFor="user_id">Student ID:</label>
                     <input
-                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-                        className="form__input"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}                     
                         type="text"
                         id="user_id"
                         ref={userRef}
@@ -82,23 +82,25 @@ const Login = () => {
                         autoComplete="off"
                         required
                     />
-
-                    <label htmlFor="password">Password:</label>
+                    <br></br>
+                    <label  className="mb-1 text-black" htmlFor="password">Password:</label>
                     <input
-                        className="form__input"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         type="password"
                         id="password"
                         onChange={handlePwdInput}
                         value={password}
                         required
                     />
-                    <button className="form__submit-button">Sign In</button>
+                                        <br></br>
 
+                    <button className="form__submit-button bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl focus:outline-none focus:shadow-outline justify-center">Sign In</button>
 
-                    <label htmlFor="persist" className="form__persist">
+                    <br></br>
+                    <label htmlFor="persist" className="form__persist text-black">
                         <input
                             type="checkbox"
-                            className="form__checkbox"
+                            className="checkbox "
                             id="persist"
                             onChange={handleToggle}
                             checked={persist}
@@ -107,9 +109,11 @@ const Login = () => {
                     </label>
                 </form>
             </main>
-            <footer>
-                <Link to="/">Back to Home</Link>
-            </footer>
+
+           {/* <footer> 
+                <Link className='text-gray-900' to="/">Back to Home</Link>
+            </footer> */}
+            
         </section>
     )
 
