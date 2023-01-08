@@ -66,23 +66,14 @@ const Login = () => {
         <section className="">
             <main className="">
                 <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
-<<<<<<< HEAD
-                <div className='bg-gradient-to-tl from-rose-700 to-rose-900'>
-                <img className=' w-1/2 h-screen float-left mix-blend-multiply object-cover 'src={require('../../img/background.jpg')} alt='background'></img></div>
+                <img className=' w-1/2 h-screen float-left mix-blend-multiply object-cover 'src={require('../../img/background.jpg')} alt='background'></img>
                 <form className="w-2xl grid place-content-center" onSubmit={handleSubmit}>
-                    <br></br>
+                <br></br>
                 <h1 className="text-5xl font-bold pb-2 text-black mb-4 font-sans">Sign <span className="text-rose-900">In</span></h1>
-                    <label className="mb-1 text-black" htmlFor="username">Student ID:</label>
+                    <label className="mb-1 text-black" htmlFor="user_id">Student ID:</label>
                     <input
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-=======
-
-                <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="user_id">Student ID:</label>
-                    <input
-                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-                        className="form__input"
->>>>>>> main
+                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}                     
                         type="text"
                         id="user_id"
                         ref={userRef}
