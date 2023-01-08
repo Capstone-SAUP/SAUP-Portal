@@ -6,7 +6,9 @@ import { faSave } from "@fortawesome/free-solid-svg-icons"
 import { ROLES } from "../../config/roles"
 import useTitle from "../../hooks/useTitle"
 
-const USER_REGEX = /^[A-z]{3,20}$/
+const USER_REGEX = /^[0-9]{3,20}$/
+const FNAME_REGEX = /^[a-zA-Z]{3,20}$/
+const LNAME_REGEX = /^[a-zA-Z]{3,20}$/
 const EMAIL_REGEX =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
@@ -22,8 +24,12 @@ const NewUserForm = () => {
 
     const navigate = useNavigate()
 
-    const [username, setUsername] = useState('')
-    const [validUsername, setValidUsername] = useState(false)
+    const [user_id, setUser_id] = useState('')
+    const [validuser_id, setValiduser_id] = useState(false)
+    const [firstname, setFirstname] = useState('')
+    const [validFirstname, setValidFirstname] = useState(false)
+    const [lastname, setLastname] = useState('')
+    const [validLastname, setValidLastname] = useState(false)
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false)
     const [password, setPassword] = useState('')
@@ -31,9 +37,17 @@ const NewUserForm = () => {
     const [roles, setRoles] = useState(["Student"])
 
     useEffect(() => {
-        setValidUsername(USER_REGEX.test(username))
-    }, [username])
+        setValiduser_id(USER_REGEX.test(user_id))
+    }, [user_id])
 
+    useEffect(() => {
+        setValidLastname(LNAME_REGEX.test(lastname))
+    }, [lastname])
+
+    useEffect(() => {
+        setValidFirstname(FNAME_REGEX.test(firstname))
+    }, [firstname])
+    
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email))
     }, [email])
@@ -44,7 +58,9 @@ const NewUserForm = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            setUsername('')
+            setUser_id('')
+            setLastname('')
+            setFirstname('')
             setEmail('')
             setPassword('')
             setRoles([])
@@ -52,7 +68,9 @@ const NewUserForm = () => {
         }
     }, [isSuccess, navigate])
 
-    const onUsernameChanged = e => setUsername(e.target.value)
+    const onUser_idChanged = e => setUser_id(e.target.value)
+    const onLastnameChanged = e => setLastname(e.target.value)
+    const onFirstnameChanged = e => setFirstname(e.target.value)
     const onEmailChanged = e => setEmail(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
 
@@ -64,12 +82,12 @@ const NewUserForm = () => {
         setRoles(values)
     }
 
-    const canSave = [roles.length, validEmail, validUsername, validPassword].every(Boolean) && !isLoading
+    const canSave = [roles.length, validLastname, validFirstname, validEmail, validuser_id, validPassword].every(Boolean) && !isLoading
 
     const onSaveUserClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewUser({ username, email, password, roles })
+            await addNewUser({ user_id, lastname, firstname, email, password, roles })
         }
     }
 
@@ -84,7 +102,9 @@ const NewUserForm = () => {
     })
 
     const errClass = isError ? "errmsg" : "offscreen"
-    const validUserClass = !validUsername ? 'form__input--incomplete' : ''
+    const validUserClass = !validuser_id ? 'form__input--incomplete' : ''
+    const validLastnameClass = !validLastname ? 'form__input--incomplete' : ''
+    const validFirstnameClass = !validFirstname ? 'form__input--incomplete' : ''
     const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
     const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
@@ -107,19 +127,46 @@ const NewUserForm = () => {
                         </button>
                     </div>
                 </div>
-                <label className="form__label" htmlFor="username">
-                    Username: <span className="nowrap">[3-20 letters]</span></label>
+                <label className="form__label" htmlFor="user_id">
+                    Student ID: </label>
                 <input
                     className={`form__input ${validUserClass}`}
-                    id="username"
-                    name="username"
+                    onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                    id="user_id"
+                    name="user_id"
                     type="text"
                     autoComplete="off"
-                    value={username}
-                    onChange={onUsernameChanged}
+                    value={user_id}
+                    onChange={onUser_idChanged}
                 />
 
-                <label className="form__label" htmlFor="username">
+                <label className="form__label" htmlFor="first_name">
+                    First Name:</label>
+                <input
+                    className={`form__input ${validFirstnameClass}`}
+                    onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
+                    id="fname"
+                    name="fname"
+                    type="text"
+                    autoComplete="off"
+                    value={firstname}
+                    onChange={onFirstnameChanged}
+                />
+                
+                <label className="form__label" htmlFor="last_name">
+                    Last Name:</label>
+                <input
+                    className={`form__input ${validLastnameClass}`}
+                    onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
+                    id="lname"
+                    name="lname"
+                    type="text"
+                    autoComplete="off"
+                    value={lastname}
+                    onChange={onLastnameChanged}
+                />
+
+                <label className="form__label" htmlFor="email">
                     HAU Email: <span className="nowrap">[@hau.edu.ph]</span></label>
                 <input
                     className={`form__input ${validEmailClass}`}

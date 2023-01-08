@@ -4,9 +4,9 @@ import useTitle from '../../hooks/useTitle'
 
 const Welcome = () => {
 
-    const { username, isManager, isAdmin } = useAuth()
+    const { user_id, isManager, isAdmin } = useAuth()
 
-    useTitle(`SAUP Portal: ${username}`)
+    useTitle(`SAUP Portal: ${user_id}`)
 
     const date = new Date()
     const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(date)
@@ -16,7 +16,7 @@ const Welcome = () => {
 
             <p>{today}</p>
 
-            <h1>Welcome {username}!</h1>
+            <h1>Welcome {user_id}!</h1>
 
             <p><Link to="/dash/notes">View Notes</Link></p>
 

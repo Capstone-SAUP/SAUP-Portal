@@ -13,7 +13,7 @@ const Login = () => {
 
     const userRef = useRef()
     const errRef = useRef()
-    const [username, setUsername] = useState('')
+    const [user_id, setuser_id] = useState('')
     const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [persist, setPersist] = usePersist()
@@ -29,22 +29,22 @@ const Login = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [username, password])
+    }, [user_id, password])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { accessToken } = await login({ username, password }).unwrap()
+            const { accessToken } = await login({ user_id, password }).unwrap()
             dispatch(setCredentials({ accessToken }))
-            setUsername('')
+            setuser_id('')
             setPassword('')
             navigate('/dash')
         } catch (err) {
             if (!err.status) {
                 setErrMsg('No Server Response');
             } else if (err.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg('Missing user_id or Password');
             } else if (err.status === 401) {
                 setErrMsg('Unauthorized');
             } else {
@@ -54,7 +54,7 @@ const Login = () => {
         }
     }
 
-    const handleUserInput = (e) => setUsername(e.target.value)
+    const handleUserInput = (e) => setuser_id(e.target.value)
     const handlePwdInput = (e) => setPassword(e.target.value)
     const handleToggle = () => setPersist(prev => !prev)
 
@@ -66,6 +66,7 @@ const Login = () => {
         <section className="">
             <main className="">
                 <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
+<<<<<<< HEAD
                 <div className='bg-gradient-to-tl from-rose-700 to-rose-900'>
                 <img className=' w-1/2 h-screen float-left mix-blend-multiply object-cover 'src={require('../../img/background.jpg')} alt='background'></img></div>
                 <form className="w-2xl grid place-content-center" onSubmit={handleSubmit}>
@@ -74,10 +75,18 @@ const Login = () => {
                     <label className="mb-1 text-black" htmlFor="username">Student ID:</label>
                     <input
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+=======
+
+                <form className="form" onSubmit={handleSubmit}>
+                    <label htmlFor="user_id">Student ID:</label>
+                    <input
+                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                        className="form__input"
+>>>>>>> main
                         type="text"
-                        id="username"
+                        id="user_id"
                         ref={userRef}
-                        value={username}
+                        value={user_id}
                         onChange={handleUserInput}
                         autoComplete="off"
                         required

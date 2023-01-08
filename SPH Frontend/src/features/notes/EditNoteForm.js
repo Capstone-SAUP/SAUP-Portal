@@ -66,7 +66,7 @@ const EditNoteForm = ({ note, users }) => {
                 key={user.id}
                 value={user.id}
 
-            > {user.username}</option >
+            > {user.user_id}</option >
         )
     })
 
@@ -144,11 +144,11 @@ const EditNoteForm = ({ note, users }) => {
                             />
                         </label>
 
-                        <label className="form__label form__checkbox-container" htmlFor="note-username">
+                        <label className="form__label form__checkbox-container" htmlFor="note-user_id">
                             ASSIGNED TO:</label>
                         <select
-                            id="note-username"
-                            name="username"
+                            id="note-user_id"
+                            name="user_id"
                             className="form__select"
                             value={userId}
                             onChange={onUserIdChanged}
