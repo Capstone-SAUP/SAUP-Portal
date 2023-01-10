@@ -19,11 +19,11 @@
   /* COLORS */
   --BGCOLOR: #8d7373;
   --BORDER-COLOR: #FFF;
-  --COLOR: #FFF;
+  --COLOR: rgb(0, 0, 0);
   --ERROR: firebrick;
   --INACTIVE: lightgray;
-  --LINK-COLOR: whitesmoke;
-  --LINK-HOVER: rgba(245, 245, 245, 0.9);
+  --LINK-COLOR: rgb(0, 0, 0);
+  --LINK-HOVER: rgba(133, 133, 133, 0.9);
   --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
   --STATUS-COMPLETE: limegreen;
   --STATUS-OPEN: firebrick;
