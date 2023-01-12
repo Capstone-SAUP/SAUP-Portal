@@ -127,7 +127,7 @@ const EditUserForm = ({ user }) => {
                     </div>
                 </div>
                 <label className="form__label" htmlFor="user_id">
-                    User_id: <span className="nowrap">[3-20 letters]</span></label>
+                    User ID:</label>
                 <input
                     className={`form__input ${validUserClass}`}
                     id="user_id"
