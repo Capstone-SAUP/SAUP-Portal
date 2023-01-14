@@ -10,6 +10,7 @@ import EditUser from './features/users/EditUser'
 import NewUserForm from './features/users/NewUserForm'
 import EditNote from './features/notes/EditNote'
 import NewNote from './features/notes/NewNote'
+import GenerateSummary from './features/generate/GenerateSummary';
 import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin'
 import RequireAuth from './features/auth/RequireAuth'
@@ -47,6 +48,13 @@ function App() {
                   <Route path=":id" element={<EditNote />} />
                   <Route path="new" element={<NewNote />} />
                 </Route>
+
+                <Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />}>
+                  <Route path="generate-summary">
+                    <Route index element={<GenerateSummary />} />
+                  </Route>
+                </Route>
+                
 
               </Route>{/* End Dash */}
             </Route>
