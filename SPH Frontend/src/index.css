@@ -290,7 +290,6 @@ tr {
 .form__input,
 .form__submit-button {
   padding: 0.5em;
-  border-radius: 15px;
 }
 
 .form__input--text {
@@ -305,11 +304,6 @@ tr {
 .form__checkbox {
   width: 24px;
   height: 24px;
-}
-
-.form__select {
-  width: fit-content;
-  padding: 0.25em;
 }
 
 .form__action-buttons {
