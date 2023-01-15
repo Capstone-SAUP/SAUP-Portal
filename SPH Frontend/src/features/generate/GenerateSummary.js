@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { PaperClipIcon } from '@heroicons/react/20/solid'
 import useTitle from "../../hooks/useTitle"
 
