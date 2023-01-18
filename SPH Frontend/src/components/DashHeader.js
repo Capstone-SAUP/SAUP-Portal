@@ -5,7 +5,8 @@ import {
     faFilePen,
     faUserGear,
     faUserPlus,
-    faRightFromBracket
+    faRightFromBracket,
+    faHouseUser
 } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
@@ -47,7 +48,7 @@ const DashHeader = () => {
     if (NOTES_REGEX.test(pathname)) {
         newNoteButton = (
             <button
-                className="icon-button"
+                className="icon-button mt-5"
                 title="New Note"
                 onClick={onNewNoteClicked}
             >
@@ -60,7 +61,7 @@ const DashHeader = () => {
     if (USERS_REGEX.test(pathname)) {
         newUserButton = (
             <button
-                className="icon-button"
+                className="icon-button mt-5"
                 title="New User"
                 onClick={onNewUserClicked}
             >
@@ -74,7 +75,7 @@ const DashHeader = () => {
         if (!USERS_REGEX.test(pathname) && pathname.includes('/dash')) {
             userButton = (
                 <button
-                    className="icon-button"
+                    className="icon-button mt-5"
                     title="Users"
                     onClick={onUsersClicked}
                 >
@@ -88,7 +89,7 @@ const DashHeader = () => {
     if (!NOTES_REGEX.test(pathname) && pathname.includes('/dash')) {
         notesButton = (
             <button
-                className="icon-button"
+                className="icon-button mt-5"
                 title="Notes"
                 onClick={onNotesClicked}
             >
@@ -99,7 +100,7 @@ const DashHeader = () => {
 
     const logoutButton = (
         <button
-            className="icon-button"
+            className="icon-button mt-5"
             title="Logout"
             onClick={sendLogout}
         >
@@ -131,7 +132,8 @@ const DashHeader = () => {
             <header className="dash-header">
                 <div className={`dash-header__container ${dashClass}`}>
                     <Link to="/dash">
-                        <h1 className="dash-header__title">SAUP Portal</h1>
+                        <h1 className="icon-button  mt-5"> 
+<FontAwesomeIcon icon={faHouseUser}/>                        </h1>
                     </Link>
                     <nav className="dash-header__nav">
                         {buttonContent}
