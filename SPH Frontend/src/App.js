@@ -12,6 +12,7 @@ import EditNote from './features/notes/EditNote'
 import NewNote from './features/notes/NewNote'
 import GenerateSummary from './features/generate/GenerateSummary'
 import GenerateCertificate from './features/generate/GenerateCertificate'
+import ApplicationForms from "./features/infos/ApplicationForms"
 import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin'
 import RequireAuth from './features/auth/RequireAuth'
@@ -57,6 +58,9 @@ function App() {
                   <Route path="generate-certificate">
                     <Route index element={<GenerateCertificate />} />
                   </Route>
+                </Route>
+                <Route path="application-forms">
+                    <Route index element={<ApplicationForms />} />
                 </Route>
                 
 
