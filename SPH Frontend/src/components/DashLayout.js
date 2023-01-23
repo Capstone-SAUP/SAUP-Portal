@@ -5,11 +5,11 @@ import DashFooter from './DashFooter'
 const DashLayout = () => {
     return (
         <>
+            <DashFooter />
             <DashHeader />
             <div className="dash-container">
                 <Outlet />
             </div>
-            <DashFooter />
         </>
     )
 }

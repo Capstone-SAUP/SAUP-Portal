@@ -172,7 +172,8 @@ a:focus-visible {
   font-size: 1rem;
   position: sticky;
   bottom: 0;
-  z-index: 1;
+  color: #FFF;
+  z-index: 100;
   background-color: rgb(94,25,27);
   padding: 0.5em;
   display: flex;
