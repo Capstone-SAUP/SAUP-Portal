@@ -131,7 +131,8 @@ const NewUserForm = () => {
                 <select
                     id="roles"
                     name="roles"
-                    className={`form__select ${validRolesClass}` + "mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                    className={`form__select ${validRolesClass}` + 
+                    "mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
                     value={roles}
                     onChange={onRolesChanged}
                 >
@@ -140,7 +141,8 @@ const NewUserForm = () => {
                 <label className="form__label" htmlFor="user_id">
                     Student ID: </label>
                 <input
-                    className={`form__input ${validUserClass}` + "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                    className={`form__input ${validUserClass}` + 
+                    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
                     onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
                     id="user_id"
                     name="user_id"
@@ -153,7 +155,8 @@ const NewUserForm = () => {
                 <label className="form__label" htmlFor="first_name">
                     First Name:</label>
                 <input
-                    className={`form__input ${validFirstnameClass}` + "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                    className={`form__input ${validFirstnameClass}` + 
+                    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
                     onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
                     id="fname"
                     name="fname"
@@ -166,7 +169,8 @@ const NewUserForm = () => {
                 <label className="form__label" htmlFor="last_name">
                     Last Name:</label>
                 <input
-                    className={`form__input ${validLastnameClass}` + "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                    className={`form__input ${validLastnameClass}` + 
+                    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
                     onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
                     id="lname"
                     name="lname"
@@ -179,7 +183,8 @@ const NewUserForm = () => {
                 <label className="form__label" htmlFor="email">
                     HAU Email: <span className="nowrap">[@hau.edu.ph]</span></label>
                 <input
-                    className={`form__input ${validEmailClass}` + "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"} 
+                    className={`form__input ${validEmailClass}` + 
+                    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"} 
                     id="email"
                     name="email"
                     type="text"
@@ -191,7 +196,8 @@ const NewUserForm = () => {
                 <label className="form__label" htmlFor="password">
                     Password: <span className="nowrap">[4-12 chars incl. !@#$%]</span></label>
                 <input
-                    className={`form__input ${validPwdClass}` + "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                    className={`form__input ${validPwdClass}` +
+                    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
                     id="password"
                     name="password"
                     type="password"
