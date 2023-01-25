@@ -2,10 +2,10 @@ import useTitle from "../../hooks/useTitle"
 import { PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Bar, BarChart, Tooltip, Legend } from "recharts";
 
 const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
+  { name: 'SOC', entries: 400 },
+  { name: 'SAS', entries: 300 },
+  { name: 'SEA', entries: 300 },
+  { name: 'SBA', entries: 200 },
 ];
 
 const COLORS = ['#651B1D', '#F4CD2A', '#000000', '#746613'];
@@ -29,8 +29,8 @@ const DataOverview = () => {
   return (
     <>
     <h1 className="font-bold text-2xl pb-5">Database Overview</h1>
-    <div className="grid grid-cols-2 grid-rows-2 gap-10 m-5">
-      <div className="border flex items-center">
+    <div className="gap-10 grid grid-cols-3">
+      <div className="border overflow-hidden bg-white shadow-lg sm:rounded-lg flex items-center">
           <BarChart
           width={500}
           height={300}
@@ -46,18 +46,18 @@ const DataOverview = () => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="value" fill="#8884d8" />
+          <Bar dataKey="entries" fill="#651B1D" />
         </BarChart>
       </div>
-      <div className="border">
+      <div className="col-span-2 border overflow-hidden bg-white shadow-lg sm:rounded-lg">
         <PieChart width={400} height={400}>
           <Pie
             data={data}
             labelLine={false}
             label={renderCustomizedLabel}
-            outerRadius={100}
+            outerRadius={125}
             fill="#8884d8"
-            dataKey="value"
+            dataKey="entries"
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -67,7 +67,7 @@ const DataOverview = () => {
           <Legend layout="vertical" align="right" verticalAlign="middle"/>
         </PieChart>
       </div>
-      <div className="border p-5 overflow-hidden bg-white shadow-lg sm:rounded-lg">
+      <div className="col-span-2 border p-5 overflow-hidden bg-white shadow-lg sm:rounded-lg">
         <h1 className="font-bold text-2xl pb-5">Total Number of Entries</h1>
         <div className="inline-flex items-center">
           <h1 className="font-bold text-5xl"> 528 </h1>
