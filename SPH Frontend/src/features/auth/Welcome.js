@@ -30,6 +30,7 @@ const Welcome = () => {
 
             {(isManager || isAdmin) && <p><Link to="/dash/generate-certificate">Generate Certificate</Link> </p>}
 
+            <p><Link to="/dash/application-forms">Application Forms</Link></p>
         </section>
     )
 
