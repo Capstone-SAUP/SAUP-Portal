@@ -19,51 +19,43 @@ const ApplicationForms = () => {
       </p>
     </div>
     <div>
-    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 lg:w-2/5 md:w-3/5 sm:w-screen">
+    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 w-1/2 lg-md:w-3/5">
       <div>
         <FolderArrowDownIcon className="text-red-900 h-20 pr-2"/>
       </div>
-      <div className="flex-shrink-0 text-base">
-        Student Intake Form and Community Outreach Proposal.pdf
-        <br/>
-        <br/>
-        Upload Date: 11/10/2022
+      <div className="text-base">
+        <p className="mb-5">Student Intake Form and Community Outreach Proposal.pdf</p>
+        <p>Upload Date: 11/10/2022</p>
       </div>
     </div>
     <br/>
-    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 lg:w-2/5 md:w-3/5 sm:w-screen">
+    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 w-1/2 lg-md:w-3/5">
       <div>
         <FolderArrowDownIcon className="text-red-900 h-20 pr-2"/>
       </div>
-      <div className="flex-shrink-0 text-base">
-        Community Extension Proposal Form.pdf
-        <br/>
-        <br/>
-        Upload Date: 11/10/2022
+      <div className="text-base">
+        <p className="mb-5">Community Extension Proposal Form.pdf</p>
+        <p>Upload Date: 11/10/2022</p>
       </div>
     </div>
     <br/>
-    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 lg:w-2/5 md:w-3/5 sm:w-screen">
+    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 w-1/2 lg-md:w-3/5">
       <div>
         <FolderArrowDownIcon className="text-red-900 h-20 pr-2"/>
       </div>
-      <div className="flex-shrink-0 text-base">
-        Implementation Report Form on Community Extension Project.pdf
-        <br/>
-        <br/>
-        Upload Date: 11/10/2022
+      <div className="text-base">
+        <p className="mb-5">Implementation Report Form on Community Extension Project.pdf</p>
+        <p>Upload Date: 11/10/2022</p>
       </div>
     </div>
     <br/>
-    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 lg:w-2/5 md:w-3/5 sm:w-screen">
+    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 w-1/2 lg-md:w-3/5">
       <div>
         <FolderArrowDownIcon className="text-red-900 h-20 pr-2"/>
       </div>
       <div className="flex-shrink-0 text-base">
-        Proposal and Implementation Report Templates Edited.pdf
-        <br/>
-        <br/>
-        Upload Date: 11/10/2022
+        <p className="mb-5">Proposal and Implementation Report Templates Edited.pdf</p>
+        <p>Upload Date: 11/10/2022</p>
       </div>
     </div>
     </div>
