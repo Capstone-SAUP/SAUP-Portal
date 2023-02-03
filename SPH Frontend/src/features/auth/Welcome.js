@@ -29,6 +29,8 @@ const Welcome = () => {
             {(isManager || isAdmin) && <p><Link to="/dash/generate-summary">Generate Summary</Link> </p>}
 
             {(isManager || isAdmin) && <p><Link to="/dash/generate-certificate">Generate Certificate</Link> </p>}
+            
+            {(isManager || isAdmin) && <p><Link to="/dash/data-overview">Database Overview</Link> </p>}
 
             <p><Link to="/dash/application-forms">Application Forms</Link></p>
 
