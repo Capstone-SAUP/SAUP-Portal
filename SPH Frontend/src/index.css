@@ -57,6 +57,17 @@
   place-content: center;
 }
 
+.icon-button-black {
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: black;
+  display: grid;
+  place-content: center;
+}
+
 .icon-button:hover,
 .icon-button:focus-visible {
   transform: scale(1.2);

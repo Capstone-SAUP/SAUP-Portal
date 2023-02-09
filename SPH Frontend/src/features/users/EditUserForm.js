@@ -110,7 +110,7 @@ const EditUserForm = ({ user }) => {
                     <h2>Edit User</h2>
                     <div className="form__action-buttons">
                         <button
-                            className="icon-button"
+                            className="icon-button-black"
                             title="Save"
                             onClick={onSaveUserClicked}
                             disabled={!canSave}
@@ -118,7 +118,7 @@ const EditUserForm = ({ user }) => {
                             <FontAwesomeIcon icon={faSave} />
                         </button>
                         <button
-                            className="icon-button"
+                            className="icon-button-black"
                             title="Delete"
                             onClick={onDeleteUserClicked}
                         >
