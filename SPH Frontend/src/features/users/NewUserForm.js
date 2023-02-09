@@ -7,8 +7,8 @@ import { ROLES } from "../../config/roles"
 import useTitle from "../../hooks/useTitle"
 
 const USER_REGEX = /^[0-9]{3,20}$/
-const FNAME_REGEX = /^[a-zA-Z]{3,20}$/
-const LNAME_REGEX = /^[a-zA-Z]{3,20}$/
+const FNAME_REGEX = /^[a-zA-Z ]{3,20}$/
+const LNAME_REGEX = /^[a-zA-Z ]{3,20}$/
 const EMAIL_REGEX =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
@@ -117,15 +117,6 @@ const NewUserForm = () => {
             <form className="h-screen w-2xl grid place-content-center text-black" onSubmit={onSaveUserClicked}>
                 <div className="form__title-row">
                 <h1 className="text-5xl font-bold pb-2 text-black mb-4 font-sans">Sign <span className="text-rose-900">Up</span></h1>
-                    <div className="form__action-buttons ">
-                        <button
-                            className="icon-button"
-                            title="Save"
-                            disabled={!canSave}
-                        >
-                            <FontAwesomeIcon icon={faSave} />
-                        </button>
-                    </div>
                 </div>
                 <label className="form__label" htmlFor="roles"></label>
                 <select
@@ -157,7 +148,7 @@ const NewUserForm = () => {
                 <input
                     className={`form__input ${validFirstnameClass}` + 
                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
-                    onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
+                    onKeyPress={(e) => !/[a-zA-Z ]/.test(e.key) && e.preventDefault()}
                     id="fname"
                     name="fname"
                     type="text"
@@ -171,7 +162,7 @@ const NewUserForm = () => {
                 <input
                     className={`form__input ${validLastnameClass}` + 
                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
-                    onKeyPress={(e) => !/[a-zA-Z]/.test(e.key) && e.preventDefault()}
+                    onKeyPress={(e) => !/[a-zA-Z ]/.test(e.key) && e.preventDefault()}
                     id="lname"
                     name="lname"
                     type="text"
@@ -204,7 +195,15 @@ const NewUserForm = () => {
                     value={password}
                     onChange={onPasswordChanged}
                 />
-
+                <div className="text-center m-5">
+                        <button
+                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            title="Save"
+                            disabled={!canSave}
+                        >
+                            Save
+                        </button>
+                    </div>
             </form>
         </>
     )
