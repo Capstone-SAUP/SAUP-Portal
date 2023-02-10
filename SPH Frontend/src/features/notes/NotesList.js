@@ -9,7 +9,7 @@ import { faNavicon } from "@fortawesome/free-solid-svg-icons"
 const NotesList = () => {
     useTitle('SAUP Portal: Notes List')
 
-    const { user_id, isManager, isAdmin } = useAuth()
+    const { user_id, isAdmin } = useAuth()
 
     const {
         data: notes,
@@ -35,7 +35,7 @@ const NotesList = () => {
         const { ids, entities } = notes
 
         let filteredIds
-        if (isManager || isAdmin) {
+        if (isAdmin) {
             filteredIds = [...ids]
         } else {
             filteredIds = ids.filter(noteId => entities[noteId].user_id === user_id)
