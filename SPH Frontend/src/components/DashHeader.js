@@ -14,7 +14,7 @@ import useAuth from '../hooks/useAuth'
 import PulseLoader from 'react-spinners/PulseLoader'
 
 const DASH_REGEX = /^\/dash(\/)?$/
-const NOTES_REGEX = /^\/dash\/notes(\/)?$/
+const NOTES_REGEX = /^\/dash\/outreach(\/)?$/
 const USERS_REGEX = /^\/dash\/users(\/)?$/
 
 const DashHeader = () => {
@@ -34,9 +34,9 @@ const DashHeader = () => {
         if (isSuccess) navigate('/')
     }, [isSuccess, navigate])
 
-    const onNewNoteClicked = () => navigate('/dash/notes/new')
+    const onNewOutreachClicked = () => navigate('/dash/outreach/new')
     const onNewUserClicked = () => navigate('/dash/users/new')
-    const onNotesClicked = () => navigate('/dash/notes')
+    const onOutreachClicked = () => navigate('/dash/outreach')
     const onUsersClicked = () => navigate('/dash/users')
 
     let dashClass = null
@@ -44,13 +44,13 @@ const DashHeader = () => {
         dashClass = "dash-header__container--small"
     }
 
-    let newNoteButton = null
+    let newOutreachButton = null
     if (NOTES_REGEX.test(pathname)) {
-        newNoteButton = (
+        newOutreachButton = (
             <button
                 className="icon-button mt-5"
-                title="New Note"
-                onClick={onNewNoteClicked}
+                title="New Outreach"
+                onClick={onNewOutreachClicked}
             >
                 <FontAwesomeIcon icon={faFileCirclePlus} />
             </button>
@@ -85,13 +85,13 @@ const DashHeader = () => {
         }
     }
 
-    let notesButton = null
+    let outreachButton = null
     if (!NOTES_REGEX.test(pathname) && pathname.includes('/dash')) {
-        notesButton = (
+        outreachButton = (
             <button
                 className="icon-button mt-5"
-                title="Notes"
-                onClick={onNotesClicked}
+                title="Outreach"
+                onClick={onOutreachClicked}
             >
                 <FontAwesomeIcon icon={faFilePen} />
             </button>
@@ -116,9 +116,9 @@ const DashHeader = () => {
     } else {
         buttonContent = (
             <>
-                {newNoteButton}
+                {newOutreachButton}
                 {newUserButton}
-                {notesButton}
+                {outreachButton}
                 {userButton}
                 {logoutButton}
             </>

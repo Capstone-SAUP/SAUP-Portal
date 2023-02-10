@@ -305,13 +305,13 @@ a:focus-visible {
     font-size: 1.5rem;
   }
 
-  .table--notes {
+  .table--outreach {
     grid-template-columns: repeat(3, 1fr) 2fr repeat(2, 1fr);
   }
 
-  .note__created,
-  .note__updated,
-  .note__user_id {
+  .outreach__created,
+  .outreach__updated,
+  .outreach__user_id {
     display: block
   }
 

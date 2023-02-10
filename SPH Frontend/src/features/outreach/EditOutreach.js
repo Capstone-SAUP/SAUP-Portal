@@ -1,21 +1,21 @@
 import { useParams } from 'react-router-dom'
-import EditNoteForm from './EditNoteForm'
-import { useGetNotesQuery } from './notesApiSlice'
+import EditOutreachForm from './EditOutreachForm'
+import { useGetOutreachQuery } from './outreachApiSlice'
 import { useGetUsersQuery } from '../users/usersApiSlice'
 import useAuth from '../../hooks/useAuth'
 import PulseLoader from 'react-spinners/PulseLoader'
 import useTitle from '../../hooks/useTitle'
 
-const EditNote = () => {
-    useTitle('SAUP Portal: Edit Note')
+const EditOutreach = () => {
+    useTitle('SAUP Portal: Edit Outreach')
 
     const { id } = useParams()
 
     const { user_id, isManager, isAdmin } = useAuth()
 
-    const { note } = useGetNotesQuery("notesList", {
+    const { outreach } = useGetOutreachQuery("outreachList", {
         selectFromResult: ({ data }) => ({
-            note: data?.entities[id]
+            outreach: data?.entities[id]
         }),
     })
 
@@ -25,17 +25,17 @@ const EditNote = () => {
         }),
     })
 
-    if (!note || !users?.length) return <PulseLoader color={"#FFF"} />
+    if (!outreach || !users?.length) return <PulseLoader color={"#FFF"} />
 
 
     if (!isManager && !isAdmin) {
-        if (note.user_id !== user_id) {
+        if (outreach.user_id !== user_id) {
             return <p className="errmsg">No access</p>
         }
     }
 
-    const content = <EditNoteForm note={note} users={users} />
+    const content = <EditOutreachForm outreach={outreach} users={users} />
 
     return content
 }
-export default EditNote
+export default EditOutreach
