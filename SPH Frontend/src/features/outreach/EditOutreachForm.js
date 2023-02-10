@@ -1,33 +1,33 @@
 import { useState, useEffect } from "react"
-import { useUpdateNoteMutation, useDeleteNoteMutation } from "./notesApiSlice"
+import { useUpdateOutreachMutation, useDeleteOutreachMutation } from "./outreachApiSlice"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import useAuth from "../../hooks/useAuth"
 
-const EditNoteForm = ({ note, users }) => {
+const EditOutreachForm = ({ outreach, users }) => {
 
     const { isAdmin } = useAuth()
 
-    const [updateNote, {
+    const [updateOutreach, {
         isLoading,
         isSuccess,
         isError,
         error
-    }] = useUpdateNoteMutation()
+    }] = useUpdateOutreachMutation()
 
-    const [deleteNote, {
+    const [deleteOutreach, {
         isSuccess: isDelSuccess,
         isError: isDelError,
         error: delerror
-    }] = useDeleteNoteMutation()
+    }] = useDeleteOutreachMutation()
 
     const navigate = useNavigate()
 
-    const [title, setTitle] = useState(note.title)
-    const [text, setText] = useState(note.text)
-    const [completed, setCompleted] = useState(note.completed)
-    const [userId, setUserId] = useState(note.user)
+    const [title, setTitle] = useState(outreach.title)
+    const [text, setText] = useState(outreach.text)
+    const [completed, setCompleted] = useState(outreach.completed)
+    const [userId, setUserId] = useState(outreach.user)
 
     useEffect(() => {
 
@@ -35,7 +35,7 @@ const EditNoteForm = ({ note, users }) => {
             setTitle('')
             setText('')
             setUserId('')
-            navigate('/dash/notes')
+            navigate('/dash/outreach')
         }
 
     }, [isSuccess, isDelSuccess, navigate])
@@ -47,18 +47,18 @@ const EditNoteForm = ({ note, users }) => {
 
     const canSave = [title, text, userId].every(Boolean) && !isLoading
 
-    const onSaveNoteClicked = async (e) => {
+    const onSaveOutreachClicked = async (e) => {
         if (canSave) {
-            await updateNote({ id: note.id, user: userId, title, text, completed })
+            await updateOutreach({ id: outreach.id, user: userId, title, text, completed })
         }
     }
 
-    const onDeleteNoteClicked = async () => {
-        await deleteNote({ id: note.id })
+    const onDeleteOutreachClicked = async () => {
+        await deleteOutreach({ id: outreach.id })
     }
 
-    const created = new Date(note.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
-    const updated = new Date(note.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
+    const created = new Date(outreach.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
+    const updated = new Date(outreach.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
 
     const options = users.map(user => {
         return (
@@ -81,9 +81,9 @@ const EditNoteForm = ({ note, users }) => {
     if (isAdmin) {
         deleteButton = (
             <button
-                className="icon-button"
+                className="icon-button-black"
                 title="Delete"
-                onClick={onDeleteNoteClicked}
+                onClick={onDeleteOutreachClicked}
             >
                 <FontAwesomeIcon icon={faTrashCan} />
             </button>
@@ -96,12 +96,12 @@ const EditNoteForm = ({ note, users }) => {
 
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
-                    <h2>Edit Note #{note.ticket}</h2>
+                    <h2>Edit Outreach #{outreach.ticket}</h2>
                     <div className="form__action-buttons">
                         <button
-                            className="icon-button"
+                            className="icon-button-black"
                             title="Save"
-                            onClick={onSaveNoteClicked}
+                            onClick={onSaveOutreachClicked}
                             disabled={!canSave}
                         >
                             <FontAwesomeIcon icon={faSave} />
@@ -109,11 +109,11 @@ const EditNoteForm = ({ note, users }) => {
                         {deleteButton}
                     </div>
                 </div>
-                <label className="form__label" htmlFor="note-title">
+                <label className="form__label" htmlFor="outreach-title">
                     Title:</label>
                 <input
                     className={`form__input ${validTitleClass}`}
-                    id="note-title"
+                    id="outreach-title"
                     name="title"
                     type="text"
                     autoComplete="off"
@@ -121,22 +121,22 @@ const EditNoteForm = ({ note, users }) => {
                     onChange={onTitleChanged}
                 />
 
-                <label className="form__label" htmlFor="note-text">
+                <label className="form__label" htmlFor="outreach-text">
                     Text:</label>
                 <textarea
                     className={`form__input form__input--text ${validTextClass}`}
-                    id="note-text"
+                    id="outreach-text"
                     name="text"
                     value={text}
                     onChange={onTextChanged}
                 />
                 <div className="form__row">
                     <div className="form__divider">
-                        <label className="form__label form__checkbox-container" htmlFor="note-completed">
+                        <label className="form__label form__checkbox-container" htmlFor="outreach-completed">
                             WORK COMPLETE:
                             <input
                                 className="form__checkbox"
-                                id="note-completed"
+                                id="outreach-completed"
                                 name="completed"
                                 type="checkbox"
                                 checked={completed}
@@ -144,10 +144,10 @@ const EditNoteForm = ({ note, users }) => {
                             />
                         </label>
 
-                        <label className="form__label form__checkbox-container" htmlFor="note-user_id">
+                        <label className="form__label form__checkbox-container" htmlFor="outreach-user_id">
                             ASSIGNED TO:</label>
                         <select
-                            id="note-user_id"
+                            id="outreach-user_id"
                             name="user_id"
                             className="form__select"
                             value={userId}
@@ -168,4 +168,4 @@ const EditNoteForm = ({ note, users }) => {
     return content
 }
 
-export default EditNoteForm
+export default EditOutreachForm

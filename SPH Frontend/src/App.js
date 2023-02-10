@@ -4,12 +4,12 @@ import Public from './components/Public'
 import Login from './features/auth/Login'
 import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
-import NotesList from './features/notes/NotesList'
+import OutreachList from './features/outreach/OutreachList'
 import UsersList from './features/users/UsersList'
 import EditUser from './features/users/EditUser'
 import NewUserForm from './features/users/NewUserForm'
-import EditNote from './features/notes/EditNote'
-import NewNote from './features/notes/NewNote'
+import EditOutreach from './features/outreach/EditOutreach'
+import NewOutreach from './features/outreach/NewOutreach'
 import GenerateSummary from './features/generate/GenerateSummary'
 import GenerateCertificate from './features/generate/GenerateCertificate'
 import DataOverview from "./features/infos/DataOverview"
@@ -47,10 +47,10 @@ function App() {
                   </Route>
                 </Route>
 
-                <Route path="notes">
-                  <Route index element={<NotesList />} />
-                  <Route path=":id" element={<EditNote />} />
-                  <Route path="new" element={<NewNote />} />
+                <Route path="outreach">
+                  <Route index element={<OutreachList />} />
+                  <Route path=":id" element={<EditOutreach />} />
+                  <Route path="new" element={<NewOutreach />} />
                 </Route>
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
