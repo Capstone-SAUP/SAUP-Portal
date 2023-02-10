@@ -39,7 +39,7 @@ function App() {
 
                 <Route index element={<Welcome />} />
 
-                <Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />}>
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="users">
                     <Route index element={<UsersList />} />
                     <Route path=":id" element={<EditUser />} />
@@ -53,7 +53,7 @@ function App() {
                   <Route path="new" element={<NewOutreach />} />
                 </Route>
 
-                <Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />}>
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="generate-summary">
                     <Route index element={<GenerateSummary />} />
                   </Route>

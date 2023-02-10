@@ -9,7 +9,7 @@ import { faNavicon } from "@fortawesome/free-solid-svg-icons"
 const OutreachList = () => {
     useTitle('SAUP Portal: Outreach List')
 
-    const { user_id, isManager, isAdmin } = useAuth()
+    const { user_id, isAdmin } = useAuth()
 
     const {
         data: outreach,
@@ -35,7 +35,7 @@ const OutreachList = () => {
         const { ids, entities } = outreach
 
         let filteredIds
-        if (isManager || isAdmin) {
+        if (isAdmin) {
             filteredIds = [...ids]
         } else {
             filteredIds = ids.filter(outreachId => entities[outreachId].user_id === user_id)

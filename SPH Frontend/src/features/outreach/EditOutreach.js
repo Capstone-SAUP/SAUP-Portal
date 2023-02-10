@@ -11,7 +11,7 @@ const EditOutreach = () => {
 
     const { id } = useParams()
 
-    const { user_id, isManager, isAdmin } = useAuth()
+    const { user_id, isAdmin } = useAuth()
 
     const { outreach } = useGetOutreachQuery("outreachList", {
         selectFromResult: ({ data }) => ({
@@ -28,7 +28,7 @@ const EditOutreach = () => {
     if (!outreach || !users?.length) return <PulseLoader color={"#FFF"} />
 
 
-    if (!isManager && !isAdmin) {
+    if (!isAdmin) {
         if (outreach.user_id !== user_id) {
             return <p className="errmsg">No access</p>
         }

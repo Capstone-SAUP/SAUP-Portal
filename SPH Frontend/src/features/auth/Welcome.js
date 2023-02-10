@@ -4,7 +4,7 @@ import useTitle from '../../hooks/useTitle'
 
 const Welcome = () => {
 
-    const { user_id, isManager, isAdmin } = useAuth()
+    const { user_id, isAdmin } = useAuth()
 
     useTitle(`SAUP Portal: ${user_id}`)
 
@@ -22,15 +22,15 @@ const Welcome = () => {
 
             <p><Link to="/dash/outreach/new">Add New Outreach</Link></p>
 
-            {(isManager || isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
+            {(isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
 
-            {(isManager || isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
+            {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
 
-            {(isManager || isAdmin) && <p><Link to="/dash/generate-summary">Generate Summary</Link> </p>}
+            {(isAdmin) && <p><Link to="/dash/generate-summary">Generate Summary</Link> </p>}
 
-            {(isManager || isAdmin) && <p><Link to="/dash/generate-certificate">Generate Certificate</Link> </p>}
+            {(isAdmin) && <p><Link to="/dash/generate-certificate">Generate Certificate</Link> </p>}
             
-            {(isManager || isAdmin) && <p><Link to="/dash/data-overview">Database Overview</Link> </p>}
+            {(isAdmin) && <p><Link to="/dash/data-overview">Database Overview</Link> </p>}
 
             <p><Link to="/dash/application-forms">Application Forms</Link></p>
 

@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth"
 
 const EditOutreachForm = ({ outreach, users }) => {
 
-    const { isManager, isAdmin } = useAuth()
+    const { isAdmin } = useAuth()
 
     const [updateOutreach, {
         isLoading,
@@ -78,7 +78,7 @@ const EditOutreachForm = ({ outreach, users }) => {
 
 
     let deleteButton = null
-    if (isManager || isAdmin) {
+    if (isAdmin) {
         deleteButton = (
             <button
                 className="icon-button-black"
