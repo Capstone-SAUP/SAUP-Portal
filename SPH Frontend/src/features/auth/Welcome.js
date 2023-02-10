@@ -18,9 +18,9 @@ const Welcome = () => {
 
             <h1>Welcome {user_id}!</h1>
 
-            <p><Link to="/dash/notes">View Notes</Link></p>
+            <p><Link to="/dash/outreach">View Outreach</Link></p>
 
-            <p><Link to="/dash/notes/new">Add New Note</Link></p>
+            <p><Link to="/dash/outreach/new">Add New Outreach</Link></p>
 
             {(isManager || isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
 

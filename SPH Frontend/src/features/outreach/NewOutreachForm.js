@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAddNewNoteMutation } from "./notesApiSlice"
+import { useAddNewOutreachMutation } from "./outreachApiSlice"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
 
-const NewNoteForm = ({ users }) => {
+const NewOutreachForm = ({ users }) => {
 
-    const [addNewNote, {
+    const [addNewOutreach, {
         isLoading,
         isSuccess,
         isError,
         error
-    }] = useAddNewNoteMutation()
+    }] = useAddNewOutreachMutation()
 
     const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ const NewNoteForm = ({ users }) => {
             setTitle('')
             setText('')
             setUserId('')
-            navigate('/dash/notes')
+            navigate('/dash/outreach')
         }
     }, [isSuccess, navigate])
 
@@ -34,10 +34,10 @@ const NewNoteForm = ({ users }) => {
 
     const canSave = [title, text, userId].every(Boolean) && !isLoading
 
-    const onSaveNoteClicked = async (e) => {
+    const onSaveOutreachClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewNote({ user: userId, title, text })
+            await addNewOutreach({ user: userId, title, text })
         }
     }
 
@@ -58,12 +58,12 @@ const NewNoteForm = ({ users }) => {
         <>
             <p className={errClass}>{error?.data?.message}</p>
 
-            <form className="form" onSubmit={onSaveNoteClicked}>
+            <form className="form" onSubmit={onSaveOutreachClicked}>
                 <div className="form__title-row">
-                    <h2>New Note</h2>
+                    <h2>New Outreach</h2>
                     <div className="form__action-buttons">
                         <button
-                            className="icon-button"
+                            className="icon-button-black"
                             title="Save"
                             disabled={!canSave}
                         >
@@ -112,4 +112,4 @@ const NewNoteForm = ({ users }) => {
     return content
 }
 
-export default NewNoteForm
+export default NewOutreachForm

@@ -1,10 +1,10 @@
-import NewNoteForm from './NewNoteForm'
+import NewOutreachForm from './NewOutreachForm'
 import { useGetUsersQuery } from '../users/usersApiSlice'
 import PulseLoader from 'react-spinners/PulseLoader'
 import useTitle from '../../hooks/useTitle'
 
-const NewNote = () => {
-    useTitle('SAUP Portal: New Note')
+const NewOutreach = () => {
+    useTitle('SAUP Portal: New Outreach')
 
     const { users } = useGetUsersQuery("usersList", {
         selectFromResult: ({ data }) => ({
@@ -14,8 +14,8 @@ const NewNote = () => {
 
     if (!users?.length) return <PulseLoader color={"#FFF"} />
 
-    const content = <NewNoteForm users={users} />
+    const content = <NewOutreachForm users={users} />
 
     return content
 }
-export default NewNote
+export default NewOutreach

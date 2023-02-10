@@ -1,23 +1,23 @@
-import { useGetNotesQuery } from "./notesApiSlice"
-import Note from "./Note"
+import { useGetOutreachQuery } from "./outreachApiSlice"
+import Outreach from "./Outreach"
 import useAuth from "../../hooks/useAuth"
 import useTitle from "../../hooks/useTitle"
 import PulseLoader from 'react-spinners/PulseLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNavicon } from "@fortawesome/free-solid-svg-icons"
 
-const NotesList = () => {
-    useTitle('SAUP Portal: Notes List')
+const OutreachList = () => {
+    useTitle('SAUP Portal: Outreach List')
 
     const { user_id, isManager, isAdmin } = useAuth()
 
     const {
-        data: notes,
+        data: outreach,
         isLoading,
         isSuccess,
         isError,
         error
-    } = useGetNotesQuery('notesList', {
+    } = useGetOutreachQuery('outreachList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
@@ -32,16 +32,16 @@ const NotesList = () => {
     }
 
     if (isSuccess) {
-        const { ids, entities } = notes
+        const { ids, entities } = outreach
 
         let filteredIds
         if (isManager || isAdmin) {
             filteredIds = [...ids]
         } else {
-            filteredIds = ids.filter(noteId => entities[noteId].user_id === user_id)
+            filteredIds = ids.filter(outreachId => entities[outreachId].user_id === user_id)
         }
 
-        const tableContent = ids?.length && filteredIds.map(noteId => <Note key={noteId} noteId={noteId} />)
+        const tableContent = ids?.length && filteredIds.map(outreachId => <Outreach key={outreachId} outreachId={outreachId} />)
 
         content = (   
         <>
@@ -118,4 +118,4 @@ const NotesList = () => {
 
     return content
 }
-export default NotesList
+export default OutreachList

@@ -1,7 +1,7 @@
 {
   "name": "SAUP-Portal-Backend",
   "version": "1.0.0",
-  "description": "techNotes MERN Project",
+  "description": "SAUP Portal HAU",
   "main": "server.js",
   "scripts": {
     "start": "node server",
