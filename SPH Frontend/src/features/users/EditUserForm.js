@@ -1,158 +1,198 @@
-import { useState, useEffect } from "react"
-import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice"
-import { useNavigate } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
-import { ROLES } from "../../config/roles"
+import { useState, useEffect } from "react";
+import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
+import { useNavigate } from "react-router-dom";
+import { ROLES } from "../../config/roles";
 
-const USER_REGEX = /^[0-9]{3,20}$/
-const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
+const USER_REGEX = /^[0-9]{3,20}$/;
+const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
+const EMAIL_REGEX =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const EditUserForm = ({ user }) => {
+    const [updateUser, { isLoading, isSuccess, isError, error }] =
+        useUpdateUserMutation();
 
-    const [updateUser, {
-        isLoading,
-        isSuccess,
-        isError,
-        error
-    }] = useUpdateUserMutation()
+    const [
+        deleteUser,
+        { isSuccess: isDelSuccess, isError: isDelError, error: delerror },
+    ] = useDeleteUserMutation();
 
-    const [deleteUser, {
-        isSuccess: isDelSuccess,
-        isError: isDelError,
-        error: delerror
-    }] = useDeleteUserMutation()
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-
-    const [user_id, setUser_id] = useState(user.user_id)
-    const [validUser_id, setValidUser_id] = useState(false)
-    const [password, setPassword] = useState('')
-    const [validPassword, setValidPassword] = useState(false)
-    const [roles, setRoles] = useState(user.roles)
-    const [active, setActive] = useState(user.active)
+    const [user_id, setUser_id] = useState(user.user_id);
+    const [validUser_id, setValidUser_id] = useState(false);
+    const [email, setEmail] = useState(user.email);
+    const [validEmail, setValidEmail] = useState(false);
+    const [password, setPassword] = useState("");
+    const [validPassword, setValidPassword] = useState(false);
+    const [roles, setRoles] = useState(user.roles);
+    const [active, setActive] = useState(user.active);
 
     useEffect(() => {
-        setValidUser_id(USER_REGEX.test(user_id))
-    }, [user_id])
+        setValidUser_id(USER_REGEX.test(user_id));
+    }, [user_id]);
 
     useEffect(() => {
-        setValidPassword(PWD_REGEX.test(password))
-    }, [password])
+        setValidEmail(EMAIL_REGEX.test(email));
+    }, [email]);
 
     useEffect(() => {
-        console.log(isSuccess)
+        setValidPassword(PWD_REGEX.test(password));
+    }, [password]);
+
+    useEffect(() => {
+        console.log(isSuccess);
         if (isSuccess || isDelSuccess) {
-            setUser_id('')
-            setPassword('')
-            setRoles([])
-            navigate('/dash/users')
+            setUser_id("");
+            setEmail("");
+            setPassword("");
+            setRoles([]);
+            navigate("/dash/users");
         }
+    }, [isSuccess, isDelSuccess, navigate]);
 
-    }, [isSuccess, isDelSuccess, navigate])
+    const onUser_idChanged = (e) => setUser_id(e.target.value);
+    const onEmailChanged = (e) => setEmail(e.target.value);
+    const onPasswordChanged = (e) => setPassword(e.target.value);
 
-    const onUser_idChanged = e => setUser_id(e.target.value)
-    const onPasswordChanged = e => setPassword(e.target.value)
-
-    const onRolesChanged = e => {
+    const onRolesChanged = (e) => {
         const values = Array.from(
             e.target.selectedOptions,
             (option) => option.value
-        )
-        setRoles(values)
-    }
+        );
+        setRoles(values);
+    };
 
-    const onActiveChanged = () => setActive(prev => !prev)
+    const onActiveChanged = () => setActive((prev) => !prev);
 
     const onSaveUserClicked = async (e) => {
         if (password) {
-            await updateUser({ id: user.id, user_id, password, roles, active })
+            await updateUser({
+                id: user.id,
+                user_id,
+                email,
+                password,
+                roles,
+                active,
+            });
         } else {
-            await updateUser({ id: user.id, user_id, roles, active })
+            await updateUser({ id: user.id, user_id, email, roles, active });
         }
-    }
+    };
 
     const onDeleteUserClicked = async () => {
-        await deleteUser({ id: user.id })
-    }
+        await deleteUser({ id: user.id });
+    };
 
-    const options = Object.values(ROLES).map(role => {
+    const options = Object.values(ROLES).map((role) => {
         return (
-            <option
-                key={role}
-                value={role}
+            <option key={role} value={role}>
+                {" "}
+                {role}
+            </option>
+        );
+    });
 
-            > {role}</option >
-        )
-    })
-
-    let canSave
+    let canSave;
     if (password) {
-        canSave = [roles.length, validUser_id, validPassword].every(Boolean) && !isLoading
+        canSave =
+            [roles.length, validUser_id, validPassword].every(Boolean) &&
+            !isLoading;
     } else {
-        canSave = [roles.length, validUser_id].every(Boolean) && !isLoading
+        canSave = [roles.length, validUser_id].every(Boolean) && !isLoading;
     }
 
-    const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
-    const validUserClass = !validUser_id ? 'form__input--incomplete' : ''
-    const validPwdClass = password && !validPassword ? 'form__input--incomplete' : ''
-    const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
+    const errClass = isError || isDelError ? "errmsg" : "offscreen";
+    const validUserClass = !validUser_id
+        ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
+        : "";
+    const validEmailClass = !validEmail
+        ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
+        : "";
+    const validPwdClass =
+        password && !validPassword
+            ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
+            : "";
+    const validRolesClass = !Boolean(roles.length)
+        ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
+        : "";
 
-    const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
-
+    const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
     const content = (
         <>
+            <img
+                className=" w-1/2 h-screen float-right mix-blend-multiply object-cover "
+                src={require("../../img/background.jpg")}
+                alt="background"
+            ></img>
             <p className={errClass}>{errContent}</p>
-
-            <form className="form" onSubmit={e => e.preventDefault()}>
-                <div className="form__title-row">
-                    <h2>Edit User</h2>
-                    <div className="form__action-buttons">
-                        <button
-                            className="icon-button-black"
-                            title="Save"
-                            onClick={onSaveUserClicked}
-                            disabled={!canSave}
-                        >
-                            <FontAwesomeIcon icon={faSave} />
-                        </button>
-                        <button
-                            className="icon-button-black"
-                            title="Delete"
-                            onClick={onDeleteUserClicked}
-                        >
-                            <FontAwesomeIcon icon={faTrashCan} />
-                        </button>
+            <form
+                className="h-screen w-1/2 grid gap-1 px-20 text-black"
+                onSubmit={(e) => e.preventDefault()}
+            >
+                <div className="flex justify-between items-center">
+                    <h1 className="text-5xl font-bold pb-2 text-black mb-4 font-sans">
+                        Edit <span className="text-rose-900">User</span>
+                    </h1>
+                </div>
+                <div className="flex justify-between items-center gap-2 grid-cols-2">
+                    <label className="text-base align-middle" htmlFor="user_id">
+                        User ID:
+                    </label>
+                    <input
+                        className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2${validUserClass}`}
+                        onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                        }
+                        id="user_id"
+                        name="user_id"
+                        type="text"
+                        autoComplete="off"
+                        value={user_id}
+                        onChange={onUser_idChanged}
+                    />
+                </div>
+                <div>
+                    <label className="text-base" htmlFor="email">
+                        HAU Email:
+                    </label>
+                    <input
+                        className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-full ${validEmailClass}`}
+                        id="email"
+                        name="email"
+                        type="text"
+                        autoComplete="off"
+                        value={email}
+                        onChange={onEmailChanged}
+                    />
+                    <div className="text-gray-500 text-xs">
+                        Must contain @hau.edu.ph
                     </div>
                 </div>
-                <label className="form__label" htmlFor="user_id">
-                    User ID:</label>
-                <input
-                    className={`form__input ${validUserClass}`}
-                    id="user_id"
-                    name="user_id"
-                    type="text"
-                    autoComplete="off"
-                    value={user_id}
-                    onChange={onUser_idChanged}
-                />
-
-                <label className="form__label" htmlFor="password">
-                    Password: <span className="nowrap">[empty = no change]</span> <span className="nowrap">[4-12 chars incl. !@#$%]</span></label>
-                <input
-                    className={`form__input ${validPwdClass}`}
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={password}
-                    onChange={onPasswordChanged}
-                />
-
-                <label className="form__label form__checkbox-container" htmlFor="user-active">
-                    ACTIVE:
+                <div>
+                    <label className="text-base" htmlFor="">
+                        Password:
+                    </label>
                     <input
-                        className="form__checkbox"
+                        className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-full ${validPwdClass}`}
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={password}
+                        onChange={onPasswordChanged}
+                    />
+                    <div className="text-gray-500 text-xs">
+                        blank = no change, 4-12 chars incl. !@#$%
+                    </div>
+                </div>
+                <label
+                    className="text-base flex items-center w-fit gap-3"
+                    htmlFor="user-active"
+                >
+                    Active:
+                    <input
+                        className="h-6 w-6 rounded-md"
                         id="user-active"
                         name="user-active"
                         type="checkbox"
@@ -161,24 +201,52 @@ const EditUserForm = ({ user }) => {
                     />
                 </label>
 
-                <label className="form__label" htmlFor="roles">
-                    ASSIGNED ROLES:</label>
-                <select
-                    id="roles"
-                    name="roles"
-                    className={`form__select ${validRolesClass}`}
-                    multiple={true}
-                    size="3"
-                    value={roles}
-                    onChange={onRolesChanged}
-                >
-                    {options}
-                </select>
-
+                <div className="flex justify-between items-center gap-2 grid-cols-2">
+                    <label className="text-base align-middle" htmlFor="user_id">
+                        Assign Role:
+                    </label>
+                    <select
+                        id="roles"
+                        name="roles"
+                        className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validRolesClass}`}
+                        value={roles}
+                        onChange={onRolesChanged}
+                    >
+                        {options}
+                    </select>
+                </div>
+                <span className="">
+                    <label
+                        className="float-left text-base"
+                        htmlFor="roles"
+                    ></label>
+                </span>
+                <div className="grid-cols-2 flex justify-evenly">
+                    <div className="text-center">
+                        <button
+                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            title="Save"
+                            onClick={onDeleteUserClicked}
+                            disabled={!canSave}
+                        >
+                            Delete
+                        </button>
+                    </div>
+                    <div className="text-center">
+                        <button
+                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            title="Save"
+                            onClick={onSaveUserClicked}
+                            disabled={!canSave}
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
             </form>
         </>
-    )
+    );
 
-    return content
-}
-export default EditUserForm
+    return content;
+};
+export default EditUserForm;

@@ -6,6 +6,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@700&display=swap');
 
+@layer components{
+  .input_incomplete {
+    @apply bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 bloc w-full;
+  }
+}
 
 * {
   margin: 0;
@@ -226,11 +231,11 @@ a:focus-visible {
   gap: 0.5em;
 }
 
-.form__title-row {
+/* .form__title-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 .form__input,
 .form__submit-button {
@@ -244,11 +249,6 @@ a:focus-visible {
 .form__input--incomplete {
   border: 1px solid var(--INPUT-INVALID);
   outline: 1px solid var(--INPUT-INVALID);
-}
-
-.form__checkbox {
-  width: 24px;
-  height: 24px;
 }
 
 .form__action-buttons {
