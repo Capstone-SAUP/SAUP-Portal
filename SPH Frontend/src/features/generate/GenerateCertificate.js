@@ -38,8 +38,10 @@ const GerateCertificate = () => {
       <div className="grid font-extrabold text-4xl aspect-video content-center align-middle justify-center border m-20 overflow-hidden bg-gray-200 shadow-lg sm:rounded-lg">
         Certificate Example
       </div>
-      
     </div>
+    <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg mt-5 text-xl px-14 py-2.5  dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                  Submit
+                </button>
     </>
   )
 }
