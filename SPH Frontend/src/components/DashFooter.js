@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHouse } from "@fortawesome/free-solid-svg-icons"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate, useLocation } from 'react-router-dom'
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import useAuth from "../hooks/useAuth"
 import { Bars3Icon } from '@heroicons/react/20/solid'
 
@@ -42,7 +42,7 @@ const DashFooter = () => {
             </input>
             <p className="absolute inset-y-0 right-6 top-3.5"><FontAwesomeIcon icon={faUser} /> User ID: { user_id }
                 <button className="ml-2">
-                <FontAwesomeIcon icon={faArrowDown} />
+                <FontAwesomeIcon icon={faAngleDown} />
                 </button>
             </p>
         </footer>
