@@ -39,7 +39,7 @@ const UsersList = () => {
         content = (
             <>
             
-            <div className="h-screen w-full rounded-lg shadow-md border shadow-gray-400">
+            <div className="h-full w-full rounded-lg shadow-md border shadow-gray-400">
                 <div className="flex justify-between">
                 <div className="px-5 font-bold mt-2">Database</div>
                 <button className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 m-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
@@ -47,7 +47,7 @@ const UsersList = () => {
                 Add New User
                 </button>
                 </div>
-                <table className="w-full text-left ">
+                <table className="w-full text-left bg ">
                     <thead className="">
                         <tr className="text-base bg-gray-200 ">
                             <th scope="col" className="px-5 py-3">User ID</th>
