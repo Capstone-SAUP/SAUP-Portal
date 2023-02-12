@@ -1,6 +1,7 @@
 import { useGetOutreachQuery } from "./outreachApiSlice"
 import Outreach from "./Outreach"
 import useAuth from "../../hooks/useAuth"
+import { useNavigate } from 'react-router-dom'
 import useTitle from "../../hooks/useTitle"
 import PulseLoader from 'react-spinners/PulseLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +9,8 @@ import { faNavicon } from "@fortawesome/free-solid-svg-icons"
 
 const OutreachList = () => {
     useTitle('SAUP Portal: Outreach List')
+
+    const navigate = useNavigate()
 
     const { user_id, isAdmin } = useAuth()
 
@@ -32,6 +35,8 @@ const OutreachList = () => {
     }
 
     if (isSuccess) {
+        const handleOutreach = () => navigate(`/dash/outreach/new`)
+
         const { ids, entities } = outreach
 
         let filteredIds
@@ -54,7 +59,7 @@ const OutreachList = () => {
             </p>
         </p>
 
-            <nav className="shadow-md shadow-gray-400 mb-4 p-3 border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+            <nav className="border shadow-md shadow-gray-400 mb-4 p-3 border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-wrap items-center justify-between mx-auto">
                 <ul className="flex gap-x-20 mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-4 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                     <li>
@@ -96,23 +101,31 @@ const OutreachList = () => {
                 </ul>
             </div>
             </nav>
-            <div className="h-screen w-full rounded-lg shadow-md  shadow-gray-400">
-                <p className="text-xl font-sans font-semibold py-2 px-2">Outreach Projects</p>
+            <div className="h-full w-full border rounded-lg shadow-md  shadow-gray-400">
+                <div className="">
+                    <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 m-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                    onClick={handleOutreach}> 
+                    Add New Project
+                    </button>
+                </div>
+                
                 <table className="w-full text-sm text-left table-fixed">
                     <thead className="bg-gray-300">
                         <tr>
                             <th scope="col" className="text-sm font-bold px-6 py-4 ">ID</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Status</th>
-                            <th scope="col" className="text-sm font-bold py-4 ">Category</th>
+                            <th scope="col" className="text-sm font-bold py-4 ">Date Created</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Date of Submission</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Name</th>
+                            <th scope="col" className="px-4 w-32">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
                         {tableContent}
                     </tbody>
                 </table>
-            </div></>
+            </div>
+            </>
         )
     }
 

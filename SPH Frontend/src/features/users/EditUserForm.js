@@ -128,7 +128,7 @@ const EditUserForm = ({ user }) => {
             ></img>
             <p className={errClass}>{errContent}</p>
             <form
-                className="h-screen w-1/2 grid gap-1 px-20 text-black"
+                className="h-full w-1/2 grid gap-3 px-20 text-black"
                 onSubmit={(e) => e.preventDefault()}
             >
                 <div className="flex justify-between items-center">
@@ -136,7 +136,7 @@ const EditUserForm = ({ user }) => {
                         Edit <span className="text-rose-900">User</span>
                     </h1>
                 </div>
-                <div className="flex justify-between items-center gap-2 grid-cols-2">
+                <div className="w-full grid">
                     <label className="text-base align-middle" htmlFor="user_id">
                         User ID:
                     </label>
@@ -187,12 +187,12 @@ const EditUserForm = ({ user }) => {
                     </div>
                 </div>
                 <label
-                    className="text-base flex items-center w-fit gap-3"
+                    className="text-base text-gray-500 flex items-center w-fit gap-3"
                     htmlFor="user-active"
                 >
                     Active:
                     <input
-                        className="h-6 w-6 rounded-md"
+                        className="h-5 w-5 rounded-md"
                         id="user-active"
                         name="user-active"
                         type="checkbox"
@@ -201,7 +201,7 @@ const EditUserForm = ({ user }) => {
                     />
                 </label>
 
-                <div className="flex justify-between items-center gap-2 grid-cols-2">
+                <div className="w-full grid">
                     <label className="text-base align-middle" htmlFor="user_id">
                         Assign Role:
                     </label>
