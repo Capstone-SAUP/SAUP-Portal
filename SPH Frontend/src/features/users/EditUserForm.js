@@ -104,7 +104,7 @@ const EditUserForm = ({ user }) => {
 
     const errClass = isError || isDelError ? "errmsg" : "offscreen";
     const validUserClass = !validUser_id
-        ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
+        ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-1/2"
         : "";
     const validEmailClass = !validEmail
         ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
