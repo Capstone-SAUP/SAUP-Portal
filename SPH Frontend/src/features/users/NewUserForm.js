@@ -140,7 +140,7 @@ const NewUserForm = () => {
             <p className={errClass}>{error?.data?.message}</p>
             <div className="">
                 <form
-                    className="h-screen gap-1 px-20 grid text-black"
+                    className="h-full gap-2 px-20 grid text-black"
                     onSubmit={onSaveUserClicked}
                 >
                     <div className="flex justify-between items-center">
@@ -149,7 +149,7 @@ const NewUserForm = () => {
                         </h1>
                     </div>
 
-                    <div className="flex justify-between items-center gap-2 grid-cols-2">
+                    <div className="w-full grid">
                         <label
                             className="text-base align-middle"
                             htmlFor="user_id"
@@ -235,7 +235,9 @@ const NewUserForm = () => {
                         <div className="text-gray-500 text-xs">
                             4-12 chars incl. !@#$%
                         </div>
-                        <div className="flex justify-between items-center gap-2 grid-cols-2">
+                    </div>
+                    <div>
+                        <div className="w-full grid">
                             <label
                                 className="text-base align-middle"
                                 htmlFor="roles"
@@ -253,7 +255,7 @@ const NewUserForm = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="text-center m-5">
+                    <div className="text-center mt-5">
                         <button
                             className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                             title="Save"

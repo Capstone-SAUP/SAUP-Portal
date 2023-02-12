@@ -217,12 +217,12 @@ a:focus-visible {
   max-width: 800px;
 }
 
-.form__checkbox-container {
+/* .form__checkbox-container {
   display: flex;
   align-items: center;
   width: fit-content;
   gap: 0.5em;
-}
+} */
 
 .form__persist {
   display: flex;
@@ -237,19 +237,19 @@ a:focus-visible {
   align-items: center;
 } */
 
-.form__input,
+/* .form__input,
 .form__submit-button {
   padding: 0.5em;
 }
 
 .form__input--text {
   min-height: 150px;
-}
+} */
 
-.form__input--incomplete {
+/* .form__input--incomplete {
   border: 1px solid var(--INPUT-INVALID);
   outline: 1px solid var(--INPUT-INVALID);
-}
+} */
 
 .form__action-buttons {
   display: flex;
