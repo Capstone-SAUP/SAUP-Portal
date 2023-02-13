@@ -136,12 +136,12 @@ const EditUserForm = ({ user }) => {
                         Edit <span className="text-rose-900">User</span>
                     </h1>
                 </div>
-                <div className="flex justify-between items-center gap-2 grid-cols-2">
-                    <label className="text-base align-middle" htmlFor="user_id">
+                <div className="flex place-items-start gap-2 grid-cols-2">
+                    <label className="text-base align-middle mt-2" htmlFor="user_id">
                         User ID:
                     </label>
                     <input
-                        className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2${validUserClass}`}
+                        className={`flex items-start bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validUserClass}`}
                         onKeyPress={(e) =>
                             !/[0-9]/.test(e.key) && e.preventDefault()
                         }
@@ -201,14 +201,14 @@ const EditUserForm = ({ user }) => {
                     />
                 </label>
 
-                <div className="flex justify-between items-center gap-2 grid-cols-2">
-                    <label className="text-base align-middle" htmlFor="user_id">
+                <div className="flex place-items-start gap-2 grid-cols-2">
+                    <label className="text-base flex items-center w-fit gap-3 mt-2 mr-4" htmlFor="user_id">
                         Assign Role:
                     </label>
                     <select
                         id="roles"
                         name="roles"
-                        className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validRolesClass}`}
+                        className={`flex items-start bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2  ${validRolesClass}`}
                         value={roles}
                         onChange={onRolesChanged}
                     >
@@ -221,10 +221,10 @@ const EditUserForm = ({ user }) => {
                         htmlFor="roles"
                     ></label>
                 </span>
-                <div className="grid-cols-2 flex justify-evenly">
+                <div className="grid-cols-2 flex items-start gap-8">
                     <div className="text-center">
                         <button
-                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-12 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                             title="Save"
                             onClick={onDeleteUserClicked}
                             disabled={!canSave}
@@ -234,7 +234,7 @@ const EditUserForm = ({ user }) => {
                     </div>
                     <div className="text-center">
                         <button
-                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-12 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                             title="Save"
                             onClick={onSaveUserClicked}
                             disabled={!canSave}

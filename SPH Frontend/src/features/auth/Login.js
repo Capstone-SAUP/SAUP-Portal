@@ -94,10 +94,10 @@ const Login = () => {
                     />
                                         <br></br>
 
-                    <button className="form__submit-button bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl focus:outline-none focus:shadow-outline justify-center">Sign In</button>
+                    <button className="bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl focus:outline-none focus:shadow-outline justify-center">Sign In</button>
 
                     <br></br>
-                    <label htmlFor="persist" className="form__persist">
+                    <label htmlFor="persist" className="flex items-center w-auto gap-2">
                         <input
                             type="checkbox"
                             className="checkbox "
