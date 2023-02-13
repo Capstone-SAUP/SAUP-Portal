@@ -1,4 +1,32 @@
 @tailwind base;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Scrollbar Design */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white black;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: maroon;
+  border-radius: 14px;
+  border: 3px solid white;
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -6,17 +34,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@700&display=swap');
 
-@layer components{
-  .input_incomplete {
-    @apply bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 bloc w-full;
-  }
-}
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 /* || VARIABLES */
 
