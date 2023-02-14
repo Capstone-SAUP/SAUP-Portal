@@ -41,14 +41,14 @@ const DashHeader = () => {
 
     let dashClass = null
     if (!DASH_REGEX.test(pathname) && !NOTES_REGEX.test(pathname) && !USERS_REGEX.test(pathname)) {
-        dashClass = "dash-header__container--small"
+        dashClass = "max-w-xs"
     }
 
     let newOutreachButton = null
     if (NOTES_REGEX.test(pathname)) {
         newOutreachButton = (
             <button
-                className="icon-button mt-5"
+                className="w-11 h-11 text-3xl bg-transparent text-white grid place-content-center mt-5"
                 title="New Outreach"
                 onClick={onNewOutreachClicked}
             >
@@ -61,7 +61,7 @@ const DashHeader = () => {
     if (USERS_REGEX.test(pathname)) {
         newUserButton = (
             <button
-                className="icon-button mt-5"
+                className="w-11 h-11 text-3xl bg-transparent text-white grid place-content-center mt-5"
                 title="New User"
                 onClick={onNewUserClicked}
             >
@@ -75,7 +75,7 @@ const DashHeader = () => {
         if (!USERS_REGEX.test(pathname) && pathname.includes('/dash')) {
             userButton = (
                 <button
-                    className="icon-button mt-5"
+                    className="w-11 h-11 text-3xl bg-transparent text-white grid place-content-center mt-5"
                     title="Users"
                     onClick={onUsersClicked}
                 >
@@ -89,7 +89,7 @@ const DashHeader = () => {
     if (!NOTES_REGEX.test(pathname) && pathname.includes('/dash')) {
         outreachButton = (
             <button
-                className="icon-button mt-5"
+                className="w-11 h-11 text-3xl bg-transparent text-white grid place-content-center mt-5"
                 title="Outreach"
                 onClick={onOutreachClicked}
             >
@@ -100,7 +100,7 @@ const DashHeader = () => {
 
     const logoutButton = (
         <button
-            className="icon-button mt-5"
+            className="w-11 h-11 text-3xl bg-transparent text-white grid place-content-center mt-5"
             title="Logout"
             onClick={sendLogout}
         >
@@ -129,13 +129,15 @@ const DashHeader = () => {
         <>
             <p className={errClass}>{error?.data?.message}</p>
 
-            <header className="dash-header">
-                <div className={`dash-header__container ${dashClass}`}>
+            <header className="h-full w-20 fixed z-10 px-4 pt-12 border-y-0 border-red-900 bg-red-900">
+
+
+                <div className={`grid-flow-col justify-between items-center pt-40 ${dashClass}`}>
                     <Link to="/dash">
-                        <h1 className="icon-button  mt-5"> 
+                        <h1 className=" w-11 h-11 text-3xl bg-transparent text-white grid place-content-center  mt-5"> 
 <FontAwesomeIcon icon={faHouseUser}/>                        </h1>
                     </Link>
-                    <nav className="dash-header__nav">
+                    <nav className="block flex-nowrap">
                         {buttonContent}
                     </nav>
                 </div>
