@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import useAuth from "../hooks/useAuth"
 import { Bars3Icon } from '@heroicons/react/20/solid'
+import { RiDashboardLine } from 'react-icons/ri'
 
 
 
@@ -26,7 +27,7 @@ const DashFooter = () => {
                 title="Home"
                 onClick={onGoHomeClicked}
             >
-                <FontAwesomeIcon icon={faHouse} />
+                <RiDashboardLine />
             </button>
         )
     }
