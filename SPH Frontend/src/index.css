@@ -172,29 +172,8 @@ a:focus-visible {
 
 /* || DASH HEADER, CONTAINER & FOOTER */
 
-.dash-header {
-  height: 100%;
-  width: 80px;
-  position: fixed;
-  z-index: 1;
-  background-color: rgb(94,25,27);
-  padding: 0 0.5em;
-  border-bottom: 1px solid var(--BORDER-COLOR);
-}
-.dash-header__container {
-  flex-flow: column;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 150px;
-}
-
 .dash-header__container--small {
   max-width: 200px;
-}
-
-.dash-header__nav {
-  display: block;
-  flex-flow: column nowrap;
 }
 
 .dash-container {
