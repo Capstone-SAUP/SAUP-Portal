@@ -12,7 +12,7 @@ const SubmitApplication = () => {
           Project Name
         <input placeholder="Name of Project" id="name" className="w-1/2 shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 mb-10 mt-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
         </input>
-          Category
+          Department
         <select id="option" className=" bg-gray-50 border shadow-lg border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-40 p-2.5 mb-10 mt-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
           <option value="SOC">SOC</option>
           <option value="SEA">SEA</option>

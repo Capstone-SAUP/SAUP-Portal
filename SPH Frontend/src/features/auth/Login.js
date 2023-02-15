@@ -70,7 +70,7 @@ const Login = () => {
                 <form className="h-screen grid place-content-center" onSubmit={handleSubmit}>
                 <br></br>
                 <h1 className="text-5xl font-bold pb-2 mb-4 font-sans">Sign <span className="text-rose-900">In</span></h1>
-                    <label className="mb-1" htmlFor="user_id">Student ID:</label>
+                    <label className="mb-1" htmlFor="user_id">User ID:</label>
                     <input
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}                     
