@@ -79,7 +79,6 @@ const UsersList = () => {
                                     <option selected>Pending</option>
                                     <option value="US">Completed</option>
                                     <option value="CA">Ongoing</option>
-                                    <option value="FR">SBA</option>
                                 </select>
                             </li>
                             <li>

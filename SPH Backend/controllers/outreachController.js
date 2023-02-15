@@ -8,10 +8,10 @@ const getAllOutreach = async (req, res) => {
     // Get all outreach from MongoDB
     const outreach = await Outreach.find().lean()
 
-    // If no outreach 
-    if (!outreach?.length) {
-        return res.status(400).json({ message: 'No outreach found' })
-    }
+    // // If no outreach 
+    // if (!outreach?.length) {
+    //     return res.status(400).json({ message: 'No outreach found' })
+    // }
 
     // Add user_id to each outreach before sending the response 
     // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
@@ -31,7 +31,7 @@ const createNewOutreach = async (req, res) => {
     const { user, title, text } = req.body
 
     // Confirm data
-    if (!user || !title || !text) {
+    if (!user || !title || !text ) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -57,10 +57,10 @@ const createNewOutreach = async (req, res) => {
 // @route PATCH /outreach
 // @access Private
 const updateOutreach = async (req, res) => {
-    const { id, user, title, text, completed } = req.body
+    const { id, user, title, text, status } = req.body
 
     // Confirm data
-    if (!id || !user || !title || !text || typeof completed !== 'boolean') {
+    if (!id || !user || !title || !text) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -82,7 +82,7 @@ const updateOutreach = async (req, res) => {
     outreach.user = user
     outreach.title = title
     outreach.text = text
-    outreach.completed = completed
+    outreach.status = status
 
     const updatedOutreach = await outreach.save()
 
