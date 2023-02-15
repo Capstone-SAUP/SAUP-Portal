@@ -26,7 +26,7 @@ const Welcome = () => {
 
             {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
 
-            {(isAdmin) && <p><Link to="/dash/generate-summary">Generate Summary</Link> </p>}
+            {/* {(isAdmin) && <p><Link to="/dash/generate-summary">Generate Summary</Link> </p>} */}
 
             {(isAdmin) && <p><Link to="/dash/generate-certificate">Generate Certificate</Link> </p>}
             
