@@ -8,7 +8,7 @@ const DashLayout = () => {
         <DashFooter />
         <div className="flex">
           <DashHeader />
-          <div className="p-7 block">
+          <div className="p-7 h-full">
             <Outlet />
           </div>
         </div>

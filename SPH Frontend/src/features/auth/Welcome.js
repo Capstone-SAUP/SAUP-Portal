@@ -20,11 +20,11 @@ const Welcome = () => {
 
             <p><Link to="/dash/outreach">View Outreach</Link></p>
 
-            <p><Link to="/dash/outreach/new">Add New Outreach</Link></p>
+            {/* <p><Link to="/dash/outreach/new">Add New Outreach</Link></p> */}
 
             {(isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
 
-            {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
+            {/* {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>} */}
 
             {(isAdmin) && <p><Link to="/dash/generate-summary">Generate Summary</Link> </p>}
 

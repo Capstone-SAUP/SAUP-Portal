@@ -162,7 +162,7 @@ const DashHeader = () => {
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <header className="flex">
+      <header className="flex sticky flex-nowrap justify-start z-50">
         <div
           className={`bg-red-900 h-screen p-5 pt-8 ${
             open ? "w-72" : "w-20"
@@ -170,7 +170,7 @@ const DashHeader = () => {
         >
           <IoChevronBack
             className={`bg-white text-red-900 text-3xl rounded-full absolute -right-3 top-9 border-2 border-red-900 cursor-pointer ${
-              open && "rotate-180"
+              !open && "rotate-180"
             }`}
             onClick={() => setOpen(!open)}
           />
