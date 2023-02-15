@@ -72,7 +72,7 @@ const DashHeader = () => {
 
   let userButton = null;
   if (isAdmin) {
-    if (!USERS_REGEX.test(pathname) && pathname.includes("/dash")) {
+    if (pathname.includes("/dash")) {
       userButton = (
         <button
           className="w-full pt-2 text-left"
@@ -98,13 +98,13 @@ const DashHeader = () => {
   }
 
   let outreachButton = null;
-  if (!NOTES_REGEX.test(pathname) && pathname.includes("/dash")) {
+  if (pathname.includes("/dash")) {
     outreachButton = (
       <button
         className="w-full pt-2 text-left"
         onClick={onOutreachClicked}
       >
-        <div className="text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md mt-2">
+        <div className="text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md mt-2">
             <span className="text-2xl block float-left pt-1">
               <FaRegHandshake className="text-3xl block float-left" />
             </span>
