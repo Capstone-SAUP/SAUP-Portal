@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import DashSidebar from './DashSidebar'
 import DashFooter from './DashFooter'
+import DataOverview from '../features/infos/DataOverview'
 
 const DashLayout = () => {
     return (
@@ -14,5 +15,6 @@ const DashLayout = () => {
         </div>
       </>
     );
+
 }
 export default DashLayout

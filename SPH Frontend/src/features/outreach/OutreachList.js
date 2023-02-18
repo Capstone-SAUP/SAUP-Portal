@@ -51,13 +51,13 @@ const OutreachList = () => {
         content = (   
         <>
 
-        <p className="text-2xl font-semibold">Outreach Projects
+        <div className="text-2xl font-semibold">Outreach Projects
             <p className="text-sm font-bold float-right">
                 <button className="pr-2">    
                     <FontAwesomeIcon icon={faNavicon} />
                 </button>View
             </p>
-        </p>
+        </div>
 
             <nav className="border shadow-md shadow-gray-400 mb-4 p-3 border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-wrap items-center justify-between mx-auto">
@@ -69,10 +69,10 @@ const OutreachList = () => {
                         </input>
                     </li>
                     <li>
-                    <label className=" px-4 py-10 text-sm font-bold">Category</label>
+                    <label className=" px-4 py-10 text-sm font-bold">Department</label>
                     <select
                         type="text" placeholder="Search" className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>All</option>
+                        <option value="All">All</option>
                         <option value="US">SOC</option>
                         <option value="CA">SAS</option>
                         <option value="FR">SBA</option>
@@ -82,17 +82,16 @@ const OutreachList = () => {
                     <label className=" px-4 py-10 text-sm font-bold">Status</label>
                     <select
                         className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Pending</option>
+                        <option value="All">Pending</option>
                         <option value="US">Completed</option>
                         <option value="CA">Ongoing</option>
-                        <option value="FR">SBA</option>
                         </select>
                     </li>
                     <li>
                     <label className=" px-4 py-10 text-sm font-bold">Sort By</label>
                     <select
                         className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Date</option>
+                        <option >Date</option>
                         <option value="US">SOC</option>
                         <option value="CA">SAS</option>
                         <option value="FR">SBA</option>

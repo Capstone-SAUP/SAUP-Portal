@@ -58,7 +58,7 @@ const UsersList = () => {
                             </li>
                             <li>
                                 <label className=" px-4 py-10 text-sm font-bold">
-                                    Category
+                                    Department
                                 </label>
                                 <select
                                     type="text"
@@ -79,7 +79,6 @@ const UsersList = () => {
                                     <option selected>Pending</option>
                                     <option value="US">Completed</option>
                                     <option value="CA">Ongoing</option>
-                                    <option value="FR">SBA</option>
                                 </select>
                             </li>
                             <li>

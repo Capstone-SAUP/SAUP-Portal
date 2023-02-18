@@ -11,21 +11,15 @@ const SubmitApplication = () => {
         <h1 className="font-bold text-2xl pb-5">Submit Application</h1>
         <div className="ml-5 object-center">
           Project Name
-          <input
-            placeholder="Name of Project"
-            id="name"
-            className="w-1/2 shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 mb-10 mt-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-          ></input>
-          Category
-          <select
-            id="option"
-            className=" bg-gray-50 border shadow-lg border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-40 p-2.5 mb-10 mt-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-          >
-            <option value="SOC">SOC</option>
-            <option value="SEA">SEA</option>
-            <option value="SBA">SBA</option>
-            <option value="SNAMS">SNAMS</option>
-          </select>
+        <input placeholder="Name of Project" id="name" className="w-1/2 shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 mb-10 mt-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
+        </input>
+          Department
+        <select id="option" className=" bg-gray-50 border shadow-lg border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-40 p-2.5 mb-10 mt-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
+          <option value="SOC">SOC</option>
+          <option value="SEA">SEA</option>
+          <option value="SBA">SBA</option>
+          <option value="SNAMS">SNAMS</option>
+        </select>
           Contact Information
           <input
             placeholder="Email or Phone Number"

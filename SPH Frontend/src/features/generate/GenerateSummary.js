@@ -5,12 +5,12 @@ const GenerateSummary = () => {
   useTitle('SAUP Portal: Generate Summary')
 
   return (
-    <><h1 className="font-bold text-2xl pb-5">Summary Generation Report</h1>
+    <><h1 className="font-bold text-2xl pt-10 pb-5">Summary Generation Report</h1>
     <div className="border overflow-hidden bg-white shadow-lg sm:rounded-lg mb-20">
       <div className="grid grid-cols-4 grid-rows-3 justify-around px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">From Date</h3>
         <h3 className="text-lg font-medium leading-6 text-gray-900">To Date</h3>
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Category</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Department</h3>
         <h3 className="text-lg font-medium leading-6 text-gray-900">Status</h3>
         <select id="countries" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
           <option selected>1/14/2023</option>

@@ -23,9 +23,7 @@ const Outreach = ({ outreachId }) => {
             <tr className="text-left px-8">
                 <td className="px-6 text-sm font-medium text-gray-900">{outreach.user_id}</td>
                 <td className="whitespace-nowrap text-sm font-medium text-gray-900">
-                    {outreach.completed
-                        ? <span className="text-green-400">Completed</span>
-                        : <span className="">Open</span>
+                    {outreach.status
                     }
                 </td>
                 <td className="text-sm font-medium text-gray-900">{created}</td>
