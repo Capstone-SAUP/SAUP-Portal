@@ -106,18 +106,18 @@ const EditOutreachForm = ({ outreach, users }) => {
 
   const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
-  let deleteButton = null;
-  if (isAdmin) {
-    deleteButton = (
-      <button
-        className="icon-button-black"
-        title="Delete"
-        onClick={onDeleteOutreachClicked}
-      >
-        <FontAwesomeIcon icon={faTrashCan} />
-      </button>
-    );
-  }
+  // let deleteButton = null;
+  // if (isAdmin) {
+  //   deleteButton = (
+  //     <button
+  //       className="icon-button-black"
+  //       title="Delete"
+  //       onClick={onDeleteOutreachClicked}
+  //     >
+  //       <FontAwesomeIcon icon={faTrashCan} />
+  //     </button>
+  //   );
+  // }
 
   const content = (
     <>
