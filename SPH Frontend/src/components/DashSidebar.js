@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { FaRegHandshake } from "react-icons/fa";
 import { TfiPrinter } from "react-icons/tfi";
 import { SlUser } from "react-icons/sl";
-import { BiUserCircle } from "react-icons/bi"
-import { RxDashboard } from "react-icons/rx"
+import { BiUserCircle } from "react-icons/bi";
+import { RxDashboard } from "react-icons/rx";
 import { IoChevronBack } from "react-icons/io5";
-import { AiOutlineFileAdd  } from "react-icons/ai"
+import { AiOutlineFileAdd } from "react-icons/ai";
 import { RiLogoutBoxRLine, RiSearchLine } from "react-icons/ri";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
@@ -16,10 +16,10 @@ const DASH_REGEX = /^\/dash(\/)?$/;
 const NOTES_REGEX = /^\/dash\/outreach(\/)?$/;
 const USERS_REGEX = /^\/dash\/users(\/)?$/;
 
-const DashHeader = () => {
+const DashSidebar = () => {
   const [open, setOpen] = useState(true);
 
-  const { isAdmin } = useAuth();
+  const { status, user_id, isAdmin } = useAuth();
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -82,7 +82,11 @@ const DashHeader = () => {
           title="Users"
           onClick={onUsersClicked}
         >
-          <div className="text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md">
+          <div
+            className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+              pathname.includes("/dash/users") && "bg-red-500"
+            }`}
+          >
             <span>
               <SlUser className="text-3xl block float-left" />
             </span>
@@ -108,17 +112,21 @@ const DashHeader = () => {
         title="Outreach"
         onClick={onOutreachClicked}
       >
-        <div className="text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md">
-            <span className="text-2xl block float-left pt-1">
-              <FaRegHandshake className="text-3xl block float-left" />
-            </span>
-            <span
-              className={`truncate text-base font-medium flex-1 duration-200 ${
-                !open && "hidden"
-              }`}
-            >
-              Outreach
-            </span>
+        <div
+          className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+            pathname.includes("/dash/outreach") && "bg-red-500"
+          }`}
+        >
+          <span className="text-2xl block float-left pt-1">
+            <FaRegHandshake className="text-3xl block float-left" />
+          </span>
+          <span
+            className={`truncate text-base font-medium flex-1 duration-200 ${
+              !open && "hidden"
+            }`}
+          >
+            Outreach
+          </span>
         </div>
       </button>
     );
@@ -132,17 +140,21 @@ const DashHeader = () => {
         title="Generate Certificate"
         onClick={onGenerateClicked}
       >
-        <div className="text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md">
-            <span className="text-2xl block float-left pt-1">
-              <TfiPrinter className="text-3xl block float-left" />
-            </span>
-            <span
-              className={`truncate text-base font-medium flex-1 duration-200 ${
-                !open && "hidden"
-              }`}
-            >
-              Certificate
-            </span>
+        <div
+          className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+            pathname.includes("/dash/generate-certificate") && "bg-red-500"
+          }`}
+        >
+          <span className="text-2xl block float-left pt-1">
+            <TfiPrinter className="text-3xl block float-left" />
+          </span>
+          <span
+            className={`truncate text-base font-medium flex-1 duration-200 ${
+              !open && "hidden"
+            }`}
+          >
+            Certificate
+          </span>
         </div>
       </button>
     );
@@ -157,7 +169,11 @@ const DashHeader = () => {
           title="Submit Application"
           onClick={onSubmitApplication}
         >
-          <div className="text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md">
+          <div
+            className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+              pathname.includes("/dash/application-forms") && "bg-red-500"
+            }`}
+          >
             <span>
               <AiOutlineFileAdd className="text-3xl block float-left" />
             </span>
@@ -177,11 +193,15 @@ const DashHeader = () => {
 
   const logoutButton = (
     <button
-      className="mb-3 w-full text-left "
+      className="mb-3 w-full bottom-0 right-0 absolute text-left "
       title="Logout"
       onClick={sendLogout}
     >
-      <div className="bottom-0 absolute mb-5 text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md">
+      <div
+        className={`mb-5 text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md${
+          !open && "flex justify-center"
+        }`}
+      >
         <span className="text-2xl block float-left pt-1">
           <RiLogoutBoxRLine className="text-3xl block float-left" />
         </span>
@@ -238,13 +258,40 @@ const DashHeader = () => {
               alt="logo"
             ></img>
             <h1
-                className={`truncate text-white font-medium text-lg mt-1.5 duration-200 ${
+              className={`truncate text-white font-medium text-lg mt-1.5 duration-200 ${
                 !open && "opacity-0 scale-0 -mb-20"
               }`}
             >
               SAUP HAU Portal
             </h1>
           </div>
+          <Link>
+            <div className={`mb-3 mt-5 ${dashClass}`}>
+              <div
+                className={`"w-full text-white grid text-base gap-x-4 cursor-pointer p-1 rounded-md ${
+                  !open && "flex justify-center"
+                }`}
+              >
+                <div className="pt-1 justify-self-center">
+                  <BiUserCircle className="text-6xl" />
+                </div>
+                <div
+                  className={`truncate w-full text-base font-medium duration-200 ${
+                    !open && "opacity-0"
+                  }`}
+                >
+                  <div className="flex justify-between">
+                    <div>User ID:</div>
+                    <span>{user_id}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <div>Access Type:</div>
+                    <span>{status}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
           {/* <div
             className={`flex items-center rounded-md bg-red-300 mt-6 duration-200 ${
               !open ? "px-2.5 py-2" : "px-4"
@@ -286,7 +333,6 @@ const DashHeader = () => {
       </header>
     </>
   );
-  console.log(open);
   return content;
 };
-export default DashHeader;
+export default DashSidebar;

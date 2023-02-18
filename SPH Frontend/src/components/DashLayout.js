@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import DashHeader from './DashHeader'
+import DashSidebar from './DashSidebar'
 import DashFooter from './DashFooter'
 
 const DashLayout = () => {
@@ -7,7 +7,7 @@ const DashLayout = () => {
       <>
         {/* <DashFooter /> */}
         <div className="flex">
-          <DashHeader />
+          <DashSidebar />
           <div className="p-7 h-full">
             <Outlet />
           </div>
