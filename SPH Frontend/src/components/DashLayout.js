@@ -5,7 +5,7 @@ import DashFooter from './DashFooter'
 const DashLayout = () => {
     return (
       <>
-        <DashFooter />
+        {/* <DashFooter /> */}
         <div className="flex">
           <DashHeader />
           <div className="p-7 h-full">

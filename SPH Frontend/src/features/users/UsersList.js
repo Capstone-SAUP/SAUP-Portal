@@ -96,7 +96,7 @@ const UsersList = () => {
                         </ul>
                     </div>
                 </nav>
-                <div className="h-full w-full rounded-lg shadow-md border shadow-gray-400">
+                <div className="w-full rounded-lg shadow-md border shadow-gray-400">
                     <div className="">
                         <div className="px-5 font-bold mt-2"></div>
                         <button

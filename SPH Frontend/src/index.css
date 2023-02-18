@@ -124,7 +124,6 @@ select {
   /* React root div */
   min-height: 100vh;
   display: flex;
-  flex-flow: column nowrap;
 }
 
 a {

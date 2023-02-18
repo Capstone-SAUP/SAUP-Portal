@@ -4,8 +4,6 @@ import {
     useDeleteOutreachMutation,
 } from "./outreachApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 
 const EditOutreachForm = ({ outreach, users }) => {
@@ -93,19 +91,6 @@ const EditOutreachForm = ({ outreach, users }) => {
         : "";
 
     const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
-
-    let deleteButton = null;
-    if (isAdmin) {
-        deleteButton = (
-            <button
-                className="icon-button-black"
-                title="Delete"
-                onClick={onDeleteOutreachClicked}
-            >
-                <FontAwesomeIcon icon={faTrashCan} />
-            </button>
-        );
-    }
 
     const content = (
         <>
