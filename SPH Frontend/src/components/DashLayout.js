@@ -10,7 +10,7 @@ const DashLayout = () => {
         <div className="flex">
           <DashSidebar />
           <div className="p-7 h-full">
-            <Outlet />
+            <DataOverview />
           </div>
         </div>
       </>
