@@ -12,8 +12,6 @@ import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
 import useAuth from '../hooks/useAuth'
 import PulseLoader from 'react-spinners/PulseLoader'
-import { faUser } from "@fortawesome/free-solid-svg-icons"
-
 
 const DASH_REGEX = /^\/dash(\/)?$/
 const NOTES_REGEX = /^\/dash\/outreach(\/)?$/
@@ -21,7 +19,7 @@ const USERS_REGEX = /^\/dash\/users(\/)?$/
 
 const DashHeader = () => {
     const { isAdmin } = useAuth()
-    const { user_id, status } = useAuth()
+
     const navigate = useNavigate()
     const { pathname } = useLocation()
 
@@ -40,10 +38,6 @@ const DashHeader = () => {
     const onNewUserClicked = () => navigate('/dash/users/new')
     const onOutreachClicked = () => navigate('/dash/outreach')
     const onUsersClicked = () => navigate('/dash/users')
-
-
-        
-
 
     let dashClass = null
     if (!DASH_REGEX.test(pathname) && !NOTES_REGEX.test(pathname) && !USERS_REGEX.test(pathname)) {
@@ -131,19 +125,15 @@ const DashHeader = () => {
         )
     }
 
-
-
-
     const content = (
         <>
             <p className={errClass}>{error?.data?.message}</p>
+
             <header className="h-full w-20 fixed z-10 px-4 pt-12 border-y-0 border-red-900 bg-red-900">
 
 
                 <div className={`grid-flow-col justify-between items-center pt-40 ${dashClass}`}>
                     <Link to="/dash">
-                    <p className="absolute top-3.5 text-white"><FontAwesomeIcon className="w-12 " icon={faUser} /> User ID: { user_id }
-     </p>
                         <h1 className=" w-11 h-11 text-3xl bg-transparent text-white grid place-content-center  mt-5"> 
 <FontAwesomeIcon icon={faHouseUser}/>                        </h1>
                     </Link>
