@@ -100,7 +100,7 @@ const OutreachList = () => {
                 </ul>
             </div>
             </nav>
-            <div className="h-full w-full border rounded-lg shadow-md  shadow-gray-400">
+            <div className="w-full border rounded-lg shadow-md  shadow-gray-400">
                 <div className="">
                     <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 m-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                     onClick={handleOutreach}> 

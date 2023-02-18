@@ -1,17 +1,20 @@
-import DashHeader from './DashHeader'
+import { Outlet } from 'react-router-dom'
+import DashSidebar from './DashSidebar'
 import DashFooter from './DashFooter'
 import DataOverview from '../features/infos/DataOverview'
 
 const DashLayout = () => {
     return (
-        <>
-            <DashFooter />
-            <DashHeader />
-            <div className=" px-2 py-4 flex-grow-1 ml-28">
-            <DataOverview />
-            </div>
+      <>
+        {/* <DashFooter /> */}
+        <div className="flex">
+          <DashSidebar />
+          <div className="p-7 h-full">
+            <Outlet />
+          </div>
+        </div>
+      </>
+    );
 
-        </>
-    )
 }
 export default DashLayout

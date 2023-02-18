@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddNewOutreachMutation } from "./outreachApiSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { STATUS } from "../../config/status";
 
 const NewOutreachForm = ({ users }) => {
