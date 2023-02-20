@@ -12,11 +12,6 @@ import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import useAuth from "../hooks/useAuth";
 import PulseLoader from "react-spinners/PulseLoader";
 
-import { FolderArrowDownIcon } from "@heroicons/react/20/solid";
-
-import FormAndViewer from "../FormAndViewer";
-
-
 const DASH_REGEX = /^\/dash(\/)?$/;
 const NOTES_REGEX = /^\/dash\/outreach(\/)?$/;
 const USERS_REGEX = /^\/dash\/users(\/)?$/;
@@ -286,18 +281,17 @@ const DashSidebar = () => {
                   }`}
                 >
                   <div className="flex justify-between">
-                    <p>User ID</p>
+                    <div>User ID:</div>
                     <span>{user_id}</span>
                   </div>
                   <div className="flex justify-between">
-                    <p>Access Type:</p>
-                    <span className=" place-items-start">{status}</span>
+                    <div>Access Type:</div>
+                    <span>{status}</span>
                   </div>
                 </div>
               </div>
             </div>
           </Link>
-
           {/* <div
             className={`flex items-center rounded-md bg-red-300 mt-6 duration-200 ${
               !open ? "px-2.5 py-2" : "px-4"
@@ -317,7 +311,7 @@ const DashSidebar = () => {
                 !open && "hidden"
               }`}
             />
-          </div> */}          
+          </div> */}
           <Link to="/dash">
             <div className={`mb-3 mt-5 ${dashClass}`}>
               <div className="text-white w-full text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md">
@@ -334,6 +328,7 @@ const DashSidebar = () => {
               </div>
             </div>
           </Link>
+          <nav className="">{buttonContent}</nav>
         </div>
       </header>
     </>
