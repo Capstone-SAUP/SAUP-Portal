@@ -1,5 +1,6 @@
 import useTitle from "../../hooks/useTitle"
 import { FolderArrowDownIcon } from "@heroicons/react/20/solid"
+import { Link } from "react-router-dom";
 
 const ApplicationForms = () => {
   useTitle('SAUP Portal: Application Forms')
@@ -19,15 +20,19 @@ const ApplicationForms = () => {
       </p>
     </div>
     <div>
-    <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 w-1/2 lg-md:w-3/5">
+    <Link to="/dash/form-viewer">
+      <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 w-1/2 lg-md:w-3/5">
       <div>
+      
         <FolderArrowDownIcon className="text-red-900 h-20 pr-2"/>
       </div>
+
       <div className="text-base">
         <p className="mb-5">Student Intake Form and Community Outreach Proposal.pdf</p>
         <p>Upload Date: 11/10/2022</p>
       </div>
     </div>
+    </Link>
     <br/>
     <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 w-1/2 lg-md:w-3/5">
       <div>

@@ -199,13 +199,12 @@ ${e}`);
             type="file"
           />
         </label>
-
-        {/* <span style={{ margin: "0 1rem" }}>|</span>
+        <span style={{ margin: "0 1rem" }}>|</span>
         <button onClick={onGetInputs}>Get Inputs</button>
         <span style={{ margin: "0 1rem" }}>|</span>
         <button onClick={onSetInputs}>Set Inputs</button>
         <span style={{ margin: "0 1rem" }}>|</span>
-      */} 
+      
 
         <button onClick={onSaveInputs}>Save Inputs</button>
         <span style={{ margin: "0 1rem" }}>|</span>
