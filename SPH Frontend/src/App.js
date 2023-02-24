@@ -1,30 +1,30 @@
-import { Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout'
-import Public from './components/Public'
-import Login from './features/auth/Login'
-import DashLayout from './components/DashLayout'
-import Welcome from './features/auth/Welcome'
-import OutreachList from './features/outreach/OutreachList'
-import UsersList from './features/users/UsersList'
-import EditUser from './features/users/EditUser'
-import NewUserForm from './features/users/NewUserForm'
-import EditOutreach from './features/outreach/EditOutreach'
-import NewOutreach from './features/outreach/NewOutreach'
-import GenerateSummary from './features/generate/GenerateSummary'
-import GenerateCertificate from './features/generate/GenerateCertificate'
-import DataOverview from "./features/infos/DataOverview"
-import ApplicationForms from "./features/infos/ApplicationForms"
-import SubmitApplication from './features/infos/SubmitApplication'
-import Prefetch from './features/auth/Prefetch'
-import PersistLogin from './features/auth/PersistLogin'
-import RequireAuth from './features/auth/RequireAuth'
-import { ROLES } from './config/roles'
-import useTitle from './hooks/useTitle'
-import Designer from './features/viewforms/Designer'
-import FormAndViewer from './features/viewforms/FormAndViewer'
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Public from "./components/Public";
+import Login from "./features/auth/Login";
+import DashLayout from "./components/DashLayout";
+import Welcome from "./features/auth/Welcome";
+import OutreachList from "./features/outreach/OutreachList";
+import UsersList from "./features/users/UsersList";
+import EditUser from "./features/users/EditUser";
+import NewUserForm from "./features/users/NewUserForm";
+import EditOutreach from "./features/outreach/EditOutreach";
+import NewOutreach from "./features/outreach/NewOutreach";
+import GenerateSummary from "./features/generate/GenerateSummary";
+import GenerateCertificate from "./features/generate/GenerateCertificate";
+import DataOverview from "./features/infos/DataOverview";
+import ApplicationForms from "./features/infos/ApplicationForms";
+import SubmitApplication from "./features/infos/SubmitApplication";
+import Prefetch from "./features/auth/Prefetch";
+import PersistLogin from "./features/auth/PersistLogin";
+import RequireAuth from "./features/auth/RequireAuth";
+import { ROLES } from "./config/roles";
+import useTitle from "./hooks/useTitle";
+import Designer from "./features/viewforms/Designer";
+import FormAndViewer from "./features/viewforms/FormAndViewer";
 
 function App() {
-  useTitle('SAUP Portal HAU')
+  useTitle("SAUP Portal HAU");
 
   return (
     <Routes>
@@ -35,10 +35,11 @@ function App() {
 
         {/* Protected Routes */}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
+          <Route
+            element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
+          >
             <Route element={<Prefetch />}>
               <Route path="dash" element={<DashLayout />}>
-
                 <Route index element={<Welcome />} />
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
@@ -67,30 +68,32 @@ function App() {
                   </Route>
                 </Route>
                 <Route path="application-forms">
-                    <Route index element={<ApplicationForms />} />
+                  <Route index element={<ApplicationForms />} />
                 </Route>
                 <Route path="submit-forms">
-                    <Route index element={<SubmitApplication />} />
+                  <Route index element={<SubmitApplication />} />
                 </Route>
 
-                <Route path="form-viewer">
-                    <Route index element={<FormAndViewer />} />
+                <Route path="form-viewer1">
+                  <Route index element={<FormAndViewer />} />
                 </Route>
-{/* 
+                <Route path="form-viewer2">
+                  <Route index element={<FormAndViewer />} />
+                </Route>
+                {/* 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                 <Route path="design" element={<Designer />}></Route>
                 </Route>
 
                  <Route path="form-viewer" element={<FormAndViewer />}></Route> */}
-                
-
-              </Route>{/* End Dash */}
+              </Route>
+              {/* End Dash */}
             </Route>
           </Route>
-        </Route>{/* End Protected Routes */}
-
+        </Route>
+        {/* End Protected Routes */}
       </Route>
-    </Routes >
+    </Routes>
   );
 }
 
