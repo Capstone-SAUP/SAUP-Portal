@@ -100,6 +100,8 @@ export const isJsonString = (str: string) => {
 export const getTemplate = () => {
   const data = require('./template.json');
   const data2 = require('./template2.json');
+  const data3 = require('./template3.json');
+  const data4 = require('./template4.json');
   var new_schema
 
   if (window.location.href.match("/form-viewer1")) {
@@ -108,8 +110,19 @@ export const getTemplate = () => {
   else if (window.location.href.match("/form-viewer2")) {
     new_schema = data2
     console.log("Truuuueee");
-    
+}
+else if (window.location.href.match("/form-viewer2")) {
+  new_schema = data2
+  console.log("Truuuueee")
 
+}  else if (window.location.href.match("/form-viewer3")) {
+  new_schema = data3
+  console.log("Truuuueee");
+  
+}  else if (window.location.href.match("/form-viewer4")) {
+  new_schema = data4
+  console.log("Truuuueee");
+  
 }
   
   const template: Template = new_schema
