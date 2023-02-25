@@ -14,7 +14,7 @@ type Mode = "form" | "viewer";
 const initTemplate = () => {
   let template: Template = getTemplate();
   try {
-    const templateString = localStorage.getItem("template");
+    const templateString = localStorage.getItem("template.json");
     const templateJson = templateString
       ? JSON.parse(templateString)
       : getTemplate();
@@ -204,8 +204,6 @@ ${e}`);
         <span style={{ margin: "0 1rem" }}>|</span>
         <button onClick={onSetInputs}>Set Inputs</button>
         <span style={{ margin: "0 1rem" }}>|</span>
-      
-
         <button onClick={onSaveInputs}>Save Inputs</button>
         <span style={{ margin: "0 1rem" }}>|</span>
         <button onClick={onResetInputs}>Reset Inputs</button>

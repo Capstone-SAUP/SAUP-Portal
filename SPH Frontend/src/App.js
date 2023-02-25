@@ -80,6 +80,12 @@ function App() {
                 <Route path="form-viewer2">
                   <Route index element={<FormAndViewer />} />
                 </Route>
+                <Route path="form-viewer3">
+                  <Route index element={<FormAndViewer />} />
+                </Route>
+                <Route path="form-viewer4">
+                  <Route index element={<FormAndViewer />} />
+                </Route>
                 {/* 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                 <Route path="design" element={<Designer />}></Route>
