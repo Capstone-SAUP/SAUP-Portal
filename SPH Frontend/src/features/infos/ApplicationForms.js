@@ -73,7 +73,6 @@ const ApplicationForms = () => {
           </div>
         </div>
         </Link>
-
         <br />
         <Link to="/dash/form-viewer4">
         <div className="inline-flex border overflow-hidden bg-white shadow-lg sm:rounded-lg p-2 mt-5 w-1/2 lg-md:w-3/5">
