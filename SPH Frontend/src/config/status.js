@@ -1,3 +1,5 @@
-export function toggleStatus(approval) {
-  return approval === 'Approved' ? 'Disapproved' : 'Approved';
-}
+export const STATUS = {
+  Pending: "Pending",
+  Ongoing: "Ongoing",
+  Completed: "Completed",
+};

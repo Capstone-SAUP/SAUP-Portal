@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddNewOutreachMutation } from "./outreachApiSlice";
-import { status } from "../../config/status";
+import { STATUS } from "../../config/status";
 
 const NewOutreachForm = ({ users }) => {
   const [addNewOutreach, { isLoading, isSuccess, isError, error }] =
