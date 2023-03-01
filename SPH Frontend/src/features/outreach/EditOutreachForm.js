@@ -5,7 +5,7 @@ import {
 } from "./outreachApiSlice";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { toggleStatus } from "../../config/status";
+import { STATUS } from "../../config/status";
 
 const EditOutreachForm = ({ outreach, users }) => {
   const { isAdmin } = useAuth();
@@ -59,7 +59,7 @@ const EditOutreachForm = ({ outreach, users }) => {
     await deleteOutreach({ id: outreach.id });
   };
 
-  const list = Object.values(status).map((status) => {
+  const list = Object.values(STATUS).map((status) => {
     return (
       <option key={status} value={status}>
         {" "}
