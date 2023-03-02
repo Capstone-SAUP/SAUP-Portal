@@ -14,6 +14,7 @@ import React from "react";
 function Designs() {
   const designerRef = useRef<HTMLDivElement | null>(null);
   const designer = useRef<Designer | null>(null);
+  // const fs = require('fs');
 
   useEffect(() => {
     let template: Template = getTemplate();
