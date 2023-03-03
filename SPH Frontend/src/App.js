@@ -20,8 +20,8 @@ import PersistLogin from "./features/auth/PersistLogin";
 import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
-import Designer from "./features/viewforms/Designer";
-import FormAndViewer from "./features/viewforms/FormAndViewer";
+import Designer from "./features/forms/Designer";
+import FormAndViewer from "./features/forms/FormAndViewer";
 
 function App() {
   useTitle("SAUP Portal HAU");

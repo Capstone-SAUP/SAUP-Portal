@@ -98,29 +98,34 @@ export const isJsonString = (str: string) => {
 };
 
 export const getTemplate = () => {
-    const data = require("./template.json");
-    const data2 = require("./template2.json");
-    const data3 = require("./template3.json");
-    const data4 = require("./template4.json");
+    const anexA = require("./templates/template.json");
+    const anexB = require("./templates/template2.json");
+    const anexC = require("./templates/template3.json");
+    const anexD = require("./templates/template4.json");
     var new_schema;
 
-    if (window.location.href.match("/form-viewer1") || window.location.href.match("/design-anex-A")) {
-        new_schema = data;
-    } else if (
-        window.location.href.match("/form-viewer2" || window.location.href.match("/design-anex-B"))
+    if (
+        window.location.href.match("/view-anex-A") ||
+        window.location.href.match("/design-anex-A")
     ) {
-        new_schema = data2;
+        new_schema = anexA;
     } else if (
-        window.location.href.match("/form-viewer3" || window.location.href.match("/design-anex-C"))
+        window.location.href.match("/view-anex-B") ||
+        window.location.href.match("/design-anex-B")
     ) {
-        new_schema = data3;
+        new_schema = anexB;
     } else if (
-        window.location.href.match("/form-viewer4" || window.location.href.match("/design-anex-D"))
+        window.location.href.match("/view-anex-C") ||
+        window.location.href.match("/design-anex-C")
     ) {
-        new_schema = data4;
+        new_schema = anexC;
+    } else if (
+        window.location.href.match("/view-anex-D") ||
+        window.location.href.match("/design-anex-D")
+    ) {
+        new_schema = anexD;
     }
     console.log(new_schema);
-    
 
     const template: Template = new_schema;
     return template;

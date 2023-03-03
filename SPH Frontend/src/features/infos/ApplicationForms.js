@@ -84,7 +84,7 @@ const ApplicationForms = () => {
                     {EditForm_A_Button}
                     <Link
                         className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5"
-                        to="/dash/form-viewer1"
+                        to="/dash/view-anex-A"
                     >
                         <div>
                             <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
@@ -100,7 +100,7 @@ const ApplicationForms = () => {
                 </div>
                 <div>
                     {EditForm_B_Button}
-                    <Link to="/dash/form-viewer2">
+                    <Link to="/dash/view-anex-B">
                         <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
                             <div>
                                 <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
@@ -116,7 +116,7 @@ const ApplicationForms = () => {
                 </div>
                 <div>
                 {EditForm_C_Button}
-                    <Link to="/dash/form-viewer3">
+                    <Link to="/dash/view-anex-C">
                         <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
                             <div>
                                 <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
@@ -133,7 +133,7 @@ const ApplicationForms = () => {
                 </div>
                 <div>
                 {EditForm_D_Button}
-                    <Link to="/dash/form-viewer4">
+                    <Link to="/dash/view-anex-D">
                         <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
                             <div>
                                 <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
