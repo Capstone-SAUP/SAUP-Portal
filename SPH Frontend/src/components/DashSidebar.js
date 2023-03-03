@@ -161,7 +161,6 @@ const DashSidebar = () => {
   }
 
   let applicationButton = null;
-  if (isAdmin) {
     if (pathname.includes("/dash")) {
       applicationButton = (
         <button
@@ -188,7 +187,6 @@ const DashSidebar = () => {
           </div>
         </button>
       );
-    }
   }
 
   const logoutButton = (

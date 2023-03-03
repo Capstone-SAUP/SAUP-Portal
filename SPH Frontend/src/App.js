@@ -20,8 +20,8 @@ import PersistLogin from "./features/auth/PersistLogin";
 import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
-import Designer from "./features/viewforms/Designer";
-import FormAndViewer from "./features/viewforms/FormAndViewer";
+import Designer from "./features/forms/Designer";
+import FormAndViewer from "./features/forms/FormAndViewer";
 
 function App() {
   useTitle("SAUP Portal HAU");
@@ -86,12 +86,22 @@ function App() {
                 <Route path="form-viewer4">
                   <Route index element={<FormAndViewer />} />
                 </Route>
-                {/* 
+                
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                <Route path="design" element={<Designer />}></Route>
+                <Route path="design-anex-A">
+                  <Route index element={<Designer />} />
+                </Route>
+                <Route path="design-anex-B">
+                  <Route index element={<Designer />} />
+                </Route>
+                <Route path="design-anex-C">
+                  <Route index element={<Designer />} />
+                </Route>
+                <Route path="design-anex-D">
+                  <Route index element={<Designer />} />
+                </Route>
                 </Route>
 
-                 <Route path="form-viewer" element={<FormAndViewer />}></Route> */}
               </Route>
               {/* End Dash */}
             </Route>
