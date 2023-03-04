@@ -74,16 +74,16 @@ function App() {
                   <Route index element={<SubmitApplication />} />
                 </Route>
 
-                <Route path="form-viewer1">
+                <Route path="view-anex-A">
                   <Route index element={<FormAndViewer />} />
                 </Route>
-                <Route path="form-viewer2">
+                <Route path="view-anex-B">
                   <Route index element={<FormAndViewer />} />
                 </Route>
-                <Route path="form-viewer3">
+                <Route path="view-anex-C">
                   <Route index element={<FormAndViewer />} />
                 </Route>
-                <Route path="form-viewer4">
+                <Route path="view-anex-D">
                   <Route index element={<FormAndViewer />} />
                 </Route>
                 

@@ -125,7 +125,7 @@ export const getTemplate = () => {
     ) {
         new_schema = anexD;
     }
-    console.log(new_schema);
+    // console.log(new_schema);
 
     const template: Template = new_schema;
     return template;
