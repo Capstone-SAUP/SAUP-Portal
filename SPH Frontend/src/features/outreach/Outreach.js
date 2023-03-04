@@ -1,10 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useGetOutreachQuery } from './outreachApiSlice'
 import { memo } from 'react'
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Modal from './Modal';
-import EditOutreachForm from './EditOutreachForm';
+import { Link } from 'react-router-dom'
 
 const Outreach = ({ outreachId }) => {
 
@@ -15,16 +12,7 @@ const Outreach = ({ outreachId }) => {
     }
     )
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    function handleOpenModal() {
-      setIsOpen(true);
-    }
-  
-    function handleCloseModal() {
-      setIsOpen(false);
-    }
-  
+    const navigate = useNavigate()
 
     if (outreach) {
 
@@ -33,7 +21,7 @@ const Outreach = ({ outreachId }) => {
 
         const updated = new Date(outreach.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
 
-        //const handleEdit = () => navigate(`/dash/outreach/${outreachId}`)
+        const handleEdit = () => navigate(`/dash/outreach/${outreachId}`)
         
 
 
@@ -50,13 +38,14 @@ const Outreach = ({ outreachId }) => {
                 <td className="text-sm font-medium text-gray-900">{outreach.title}</td>
 
                 <td className="text-sm font-medium text-gray-900">
-                    <button
-                        className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                           onClick={handleOpenModal}> View                         </button>
-                            <Modal isOpen={isOpen} onClose={handleCloseModal} title="My Modal">
-                                {/* <EditOutreachForm /> */}
-                                <Modal/>
-                            </Modal>  
+
+                    <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                        onClick={handleEdit}> 
+                                            Edit
+                    </button>
+                    <Link to="/dash/ViewPDF">
+                        Form
+                        </Link>
                 </td>
             </tr>
         )

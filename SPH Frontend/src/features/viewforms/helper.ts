@@ -102,6 +102,7 @@ export const getTemplate = () => {
   const data2 = require('./template2.json');
   const data3 = require('./template3.json');
   const data4 = require('./template4.json');
+  const viewdata = require('./template2.json')
   var new_schema
 
   if (window.location.href.match("/form-viewer1")) {
@@ -121,6 +122,10 @@ else if (window.location.href.match("/form-viewer2")) {
   
 }  else if (window.location.href.match("/form-viewer4")) {
   new_schema = data4
+  console.log("Truuuueee");
+  
+} else if (window.location.href.match("/ViewPDF")) {
+  new_schema = viewdata
   console.log("Truuuueee");
   
 }

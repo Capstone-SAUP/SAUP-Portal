@@ -22,6 +22,7 @@ import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
 import Designer from "./features/viewforms/Designer";
 import FormAndViewer from "./features/viewforms/FormAndViewer";
+import ViewerPDF from "./features/outreach/ViewerPDF";
 
 function App() {
   useTitle("SAUP Portal HAU");
@@ -54,6 +55,7 @@ function App() {
                   <Route index element={<OutreachList />} />
                   <Route path=":id" element={<EditOutreach />} />
                   <Route path="new" element={<NewOutreach />} />
+
                 </Route>
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
@@ -85,6 +87,9 @@ function App() {
                 </Route>
                 <Route path="form-viewer4">
                   <Route index element={<FormAndViewer />} />
+                </Route>
+                <Route path="ViewPDF">
+                  <Route index element={<ViewerPDF />} />
                 </Route>
                 {/* 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
