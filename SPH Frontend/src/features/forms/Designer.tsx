@@ -129,30 +129,37 @@ ${e}`);
             >
                 <strong>Designer</strong>
                 <span style={{ margin: "0 1rem" }}>:</span>
-                <label style={{ width: 180 }}>
-                    Change BasePDF
-                    <input
-                        type="file"
-                        accept="application/pdf"
-                        onChange={onChangeBasePDF}
-                    />
-                </label>
-                <span style={{ margin: "0 1rem" }}>/</span>
-                <label style={{ width: 180 }}>
+                <table className="w-2 border-collapse border border-slate-500 ">
+                <tbody className="block text-base">
+                <tr>
+                 <td className="border border-slate-700">
                     Load Template
                     <input
                         type="file"
                         accept="application/json"
                         onChange={onLoadTemplate}
                     />
-                </label>
-                <span style={{ margin: "0 1rem" }}>/</span>
+                    </td>
+                    </tr>
+                <tr>
+                 <td className="border border-slate-700">
+                    Change BasePDF
+                    <input
+                        type="file"
+                        accept="application/pdf"
+                        onChange={onChangeBasePDF}
+                    />
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onDownloadTemplate}>Download Template</button>
-                <span style={{ margin: "0 1rem" }}>/</span>
+                <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={() => onSaveTemplate()}>Save Template</button>
-                <span style={{ margin: "0 1rem" }}>/</span>
+                <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onResetTemplate}>Reset Template</button>
-                <span style={{ margin: "0 1rem" }}>/</span>
+                <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onGeneratePDF}>Generate PDF</button>
             </header>
             <div ref={designerRef} />
