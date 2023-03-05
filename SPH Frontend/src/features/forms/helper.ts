@@ -102,6 +102,8 @@ export const getTemplate = () => {
     const anexB = require("./templates/template2.json");
     const anexC = require("./templates/template3.json");
     const anexD = require("./templates/template4.json");
+    const Proposed = require("./templates/template2.json");
+
     var new_schema;
 
     if (
@@ -124,6 +126,10 @@ export const getTemplate = () => {
         window.location.href.match("/design-anex-D")
     ) {
         new_schema = anexD;
+    } else if (
+        window.location.href.match("/viewerPDF") //View Only
+    ) {
+        new_schema = Proposed;
     }
     // console.log(new_schema);
 
