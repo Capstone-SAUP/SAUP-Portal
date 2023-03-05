@@ -22,6 +22,7 @@ import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
 import Designer from "./features/forms/Designer";
 import FormAndViewer from "./features/forms/FormAndViewer";
+import ViewerPDF from "./features/forms/ViewerPDF";
 
 function App() {
   useTitle("SAUP Portal HAU");
@@ -86,6 +87,9 @@ function App() {
                 <Route path="view-anex-D">
                   <Route index element={<FormAndViewer />} />
                 </Route>
+                <Route path="viewerPDF">
+                  <Route index element={<ViewerPDF />} />
+                </Route>
                 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                 <Route path="design-anex-A">
@@ -100,6 +104,7 @@ function App() {
                 <Route path="design-anex-D">
                   <Route index element={<Designer />} />
                 </Route>
+                
                 </Route>
 
               </Route>
