@@ -30,6 +30,7 @@ app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/outreach', require('./routes/outreachRoutes'))
+app.use('/view-anex-A', require('./routes/anexARoutes'))
 
 app.all('*', (req, res) => {
     res.status(404)
