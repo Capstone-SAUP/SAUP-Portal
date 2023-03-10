@@ -543,7 +543,6 @@ const Public = () => {
                         <div className="grid grid-cols-5 lg:gap-8 sm:gap-4 sm:grid-cols-3">
                             <div className="row-span-3">
                                 <div
-                                    href="https://flowbite.com"
                                     className="flex items-center"
                                 >
                                     <img
@@ -640,9 +639,7 @@ const Public = () => {
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                             © 2023{" "}
-                            <a href="https://flowbite.com" className="">
                                 SAUP HAU
-                            </a>
                             .
                         </span>
                     </div>
