@@ -46,7 +46,9 @@ const Login = () => {
             } else if (err.status === 400) {
                 setErrMsg('Missing user_id or Password');
             } else if (err.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg(
+                  "The user ID or password you entered is invalid. Please double check and try again."
+                );
             } else {
                 setErrMsg(err.data?.message);
             }
@@ -63,59 +65,79 @@ const Login = () => {
     if (isLoading) return <PulseLoader color={"#FFF"} />
 
     const content = (
-        <section className="">
-            <main className="">
-                <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
-                <img className="w-1/2 h-screen float-left mix-blend-multiply object-cover"src={require('../../img/background.jpg')} alt='background'></img>
-                <form className="h-screen grid place-content-center" onSubmit={handleSubmit}>
-                <br></br>
-                <h1 className="text-5xl font-bold pb-2 mb-4 font-sans">Sign <span className="text-rose-900">In</span></h1>
-                    <label className="mb-1" htmlFor="user_id">User ID:</label>
-                    <input
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}                     
-                        type="text"
-                        id="user_id"
-                        ref={userRef}
-                        value={user_id}
-                        onChange={handleUserInput}
-                        autoComplete="off"
-                        required
-                    />
-                    <br></br>
-                    <label  className="mb-1" htmlFor="password">Password:</label>
-                    <input
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        type="password"
-                        id="password"
-                        onChange={handlePwdInput}
-                        value={password}
-                        required
-                    />
-                                        <br></br>
+      <section className="">
+        <main className="">
+          <img
+            className="w-1/2 h-screen float-left object-cover"
+            src={require("../../img/background.jpg")}
+            alt="background"
+          ></img>
+          <form
+            className="h-screen grid place-content-center"
+            onSubmit={handleSubmit}
+          >
+            <br></br>
+            <h1 className="text-5xl font-bold pb-2 mb-4 font-sans">
+              Sign <span className="text-rose-900">In</span>
+            </h1>
+            <p
+              ref={errRef}
+              className={`text-xs shrink w-64 text-center ${errClass}`}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
+            <label className="mb-1" htmlFor="user_id">
+              User ID:
+            </label>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-64 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+              type="text"
+              id="user_id"
+              ref={userRef}
+              value={user_id}
+              onChange={handleUserInput}
+              autoComplete="off"
+              required
+            />
+            <br></br>
+            <label className="mb-1" htmlFor="password">
+              Password:
+            </label>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 bloc w-64 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="password"
+              id="password"
+              onChange={handlePwdInput}
+              value={password}
+              required
+            />
+            <br></br>
 
-                    <button className="form__submit-button bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl focus:outline-none focus:shadow-outline justify-center">Sign In</button>
+            <button className="form__submit-button bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl focus:outline-none focus:shadow-outline justify-center">
+              Sign In
+            </button>
 
-                    <br></br>
-                    <label htmlFor="persist" className="form__persist">
-                        <input
-                            type="checkbox"
-                            className="checkbox "
-                            id="persist"
-                            onChange={handleToggle}
-                            checked={persist}
-                        />
-                        Trust This Device
-                    </label>
-                </form>
-            </main>
+            <br></br>
+            <label htmlFor="persist" className="form__persist">
+              <input
+                type="checkbox"
+                className="checkbox "
+                id="persist"
+                onChange={handleToggle}
+                checked={persist}
+              />
+              Trust This Device
+            </label>
+          </form>
+        </main>
 
-           {/* <footer> 
+        {/* <footer> 
                 <Link className='text-gray-900' to="/">Back to Home</Link>
             </footer> */}
-            
-        </section>
-    )
+      </section>
+    );
 
     return content
 }
