@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { FaRegHandshake } from "react-icons/fa";
 import { TfiPrinter } from "react-icons/tfi";
 import { SlUser } from "react-icons/sl";
+import { useParams } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
 import { IoChevronBack } from "react-icons/io5";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { RiLogoutBoxRLine, RiSearchLine } from "react-icons/ri";
+import { useGetUsersQuery } from "../features/users/usersApiSlice";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import useAuth from "../hooks/useAuth";
@@ -16,11 +18,33 @@ const DASH_REGEX = /^\/dash(\/)?$/;
 const NOTES_REGEX = /^\/dash\/outreach(\/)?$/;
 const USERS_REGEX = /^\/dash\/users(\/)?$/;
 
-const DashSidebar = () => {
+const DashSidebar = ({ ids }) => {
   const [open, setOpen] = useState(true);
 
   const { status, user_id, isAdmin } = useAuth();
 
+  
+  const { user_ids, firstname, lastname } = useGetUsersQuery("usersList", {
+    selectFromResult: ({ data }) => ({
+      // user: data?.entities[ids].firstname,
+      user_ids: data?.ids.map((id) => data?.entities[id].user_id),
+      firstname: data?.ids.map((id) => data?.entities[id].firstname),
+      lastname: data?.ids.map((id) => data?.entities[id].lastname),
+    }),
+  });
+  
+  const currentUser = user_ids.indexOf(user_id);
+  const user_fullname = firstname[currentUser] + " " +lastname[currentUser];
+  console.log(user_fullname);
+  // console.log(user_ids);
+  
+  // let current_user;
+  // if (user_id === user_ids){
+  //   console.log(current_user);
+  // }
+
+  // const tableContent =
+  //   ids?.length && ids.map((userId) => key={userId},userId={userId});
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -161,32 +185,32 @@ const DashSidebar = () => {
   }
 
   let applicationButton = null;
-    if (pathname.includes("/dash")) {
-      applicationButton = (
-        <button
-          className="mb-3 w-full text-left"
-          title="Submit Application"
-          onClick={onSubmitApplication}
+  if (pathname.includes("/dash")) {
+    applicationButton = (
+      <button
+        className="mb-3 w-full text-left"
+        title="Submit Application"
+        onClick={onSubmitApplication}
+      >
+        <div
+          className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+            pathname.includes("/dash/application-forms") && "bg-red-500"
+          }`}
         >
-          <div
-            className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
-              pathname.includes("/dash/application-forms") && "bg-red-500"
+          <span>
+            <AiOutlineFileAdd className="text-3xl block float-left" />
+          </span>
+
+          <span
+            className={`truncate text-base font-medium flex-1 duration-200 ${
+              !open && "hidden"
             }`}
           >
-            <span>
-              <AiOutlineFileAdd className="text-3xl block float-left" />
-            </span>
-
-            <span
-              className={`truncate text-base font-medium flex-1 duration-200 ${
-                !open && "hidden"
-              }`}
-            >
-              Submit Application
-            </span>
-          </div>
-        </button>
-      );
+            Submit Application
+          </span>
+        </div>
+      </button>
+    );
   }
 
   const logoutButton = (
@@ -274,15 +298,18 @@ const DashSidebar = () => {
                   <BiUserCircle className="text-6xl" />
                 </div>
                 <div
-                  className={`truncate w-full text-base font-medium duration-200 ${
+                  className={` w-full text-base font-medium duration-200 ${
                     !open && "opacity-0"
                   }`}
                 >
-                  <div className="flex justify-between">
+                  <div className="flex text-2xl mt-3 mb-3 text-center justify-center">
+                    <div>{user_fullname}</div>
+                  </div>
+                  <div className="flex truncate justify-between">
                     <div>User ID:</div>
                     <span>{user_id}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex truncate justify-between">
                     <div>Access Type:</div>
                     <span>{status}</span>
                   </div>
