@@ -1,110 +1,79 @@
 const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
-const anexaAschema = new mongoose.Schema(
+const anexaBschema = new mongoose.Schema(
   {
-    // user: {
+    // user: {//
     //   type: mongoose.Schema.Types.ObjectId,
     //   required: true,
     //   ref: "User",
     // },
-    name_org: {
+    sponsor_dept: {
       type: String,
     },
-    date_est: {
+    project_title: {
       type: String,
     },
-    designated_per1: {
+    target_beneficiaries: {
       type: String,
     },
-    designated_per2: {
+    venue: {
       type: String,
     },
-    designated_per3: {
+    obj1: {
       type: String,
     },
-    designated_per4: {
+    ojb2: {
       type: String,
     },
-    position_per1: {
+    obj3: {
       type: String,
     },
-    position_per2: {
+    act1: {
       type: String,
     },
-    position_per3: {
+    act2: {
       type: String,
     },
-    position_per4: {
+    act3: {
       type: String,
     },
-    contact_per1: {
+    respon_per1: {
       type: String,
     },
-    contact_per2: {
+    respon_per2: {
       type: String,
     },
-    contact_per3: {
+    respon_per3: {
       type: String,
     },
-    contact_per4: {
+    budget_req1: {
       type: String,
     },
-    no_members: {
+    budget_req2: {
       type: String,
     },
-    org_skills: {
+    budget_req3: {
       type: String,
     },
-    title_activity: {
+    time_frame1: {
       type: String,
     },
-    purpose_activity: {
+    time_frame2: {
       type: String,
     },
-    reason_community: {
+    time_frame3: {
       type: String,
     },
-    target_date: {
+    output1: {
       type: String,
     },
-    no_beneficiaries: {
+    output2: {
       type: String,
     },
-    target_areas: {
+    output3: {
       type: String,
     },
-    target_beneficiary: {
-      type: String,
-    },
-    class_outreachdole: {
-      type: String,
-    },
-    class_semi_dev: {
-      type: String,
-    },
-    class_dev: {
-      type: String,
-    },
-    target_obj: {
-      type: String,
-    },
-    activities: {
-      type: String,
-    },
-    time_frame: {
-      type: String,
-    },
-    beneficiaries: {
-      type: String,
-    },
-    budget: {
-      type: String,
-    },
-    prog_indicator: {
-      type: String,
-    },  
-
     // status: {
     //   type: String,
     //   default: "Pending",
@@ -153,4 +122,4 @@ const anexaAschema = new mongoose.Schema(
 //     start_seq: 500
 // })
 
-module.exports = mongoose.model('AnexA', anexaAschema)
+module.exports = mongoose.model('AnexB', anexaBschema)

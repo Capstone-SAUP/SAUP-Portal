@@ -9,6 +9,10 @@ import {
 } from "./helper";
 import React from "react";
 import { useAddNewAnexAMutation } from "../outreach/anexA_ApiSlice";
+import { useAddNewAnexBMutation } from "../outreach/anexB_ApiSlice";
+import { useAddNewAnexCMutation } from "../outreach/anexC_ApiSlice";
+
+
 import { useGetUsersQuery } from "../users/usersApiSlice";
 // import { useParams } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
@@ -18,7 +22,7 @@ type Mode = "form" | "viewer";
 const initTemplate = () => {
     let template: Template = getTemplate();
     try {
-        const templateString = localStorage.getItem("template.json");
+        const templateString = localStorage.getItem("template");
         const templateJson = templateString
             ? JSON.parse(templateString)
             : getTemplate();
@@ -34,6 +38,10 @@ function FormAndViewer() {
     // const AddAnex = useAddNewAnexMutation();
     // const { user_id} = useAuth();
     const [addNewAnexA] = useAddNewAnexAMutation();
+    const [addNewAnexB] = useAddNewAnexBMutation();
+    const [addNewAnexC] = useAddNewAnexCMutation();
+
+
     // const [userId, setUserId] = useState(users[0].id);
 
     const uiRef = useRef<HTMLDivElement | null>(null);
@@ -122,10 +130,12 @@ ${e}`);
             const file = JSON.stringify(inputs);
             try {
                 await addNewAnexA(inputs[0]);
+                await addNewAnexB(inputs[0]);
+                await addNewAnexC(inputs[0]);
             } catch (error) {
                 console.log(error);
             }
-            // alert("Saved!");
+            alert("Saved!");
         }
     };
 

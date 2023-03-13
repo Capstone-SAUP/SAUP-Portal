@@ -10,6 +10,7 @@ const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConn')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3500
 
 console.log(process.env.NODE_ENV)
@@ -31,6 +32,8 @@ app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/outreach', require('./routes/outreachRoutes'))
 app.use('/view-anex-A', require('./routes/anexARoutes'))
+app.use('/view-anex-B', require('./routes/anexBRoutes'))
+app.use('/view-anex-C', require('./routes/anexCRoutes'))
 
 app.all('*', (req, res) => {
     res.status(404)
@@ -54,3 +57,10 @@ mongoose.connection.on('error', err => {
     console.log(err)
     logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
 })
+
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({
+  limit: '50mb',
+  extended: false,
+}))
+//

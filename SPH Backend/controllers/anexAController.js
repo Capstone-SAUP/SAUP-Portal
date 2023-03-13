@@ -31,35 +31,35 @@ const createNewAnexA = async (req, res) => {
     const { 
         name_org, 
         date_est, 
-        person1,
-        person2,
-        person3,
-        person4,
-        position1,
-        position2,
-        position3,
-        position4,
-        contact1,
-        contact2,
-        contact3,
-        contact4,
+        designated_per1,
+        designated_per2,
+        designated_per3,
+        designated_per4,
+        position_per1,
+        position_per2,
+        position_per3,
+        position_per4,
+        contact_per1,
+        contact_per2,
+        contact_per3,
+        contact_per4,
         no_members,
         org_skills,
-        title,
-        purpose,
-        reason,
-        target_date,
-        target_area,
-        target_benef,
-        no_benef,
-        contact_lower,
-        target_date_lower,
-        objectives,
+        title_activity,
+        purpose_activity,
+        reason_community,
+        no_beneficiaries,
+        target_areas,
+        target_beneficiary,
+        class_outreachdole,
+        class_semi_dev,
+        class_dev,
+        target_obj,
         activities,
-        timeframe,
-        benef,
+        time_frame,
+        beneficiaries,
         budget,
-        prog_ind, } = req.body
+        prog_indicator, } = req.body
 
     // Confirm data
     // if (!user || !title || !text ) {
@@ -74,41 +74,41 @@ const createNewAnexA = async (req, res) => {
     // }
 
     // Create and store the new user 
-    const anexA = await AnexA.create({ 
+    const anexaA = await AnexA.create({ 
         name_org, 
         date_est, 
-        person1,
-        person2,
-        person3,
-        person4,
-        position1,
-        position2,
-        position3,
-        position4,
-        contact1,
-        contact2,
-        contact3,
-        contact4,
+        designated_per1,
+        designated_per2,
+        designated_per3,
+        designated_per4,
+        position_per1,
+        position_per2,
+        position_per3,
+        position_per4,
+        contact_per1,
+        contact_per2,
+        contact_per3,
+        contact_per4,
         no_members,
         org_skills,
-        title,
-        purpose,
-        reason,
-        target_date,
-        target_area,
-        target_benef,
-        no_benef,
-        contact_lower,
-        target_date_lower,
-        objectives,
+        title_activity,
+        purpose_activity,
+        reason_community,
+        no_beneficiaries,
+        target_areas,
+        target_beneficiary,
+        class_outreachdole,
+        class_semi_dev,
+        class_dev,
+        target_obj,
         activities,
-        timeframe,
-        benef,
+        time_frame,
+        beneficiaries,
         budget,
-        prog_ind,
+        prog_indicator,
     })
 
-    if (anexA) { // Created 
+    if (anexaA) { // Created 
         return res.status(201).json({ message: 'New anexa created' })
     } else {
         return res.status(400).json({ message: 'Invalid anexa data received' })
@@ -128,9 +128,9 @@ const updateAnexA = async (req, res) => {
     }
 
     // Confirm anexa exists to update
-    const anexa = await AnexA.findById(id).exec()
+    const anexaA = await AnexA.findById(id).exec()
 
-    if (!anexa) {
+    if (!anexaA) {
         return res.status(400).json({ message: 'AnexA not found' })
     }
 
@@ -142,12 +142,12 @@ const updateAnexA = async (req, res) => {
         return res.status(409).json({ message: 'Duplicate anexa title' })
     }
 
-    anexa.user = user
-    anexa.title = title
-    anexa.text = text
-    anexa.status = status
+    anexaA.user = user
+    anexaA.title = title
+    anexaA.text = text
+    anexaA.status = status
 
-    const updatedAnexA = await anexa.save()
+    const updatedAnexA = await anexaA.save()
 
     res.json(`'${updatedAnexA.title}' updated`)
 }
@@ -164,13 +164,13 @@ const deleteAnexA = async (req, res) => {
     }
 
     // Confirm anexa exists to delete 
-    const anexa = await AnexA.findById(id).exec()
+    const anexaA = await AnexA.findById(id).exec()
 
-    if (!anexa) {
+    if (!anexaA) {
         return res.status(400).json({ message: 'AnexA not found' })
     }
 
-    const result = await anexa.deleteOne()
+    const result = await anexaA.deleteOne()
 
     const reply = `AnexA '${result.title}' with ID ${result._id} deleted`
 
