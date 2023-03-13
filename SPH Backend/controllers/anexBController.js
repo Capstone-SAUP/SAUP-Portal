@@ -8,20 +8,20 @@ const getAllAnexB = async (req, res) => {
     // Get all anexa from MongoDB
     const anexB = await AnexB.find().lean()
 
-    // // If no anexa 
-    // if (!anexa?.length) {
-    //     return res.status(400).json({ message: 'No anexa found' })
-    // }
+    // If no anexa 
+    if (!anexB?.length) {
+        return res.status(400).json({ message: 'No AnexB found' })
+    }
 
     // Add user_id to each anexa before sending the response 
     // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
     // You could also do this with a for...of loop
-    // const outreachWithUser = await Promise.all(anexa.map(async (anexa) => {
-    //     const user = await User.findById(anexa.user).lean().exec()
-    //     return { ...anexa, user_id: user.user_id }
-    // }))
+    const outreachWithUser = await Promise.all(anexB.map(async (anexB) => {
+        const user = await User.findById(anexB.user).lean().exec()
+        return { ...anexB, user: user }
+    }))
 
-    // res.json(outreachWithUser)
+    res.json(outreachWithUser)
 }
 
 // @desc Create new anexa
@@ -29,9 +29,10 @@ const getAllAnexB = async (req, res) => {
 // @access Private
 const createNewAnexB = async (req, res) => {
     const { 
+        user,
         sponsor_dept, 
         project_title, 
-        target_beneficiaries,
+        target_beneficiary,
         venue,
         obj1,
         ojb2,
@@ -65,10 +66,11 @@ const createNewAnexB = async (req, res) => {
     // }
 
     // Create and store the new user 
-    const anexaB = await AnexB.create({ 
+    const anexB = await AnexB.create({ 
+        user,
         sponsor_dept, 
         project_title, 
-        target_beneficiaries,
+        target_beneficiary,
         venue,
         obj1,
         ojb2,
@@ -90,7 +92,7 @@ const createNewAnexB = async (req, res) => {
         output3,
     })
 
-    if (anexaB) { // Created 
+    if (anexB) { // Created 
         return res.status(201).json({ message: 'New anexa created' })
     } else {
         return res.status(400).json({ message: 'Invalid anexa data received' })
@@ -110,9 +112,9 @@ if (!id || !user || !title || !text) {
 }
 
 // Confirm anexa exists to update
-const anexaB = await AnexA.findById(id).exec()
+const anexB = await AnexA.findById(id).exec()
 
-if (!anexaB) {
+if (!anexB) {
     return res.status(400).json({ message: 'AnexB not found' })
 }
 
@@ -124,12 +126,12 @@ if (duplicate && duplicate?._id.toString() !== id) {
     return res.status(409).json({ message: 'Duplicate anexa title' })
 }
 
-anexaB.user = user
-anexaB.title = title
-anexaB.text = text
-anexaB.status = status
+anexB.user = user
+anexB.title = title
+anexB.text = text
+anexB.status = status
 
-const updatedAnexB = await anexaB.save()
+const updatedAnexB = await anexB.save()
 
 res.json(`'${updatedAnexB.title}' updated`)
 }
@@ -146,13 +148,13 @@ if (!id) {
 }
 
 // Confirm anexa exists to delete 
-const anexaB = await AnexB.findById(id).exec()
+const anexB = await AnexB.findById(id).exec()
 
-if (!anexaB) {
+if (!anexB) {
     return res.status(400).json({ message: 'AnexA not found' })
 }
 
-const result = await anexaB.deleteOne()
+const result = await anexB.deleteOne()
 
 const reply = `AnexB '${result.title}' with ID ${result._id} deleted`
 

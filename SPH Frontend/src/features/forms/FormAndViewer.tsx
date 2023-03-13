@@ -12,10 +12,10 @@ import { useAddNewAnexAMutation } from "../outreach/anexA_ApiSlice";
 import { useAddNewAnexBMutation } from "../outreach/anexB_ApiSlice";
 import { useAddNewAnexCMutation } from "../outreach/anexC_ApiSlice";
 
-
 import { useGetUsersQuery } from "../users/usersApiSlice";
 // import { useParams } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
+import { current } from "@reduxjs/toolkit";
 
 type Mode = "form" | "viewer";
 
@@ -36,11 +36,26 @@ const initTemplate = () => {
 
 function FormAndViewer() {
     // const AddAnex = useAddNewAnexMutation();
-    // const { user_id} = useAuth();
+    const { user_id } = useAuth();
     const [addNewAnexA] = useAddNewAnexAMutation();
     const [addNewAnexB] = useAddNewAnexBMutation();
     const [addNewAnexC] = useAddNewAnexCMutation();
 
+    const { object_id, user_ids, lastname } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            object_id: data?.ids.map(
+                (id: string | number) => data?.entities[id].id
+            ),
+            user_ids: data?.ids.map(
+                (id: string | number) => data?.entities[id].user_id
+            ),
+            lastname: data?.ids.map(
+                (id: string | number) => data?.entities[id].lastname
+            ),
+        }),
+    });
+    
+    //   console.log(object_id[currentUser]);
 
     // const [userId, setUserId] = useState(users[0].id);
 
@@ -81,6 +96,17 @@ function FormAndViewer() {
             }
         };
     }, [uiRef, mode]);
+
+    const getCurrentUser = () => {
+        try {
+            const currentUser = user_ids.indexOf(user_id);
+            const currentUserObjectId = object_id[currentUser];
+            console.log(currentUserObjectId);
+            return currentUserObjectId;
+            } catch (error) {
+                
+            }
+    }
 
     const onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value as Mode;
@@ -125,13 +151,25 @@ ${e}`);
     const onSaveAnexClicked = async () => {
         if (ui.current) {
             const inputs = ui.current.getInputs();
-            console.log(inputs);
+            // console.log(inputs);
             localStorage.setItem("inputs", JSON.stringify(inputs));
-            const file = JSON.stringify(inputs);
+            inputs[0]["user"] = getCurrentUser();
+            // inputs[0].'user_id' = [{"temp":"100", "humid":"12"}];
+
+            // inputs.push({"user_id":"111"});
+            // console.log(inputs);
+            // console.log(inputs.unshift("user_id"));
+
             try {
-                await addNewAnexA(inputs[0]);
-                await addNewAnexB(inputs[0]);
-                await addNewAnexC(inputs[0]);
+                if(window.location.href.match("/view-anex-A")){
+                    await addNewAnexA(inputs[0]);
+                }
+                if(window.location.href.match("/view-anex-B")){
+                    await addNewAnexB(inputs[0]);
+                }
+                if(window.location.href.match("/view-anex-C")){
+                    await addNewAnexC(inputs[0]);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -139,17 +177,17 @@ ${e}`);
         }
     };
 
-    const onSetInputs = () => {
-        if (ui.current) {
-            const prompt = window.prompt("Enter Inputs JSONString") || "";
-            try {
-                const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
-                ui.current.setInputs(json);
-            } catch (e) {
-                alert(e);
-            }
-        }
-    };
+    // const onSetInputs = () => {
+    //     if (ui.current) {
+    //         const prompt = window.prompt("Enter Inputs JSONString") || "";
+    //         try {
+    //             const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
+    //             ui.current.setInputs(json);
+    //         } catch (e) {
+    //             alert(e);
+    //         }
+    //     }
+    // };
 
     const onSaveInputs = () => {
         if (ui.current) {
@@ -251,7 +289,7 @@ ${e}`);
                 <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onSaveAnexClicked}>Save Anex</button>
                 <span style={{ margin: "0 1rem" }}>|</span>
-                <button onClick={onSetInputs}>Set Inputs</button>
+                {/* <button onClick={onSetInputs}>Set Inputs</button> */}
                 <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onSaveInputs}>Save Inputs</button>
                 <span style={{ margin: "0 1rem" }}>|</span>

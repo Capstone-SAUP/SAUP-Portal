@@ -46,8 +46,6 @@ const NewOutreachForm = ({ users }) => {
     );
   });
 
-  console.log(status);
-
   const errClass = isError ? "errmsg" : "offscreen";
   const validTitleClass = !title
     ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"

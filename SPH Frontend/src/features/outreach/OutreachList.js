@@ -1,4 +1,4 @@
-import { useGetOutreachQuery } from "./outreachApiSlice"
+import { useGetAnexBQuery } from "./anexB_ApiSlice"
 import Outreach from "./Outreach"
 import useAuth from "../../hooks/useAuth"
 import { useNavigate } from 'react-router-dom'
@@ -20,7 +20,7 @@ const OutreachList = () => {
         isSuccess,
         isError,
         error
-    } = useGetOutreachQuery('outreachList', {
+    } = useGetAnexBQuery('outreachList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
@@ -38,7 +38,7 @@ const OutreachList = () => {
         const handleOutreach = () => navigate(`/dash/outreach/new`)
 
         const { ids, entities } = outreach
-
+        console.log();
         let filteredIds
         if (isAdmin) {
             filteredIds = [...ids]

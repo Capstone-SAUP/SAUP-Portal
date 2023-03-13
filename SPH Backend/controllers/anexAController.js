@@ -29,6 +29,7 @@ const getAllAnexA = async (req, res) => {
 // @access Private
 const createNewAnexA = async (req, res) => {
     const { 
+        user,
         name_org, 
         date_est, 
         designated_per1,
@@ -45,7 +46,7 @@ const createNewAnexA = async (req, res) => {
         contact_per4,
         no_members,
         org_skills,
-        title_activity,
+        project_title,
         purpose_activity,
         reason_community,
         no_beneficiaries,
@@ -59,7 +60,9 @@ const createNewAnexA = async (req, res) => {
         time_frame,
         beneficiaries,
         budget,
-        prog_indicator, } = req.body
+        prog_indicator,
+        
+        } = req.body
 
     // Confirm data
     // if (!user || !title || !text ) {
@@ -74,7 +77,8 @@ const createNewAnexA = async (req, res) => {
     // }
 
     // Create and store the new user 
-    const anexaA = await AnexA.create({ 
+    const anexaA = await AnexA.create({
+        user,
         name_org, 
         date_est, 
         designated_per1,
@@ -91,7 +95,7 @@ const createNewAnexA = async (req, res) => {
         contact_per4,
         no_members,
         org_skills,
-        title_activity,
+        project_title,
         purpose_activity,
         reason_community,
         no_beneficiaries,

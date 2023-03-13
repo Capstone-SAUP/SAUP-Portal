@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom'
-import { useGetOutreachQuery } from './outreachApiSlice'
+import { useGetAnexBQuery } from './anexB_ApiSlice'
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 const Outreach = ({ outreachId }) => {
 
-    const { outreach } = useGetOutreachQuery("outreachList", {
+    const { outreach } = useGetAnexBQuery("outreachList", {
         selectFromResult: ({ data }) => ({
             outreach: data?.entities[outreachId]
         }),
     }
     )
-
+    console.log(outreach);
     const navigate = useNavigate()
 
     if (outreach) {

@@ -21,7 +21,7 @@
         "characterSpacing": 0,
         "lineHeight": 1
       },
-      "target_beneficiaries": {
+      "target_beneficiary": {
         "type": "text",
         "position": { "x": 74.23, "y": 87.48 },
         "width": 126.81,
@@ -228,7 +228,7 @@
     {
       "sponsor_dept": "",
       "project_title": "",
-      "target_beneficiaries": "",
+      "target_beneficiary": "",
       "venue": "",
       "obj1": "",
       "ojb2": "",
@@ -253,7 +253,7 @@
   "columns": [
     "sponsor_dept",
     "project_title",
-    "target_beneficiaries",
+    "target_beneficiary",
     "venue",
     "obj1",
     "ojb2",

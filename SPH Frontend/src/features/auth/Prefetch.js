@@ -1,5 +1,5 @@
 import { store } from '../../app/store'
-import { outreachApiSlice } from '../outreach/outreachApiSlice'
+import { anexB_ApiSlice } from '../outreach/anexB_ApiSlice'
 import { usersApiSlice } from '../users/usersApiSlice';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom';
 const Prefetch = () => {
 
     useEffect(() => {
-        store.dispatch(outreachApiSlice.util.prefetch('getOutreach', 'outreachList', { force: true }))
+        store.dispatch(anexB_ApiSlice.util.prefetch('getAnexB', 'outreachList', { force: true }))
         store.dispatch(usersApiSlice.util.prefetch('getUsers', 'usersList', { force: true }))
     }, [])
 

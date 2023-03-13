@@ -35,7 +35,7 @@ const DashSidebar = ({ ids }) => {
   
   const currentUser = user_ids.indexOf(user_id);
   const user_fullname = firstname[currentUser] + " " +lastname[currentUser];
-  console.log(user_fullname);
+  // console.log(user_fullname);
   // console.log(user_ids);
   
   // let current_user;
