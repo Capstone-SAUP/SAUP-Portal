@@ -127,7 +127,12 @@ const createNewAnexC = async (req, res) => {
         amount1,
         amount2,
         amount3,
-        amount_total } = req.body
+        amount_total,
+        image1,
+        caption1,
+        caption2,
+        image2
+     } = req.body
 
     // Confirm data
     // if (!user || !title || !text ) {
@@ -242,6 +247,10 @@ const createNewAnexC = async (req, res) => {
         amount2,
         amount3,
         amount_total,
+        image1,
+        caption1,
+        caption2,
+        image2
     })
 
     if (anexaC) { // Created 
@@ -319,3 +328,4 @@ module.exports = {
     updateAnexC,
     deleteAnexC
 }
+//

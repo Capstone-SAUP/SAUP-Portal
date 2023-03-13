@@ -3,7 +3,7 @@ const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const anexaCschema = new mongoose.Schema(
   {
-    // user: {
+    // user: {//
     //   type: mongoose.Schema.Types.ObjectId,
     //   required: true,
     //   ref: "User",
@@ -302,6 +302,18 @@ const anexaCschema = new mongoose.Schema(
     amount_total: {
       type: String,
     },
+    image1: {
+      type: Buffer,
+    },
+    caption1: {
+      type: String,
+    },
+    caption2: {
+      type: String,
+    },
+    image2: {
+      type: Buffer,
+    }
 
 
 
