@@ -8,9 +8,9 @@ import {
     isJsonString,
 } from "./helper";
 import React from "react";
-import { useAddNewAnexAMutation } from "../outreach/anexA_ApiSlice";
-import { useAddNewAnexBMutation } from "../outreach/anexB_ApiSlice";
-import { useAddNewAnexCMutation } from "../outreach/anexC_ApiSlice";
+import { useAddNewAnexAMutation } from "../outreach/Slices/anexA_ApiSlice";
+import { useAddNewAnexBMutation } from "../outreach/Slices/anexB_ApiSlice";
+import { useAddNewAnexCMutation } from "../outreach/Slices/anexC_ApiSlice";
 
 
 import { useGetUsersQuery } from "../users/usersApiSlice";
