@@ -18,7 +18,8 @@ const getAllAnexB = async (req, res) => {
     // You could also do this with a for...of loop
     const outreachWithUser = await Promise.all(anexB.map(async (anexB) => {
         const user = await User.findById(anexB.user).lean().exec()
-        return { ...anexB, user: user }
+        
+        return { ...anexB, user: user.user_id, fullname: user.firstname + " " + user.lastname}
     }))
 
     res.json(outreachWithUser)
@@ -51,7 +52,9 @@ const createNewAnexB = async (req, res) => {
         time_frame3,
         output1,
         output2,
-        output3, } = req.body
+        output3,
+        status,
+    } = req.body
 
     // Confirm data
     // if (!user || !title || !text ) {

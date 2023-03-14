@@ -23,6 +23,7 @@ import useTitle from "./hooks/useTitle";
 import Designer from "./features/forms/Designer";
 import FormAndViewer from "./features/forms/FormAndViewer";
 import ViewerPDF from "./features/forms/ViewerPDF";
+import GetOutreachA from "./features/outreach/GetOutreachA";
 
 function App() {
   useTitle("SAUP Portal HAU");
@@ -51,8 +52,8 @@ function App() {
                   </Route>
                 </Route>
 
-                <Route path="outreach">
-                  <Route index element={<OutreachList />} />
+                <Route path="get-outreach">
+                  <Route index element={<GetOutreachA />} />
                   <Route path=":id" element={<EditOutreach />} />
                   <Route path="new" element={<NewOutreach />} />
                 </Route>

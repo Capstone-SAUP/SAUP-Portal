@@ -57,7 +57,7 @@ const DashSidebar = ({ ids }) => {
 
   // const onNewOutreachClicked = () => navigate("/dash/outreach/new");
   // const onNewUserClicked = () => navigate("/dash/users/new");
-  const onOutreachClicked = () => navigate("/dash/outreach");
+  const onOutreachClicked = () => navigate("/dash/get-outreach");
   const onUsersClicked = () => navigate("/dash/users");
   const onGenerateClicked = () => navigate("/dash/generate-certificate");
   const onSubmitApplication = () => navigate("/dash/application-forms");
