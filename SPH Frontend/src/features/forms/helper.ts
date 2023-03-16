@@ -108,12 +108,15 @@ export const getTemplate = () => {
 
     if (
         window.location.href.match("/view-anex-A") ||
-        window.location.href.match("/design-anex-A")
+        window.location.href.match("/design-anex-A") ||
+        window.location.href.match("/view/type-Student")
     ) {
         new_schema = anexA;
     } else if (
         window.location.href.match("/view-anex-B") ||
-        window.location.href.match("/design-anex-B")
+        window.location.href.match("/design-anex-B") ||
+        window.location.href.match("/view/type-Admin") ||
+        window.location.href.match("/view/type-Employee")
     ) {
         new_schema = anexB;
     } else if (
@@ -127,7 +130,7 @@ export const getTemplate = () => {
     ) {
         new_schema = anexD;
     } else if (
-        window.location.href.match("/viewerPDF") //View Only
+        window.location.href.match("/outreach/view") //View Only
     ) {
         new_schema = Proposed;
     }

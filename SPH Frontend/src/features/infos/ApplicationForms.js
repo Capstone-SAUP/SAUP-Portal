@@ -9,12 +9,11 @@ const ApplicationForms = () => {
 
     const navigate = useNavigate();
 
-    const { isAdmin } = useAuth();
+    const { roles, isAdmin } = useAuth();
 
     const onEditForm_A_Clicked = () => navigate("/dash/design-anex-A");
     const onEditForm_B_Clicked = () => navigate("/dash/design-anex-B");
     const onEditForm_C_Clicked = () => navigate("/dash/design-anex-C");
-    const onEditForm_D_Clicked = () => navigate("/dash/design-anex-D");
 
     let EditForm_A_Button = null;
     if (isAdmin) {
@@ -43,14 +42,61 @@ const ApplicationForms = () => {
         );
     }
 
-    let EditForm_D_Button = null;
-    if (isAdmin) {
-        EditForm_D_Button = (
-            <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_D_Clicked}>
-                <div className="text-base">Edit Form Template</div>
-            </button>
+    // let EditForm_D_Button = null;
+    // if (isAdmin) {
+    //     EditForm_D_Button = (
+    //         <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_D_Clicked}>
+    //             <div className="text-base">Edit Form Template</div>
+    //         </button>
+    //     );
+    // }
+
+    let StudentIntake = null;
+    if(roles == "Student" || roles == "Admin"){
+        StudentIntake = (
+            <div>
+                    {EditForm_A_Button}
+                    <Link
+                        className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5"
+                        to="/dash/view-anex-A"
+                    >
+                        <div>
+                            <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
+                        </div>
+                        <div className="text-base">
+                            <p className="mb-5">
+                                Student Intake Form and Community Outreach
+                                Proposal.pdf
+                            </p>
+                            <p>Upload Date: 11/10/2022</p>
+                        </div>
+                    </Link>
+                </div>
         );
     }
+
+    let EmployeeIntake = null;
+    if(roles == "Employee" || roles == "Admin"){
+        EmployeeIntake = (
+            <div>
+            {EditForm_B_Button}
+            <Link to="/dash/view-anex-B">
+                <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
+                    <div>
+                        <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
+                    </div>
+                    <div className="text-base">
+                        <p className="mb-5">
+                            Community Extension Proposal Form.pdf
+                        </p>
+                        <p>Upload Date: 11/10/2022</p>
+                    </div>
+                </div>
+            </Link>
+        </div>
+        );
+    }
+
 
     return (
         <>
@@ -80,40 +126,8 @@ const ApplicationForms = () => {
                 </p>
             </div>
             <div>
-                <div>
-                    {EditForm_A_Button}
-                    <Link
-                        className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5"
-                        to="/dash/view-anex-A"
-                    >
-                        <div>
-                            <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
-                        </div>
-                        <div className="text-base">
-                            <p className="mb-5">
-                                Student Intake Form and Community Outreach
-                                Proposal.pdf
-                            </p>
-                            <p>Upload Date: 11/10/2022</p>
-                        </div>
-                    </Link>
-                </div>
-                <div>
-                    {EditForm_B_Button}
-                    <Link to="/dash/view-anex-B">
-                        <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
-                            <div>
-                                <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
-                            </div>
-                            <div className="text-base">
-                                <p className="mb-5">
-                                    Community Extension Proposal Form.pdf
-                                </p>
-                                <p>Upload Date: 11/10/2022</p>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
+                {StudentIntake}
+                {EmployeeIntake}
                 <div>
                 {EditForm_C_Button}
                     <Link to="/dash/view-anex-C">
@@ -131,7 +145,7 @@ const ApplicationForms = () => {
                         </div>
                     </Link>
                 </div>
-                <div>
+                {/* <div>
                 {EditForm_D_Button}
                     <Link to="/dash/view-anex-D">
                         <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
@@ -147,7 +161,7 @@ const ApplicationForms = () => {
                             </div>
                         </div>
                     </Link>
-                </div>
+                </div> */}
             </div>
         </>
     );

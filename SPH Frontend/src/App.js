@@ -8,7 +8,7 @@ import OutreachList from "./features/outreach/OutreachList";
 import UsersList from "./features/users/UsersList";
 import EditUser from "./features/users/EditUser";
 import NewUserForm from "./features/users/NewUserForm";
-import EditOutreach from "./features/outreach/EditOutreach";
+import ViewOutreach from "./features/outreach/ViewOutreach";
 import NewOutreach from "./features/outreach/NewOutreach";
 import GenerateSummary from "./features/generate/GenerateSummary";
 import GenerateCertificate from "./features/generate/GenerateCertificate";
@@ -52,18 +52,23 @@ function App() {
                   </Route>
                 </Route>
 
-                <Route path="get-outreach">
+                <Route path="outreach">
                   <Route index element={<GetOutreachA />} />
-                  <Route path=":id" element={<EditOutreach />} />
+                    <Route path="view/type-Student">
+                      <Route path=":id" element={<ViewOutreach />} />
+                    </Route>
+                    <Route path="view/type-Employee">
+                      <Route path=":id" element={<ViewOutreach />} />
+                    </Route>
+                    <Route path="view/type-Admin">
+                      <Route path=":id" element={<ViewOutreach />} />
+                    </Route>
                   <Route path="new" element={<NewOutreach />} />
                 </Route>
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="generate-summary">
                     <Route index element={<GenerateSummary />} />
-                  </Route>
-                  <Route path="generate-certificate">
-                    <Route index element={<GenerateCertificate />} />
                   </Route>
                   <Route path="data-overview">
                     <Route index element={<DataOverview />} />
@@ -72,20 +77,23 @@ function App() {
                 <Route path="application-forms">
                   <Route index element={<ApplicationForms />} />
                 </Route>
-                <Route path="submit-forms">
+                {/* <Route path="submit-forms">
                   <Route index element={<SubmitApplication />} />
-                </Route>
-
+                </Route> */}
+                <Route element={<RequireAuth allowedRoles={[ROLES.Student,ROLES.Admin]} />}>
                 <Route path="view-anex-A">
                   <Route index element={<FormAndViewer />} />
                 </Route>
+                </Route>
+                <Route element={<RequireAuth allowedRoles={[ROLES.Employee,ROLES.Admin]} />}>
+                <Route path="generate-certificate">
+                    <Route index element={<GenerateCertificate />} />
+                  </Route>
                 <Route path="view-anex-B">
                   <Route index element={<FormAndViewer />} />
                 </Route>
-                <Route path="view-anex-C">
-                  <Route index element={<FormAndViewer />} />
                 </Route>
-                <Route path="view-anex-D">
+                <Route path="view-anex-C">
                   <Route index element={<FormAndViewer />} />
                 </Route>
                 <Route path="viewerPDF">

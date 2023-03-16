@@ -77,6 +77,9 @@ const anexAschema = new mongoose.Schema(
     target_beneficiary: {
       type: String,
     },
+    target_date: {
+      type: String,
+    },
     class_outreachdole: {
       type: String,
     },

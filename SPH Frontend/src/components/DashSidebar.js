@@ -21,7 +21,7 @@ const USERS_REGEX = /^\/dash\/users(\/)?$/;
 const DashSidebar = ({ ids }) => {
   const [open, setOpen] = useState(true);
 
-  const { status, user_id, isAdmin } = useAuth();
+  const { roles, user_id, isAdmin } = useAuth();
 
   
   const { user_ids, firstname, lastname } = useGetUsersQuery("usersList", {
@@ -57,7 +57,7 @@ const DashSidebar = ({ ids }) => {
 
   // const onNewOutreachClicked = () => navigate("/dash/outreach/new");
   // const onNewUserClicked = () => navigate("/dash/users/new");
-  const onOutreachClicked = () => navigate("/dash/get-outreach");
+  const onOutreachClicked = () => navigate("/dash/outreach");
   const onUsersClicked = () => navigate("/dash/users");
   const onGenerateClicked = () => navigate("/dash/generate-certificate");
   const onSubmitApplication = () => navigate("/dash/application-forms");
@@ -311,7 +311,7 @@ const DashSidebar = ({ ids }) => {
                   </div>
                   <div className="flex truncate justify-between">
                     <div>Access Type:</div>
-                    <span>{status}</span>
+                    <span>{roles}</span>
                   </div>
                 </div>
               </div>

@@ -26,6 +26,8 @@ const OutreachList = ({ ids_A, entities_A }) => {
         refetchOnMountOrArgChange: true
     })
 
+    // console.log(anexB);
+
     let content
 
     if (isLoading) content = <PulseLoader color={"#FFF"} />
@@ -43,16 +45,16 @@ const OutreachList = ({ ids_A, entities_A }) => {
         let entities_B = entities
 
         let Anex_ids = ids_A.concat(ids_B)
-        let Anex_entities = {entities_B,entities_A}
+        let Anex_entities = {...entities_B,...entities_A};
 
-        // console.log(Anex_ids);
-        // console.log(entities_A);
-        console.log(entities_A);
+        // let user_role = Anex_entities.user_role
+
+        // console.log(Anex_entities.user_role)
         let filteredIds
         if (isAdmin) {
             filteredIds = [...Anex_ids]
         } else {
-            filteredIds = Anex_ids.filter(outreachId => Anex_entities[outreachId].user_id === user_id)
+            filteredIds = Anex_ids.filter(outreachId => Anex_entities[outreachId].user === user_id)
         }
 
         const tableContent = Anex_ids?.length && filteredIds.map(outreachId => <Outreach key={outreachId} outreachId={outreachId} />)

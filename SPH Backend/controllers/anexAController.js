@@ -19,7 +19,7 @@ const getAllAnexA = async (req, res) => {
     const outreachWithUser = await Promise.all(anexA.map(async (anexA) => {
         const user = await User.findById(anexA.user).lean().exec()
         
-        return { ...anexA, user: user.user_id, fullname: user.firstname + " " + user.lastname}
+        return { ...anexA, user: user.user_id, fullname: user.firstname + " " + user.lastname, user_role: user.roles[0]}
     }))
 
     res.json(outreachWithUser)
@@ -53,6 +53,7 @@ const createNewAnexA = async (req, res) => {
         no_beneficiaries,
         target_areas,
         target_beneficiary,
+        target_date,
         class_outreachdole,
         class_semi_dev,
         class_dev,
@@ -102,6 +103,7 @@ const createNewAnexA = async (req, res) => {
         no_beneficiaries,
         target_areas,
         target_beneficiary,
+        target_date,
         class_outreachdole,
         class_semi_dev,
         class_dev,

@@ -8,12 +8,11 @@ import {
     isJsonString,
 } from "./helper";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAddNewAnexAMutation } from "../outreach/anexA_ApiSlice";
 import { useAddNewAnexBMutation } from "../outreach/anexB_ApiSlice";
 import { useAddNewAnexCMutation } from "../outreach/anexC_ApiSlice";
-
 import { useGetUsersQuery } from "../users/usersApiSlice";
-// import { useParams } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
 import { current } from "@reduxjs/toolkit";
 
@@ -35,7 +34,7 @@ const initTemplate = () => {
 };
 
 function FormAndViewer() {
-    // const AddAnex = useAddNewAnexMutation();
+    const navigate = useNavigate();
     const { user_id } = useAuth();
     const [addNewAnexA] = useAddNewAnexAMutation();
     const [addNewAnexB] = useAddNewAnexBMutation();
@@ -54,7 +53,7 @@ function FormAndViewer() {
             ),
         }),
     });
-    
+
     //   console.log(object_id[currentUser]);
 
     // const [userId, setUserId] = useState(users[0].id);
@@ -103,10 +102,8 @@ function FormAndViewer() {
             const currentUserObjectId = object_id[currentUser];
             console.log(currentUserObjectId);
             return currentUserObjectId;
-            } catch (error) {
-                
-            }
-    }
+        } catch (error) {}
+    };
 
     const onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value as Mode;
@@ -133,13 +130,9 @@ ${e}`);
     const onGetInputs = () => {
         if (ui.current) {
             const inputs = ui.current.getInputs();
-            // alert(JSON.stringify(inputs, null, 2));
-            // alert("Dumped as console.log");
-            // const file = (JSON.stringify(inputs, null, 2));
-
-            //   const [file = (JSON.stringify(inputs, null, 2))] =
-            // useAddNewAnexMutation();
-            // console.log(file);
+            alert(JSON.stringify(inputs, null, 2));
+            alert("Dumped as console.log");
+            console.log(inputs);
         }
     };
 
@@ -161,33 +154,34 @@ ${e}`);
             // console.log(inputs.unshift("user_id"));
 
             try {
-                if(window.location.href.match("/view-anex-A")){
+                if (window.location.href.match("/view-anex-A")) {
                     await addNewAnexA(inputs[0]);
                 }
-                if(window.location.href.match("/view-anex-B")){
+                if (window.location.href.match("/view-anex-B")) {
                     await addNewAnexB(inputs[0]);
                 }
-                if(window.location.href.match("/view-anex-C")){
+                if (window.location.href.match("/view-anex-C")) {
                     await addNewAnexC(inputs[0]);
                 }
             } catch (error) {
                 console.log(error);
             }
             alert("Saved!");
+            navigate("/dash/outreach");
         }
     };
 
-    // const onSetInputs = () => {
-    //     if (ui.current) {
-    //         const prompt = window.prompt("Enter Inputs JSONString") || "";
-    //         try {
-    //             const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
-    //             ui.current.setInputs(json);
-    //         } catch (e) {
-    //             alert(e);
-    //         }
-    //     }
-    // };
+    const onSetInputs = () => {
+        if (ui.current) {
+            const prompt = window.prompt("Enter Inputs JSONString") || "";
+            try {
+                const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
+                ui.current.setInputs(json);
+            } catch (e) {
+                alert(e);
+            }
+        }
+    };
 
     const onSaveInputs = () => {
         if (ui.current) {
@@ -289,7 +283,7 @@ ${e}`);
                 <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onSaveAnexClicked}>Save Anex</button>
                 <span style={{ margin: "0 1rem" }}>|</span>
-                {/* <button onClick={onSetInputs}>Set Inputs</button> */}
+                <button onClick={onSetInputs}>Set Inputs</button>
                 <span style={{ margin: "0 1rem" }}>|</span>
                 <button onClick={onSaveInputs}>Save Inputs</button>
                 <span style={{ margin: "0 1rem" }}>|</span>

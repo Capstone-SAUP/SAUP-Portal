@@ -19,7 +19,7 @@ const getAllAnexB = async (req, res) => {
     const outreachWithUser = await Promise.all(anexB.map(async (anexB) => {
         const user = await User.findById(anexB.user).lean().exec()
         
-        return { ...anexB, user: user.user_id, fullname: user.firstname + " " + user.lastname}
+        return { ...anexB, user: user.user_id, fullname: user.firstname + " " + user.lastname, user_role: user.roles[0]}
     }))
 
     res.json(outreachWithUser)
