@@ -1,5 +1,6 @@
 const User = require('../models/User')
-const Outreach = require('../models/Outreach')
+const AnexA = require('../models/AnexA')
+const AnexB = require('../models/AnexB')
 const bcrypt = require('bcrypt')
 
 // @desc Get all users
@@ -104,8 +105,9 @@ const deleteUser = async (req, res) => {
     }
 
     // Does the user still have assigned outreach?
-    const outreach = await Outreach.findOne({ user: id }).lean().exec()
-    if (outreach) {
+    const anexA = await AnexA.findOne({ user: id }).lean().exec()
+    const anexB = await AnexB.findOne({ user: id }).lean().exec()
+    if (anexA || anexB) {
         return res.status(400).json({ message: 'User has assigned outreach' })
     }
 
