@@ -161,7 +161,7 @@
           "characterSpacing": 0,
           "lineHeight": 1
         },
-        "title_activity": {
+        "project_title": {
           "type": "text",
           "position": { "x": 55.2, "y": 96.62 },
           "width": 151.93,
@@ -344,7 +344,7 @@
         "contact_per4": "",
         "no_members": "",
         "org_skills": "",
-        "title_activity": "",
+        "project_title": "",
         "purpose_activity": "",
         "reason_community": "",
         "target_date": "",
@@ -379,7 +379,7 @@
       "contact_per4",
       "no_members",
       "org_skills",
-      "title_activity",
+      "project_title",
       "purpose_activity",
       "reason_community",
       "target_date",

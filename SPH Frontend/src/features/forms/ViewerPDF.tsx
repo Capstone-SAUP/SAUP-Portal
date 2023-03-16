@@ -26,22 +26,25 @@ const initTemplate = () => {
   return template;
 };
 
-function ViewerPDF() {
+
+
+const ViewerPDF = (filteredOutreach:any) =>  {
+
+  // console.log(outreachId);
+  
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);
 
   const [mode, setMode] = useState<Mode>(
-    (localStorage.getItem("mode") as Mode) ?? "form"
+    (localStorage.getItem("mode") as Mode) ?? "viewer"
   );
-
+  
   useEffect(() => {
     const template = initTemplate();
     let inputs = template.sampledata ?? [{}];
     try {
-      const inputsString = localStorage.getItem("inputs");
+      const inputsString = [filteredOutreach["filteredOutreach"]];
       const inputsJson = inputsString
-        ? JSON.parse(inputsString)
-        : template.sampledata ?? [{}];
       inputs = inputsJson;
     } catch {
       localStorage.removeItem("inputs");
@@ -49,7 +52,7 @@ function ViewerPDF() {
 
     getFontsData().then((font) => {
       if (uiRef.current) {
-        ui.current = new (mode === "form" ? Form : Viewer)({
+        ui.current = new (mode === "viewer" ? Form : Viewer)({
           domContainer: uiRef.current,
           template,
           inputs,
@@ -96,17 +99,17 @@ function ViewerPDF() {
 //     }
 //   };
 
-//   const onSetInputs = () => {
-//     if (ui.current) {
-//       const prompt = window.prompt("Enter Inputs JSONString") || "";
-//       try {
-//         const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
-//         ui.current.setInputs(json);
-//       } catch (e) {
-//         alert(e);
-//       }
-//     }
-//   };
+  const onSetInputs = () => {
+    if (ui.current) {
+      const prompt = window.prompt("Enter Inputs JSONString") || "";
+      try {
+        const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
+        ui.current.setInputs(json);
+      } catch (e) {
+        alert(e);
+      }
+    }
+  };
 
 //   const onSaveInputs = () => {
 //     if (ui.current) {

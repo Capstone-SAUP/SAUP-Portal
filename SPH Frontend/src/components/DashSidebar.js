@@ -21,7 +21,7 @@ const USERS_REGEX = /^\/dash\/users(\/)?$/;
 const DashSidebar = ({ ids }) => {
   const [open, setOpen] = useState(true);
 
-  const { status, user_id, isAdmin } = useAuth();
+  const { roles, user_id, isAdmin } = useAuth();
 
   
   const { user_ids, firstname, lastname } = useGetUsersQuery("usersList", {
@@ -35,7 +35,7 @@ const DashSidebar = ({ ids }) => {
   
   const currentUser = user_ids.indexOf(user_id);
   const user_fullname = firstname[currentUser] + " " +lastname[currentUser];
-  console.log(user_fullname);
+  // console.log(user_fullname);
   // console.log(user_ids);
   
   // let current_user;
@@ -311,7 +311,7 @@ const DashSidebar = ({ ids }) => {
                   </div>
                   <div className="flex truncate justify-between">
                     <div>Access Type:</div>
-                    <span>{status}</span>
+                    <span>{roles}</span>
                   </div>
                 </div>
               </div>

@@ -8,14 +8,14 @@ import {
     isJsonString,
 } from "./helper";
 import React from "react";
-import { useAddNewAnexAMutation } from "../outreach/Slices/anexA_ApiSlice";
-import { useAddNewAnexBMutation } from "../outreach/Slices/anexB_ApiSlice";
-import { useAddNewAnexCMutation } from "../outreach/Slices/anexC_ApiSlice";
-
+import { useNavigate } from "react-router-dom";
+import { useAddNewAnexAMutation } from "../outreach/anexA_ApiSlice";
+import { useAddNewAnexBMutation } from "../outreach/anexB_ApiSlice";
+import { useAddNewAnexCMutation } from "../outreach/anexC_ApiSlice";
 
 import { useGetUsersQuery } from "../users/usersApiSlice";
-// import { useParams } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
+import { current } from "@reduxjs/toolkit";
 
 type Mode = "form" | "viewer";
 
@@ -35,12 +35,27 @@ const initTemplate = () => {
 };
 
 function FormAndViewer() {
-    // const AddAnex = useAddNewAnexMutation();
-    // const { user_id} = useAuth();
+    const navigate = useNavigate();
+    const { user_id } = useAuth();
     const [addNewAnexA] = useAddNewAnexAMutation();
     const [addNewAnexB] = useAddNewAnexBMutation();
     const [addNewAnexC] = useAddNewAnexCMutation();
 
+    const { object_id, user_ids, lastname } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            object_id: data?.ids.map(
+                (id: string | number) => data?.entities[id].id
+            ),
+            user_ids: data?.ids.map(
+                (id: string | number) => data?.entities[id].user_id
+            ),
+            lastname: data?.ids.map(
+                (id: string | number) => data?.entities[id].lastname
+            ),
+        }),
+    });
+
+    //   console.log(object_id[currentUser]);
 
     // const [userId, setUserId] = useState(users[0].id);
 
@@ -82,6 +97,15 @@ function FormAndViewer() {
         };
     }, [uiRef, mode]);
 
+    const getCurrentUser = () => {
+        try {
+            const currentUser = user_ids.indexOf(user_id);
+            const currentUserObjectId = object_id[currentUser];
+            console.log(currentUserObjectId);
+            return currentUserObjectId;
+        } catch (error) {}
+    };
+
     const onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value as Mode;
         setMode(value);
@@ -107,13 +131,9 @@ ${e}`);
     const onGetInputs = () => {
         if (ui.current) {
             const inputs = ui.current.getInputs();
-            // alert(JSON.stringify(inputs, null, 2));
-            // alert("Dumped as console.log");
-            // const file = (JSON.stringify(inputs, null, 2));
-
-            //   const [file = (JSON.stringify(inputs, null, 2))] =
-            // useAddNewAnexMutation();
-            // console.log(file);
+            alert(JSON.stringify(inputs, null, 2));
+            alert("Dumped as console.log");
+            console.log(inputs);
         }
     };
 
@@ -125,17 +145,30 @@ ${e}`);
     const onSaveAnexClicked = async () => {
         if (ui.current) {
             const inputs = ui.current.getInputs();
-            console.log(inputs);
+            // console.log(inputs);
             localStorage.setItem("inputs", JSON.stringify(inputs));
-            const file = JSON.stringify(inputs);
+            inputs[0]["user"] = getCurrentUser();
+            // inputs[0].'user_id' = [{"temp":"100", "humid":"12"}];
+
+            // inputs.push({"user_id":"111"});
+            // console.log(inputs);
+            // console.log(inputs.unshift("user_id"));
+
             try {
-                await addNewAnexA(inputs[0]);
-                await addNewAnexB(inputs[0]);
-                await addNewAnexC(inputs[0]);
+                if (window.location.href.match("/view-anex-A")) {
+                    await addNewAnexA(inputs[0]);
+                }
+                if (window.location.href.match("/view-anex-B")) {
+                    await addNewAnexB(inputs[0]);
+                }
+                if (window.location.href.match("/view-anex-C")) {
+                    await addNewAnexC(inputs[0]);
+                }
             } catch (error) {
                 console.log(error);
             }
             alert("Saved!");
+            navigate("/dash/outreach");
         }
     };
 

@@ -8,20 +8,21 @@ const getAllAnexA = async (req, res) => {
     // Get all anexa from MongoDB
     const anexA = await AnexA.find().lean()
 
-    // // If no anexa 
-    // if (!anexa?.length) {
-    //     return res.status(400).json({ message: 'No anexa found' })
-    // }
+    // If no anexa 
+    if (!anexA?.length) {
+        return res.status(400).json({ message: 'No AnexA found' })
+    }
 
     // Add user_id to each anexa before sending the response 
     // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
     // You could also do this with a for...of loop
-    // const outreachWithUser = await Promise.all(anexa.map(async (anexa) => {
-    //     const user = await User.findById(anexa.user).lean().exec()
-    //     return { ...anexa, user_id: user.user_id }
-    // }))
+    const outreachWithUser = await Promise.all(anexA.map(async (anexA) => {
+        const user = await User.findById(anexA.user).lean().exec()
+        
+        return { ...anexA, user: user.user_id, fullname: user.firstname + " " + user.lastname, user_role: user.roles[0]}
+    }))
 
-    // res.json(outreachWithUser)
+    res.json(outreachWithUser)
 }
 
 // @desc Create new anexa
@@ -29,6 +30,7 @@ const getAllAnexA = async (req, res) => {
 // @access Private
 const createNewAnexA = async (req, res) => {
     const { 
+        user,
         name_org, 
         date_est, 
         designated_per1,
@@ -45,12 +47,13 @@ const createNewAnexA = async (req, res) => {
         contact_per4,
         no_members,
         org_skills,
-        title_activity,
+        project_title,
         purpose_activity,
         reason_community,
         no_beneficiaries,
         target_areas,
         target_beneficiary,
+        target_date,
         class_outreachdole,
         class_semi_dev,
         class_dev,
@@ -59,7 +62,9 @@ const createNewAnexA = async (req, res) => {
         time_frame,
         beneficiaries,
         budget,
-        prog_indicator, } = req.body
+        prog_indicator,
+        
+        } = req.body
 
     // Confirm data
     // if (!user || !title || !text ) {
@@ -74,7 +79,8 @@ const createNewAnexA = async (req, res) => {
     // }
 
     // Create and store the new user 
-    const anexaA = await AnexA.create({ 
+    const anexaA = await AnexA.create({
+        user,
         name_org, 
         date_est, 
         designated_per1,
@@ -91,12 +97,13 @@ const createNewAnexA = async (req, res) => {
         contact_per4,
         no_members,
         org_skills,
-        title_activity,
+        project_title,
         purpose_activity,
         reason_community,
         no_beneficiaries,
         target_areas,
         target_beneficiary,
+        target_date,
         class_outreachdole,
         class_semi_dev,
         class_dev,

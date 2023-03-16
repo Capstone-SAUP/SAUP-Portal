@@ -1,13 +1,13 @@
-import { useGetOutreachQuery } from "./outreachApiSlice"
-import Outreach from "./Outreach"
 import useAuth from "../../hooks/useAuth"
 import { useNavigate } from 'react-router-dom'
 import useTitle from "../../hooks/useTitle"
 import PulseLoader from 'react-spinners/PulseLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNavicon } from "@fortawesome/free-solid-svg-icons"
+import { useGetAnexBQuery } from "./anexB_ApiSlice"
+import Outreach from "./Outreach"
 
-const OutreachList = () => {
+const OutreachList = ({ ids_A, entities_A }) => {
     useTitle('SAUP Portal: Outreach List')
 
     const navigate = useNavigate()
@@ -15,16 +15,18 @@ const OutreachList = () => {
     const { user_id, isAdmin } = useAuth()
 
     const {
-        data: outreach,
+        data: anexB,
         isLoading,
         isSuccess,
         isError,
         error
-    } = useGetOutreachQuery('outreachList', {
+    } = useGetAnexBQuery('outreachList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
     })
+
+    // console.log(anexB);
 
     let content
 
@@ -35,18 +37,27 @@ const OutreachList = () => {
     }
 
     if (isSuccess) {
+
         const handleOutreach = () => navigate(`/dash/outreach/new`)
 
-        const { ids, entities } = outreach
+        const { ids, entities } = anexB
+        let ids_B = ids;
+        let entities_B = entities
 
+        let Anex_ids = ids_A.concat(ids_B)
+        let Anex_entities = {...entities_B,...entities_A};
+
+        // let user_role = Anex_entities.user_role
+
+        // console.log(Anex_entities.user_role)
         let filteredIds
         if (isAdmin) {
-            filteredIds = [...ids]
+            filteredIds = [...Anex_ids]
         } else {
-            filteredIds = ids.filter(outreachId => entities[outreachId].user_id === user_id)
+            filteredIds = Anex_ids.filter(outreachId => Anex_entities[outreachId].user === user_id)
         }
 
-        const tableContent = ids?.length && filteredIds.map(outreachId => <Outreach key={outreachId} outreachId={outreachId} />)
+        const tableContent = Anex_ids?.length && filteredIds.map(outreachId => <Outreach key={outreachId} outreachId={outreachId} />)
 
         content = (   
         <>
@@ -101,22 +112,24 @@ const OutreachList = () => {
             </div>
             </nav>
             <div className="w-full border rounded-lg shadow-md  shadow-gray-400">
-                <div className="">
+                {/* <div className="">
                     <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 m-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                     onClick={handleOutreach}> 
                     Add New Project
                     </button>
-                </div>
+                </div> */}
                 
                 <table className="w-full text-sm text-left table-fixed">
                     <thead className="bg-gray-300">
                         <tr>
                             <th scope="col" className="text-sm font-bold px-6 py-4 ">ID</th>
+                            <th scope="col" className="text-sm font-bold py-4 ">Full Name</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Status</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Date Created</th>
-                            <th scope="col" className="text-sm font-bold py-4 ">Date of Submission</th>
-                            <th scope="col" className="text-sm font-bold py-4 ">Name</th>
-                            <th scope="col" className="px-4 w-32">Edit</th>
+                            <th scope="col" className="text-sm font-bold py-4 ">Project Title</th>
+                            <th scope="col" className="text-sm font-bold py-4 ">Beneficiaries</th>
+                            <th scope="col" className="text-sm font-bold py-4 ">Venue</th>
+                            <th scope="col" className="px-4 w-32">View</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -14,7 +14,7 @@ export const anexB_ApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getAnexB: builder.query({
             query: () => ({
-                url: '/view-anex-B',
+                url: '/outreach',
                 validateStatus: (response, result) => {
                     return response.status === 200 && !result.isError
                 },

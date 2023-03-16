@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { STATUS } from "../../config/status";
 
-const EditOutreachForm = ({ outreach, users }) => {
+const ViewOutreachForm = ({ outreach, users }) => {
   const { isAdmin } = useAuth();
 
   const [updateOutreach, { isLoading, isSuccess, isError, error }] =
@@ -227,4 +227,4 @@ const EditOutreachForm = ({ outreach, users }) => {
   return content;
 };
 
-export default EditOutreachForm;
+export default ViewOutreachForm;
