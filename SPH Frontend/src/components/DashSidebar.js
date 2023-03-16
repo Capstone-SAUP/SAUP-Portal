@@ -165,7 +165,7 @@ const DashSidebar = ({ ids }) => {
         onClick={onGenerateClicked}
       >
         <div
-          className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+          className={`mb-20 text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
             pathname.includes("/dash/generate-certificate") && "bg-red-500"
           }`}
         >
