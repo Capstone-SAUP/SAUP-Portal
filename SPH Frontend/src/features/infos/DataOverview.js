@@ -20,7 +20,7 @@ const data = [
   { name: "SBA", entries: 200 },
 ];
 
-const COLORS = ["#651B1D", "#F4CD2A", "#000000", "#746613"];
+const COLORS = ["#651B1D", "#F4CD2A", "#616058", "#746613"];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
