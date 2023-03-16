@@ -9,6 +9,8 @@ import UsersList from "./features/users/UsersList";
 import EditUser from "./features/users/EditUser";
 import NewUserForm from "./features/users/NewUserForm";
 import ViewOutreach from "./features/outreach/ViewOutreach";
+import OutreachReportForm from "./features/outreach/OutreachReportForm";
+import ReportOutreach from "./features/outreach/ReportOutreach";
 import NewOutreach from "./features/outreach/NewOutreach";
 import GenerateSummary from "./features/generate/GenerateSummary";
 import GenerateCertificate from "./features/generate/GenerateCertificate";
@@ -63,8 +65,8 @@ function App() {
                     <Route path="view/type-Admin">
                       <Route path=":id" element={<ViewOutreach />} />
                     </Route>
-                    <Route path="report/">
-                      <Route path=":id" element={<ViewOutreach />} />
+                    <Route path="report">
+                      <Route path=":id" element={<ReportOutreach />} />
                     </Route>
                   <Route path="new" element={<NewOutreach />} />
                 </Route>

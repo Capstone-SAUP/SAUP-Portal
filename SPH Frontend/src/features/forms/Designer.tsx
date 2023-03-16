@@ -39,7 +39,7 @@ function Designs() {
                 });
                 designer.current.onSaveTemplate(onSaveTemplate);
             }
-        });
+        })
         return () => {
             if (designer.current) {
                 designer.current.destroy();

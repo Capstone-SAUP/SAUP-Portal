@@ -27,7 +27,6 @@ const initTemplate = () => {
 };
 
 
-
 const ViewerPDF = (filteredOutreach:any) =>  {
 
   // console.log(outreachId);

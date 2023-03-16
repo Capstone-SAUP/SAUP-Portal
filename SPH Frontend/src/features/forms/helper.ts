@@ -3,24 +3,9 @@ import { Template, Font, checkTemplate } from "@pdfme/generator";
 const fontObjList = [
     {
         fallback: true,
-        label: "NotoSansJP-Regular",
-        url: "/fonts/NotoSansJP-Regular.ttf",
-    },
-    {
-        fallback: false,
-        label: "NotoSansSC-Regular",
-        url: "/fonts/NotoSansSC-Regular.otf",
-    },
-    {
-        fallback: false,
-        label: "NotoSerifJP-Regular",
-        url: "/fonts/NotoSerifJP-Regular.ttf",
-    },
-    {
-        fallback: false,
-        label: "ZenKurenaido-Regular",
-        url: "/fonts/ZenKurenaido-Regular.ttf",
-    },
+        label: "Arial",
+        url: "/fonts/Arial.ttf",
+    }
 ];
 
 export const getFontsData = async () => {
@@ -73,6 +58,8 @@ export const getTemplateFromJsonFile = (file: File) => {
         }
     });
 };
+
+
 
 export const downloadJsonFile = (json: any, title: string) => {
     if (typeof window !== "undefined") {
