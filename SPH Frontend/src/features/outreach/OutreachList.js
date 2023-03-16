@@ -129,7 +129,7 @@ const OutreachList = ({ ids_A, entities_A }) => {
                             <th scope="col" className="text-sm font-bold py-4 ">Project Title</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Beneficiaries</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Venue</th>
-                            <th scope="col" className="px-4 w-32">View</th>
+                            <th scope="col" className="px-6 py-4 w-40">Option</th>
                         </tr>
                     </thead>
                     <tbody>

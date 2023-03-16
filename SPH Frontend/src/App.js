@@ -63,6 +63,9 @@ function App() {
                     <Route path="view/type-Admin">
                       <Route path=":id" element={<ViewOutreach />} />
                     </Route>
+                    <Route path="report/">
+                      <Route path=":id" element={<ViewOutreach />} />
+                    </Route>
                   <Route path="new" element={<NewOutreach />} />
                 </Route>
 
