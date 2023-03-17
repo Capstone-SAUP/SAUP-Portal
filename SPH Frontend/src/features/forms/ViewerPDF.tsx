@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Form, Viewer, Template, checkTemplate } from "@pdfme/ui";
 import { generate } from "@pdfme/generator";
@@ -34,19 +35,17 @@ const ViewerPDF = (Outreach:any) =>  {
 
   const filteredOutreach = Outreach.filteredOutreach
   const outreachInfo = Outreach.outreachInfo
-
-  // console.log(outreachInfo);
-  
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);
 
   const [mode, setMode] = useState<Mode>(
     (localStorage.getItem("mode") as Mode) ?? "viewer"
   );
+  
+  const navigate = useNavigate();
 
   const [updateOutreach, { isLoading, isSuccess }] =
   useUpdateAnexBMutation();
-
 
 
   const [status, setCompleted] = useState(outreachInfo.status);
@@ -56,6 +55,9 @@ const ViewerPDF = (Outreach:any) =>  {
     if (isSuccess ) {
       setOutreach_id("");
       setCompleted("");
+      navigate(
+        "/dash/outreach/"
+      );
     }
   }, [isSuccess]);
 

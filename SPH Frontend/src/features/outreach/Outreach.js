@@ -69,7 +69,7 @@ const Outreach = ({ outreachId }) => {
     );
   });
 
-  const handleEdit = () =>
+  const handleView = () =>
     navigate(
       `/dash/outreach/view/type-${allOutreach.user_role}/${allOutreach.id}`
     );
@@ -85,8 +85,6 @@ const Outreach = ({ outreachId }) => {
       month: "long",
     });
 
-    // const handleEdit = () => navigate(`/dash/outreach/${outreachId}`)
-
     return (
       <tr className="text-left border px-8">
         <td className="px-6 text-sm font-medium text-gray-900">
@@ -96,9 +94,7 @@ const Outreach = ({ outreachId }) => {
           {allOutreach.fullname}
         </td>
         <td className="whitespace-nowrap text-sm font-medium text-gray-900">
-          <select value={status} onChange={onCompletedChanged}>
-            {list}
-          </select>
+          {allOutreach.status}
         </td>
         <td className="text-sm font-medium text-gray-900">{created}</td>
         <td className="text-sm font-medium text-gray-900">
@@ -110,27 +106,13 @@ const Outreach = ({ outreachId }) => {
         <td className="text-sm font-medium text-gray-900">
           {allOutreach.venue}
         </td>
-        <td className="whitespace-nowrap text-sm font-medium text-gray-900"></td>
-        <td className="text-sm font-medium text-gray-900">
-          {/* <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                        onClick={handleEdit}> 
-                                            Edit
-                    </button> */}
+        <td className="whitespace-nowrap text-sm font-medium text-gray-900">          
           <button
             className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-            onClick={handleEdit}
+            onClick={handleView}
           >
             Form
-          </button>
-          <button
-            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-            title="Save"
-            onClick={onSaveOutreachClicked}
-            disabled={!canSave}
-          >
-            Save
-          </button>
-        </td>
+          </button></td>
       </tr>
     );
   } else return null;

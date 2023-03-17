@@ -75,8 +75,8 @@ const anexBschema = new mongoose.Schema(
       type: String,
     },
     status: {
-      type:[String],
-      default: ["Pending"]
+      type: String,
+      default: "Pending"
     },
   },
   {

@@ -110,7 +110,7 @@ const createNewAnexB = async (req, res) => {
 const updateAnexB = async (req, res) => {
 const { id, status } = req.body
 
-console.log(id);
+console.log();
 // Confirm data
 // if (!id || !status) {
 //     return res.status(400).json({ message: 'All fields are required' })
