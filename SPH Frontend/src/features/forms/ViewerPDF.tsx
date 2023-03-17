@@ -8,6 +8,8 @@ import {
   isJsonString,
 } from "./helper";
 import React from "react";
+import { useUpdateAnexBMutation } from "../outreach/anexB_ApiSlice";
+import { STATUS } from "../../config/status";
 
 type Mode = "form" | "viewer";
 
@@ -28,9 +30,12 @@ const initTemplate = () => {
 
 
 
-const ViewerPDF = (filteredOutreach:any) =>  {
+const ViewerPDF = (Outreach:any) =>  {
 
-  // console.log(outreachId);
+  const filteredOutreach = Outreach.filteredOutreach
+  const outreachInfo = Outreach.outreachInfo
+
+  // console.log(outreachInfo);
   
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);
@@ -38,12 +43,52 @@ const ViewerPDF = (filteredOutreach:any) =>  {
   const [mode, setMode] = useState<Mode>(
     (localStorage.getItem("mode") as Mode) ?? "viewer"
   );
+
+  const [updateOutreach, { isLoading, isSuccess }] =
+  useUpdateAnexBMutation();
+
+
+
+  const [status, setCompleted] = useState(outreachInfo.status);
+  const [outreachId, setOutreach_id] = useState(outreachInfo.id);
+
+  useEffect(() => {
+    if (isSuccess ) {
+      setOutreach_id("");
+      setCompleted("");
+    }
+  }, [isSuccess]);
+
+  const onCompletedChanged = (e: { target: { value: any; }; }) => setCompleted(e.target.value);
+  const onOutreach_idChanged = (e: { target: { value: any; }; }) => setOutreach_id(e.target.value);
+
+  const canSave = !isLoading;
+
+  const onSaveOutreachClicked = async (e: any) => {
+    if (canSave) {
+      await updateOutreach({
+        id: outreachId,
+        status,
+      });
+    } else {
+      await updateOutreach({id: outreachId, status });
+    }
+  };
+
+  const list = Object.values(STATUS).map((status) => {
+    return (
+      <option key={status} value={status}>
+        {" "}
+        {status}
+      </option>
+    );
+  });
   
   useEffect(() => {
     const template = initTemplate();
     let inputs = template.sampledata ?? [{}];
     try {
-      const inputsString = [filteredOutreach["filteredOutreach"]];
+      const inputsString = [filteredOutreach];
       const inputsJson = inputsString
       inputs = inputsJson;
     } catch {
@@ -211,11 +256,34 @@ const ViewerPDF = (filteredOutreach:any) =>  {
         <span style={{ margin: "0 1rem" }}>|</span>
         <button onClick={onGeneratePDF}>Generate PDF</button> */}
 </header>
+        <div className="w-full grid">
+            <label className="text-base align-middle" htmlFor="user_id">
+                Assign Role:
+            </label>
+            <select
+                id="roles"
+                name="roles"
+                className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                value={status}
+                onChange={onCompletedChanged}
+            >
+                {list}
+            </select>
+        </div>
+        <button
+            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+            title="Save"
+            onClick={onSaveOutreachClicked}
+            disabled={!canSave}
+          >
+            Save
+          </button>
       <br></br>
       <br></br>
       <br></br>
-      <div className='max-w-5xl' ref={uiRef}/>
-    </div>
+      <div className="w-full">
+        <div className='' ref={uiRef}/></div>
+      </div>
   
   );
   

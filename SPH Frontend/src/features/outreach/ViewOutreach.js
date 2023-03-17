@@ -24,7 +24,7 @@ const ViewOutreach = () => {
     });
 
     const unfilteredOutreach = { ...anexA, ...anexB };
-
+    const outreachInfo = { ...anexA, ...anexB };
     delete unfilteredOutreach._id;
     delete unfilteredOutreach.user;
     delete unfilteredOutreach.id;
@@ -37,7 +37,9 @@ const ViewOutreach = () => {
 
     const filteredOutreach = unfilteredOutreach;
 
-    const content = <ViewerPDF filteredOutreach={filteredOutreach} />
+    console.log();
+
+    const content = <ViewerPDF filteredOutreach={filteredOutreach} outreachInfo={outreachInfo}/>
 
     return content
 }

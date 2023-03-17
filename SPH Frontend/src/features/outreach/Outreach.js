@@ -25,7 +25,6 @@ const Outreach = ({ outreachId }) => {
   const navigate = useNavigate();
 
   const allOutreach = { ...anexA, ...anexB };
-  console.log(allOutreach);
   // const [status, setStatus] = useState(allOutreach.status);
 
   // const handleStatusChange = (event) => {
@@ -48,16 +47,16 @@ const Outreach = ({ outreachId }) => {
 
   const onCompletedChanged = (e) => setCompleted(e.target.value);
 
-  const canSave = [status].every(Boolean) && !isLoading;
+  const canSave = !isLoading;
 
   const onSaveOutreachClicked = async (e) => {
     if (canSave) {
       await updateOutreach({
-        id: outreachId.id,
+        id: allOutreach.id,
         status,
       });
     } else {
-      await updateOutreach({ id: outreachId, status });
+      await updateOutreach({ status });
     }
   };
 
@@ -97,7 +96,7 @@ const Outreach = ({ outreachId }) => {
           {allOutreach.fullname}
         </td>
         <td className="whitespace-nowrap text-sm font-medium text-gray-900">
-          <select value ={allOutreach}>
+          <select value={status} onChange={onCompletedChanged}>
             {list}
           </select>
         </td>

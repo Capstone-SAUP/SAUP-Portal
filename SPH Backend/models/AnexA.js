@@ -108,8 +108,8 @@ const anexAschema = new mongoose.Schema(
       type: String,
     },
     status: {
-      type: String,
-      enum: ["Pending", "Approved", "Completed"],
+      type: [String],
+      default: "Pending",
     },
   },
   {
