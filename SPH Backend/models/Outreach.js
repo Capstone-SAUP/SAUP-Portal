@@ -17,8 +17,8 @@ const outreachchema = new mongoose.Schema(
       required: true,
     },
     status: {
-      type: String,
-      default: "Pending",
+      type:[String],
+      default: "Pending"
     },
   },
   {

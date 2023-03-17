@@ -93,6 +93,7 @@ const createNewAnexB = async (req, res) => {
         output1,
         output2,
         output3,
+        status,
     })
 
     if (anexB) { // Created 
@@ -115,7 +116,7 @@ if (!id || !user || !title || !text) {
 }
 
 // Confirm anexa exists to update
-const anexB = await AnexA.findById(id).exec()
+const anexB = await anexB.findById(id).exec()
 
 if (!anexB) {
     return res.status(400).json({ message: 'AnexB not found' })

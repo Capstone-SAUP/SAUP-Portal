@@ -37,7 +37,7 @@ export const anexB_ApiSlice = apiSlice.injectEndpoints({
         }),
         addNewAnexB: builder.mutation({
             query: initialAnexB => ({
-                url: '/view-anex-B',
+                url: '/outreach',
                 method: 'POST',
                 body: {
                     ...initialAnexB,
