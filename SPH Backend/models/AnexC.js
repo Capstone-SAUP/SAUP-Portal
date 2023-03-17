@@ -14,7 +14,7 @@ const anexaCschema = new mongoose.Schema(
     project_title: {
       type: String,
     },
-    beneficiaries: {
+    target_beneficiary: {
       type: String,
     },
     accomp_obj: {

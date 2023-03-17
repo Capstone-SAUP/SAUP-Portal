@@ -44,7 +44,7 @@ const OutreachList = ({ ids_A, entities_A }) => {
         let ids_B = ids;
         let entities_B = entities
 
-        let Anex_ids = ids_A.concat(ids_B)
+        let Anex_ids = ids_A.concat(ids_B);
         let Anex_entities = {...entities_B,...entities_A};
 
         // let user_role = Anex_entities.user_role

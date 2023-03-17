@@ -31,7 +31,6 @@ const GetOutreachA = () => {
         let ids_A = ids;
         let entities_A = entities
         // console.log(ids_A);
-        let filteredIds
         content = <OutreachList ids_A={ids_A} entities_A={entities_A} />
     }
 
