@@ -166,7 +166,7 @@ ${e}`);
         console.log(error);
       }
       alert("Saved!");
-      navigate("/dash/outreach");
+      navigate("/dash/users");
     }
   };
 

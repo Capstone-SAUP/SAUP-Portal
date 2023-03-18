@@ -4,24 +4,18 @@ import { useGetAnexAQuery } from "./anexA_ApiSlice";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
-const Outreach = ({ outreachId }) => {
-    const { anexA } = useGetAnexAQuery("outreachList", {
-        selectFromResult: ({ data }) => ({
-            anexA: data?.entities[outreachId],
-        }),
-    });
-
+const OutreachEmp = ({ outreachId }) => {
     const { anexB } = useGetAnexBQuery("outreachList", {
         selectFromResult: ({ data }) => ({
             anexB: data?.entities[outreachId],
         }),
     });
-
+console.log(outreachId);
     const navigate = useNavigate();
 
-    const allOutreach = { ...anexA, ...anexB };
+    const allOutreach = { ...anexB };
 
-    const handleEdit = () => navigate(`/dash/outreach/view/type-${allOutreach.user_role}/${allOutreach.id}`);
+    const handleEdit = () => navigate(`/dash/employee/view/type-${allOutreach.user_role}/${allOutreach.id}`);
     
     if (allOutreach) {
         const created = new Date(allOutreach.createdAt).toLocaleString(
@@ -74,6 +68,6 @@ const Outreach = ({ outreachId }) => {
     } else return null;
 };
 
-const memoizedOutreach = memo(Outreach);
+const memoizedOutreach = memo(OutreachEmp);
 
 export default memoizedOutreach;
