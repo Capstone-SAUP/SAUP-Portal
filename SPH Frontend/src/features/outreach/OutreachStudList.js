@@ -4,10 +4,10 @@ import useTitle from "../../hooks/useTitle"
 import PulseLoader from 'react-spinners/PulseLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNavicon } from "@fortawesome/free-solid-svg-icons"
-import { useGetAnexBQuery } from "./anexB_ApiSlice"
-import Outreach from "./Outreach"
+import { useGetAnexAQuery } from "./anexA_ApiSlice"
+import OutreachStud from "./OutreachStud";
 
-const OutreachList = ({ ids_A, entities_A }) => {
+const OutreachStudList = () => {
     useTitle('SAUP Portal: Outreach List')
 
     const navigate = useNavigate()
@@ -15,18 +15,18 @@ const OutreachList = ({ ids_A, entities_A }) => {
     const { user_id, isAdmin } = useAuth()
 
     const {
-        data: anexB,
+        data: anexA,
         isLoading,
         isSuccess,
         isError,
         error
-    } = useGetAnexBQuery('outreachList', {
+    } = useGetAnexAQuery('outreachList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
     })
 
-    // console.log(anexB);
+    // console.log(anexA);
 
     let content
 
@@ -40,24 +40,25 @@ const OutreachList = ({ ids_A, entities_A }) => {
 
         const handleOutreach = () => navigate(`/dash/outreach/new`)
 
-        const { ids, entities } = anexB
-        let ids_B = ids;
-        let entities_B = entities
+        const { ids, entities } = anexA
+        let ids_A = ids;
+        let entities_A = entities;
 
-        let Anex_ids = ids_A.concat(ids_B);
-        let Anex_entities = {...entities_B,...entities_A};
+        // let user_role = entities_A.user_role
 
-        // let user_role = Anex_entities.user_role
-
-        // console.log(Anex_entities.user_role)
+        // console.log(entities_A.user_role)
         let filteredIds
         if (isAdmin) {
-            filteredIds = [...Anex_ids]
+            filteredIds = [...ids_A]
         } else {
-            filteredIds = Anex_ids.filter(outreachId => Anex_entities[outreachId].user === user_id)
+            filteredIds = ids_A.filter(outreachId => entities_A[outreachId].user === user_id)
         }
 
-        const tableContent = Anex_ids?.length && filteredIds.map(outreachId => <Outreach key={outreachId} outreachId={outreachId} />)
+        const tableContent =
+          ids_A?.length &&
+          filteredIds.map((outreachId) => (
+            <OutreachStud key={outreachId} outreachId={outreachId} />
+          ));
 
         content = (   
         <>
@@ -129,7 +130,7 @@ const OutreachList = ({ ids_A, entities_A }) => {
                             <th scope="col" className="text-sm font-bold py-4 ">Project Title</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Beneficiaries</th>
                             <th scope="col" className="text-sm font-bold py-4 ">Venue</th>
-                            <th scope="col" className="px-6 py-4 w-40">Option</th>
+                            <th scope="col" className="px-4 w-32">View</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,4 +144,4 @@ const OutreachList = ({ ids_A, entities_A }) => {
 
     return content
 }
-export default OutreachList
+export default OutreachStudList

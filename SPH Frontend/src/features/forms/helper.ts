@@ -96,14 +96,13 @@ export const getTemplate = () => {
     if (
         window.location.href.match("/view-anex-A") ||
         window.location.href.match("/design-anex-A") ||
-        window.location.href.match("/view/type-Student")
+        window.location.href.match("/student")
     ) {
         new_schema = anexA;
     } else if (
         window.location.href.match("/view-anex-B") ||
         window.location.href.match("/design-anex-B") ||
-        window.location.href.match("/view/type-Admin") ||
-        window.location.href.match("/view/type-Employee")
+        window.location.href.match("/employee")
     ) {
         new_schema = anexB;
     } else if (

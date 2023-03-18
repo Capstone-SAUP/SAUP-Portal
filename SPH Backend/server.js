@@ -30,9 +30,9 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
-app.use('/get-outreach', require('./routes/anexARoutes'))
-app.use('/outreach', require('./routes/anexBRoutes'))
-app.use('/report', require('./routes/anexCRoutes'))
+app.use('/student', require('./routes/anexARoutes'));
+app.use('/employee', require('./routes/anexBRoutes'))
+app.use("/report", require("./routes/anexCRoutes"));
 app.use('/view-anex-A', require('./routes/anexARoutes'))
 app.use('/view-anex-B', require('./routes/anexBRoutes'))
 app.use('/view-anex-C', require('./routes/anexCRoutes'))
