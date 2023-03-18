@@ -55,36 +55,27 @@ function App() {
                   </Route>
                 </Route>
 
-                  <Route path="employee">
-                    <Route index element={<OutreachEmpList />} />
-                    <Route path="view/type-Student">
-                      <Route path=":id" element={<ViewOutreach />} />
-                    </Route>
-                    <Route path="view/type-Employee">
-                      <Route path=":id" element={<ViewOutreach />} />
-                    </Route>
-                    <Route path="view/type-Admin">
-                      <Route path=":id" element={<ViewOutreach />} />
-                    </Route>
-                    <Route path="new" element={<NewOutreach />} />
+                <Route path="employee">
+                  <Route index element={<OutreachEmpList />} />
+                  <Route path="view">
+                    <Route path=":id" element={<ViewOutreach />} />
                   </Route>
-
-                  <Route path="student">
-                    <Route index element={<OutreachStudList />} />
-                    <Route path="view/type-Student">
-                      <Route path=":id" element={<ViewOutreach />} />
-                    </Route>
-                    <Route path="view/type-Employee">
-                      <Route path=":id" element={<ViewOutreach />} />
-                    </Route>
-                    <Route path="view/type-Admin">
-                      <Route path=":id" element={<ViewOutreach />} />
-                    </Route>
-                      <Route path="report">
-                      <Route path=":id" element={<ReportOutreach />} />
-                    </Route>
+                  <Route path="report">
+                    <Route path=":id" element={<ReportOutreach />} />
+                  </Route>
                   <Route path="new" element={<NewOutreach />} />
+                </Route>
+
+                <Route path="student">
+                  <Route index element={<OutreachStudList />} />
+                  <Route path="view">
+                    <Route path=":id" element={<ViewOutreach />} />
                   </Route>
+                  <Route path="report">
+                    <Route path=":id" element={<ReportOutreach />} />
+                  </Route>
+                  <Route path="new" element={<NewOutreach />} />
+                </Route>
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="generate-summary">

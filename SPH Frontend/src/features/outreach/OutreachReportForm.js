@@ -801,12 +801,15 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           />
                         </div>
                       </div>
-                      <div class="md:col-span-2 md:row-span-3 text-gray-600">
+                      <div class="md:col-span-2 md:row-span-6 text-gray-600">
                         <p class="font-medium text-lg">
                           List of Actual Volunteers and Type of Participation:
                         </p>
                       </div>
-                      <div className="md:col-span-2 "> Preparatory Phase</div>
+                      <div className="md:col-span-2 text-base font-semibold text-gray-600">
+                        {" "}
+                        Preparatory Phase
+                      </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div class="md:col-span-1">
                           <label for="country">Name of Volunteer</label>
@@ -915,10 +918,82 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           >
                             {options}
                           </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
                         </div>
                         <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
                           <div class="md:col-span-1">
                             <label for="country">Start Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
                             <input
                               type="time"
                               id="start-time"
@@ -940,14 +1015,587 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
                           </div>
                         </div>
                       </div>
-                      <div class="md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div class="">
-                          <label for="country">Preparatory Phase</label>
-                          <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"></div>
+                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                        {" "}
+                        Implementation Phase/Actual Conduct of CES
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                        <div class="md:col-span-1">
+                          <label for="country">Name of Volunteer</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
                         </div>
+                        <div class="md:col-span-1">
+                          <label for="country">Position/Designation</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="md:col-span-1">
+                          <label for="country">Type of Participation</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                          <div class="md:col-span-1">
+                            <label for="country">Start Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                          </div>
+                          <div class="md:col-span-1">
+                            <label for="country">End Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                        {" "}
+                        Post Implementation (Includes Report Writing and
+                        Evaluation)
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                        <div class="md:col-span-1">
+                          <label for="country">Name of Volunteer</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="md:col-span-1">
+                          <label for="country">Position/Designation</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="md:col-span-1">
+                          <label for="country">Type of Participation</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                          <div class="md:col-span-1">
+                            <label for="country">Start Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                          </div>
+                          <div class="md:col-span-1">
+                            <label for="country">End Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="md:col-span-2 md:row-span-6"></div>
+                      <div class="md:col-span-7">
+                        <label for="country">Learnings/Insights:</label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7 grid-cols-1 md:grid-cols-2">
                         <div class="">
                           <label for="state">State / province</label>
                           <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
@@ -1021,6 +1669,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           </label>
                         </div>
                       </div>
+
                       <div class="md:col-span-2">
                         <label for="soda">How many soda pops?</label>
                         <div class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">

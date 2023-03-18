@@ -16,7 +16,7 @@ const OutreachStud = ({ outreachId }) => {
 
   const handleEdit = () =>
     navigate(
-      `/dash/student/view/type-${allOutreach.user_role}/${allOutreach.id}`
+      `/dash/student/view/${allOutreach.id}`
     );
 
   if (allOutreach) {

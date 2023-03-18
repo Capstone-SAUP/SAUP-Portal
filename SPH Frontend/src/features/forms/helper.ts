@@ -110,16 +110,7 @@ export const getTemplate = () => {
         window.location.href.match("/design-anex-C")
     ) {
         new_schema = anexC;
-    } else if (
-        window.location.href.match("/view-anex-D") ||
-        window.location.href.match("/design-anex-D")
-    ) {
-        new_schema = anexD;
-    } else if (
-        window.location.href.match("/outreach/view") //View Only
-    ) {
-        new_schema = Proposed;
-    }
+    } 
     // console.log(new_schema);
 
     const template: Template = new_schema;

@@ -10,14 +10,12 @@ const OutreachEmp = ({ outreachId }) => {
             anexB: data?.entities[outreachId],
         }),
     });
-console.log(outreachId);
     const navigate = useNavigate();
 
     const allOutreach = { ...anexB };
 
-    const handleEdit = () => navigate(`/dash/outreach/view/type-${allOutreach.user_role}/${allOutreach.id}`);
-        const handleReport = () =>
-          navigate(`/dash/outreach/report/${allOutreach.id}`);
+    const handleView = () => navigate(`/dash/employee/view/${allOutreach.id}`);
+    const handleReport = () => navigate(`/dash/employee/report/${allOutreach.id}`);
     
     if (allOutreach) {
         const created = new Date(allOutreach.createdAt).toLocaleString(
