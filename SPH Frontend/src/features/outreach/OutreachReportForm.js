@@ -22,12 +22,37 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [createReport, { isLoading, isSuccess, isError, error }] =
   useAddNewAnexCMutation();
 
-
   const navigate = useNavigate();
+
+    const [prepPhase, setInputFields] = useState([{
+        fullName:'',
+        emailAddress:'',
+        salary:''  
+    } ]);
+    const addInputField = ()=>{
+        setInputFields([...prepPhase, {
+            fullName:'',
+            emailAddress:'',
+            salary:''  
+        } ])
+      
+    }
+    const removeInputFields = (index)=>{
+        const rows = [...prepPhase];
+        rows.splice(index, 1);
+        setInputFields(rows);
+    }
+    const handleChange = (index, evnt)=>{
+    
+    const { name, value } = evnt.target;
+    const list = [...prepPhase];
+    list[index][name] = value;
+    setInputFields(list);
+}
 
   // const [title, setTitle] = useState(outreach.title);
 
-    const [user, setUser] = useState(filteredOutreach.user)
+    const [userId, setUserId] = useState(users[0].id)
     const [sponsor_dept, setSponsor_Dept] = useState(filteredOutreach.sponsor_dept)
     const [project_title, setProject_Title] = useState(filteredOutreach.project_title)
     const [target_beneficiary, setBeneficiaries] = useState(filteredOutreach.target_beneficiary)
@@ -44,9 +69,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     const [prep_pos1, setPrep_Pos1] = useState(filteredOutreach.prep_pos1)
     const [prep_pos2, setPrep_Pos2] = useState(filteredOutreach.prep_pos2)
     const [prep_pos3, setPrep_Pos3] = useState(filteredOutreach.prep_pos3)
+    const [prep_pos4, setPrep_Pos4] = useState(filteredOutreach.prep_pos4)
     const [prep_type1, setPrep_Type1] = useState(filteredOutreach.prep_type1)
     const [prep_type2, setPrep_Type2] = useState(filteredOutreach.prep_type2)
-    const [prep_pos4, setPrep_Pos4] = useState(filteredOutreach.prep_pos4)
     const [prep_type3, setPrep_Type3] = useState(filteredOutreach.prep_type3)
     const [prep_type4, setPrep_Type4] = useState(filteredOutreach.prep_type4)
     const [prep_start1, setPrep_Start1] = useState(filteredOutreach.prep_start1)
@@ -134,7 +159,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   useEffect(() => {
           if (isSuccess) {
-      setUser("")
+      setUserId("")
       setSponsor_Dept("")
       setProject_Title("")
       setBeneficiaries("")
@@ -245,7 +270,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   // const onTitleChanged = (e) => setTitle(e.target.value)a;
 
   // const [title, setTitle
-  const onUserChanged = (e) => setUser (e.target.value)
+  const onUserIdChanged = (e) => setUserId (e.target.value)
   const onSponsor_DeptChanged = (e) => setSponsor_Dept (e.target.value)
   const onProject_TitleChanged = (e) => setProject_Title (e.target.value)
   const onBeneficiariesChanged = (e) => setBeneficiaries (e.target.value)
@@ -351,7 +376,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onImage2Changed = (e) => setImage2 (e.target.value)
 
   const canSave = [
-    user,
+    userId,
     sponsor_dept,
     project_title,
     target_beneficiary,
@@ -460,7 +485,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     e.preventDefault();
     if (canSave) {
         await createReport({
-          user,
+          userId,
           sponsor_dept,
           project_title,
           target_beneficiary,
@@ -594,14 +619,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     second: "numeric",
   });
 
-  // const options = users.map((user) => {
-  //   return (
-  //     <option key={user.id} value={user.id}>
-  //       {" "}
-  //       {user.user_id}
-  //     </option>
-  //   );
-  // });
+      const options = users.map((user) => {
+        return (
+          <option className="" key={user.id} value={user.id}>
+            {user.user_id + " | " + user.lastname + ", " + user.firstname}
+          </option>
+        );
+      });
 
   const errClass = isError ? "errmsg" : "offscreen";
 
@@ -632,162 +656,442 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
         className="h-full full grid gap-3 px-20 text-black"
         onSubmit={(e) => e.preventDefault()}
       >
-<div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-  <div class="container max-w-screen-lg mx-auto">
-    <div>
-      <h2 class="font-semibold text-xl">Implementation Report Form</h2>
-      <p class="mb-6 text-base">The form is both for student and employee initiated 
-activities and should be submitted within one (1) month after the activity.
-</p>
+        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+          <div class="container max-w-screen-lg mx-auto">
+            <div>
+              <h2 class="font-semibold text-xl">Implementation Report Form</h2>
+              <p class="mb-6 text-base">
+                The form is both for student and employee initiated activities
+                and should be submitted within one (1) month after the activity.
+              </p>
 
-      <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-          <div class="text-gray-600">
-            <p class="font-medium text-lg">Outreach Details</p>
-            <p>Please fill out all the blank fields.</p>
-          </div>
+              <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                  {/* <div class="text-gray-600">
+                    <div className="mb-[756px]">
+                      <p class="font-medium text-lg">Outreach Details</p>
+                      <p>Please fill out all the blank fields.</p>
+                    </div>
+                    <div>
+                      <p class="font-medium text-lg">
+                        List of Actual Volunteers and Type of Participation :
+                      </p>
+                      <p>Please fill out all the blank fields.</p>
+                    </div>
+                  </div> */}
 
-          <div class="lg:col-span-2">
-            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
-              <div class="md:col-span-6">
-                <label for="full_name">Sponsoring Department(s)/ Proponent(s)	:</label>
-                <input type="text" name="full_name" id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value={project_title}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <label for="email">Project Title :</label>
-                <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value={sponsor_dept}
-                onChange={onSponsor_DeptChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <label for="email">Beneficiaries	:</label>
-                <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value={target_beneficiary}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <label for="email">Accomplished Objectives :</label>
-                <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value={accomp_obj}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <label for="email">Venue of CES Activity :</label>
-                <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value={venue}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <label for="email">Date/Time Implemented :</label>
-                <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value={date_implement}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <label for="email">Brief Narrative :</label>
-                <textarea type="text" name="email" id="email" class="h-44 border mt-1 rounded px-4 w-full bg-gray-50" value={brief_narrative}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-3">
-                <label for="address">Topics</label>
-                <textarea type="textarea" name="address" id="address" class="h-44 border mt-1 rounded px-4 w-full bg-gray-50" value={topics}
-                onChange={onProject_TitleChanged} placeholder="" />
-              </div>
-
-              <div class="md:col-span-3">
-                <label for="city">Speakers</label>
-                <textarea type="textarea" name="city" id="city" class="h-44 border mt-1 rounded px-4 w-full bg-gray-50" value={speakers}
-                onChange={onProject_TitleChanged} placeholder="" />
-              </div>
-
-              <div class="md:col-span-2">
-                <label for="country">Country / region</label>
-                <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                  <input name="country" id="country" placeholder="Country" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value={project_title}
-                onChange={onProject_TitleChanged} />
-                  <button tabindex="-1" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </button>
-                  <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                  </button>
-                </div>
-              </div>
-
-              <div class="md:col-span-2">
-                <label for="state">State / province</label>
-                <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                  <input name="state" id="state" placeholder="State" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value={project_title}
-                onChange={onProject_TitleChanged} />
-                  <button tabindex="-1" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </button>
-                  <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                  </button>
-                </div>
-              </div>
-
-              <div class="md:col-span-1">
-                <label for="zipcode">Zipcode</label>
-                <input type="text" name="zipcode" id="zipcode" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value={project_title}
-                onChange={onProject_TitleChanged} />
-              </div>
-
-              <div class="md:col-span-6">
-                <div class="inline-flex items-center">
-                  <input type="checkbox" name="billing_same" id="billing_same" class="form-checkbox" />
-                  <label for="billing_same" class="ml-2">My billing address is different than above.</label>
-                </div>
-              </div>
-
-              <div class="md:col-span-2">
-                <label for="soda">How many soda pops?</label>
-                <div class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                  <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                  <input name="soda" id="soda" placeholder="0" class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent" value="0" />
-                  <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-500 hover:text-blue-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 fill-current" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-      
-              <div class="md:col-span-6 text-right">
-                <div class="inline-flex items-end">
-                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                  <div class="lg:col-span-3">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
+                      <div class="md:col-span-2 md:row-span-6 text-gray-600">
+                        <div className="">
+                          <p class="font-medium text-lg">Outreach Details</p>
+                          <p>Please fill out all the blank fields.</p>
+                        </div>
+                      </div>
+                      <div class="md:col-span-7">
+                        <label for="full_name">
+                          Sponsoring Department(s)/ Proponent(s) :
+                        </label>
+                        <input
+                          type="text"
+                          name="full_name"
+                          id="full_name"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={project_title}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7">
+                        <label for="email">Project Title :</label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={sponsor_dept}
+                          onChange={onSponsor_DeptChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7">
+                        <label for="email">Beneficiaries :</label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={target_beneficiary}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7">
+                        <label for="email">Accomplished Objectives :</label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7">
+                        <label for="email">Venue of CES Activity :</label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={venue}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7">
+                        <label for="email">Date/Time Implemented :</label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={date_implement}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-2"></div>
+                      <div class="md:col-span-7">
+                        <label for="email">Brief Narrative :</label>
+                        <textarea
+                          type="text"
+                          name="email"
+                          id="email"
+                          class="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={brief_narrative}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-2 text-gray-600">
+                        <p class="font-medium text-lg">
+                          Topic(s) Discussed and Resource
+                          Speaker(s)/Facilitator(s),
+                        </p>
+                        <p>(if applicable)</p>
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
+                        <div class="">
+                          <label for="address">Topics</label>
+                          <textarea
+                            type="textarea"
+                            name="address"
+                            id="address"
+                            class="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={topics}
+                            onChange={onProject_TitleChanged}
+                            placeholder=""
+                          />
+                        </div>
+                        <div class="">
+                          <label for="city">Speakers</label>
+                          <textarea
+                            type="textarea"
+                            name="city"
+                            id="city"
+                            class="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={speakers}
+                            onChange={onProject_TitleChanged}
+                            placeholder=""
+                          />
+                        </div>
+                      </div>
+                      <div class="md:col-span-2 md:row-span-3 text-gray-600">
+                        <p class="font-medium text-lg">
+                          List of Actual Volunteers and Type of Participation:
+                        </p>
+                      </div>
+                      <div className="md:col-span-2 "> Preparatory Phase</div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                        <div class="md:col-span-1">
+                          <label for="country">Name of Volunteer</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="md:col-span-1">
+                          <label for="country">Position/Designation</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="md:col-span-1">
+                          <label for="country">Type of Participation</label>
+                          <select
+                            id="user"
+                            name="user"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={userId}
+                            onChange={onUserIdChanged}
+                          >
+                            {options}
+                          </select>
+                        </div>
+                        <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                          <div class="md:col-span-1">
+                            <label for="country">Start Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                          </div>
+                          <div class="md:col-span-1">
+                            <label for="country">End Time</label>
+                            <input
+                              type="time"
+                              id="start-time"
+                              name="start-time"
+                              value={userId}
+                              required
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onUserIdChanged}
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="md:col-span-7 grid-cols-1 md:grid-cols-2">
+                        <div class="">
+                          <label for="country">Preparatory Phase</label>
+                          <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"></div>
+                        </div>
+                        <div class="">
+                          <label for="state">State / province</label>
+                          <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                            <input
+                              name="state"
+                              id="state"
+                              placeholder="State"
+                              class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                              value={project_title}
+                              onChange={onProject_TitleChanged}
+                            />
+                            <button
+                              tabindex="-1"
+                              class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600"
+                            >
+                              <svg
+                                class="w-4 h-4 mx-2 fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                              </svg>
+                            </button>
+                            <button
+                              tabindex="-1"
+                              for="show_more"
+                              class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600"
+                            >
+                              <svg
+                                class="w-4 h-4 mx-2 fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <polyline points="18 15 12 9 6 15"></polyline>
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="md:col-span-1">
+                        <label for="zipcode">Zipcode</label>
+                        <input
+                          type="text"
+                          name="zipcode"
+                          id="zipcode"
+                          class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          placeholder=""
+                          value={project_title}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+                      <div class="md:col-span-7">
+                        <div class="inline-flex items-center">
+                          <input
+                            type="checkbox"
+                            name="billing_same"
+                            id="billing_same"
+                            class="form-checkbox"
+                          />
+                          <label for="billing_same" class="ml-2">
+                            My billing address is different than above.
+                          </label>
+                        </div>
+                      </div>
+                      <div class="md:col-span-2">
+                        <label for="soda">How many soda pops?</label>
+                        <div class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                          <button
+                            tabindex="-1"
+                            for="show_more"
+                            class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4 mx-2"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                          <input
+                            name="soda"
+                            id="soda"
+                            placeholder="0"
+                            class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
+                            value="0"
+                          />
+                          <button
+                            tabindex="-1"
+                            for="show_more"
+                            class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-500 hover:text-blue-600"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4 mx-2 fill-current"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="md:col-span-7 text-right">
+                        <div class="inline-flex items-end">
+                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-          <div className="text-center">
-            <button
-              className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-              title="Save"
-              onClick={onSaveReportClicked}
-              disabled={!canSave}
-            >
-              Save
-            </button>
+        <div className="text-center">
+          <button
+            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+            title="Save"
+            onClick={onSaveReportClicked}
+            disabled={!canSave}
+          >
+            Save
+          </button>
         </div>
       </form>
     </>

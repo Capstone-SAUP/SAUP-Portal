@@ -39,9 +39,8 @@ const NewOutreachForm = ({ users }) => {
 
   const options = users.map((user) => {
     return (
-      <option key={user.id} value={user.id}>
-        {" "}
-        {user.user_id}
+      <option className="" key={user.id} value={user.id}>
+        {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
   });

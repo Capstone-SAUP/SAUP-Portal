@@ -9,10 +9,10 @@ const ViewOutreach = () => {
     useTitle('SAUP Portal: Edit Outreach')
 
     const { users } = useGetUsersQuery("usersList", {
-        selectFromResult: ({ data }) => ({
-            users: data?.ids.map(id => data?.entities[id])
-        }),
-    })
+      selectFromResult: ({ data }) => ({
+        users: data?.ids.map((id) => data?.entities[id]),
+      }),
+    });
 
     const { id } = useParams()
 
@@ -29,7 +29,6 @@ const ViewOutreach = () => {
     });
 
     const unfilteredOutreach = { ...anexA, ...anexB };
-
     delete unfilteredOutreach._id;
     delete unfilteredOutreach.user;
     delete unfilteredOutreach.id;
@@ -41,7 +40,7 @@ const ViewOutreach = () => {
     delete unfilteredOutreach.__v;
 
     const filteredOutreach = unfilteredOutreach;
-    // console.log(users);
+
     const content = <OutreachReportForm filteredOutreach={filteredOutreach} users={users}/>
 
     return content
