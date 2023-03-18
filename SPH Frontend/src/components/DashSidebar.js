@@ -57,7 +57,8 @@ const DashSidebar = ({ ids }) => {
 
   // const onNewOutreachClicked = () => navigate("/dash/outreach/new");
   // const onNewUserClicked = () => navigate("/dash/users/new");
-  const onOutreachClicked = () => navigate("/dash/outreach");
+  const onEmployeeOutreachClicked = () => navigate("/dash/employee");
+  const onStudentOutreachClicked = () => navigate("/dash/student");
   const onUsersClicked = () => navigate("/dash/users");
   const onGenerateClicked = () => navigate("/dash/generate-certificate");
   const onSubmitApplication = () => navigate("/dash/application-forms");
@@ -128,17 +129,18 @@ const DashSidebar = ({ ids }) => {
     }
   }
 
-  let outreachButton = null;
+  let employeeOutreachButton = null;
+  if (roles == "Employee" || isAdmin) {
   if (pathname.includes("/dash")) {
-    outreachButton = (
+    employeeOutreachButton = (
       <button
         className="mb-3 w-full text-left"
         title="Outreach"
-        onClick={onOutreachClicked}
+        onClick={onEmployeeOutreachClicked}
       >
         <div
           className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
-            pathname.includes("/dash/outreach") && "bg-red-500"
+            pathname.includes("/dash/employee") && "bg-red-500"
           }`}
         >
           <span className="text-2xl block float-left pt-1">
@@ -149,12 +151,45 @@ const DashSidebar = ({ ids }) => {
               !open && "hidden"
             }`}
           >
-            Outreach
+            Employee Outreach
           </span>
         </div>
       </button>
     );
   }
+  }
+
+
+  let studentOutreachButton = null;
+  if (roles == "Student"  || isAdmin) {
+    if (pathname.includes("/dash")) {
+      studentOutreachButton = (
+        <button
+          className="mb-3 w-full text-left"
+          title="Outreach"
+          onClick={onStudentOutreachClicked}
+        >
+          <div
+            className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+              pathname.includes("/dash/student") && "bg-red-500"
+            }`}
+          >
+            <span className="text-2xl block float-left pt-1">
+              <FaRegHandshake className="text-3xl block float-left" />
+            </span>
+            <span
+              className={`truncate text-base font-medium flex-1 duration-200 ${
+                !open && "hidden"
+              }`}
+            >
+              Student Outreach
+            </span>
+          </div>
+        </button>
+      );
+    }
+  }
+
 
   let certificateButton = null;
   if (pathname.includes("/dash")) {
@@ -248,7 +283,8 @@ const DashSidebar = ({ ids }) => {
       <>
         {/* {newOutreachButton}
         {newUserButton} */}
-        {outreachButton}
+        {employeeOutreachButton}
+        {studentOutreachButton}
         {userButton}
         {applicationButton}
         {certificateButton}
