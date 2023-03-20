@@ -3,24 +3,9 @@ import { Template, Font, checkTemplate } from "@pdfme/generator";
 const fontObjList = [
     {
         fallback: true,
-        label: "NotoSansJP-Regular",
-        url: "/fonts/NotoSansJP-Regular.ttf",
-    },
-    {
-        fallback: false,
-        label: "NotoSansSC-Regular",
-        url: "/fonts/NotoSansSC-Regular.otf",
-    },
-    {
-        fallback: false,
-        label: "NotoSerifJP-Regular",
-        url: "/fonts/NotoSerifJP-Regular.ttf",
-    },
-    {
-        fallback: false,
-        label: "ZenKurenaido-Regular",
-        url: "/fonts/ZenKurenaido-Regular.ttf",
-    },
+        label: "Arial",
+        url: "/fonts/Arial.ttf",
+    }
 ];
 
 export const getFontsData = async () => {
@@ -74,6 +59,8 @@ export const getTemplateFromJsonFile = (file: File) => {
     });
 };
 
+
+
 export const downloadJsonFile = (json: any, title: string) => {
     if (typeof window !== "undefined") {
         const blob = new Blob([JSON.stringify(json)], {
@@ -123,16 +110,7 @@ export const getTemplate = () => {
         window.location.href.match("/design-anex-C")
     ) {
         new_schema = anexC;
-    } else if (
-        window.location.href.match("/view-anex-D") ||
-        window.location.href.match("/design-anex-D")
-    ) {
-        new_schema = anexD;
-    } else if (
-        window.location.href.match("/outreach/view") //View Only
-    ) {
-        new_schema = Proposed;
-    }
+    } 
     // console.log(new_schema);
 
     const template: Template = new_schema;

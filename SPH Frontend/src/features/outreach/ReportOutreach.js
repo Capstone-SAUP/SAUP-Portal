@@ -1,11 +1,18 @@
 import { useParams } from 'react-router-dom'
-import ViewerPDF from '../forms/ViewerPDF'
+import OutreachReportForm from "./OutreachReportForm";
 import { useGetAnexBQuery } from "./anexB_ApiSlice";
 import { useGetAnexAQuery } from "./anexA_ApiSlice";
+import { useGetUsersQuery } from '../users/usersApiSlice'
 import useTitle from '../../hooks/useTitle'
 
 const ViewOutreach = () => {
     useTitle('SAUP Portal: Edit Outreach')
+
+    const { users } = useGetUsersQuery("usersList", {
+      selectFromResult: ({ data }) => ({
+        users: data?.ids.map((id) => data?.entities[id]),
+      }),
+    });
 
     const { id } = useParams()
 
@@ -22,7 +29,6 @@ const ViewOutreach = () => {
     });
 
     const unfilteredOutreach = { ...anexA, ...anexB };
-
     delete unfilteredOutreach._id;
     delete unfilteredOutreach.user;
     delete unfilteredOutreach.id;
@@ -35,7 +41,7 @@ const ViewOutreach = () => {
 
     const filteredOutreach = unfilteredOutreach;
 
-    const content = <ViewerPDF filteredOutreach={filteredOutreach} />
+    const content = <OutreachReportForm filteredOutreach={filteredOutreach} users={users}/>
 
     return content
 }

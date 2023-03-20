@@ -27,10 +27,11 @@ const initTemplate = () => {
 };
 
 
-
 const ViewerPDF = (filteredOutreach:any) =>  {
 
-  // console.log(outreachId);
+  window.addEventListener("beforeunload", function(event) {
+    event.returnValue = "The information in the document will reset.";
+  });
   
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);
