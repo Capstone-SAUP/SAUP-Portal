@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
+import { DEPT } from "../../config/department";
 import useTitle from "../../hooks/useTitle";
 
 const USER_REGEX = /^[0-9]{3,20}$/;
@@ -30,6 +31,8 @@ const NewUserForm = () => {
     const [password, setPassword] = useState("");
     const [validPassword, setValidPassword] = useState(false);
     const [roles, setRoles] = useState(["Student"]);
+    const [department, setDept] = useState([" "]);
+
 
     useEffect(() => {
         setValiduser_id(USER_REGEX.test(user_id));
@@ -59,6 +62,7 @@ const NewUserForm = () => {
             setEmail("");
             setPassword("");
             setRoles([]);
+            setDept([]);
             navigate("/dash/users");
         }
     }, [isSuccess, navigate]);
@@ -75,6 +79,14 @@ const NewUserForm = () => {
             (option) => option.value
         );
         setRoles(values);
+    };
+
+    const onDeptChanged = (e) => {
+        const values = Array.from(
+            e.target.selectedOptions, //HTMLCollection
+            (optionDept) => optionDept.value
+        );
+        setDept(values);
     };
 
     const canSave =
@@ -97,15 +109,25 @@ const NewUserForm = () => {
                 email,
                 password,
                 roles,
+                department,
             });
         }
     };
 
-    const options = Object.values(ROLES).map((role) => {
+    const option = Object.values(ROLES).map((role) => {
         return (
             <option key={role} value={role}>
                 {" "}
                 {role}
+            </option>
+        );
+    });
+
+    const optionDept = Object.values(DEPT).map((dept) => {
+        return (
+            <option key={dept} value={dept}>
+                {" "}
+                {dept}
             </option>
         );
     });
@@ -129,7 +151,9 @@ const NewUserForm = () => {
     const validRolesClass = !Boolean(roles.length)
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
-
+   const validDeptClass = !Boolean(department.length)
+        ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
+        : "";
     const content = (
         <>
             <img
@@ -251,7 +275,26 @@ const NewUserForm = () => {
                                 value={roles}
                                 onChange={onRolesChanged}
                             >
-                                {options}
+                                {option}
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="w-full grid">
+                            <label
+                                className="text-base align-middle"
+                                htmlFor="dept"
+                            >
+                                Assigned Department:
+                            </label>
+                            <select
+                                id="dept"
+                                name="dept"
+                                className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validDeptClass}`}
+                                value={department}
+                                onChange={onDeptChanged}
+                            >
+                                {optionDept}
                             </select>
                         </div>
                     </div>

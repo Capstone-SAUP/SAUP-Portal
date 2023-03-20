@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
         type: [String],
         default: ["Student"]
     },
+    department: {
+        type: [String],
+        default: [" "]
+    },
     active: {
         type: Boolean,
         default: true

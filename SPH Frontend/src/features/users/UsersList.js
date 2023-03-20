@@ -38,6 +38,9 @@ const UsersList = () => {
             ids?.length &&
             ids.map((userId) => <User key={userId} userId={userId} />);
 
+            console.log(User)
+
+
         content = (
             <>
                 <p className="text-2xl font-semibold">
@@ -119,6 +122,9 @@ const UsersList = () => {
                                 </th>
                                 <th scope="col" className="w-32">
                                     Roles
+                                </th>
+                                <th scope="col" className="w-32">
+                                    Department
                                 </th>
                                 <th scope="col" className="px-4 w-32">
                                     Edit

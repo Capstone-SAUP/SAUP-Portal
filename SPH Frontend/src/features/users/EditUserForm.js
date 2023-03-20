@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
+import { DEPT } from "../../config/department";
+
 
 const USER_REGEX = /^[0-9]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
@@ -26,6 +28,7 @@ const EditUserForm = ({ user }) => {
     const [password, setPassword] = useState("");
     const [validPassword, setValidPassword] = useState(false);
     const [roles, setRoles] = useState(user.roles);
+    const [department, setDept] = useState(user.department);
     const [active, setActive] = useState(user.active);
 
     useEffect(() => {
@@ -47,6 +50,7 @@ const EditUserForm = ({ user }) => {
             setEmail("");
             setPassword("");
             setRoles([]);
+            setDept([]);
             navigate("/dash/users");
         }
     }, [isSuccess, isDelSuccess, navigate]);
@@ -63,6 +67,14 @@ const EditUserForm = ({ user }) => {
         setRoles(values);
     };
 
+    const onDeptChanged = (e) => {
+        const values = Array.from(
+            e.target.selectedOptions,
+            (option) => option.value
+        );
+        setDept(values);
+    };
+
     const onActiveChanged = () => setActive((prev) => !prev);
 
     const onSaveUserClicked = async (e) => {
@@ -73,10 +85,11 @@ const EditUserForm = ({ user }) => {
                 email,
                 password,
                 roles,
+                department,
                 active,
             });
         } else {
-            await updateUser({ id: user.id, user_id, email, roles, active });
+            await updateUser({ id: user.id, user_id, email, roles, department, active });
         }
     };
 
@@ -93,13 +106,23 @@ const EditUserForm = ({ user }) => {
         );
     });
 
+    const optionDept = Object.values(DEPT).map((dept) => {
+        return (
+            <option key={dept} value={dept}>
+                {" "}
+                {dept}
+            </option>
+        );
+    });
+        
+
     let canSave;
     if (password) {
         canSave =
-            [roles.length, validUser_id, validPassword].every(Boolean) &&
+            [roles.length, department.length, validUser_id, validPassword].every(Boolean) &&
             !isLoading;
     } else {
-        canSave = [roles.length, validUser_id].every(Boolean) && !isLoading;
+        canSave = [roles.length, department.length, validUser_id].every(Boolean) && !isLoading;
     }
 
     const errClass = isError || isDelError ? "errmsg" : "offscreen";
@@ -116,7 +139,10 @@ const EditUserForm = ({ user }) => {
     const validRolesClass = !Boolean(roles.length)
         ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
         : "";
-
+    const validDeptClass = !Boolean(department.length)
+        ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
+        : "";
+        
     const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
     const content = (
@@ -215,12 +241,35 @@ const EditUserForm = ({ user }) => {
                         {options}
                     </select>
                 </div>
+
+                <div>
+                        <div className="w-full grid">
+                            <label
+                                className="text-base align-middle"
+                                htmlFor="dept"
+                            >
+                                Assigned Department:
+                            </label>
+                            <select
+                                id="dept"
+                                name="dept"
+                                className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validDeptClass}`}
+                                value={department}
+                                onChange={onDeptChanged}
+                            >
+                                {optionDept}
+                            </select>
+                        </div>
+                    </div>
+
                 <span className="">
                     <label
                         className="float-left text-base"
                         htmlFor="roles"
                     ></label>
                 </span>
+                
+
                 <div className="grid-cols-2 flex justify-evenly">
                     <div className="text-center">
                         <button
