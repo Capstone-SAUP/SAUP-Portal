@@ -15,7 +15,7 @@ const NewUserForm = () => {
     useTitle("SAUP Portal: New User");
 
     const [addNewUser, { isLoading, isSuccess, isError, error }] =
-        useAddNewUserMutation();
+    useAddNewUserMutation();
 
     const navigate = useNavigate();
 

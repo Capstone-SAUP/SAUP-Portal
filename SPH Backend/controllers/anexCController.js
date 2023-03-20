@@ -1,20 +1,20 @@
-const AnexC = require('../models/AnexC')
-const User = require('../models/User')
+const AnexC = require("../models/AnexC");
+const User = require("../models/User");
 
-// @desc Get all anexa 
+// @desc Get all anexa
 // @route GET /anexa
 // @access Private
 const getAllAnexC = async (req, res) => {
     // Get all anexa from MongoDB
-    const anexC = await AnexC.find().lean()
+    const anexC = await AnexC.find().lean();
 
-    // // If no anexa 
+    // // If no anexa
     // if (!anexa?.length) {
     //     return res.status(400).json({ message: 'No anexa found' })
     // }
 
-    // Add user_id to each anexa before sending the response 
-    // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
+    // Add user_id to each anexa before sending the response
+    // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE
     // You could also do this with a for...of loop
     // const outreachWithUser = await Promise.all(anexa.map(async (anexa) => {
     //     const user = await User.findById(anexa.user).lean().exec()
@@ -22,13 +22,13 @@ const getAllAnexC = async (req, res) => {
     // }))
 
     // res.json(outreachWithUser)
-}
+};
 
 // @desc Create new anexa
 // @route POST /anexa
 // @access Private
 const createNewAnexC = async (req, res) => {
-    const { 
+    const {
         user,
         sponsor_dept,
         project_title,
@@ -88,12 +88,12 @@ const createNewAnexC = async (req, res) => {
         post_pos3,
         post_type1,
         post_type2,
-        post_pos4 ,
+        post_pos4,
         post_type3,
         post_type4,
         post_start1,
         post_start2,
-        post_star3 ,
+        post_star3,
         post_star4,
         post_end1,
         post_end2,
@@ -132,8 +132,8 @@ const createNewAnexC = async (req, res) => {
         image1,
         caption1,
         caption2,
-        image2
-     } = req.body
+        image2,
+    } = req.body;
 
     // Confirm data
     // if (!user || !title || !text ) {
@@ -147,8 +147,8 @@ const createNewAnexC = async (req, res) => {
     //     return res.status(409).json({ message: 'Duplicate anexa title' })
     // }
 
-    // Create and store the new user 
-    const anexaC = await AnexC.create({ 
+    // Create and store the new user
+    const anexaC = await AnexC.create({
         user,
         sponsor_dept,
         project_title,
@@ -208,12 +208,12 @@ const createNewAnexC = async (req, res) => {
         post_pos3,
         post_type1,
         post_type2,
-        post_pos4 ,
+        post_pos4,
         post_type3,
         post_type4,
         post_start1,
         post_start2,
-        post_star3 ,
+        post_star3,
         post_star4,
         post_end1,
         post_end2,
@@ -252,82 +252,85 @@ const createNewAnexC = async (req, res) => {
         image1,
         caption1,
         caption2,
-        image2
-    })
+        image2,
+    });
 
-    if (anexaC) { // Created 
-        return res.status(201).json({ message: 'New anexa created' })
+    if (anexaC) {
+        // Created
+        return res.status(201).json({ message: "New anexa created" });
     } else {
-        return res.status(400).json({ message: 'Invalid anexa data received' })
+        return res.status(400).json({ message: "Invalid anexa data received" });
     }
-
-}
+};
 
 // @desc Update a anexa
 // @route PATCH /anexa
 // @access Private
 const updateAnexC = async (req, res) => {
-const { id, user, title, text, status } = req.body
+    const { id, user, title, text, status } = req.body;
 
-// Confirm data
-if (!id || !user || !title || !text) {
-    return res.status(400).json({ message: 'All fields are required' })
-}
+    // Confirm data
+    if (!id || !user || !title || !text) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
 
-// Confirm anexa exists to update
-const anexaC = await AnexC.findById(id).exec()
+    // Confirm anexa exists to update
+    const anexaC = await AnexC.findById(id).exec();
 
-if (!anexaC) {
-    return res.status(400).json({ message: 'AnexC not found' })
-}
+    if (!anexaC) {
+        return res.status(400).json({ message: "AnexC not found" });
+    }
 
-// Check for duplicate title
-const duplicate = await AnexC.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    // Check for duplicate title
+    const duplicate = await AnexC.findOne({ title })
+        .collation({ locale: "en", strength: 2 })
+        .lean()
+        .exec();
 
-// Allow renaming of the original anexa 
-if (duplicate && duplicate?._id.toString() !== id) {
-    return res.status(409).json({ message: 'Duplicate anexa title' })
-}
+    // Allow renaming of the original anexa
+    if (duplicate && duplicate?._id.toString() !== id) {
+        return res.status(409).json({ message: "Duplicate anexa title" });
+    }
 
-anexaC.user = user
-anexaC.title = title
-anexaC.text = text
-anexaC.status = status
+    anexaC.user = user;
+    anexaC.title = title;
+    anexaC.text = text;
+    anexaC.status = status;
 
-const updatedAnexC = await anexaC.save()
+    const updatedAnexC = await anexaC.save();
 
-res.json(`'${updatedAnexC.title}' updated`)
-}
+    res.json(`'${updatedAnexC.title}' updated`);
+};
 
 // @desc Delete a anexa
 // @route DELETE /anexa
 // @access Private
 const deleteAnexC = async (req, res) => {
-const { id } = req.body
+    const { id } = req.body;
 
-// Confirm data
-if (!id) {
-    return res.status(400).json({ message: 'AnexC ID required' })
-}
+    // Confirm data
+    if (!id) {
+        return res.status(400).json({ message: "AnexC ID required" });
+    }
 
-// Confirm anexa exists to delete 
-const anexaC = await AnexC.findById(id).exec()
+    // Confirm anexa exists to delete
+    const anexaC = await AnexC.findById(id).exec();
 
-if (!anexaC) {
-    return res.status(400).json({ message: 'AnexC not found' })
-}
+    if (!anexaC) {
+        return res.status(400).json({ message: "AnexC not found" });
+    }
 
-const result = await anexaC.deleteOne()
+    const result = await anexaC.deleteOne();
 
-const reply = `AnexC '${result.title}' with ID ${result._id} deleted`
+    const reply = `AnexC '${result.title}' with ID ${result._id} deleted`;
 
-res.json(reply)
-}
+    res.json(reply);
+};
 
 module.exports = {
     getAllAnexC,
     createNewAnexC,
     updateAnexC,
-    deleteAnexC
-}
+    deleteAnexC,
+};
 //
