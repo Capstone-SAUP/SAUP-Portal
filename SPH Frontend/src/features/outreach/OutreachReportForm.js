@@ -656,39 +656,43 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
         className="h-full full grid gap-3 px-20 text-black"
         onSubmit={(e) => e.preventDefault()}
       >
-        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-          <div class="container max-w-screen-lg mx-auto">
+        <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+          <div className="container max-w-screen-lg mx-auto">
             <div>
-              <h2 class="font-semibold text-xl">Implementation Report Form</h2>
-              <p class="mb-6 text-base">
+              <h2 className="font-semibold text-xl">
+                Implementation Report Form
+              </h2>
+              <p className="mb-6 text-base">
                 The form is both for student and employee initiated activities
                 and should be submitted within one (1) month after the activity.
               </p>
 
-              <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                  {/* <div class="text-gray-600">
+              <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                  {/* <div className="text-gray-600">
                     <div className="mb-[756px]">
-                      <p class="font-medium text-lg">Outreach Details</p>
+                      <p className="font-medium text-lg">Outreach Details</p>
                       <p>Please fill out all the blank fields.</p>
                     </div>
                     <div>
-                      <p class="font-medium text-lg">
+                      <p className="font-medium text-lg">
                         List of Actual Volunteers and Type of Participation :
                       </p>
                       <p>Please fill out all the blank fields.</p>
                     </div>
                   </div> */}
 
-                  <div class="lg:col-span-3">
-                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
-                      <div class="md:col-span-2 md:row-span-6 text-gray-600">
+                  <div className="lg:col-span-3">
+                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
+                      <div className="md:col-span-2 md:row-span-6 text-gray-600">
                         <div className="">
-                          <p class="font-medium text-lg">Outreach Details</p>
+                          <p className="font-medium text-lg">
+                            Outreach Details
+                          </p>
                           <p>Please fill out all the blank fields.</p>
                         </div>
                       </div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-7">
                         <label for="full_name">
                           Sponsoring Department(s)/ Proponent(s) :
                         </label>
@@ -696,113 +700,113 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           type="text"
                           name="full_name"
                           id="full_name"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={project_title}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-7">
                         <label for="email">Project Title :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={sponsor_dept}
                           onChange={onSponsor_DeptChanged}
                         />
                       </div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-7">
                         <label for="email">Beneficiaries :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={target_beneficiary}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-7">
                         <label for="email">Accomplished Objectives :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-7">
                         <label for="email">Venue of CES Activity :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={venue}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-7">
                         <label for="email">Date/Time Implemented :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={date_implement}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-2"></div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-2"></div>
+                      <div className="md:col-span-7">
                         <label for="email">Brief Narrative :</label>
                         <textarea
                           type="text"
                           name="email"
                           id="email"
-                          class="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={brief_narrative}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-2 text-gray-600">
-                        <p class="font-medium text-lg">
+                      <div className="md:col-span-2 text-gray-600">
+                        <p className="font-medium text-lg">
                           Topic(s) Discussed and Resource
                           Speaker(s)/Facilitator(s),
                         </p>
                         <p>(if applicable)</p>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div class="">
+                        <div className="">
                           <label for="address">Topics</label>
                           <textarea
                             type="textarea"
                             name="address"
                             id="address"
-                            class="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
                             value={topics}
                             onChange={onProject_TitleChanged}
                             placeholder=""
                           />
                         </div>
-                        <div class="">
+                        <div className="">
                           <label for="city">Speakers</label>
                           <textarea
                             type="textarea"
                             name="city"
                             id="city"
-                            class="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
                             value={speakers}
                             onChange={onProject_TitleChanged}
                             placeholder=""
                           />
                         </div>
                       </div>
-                      <div class="md:col-span-2 md:row-span-6 text-gray-600">
-                        <p class="font-medium text-lg">
+                      <div className="md:col-span-2 md:row-span-6 text-gray-600">
+                        <p className="font-medium text-lg">
                           List of Actual Volunteers and Type of Participation:
                         </p>
                       </div>
@@ -811,7 +815,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         Preparatory Phase
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Name of Volunteer</label>
                           <select
                             id="user"
@@ -859,7 +863,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             {options}
                           </select>
                         </div>
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Position/Designation</label>
                           <select
                             id="user"
@@ -900,14 +904,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Type of Participation</label>
                           <select
                             id="user"
@@ -948,22 +952,21 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div class="md:col-span-1">
+                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                          <div className="md:col-span-1">
                             <label for="country">Start Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -972,7 +975,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -981,7 +983,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -990,7 +991,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -999,19 +999,17 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
                           </div>
-                          <div class="md:col-span-1">
+                          <div className="md:col-span-1">
                             <label for="country">End Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1020,7 +1018,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1029,7 +1026,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1038,7 +1034,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1047,8 +1042,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
                           </div>
@@ -1059,7 +1053,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         Implementation Phase/Actual Conduct of CES
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Name of Volunteer</label>
                           <select
                             id="user"
@@ -1100,14 +1094,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Position/Designation</label>
                           <select
                             id="user"
@@ -1148,14 +1142,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Type of Participation</label>
                           <select
                             id="user"
@@ -1196,22 +1190,21 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div class="md:col-span-1">
+                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                          <div className="md:col-span-1">
                             <label for="country">Start Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1220,7 +1213,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1229,7 +1221,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1238,7 +1229,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1247,19 +1237,17 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
                           </div>
-                          <div class="md:col-span-1">
+                          <div className="md:col-span-1">
                             <label for="country">End Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1268,7 +1256,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1277,7 +1264,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1286,7 +1272,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1295,8 +1280,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
                           </div>
@@ -1308,7 +1292,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         Evaluation)
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Name of Volunteer</label>
                           <select
                             id="user"
@@ -1349,14 +1333,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Position/Designation</label>
                           <select
                             id="user"
@@ -1397,14 +1381,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="md:col-span-1">
+                        <div className="md:col-span-1">
                           <label for="country">Type of Participation</label>
                           <select
                             id="user"
@@ -1445,22 +1429,21 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <select
                             id="user"
                             name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={userId}
                             onChange={onUserIdChanged}
                           >
                             {options}
                           </select>
                         </div>
-                        <div class="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div class="md:col-span-1">
+                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                          <div className="md:col-span-1">
                             <label for="country">Start Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1469,7 +1452,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1478,7 +1460,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1487,7 +1468,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1496,19 +1476,17 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
                           </div>
-                          <div class="md:col-span-1">
+                          <div className="md:col-span-1">
                             <label for="country">End Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1517,7 +1495,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1526,7 +1503,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1535,7 +1511,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
@@ -1544,21 +1519,20 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               id="start-time"
                               name="start-time"
                               value={userId}
-                              required
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onUserIdChanged}
                             ></input>
                           </div>
                         </div>
                       </div>
-                      <div class="md:col-span-2 md:row-span-6"></div>
-                      <div class="md:col-span-7">
+                      <div className="md:col-span-2 md:row-span-1"></div>
+                      <div className="md:col-span-7">
                         <label for="country">Learnings/Insights:</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
                           onChange={onProject_TitleChanged}
                         />
@@ -1566,7 +1540,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
                           onChange={onProject_TitleChanged}
                         />
@@ -1574,7 +1548,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
                           onChange={onProject_TitleChanged}
                         />
@@ -1582,7 +1556,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
                           onChange={onProject_TitleChanged}
                         />
@@ -1590,138 +1564,468 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           type="text"
                           name="email"
                           id="email"
-                          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
                           onChange={onProject_TitleChanged}
                         />
                       </div>
-                      <div class="md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div class="">
-                          <label for="state">State / province</label>
-                          <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                            <input
-                              name="state"
-                              id="state"
-                              placeholder="State"
-                              class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                              value={project_title}
-                              onChange={onProject_TitleChanged}
-                            />
-                            <button
-                              tabindex="-1"
-                              class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600"
-                            >
-                              <svg
-                                class="w-4 h-4 mx-2 fill-current"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                              </svg>
-                            </button>
-                            <button
-                              tabindex="-1"
-                              for="show_more"
-                              class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600"
-                            >
-                              <svg
-                                class="w-4 h-4 mx-2 fill-current"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <polyline points="18 15 12 9 6 15"></polyline>
-                              </svg>
-                            </button>
+                      <div className="md:col-span-2 text-gray-600">
+                        <p className="font-medium text-lg">
+                          Strengths, Weaknesses, Areas for Improvement:
+                        </p>
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-1">
+                          <label for="country">Strengths</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">Weaknesses</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">Areas for Improvement</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-2 md:row-span-1"></div>
+                      <div className="md:col-span-7">
+                        <label for="country">
+                          Actual Participation/Counterpart of the Partner
+                          Community Served:
+                        </label>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                          value={accomp_obj}
+                          onChange={onProject_TitleChanged}
+                        />
+                      </div>
+
+                      <div className="md:col-span-2 md:row-span-6 text-gray-600">
+                        <p className="font-medium text-lg">Financial Report:</p>
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-2">
+                          <label for="country">Particulars</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                          <p className="text-right pt-3 text-base alig">
+                            TOTAL:
+                          </p>
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">Amount</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            placeholder="Php"
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            placeholder="Php"
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            placeholder="Php"
+                            onChange={onProject_TitleChanged}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            placeholder="Php"
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                        Prepared by:
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-2">
+                          <label for="country">
+                            Name of Project Organizer or CSCB Representative
+                          </label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">Designation</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                        Noted by:
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-2">
+                          <label for="country">
+                            Name of Adviser for Student Organizations
+                          </label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">
+                            Name of Student Organization
+                          </label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-2">
+                          <label for="country">
+                            Name of CSCB Representative for Departmental CES
+                          </label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">Department Represented</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-2 md:row-span-1"></div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-2">
+                          <label for="country">
+                            Name of Dean or Cluster Head
+                          </label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <label for="country">Designation</label>
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-2 text-gray-600">
+                        <p className="font-medium text-lg">
+                          Upload Documentation
+                        </p>
+                      </div>
+                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
+                        <div class="flex justify-center mt-8">
+                          <div class="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
+                            <div class="m-4">
+                              <label class="inline-block mb-2 text-gray-500">
+                                File Upload
+                              </label>
+                              <div class="flex items-center justify-center w-full">
+                                <label class="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                  <div class="flex flex-col items-center justify-center pt-7">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                      />
+                                    </svg>
+                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                      Photo Here
+                                    </p>
+                                  </div>
+                                  <input
+                                    type="file"
+                                    class="opacity-0"
+                                    value={speakers}
+                                    onChange={onProject_TitleChanged}
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                            <div class="flex justify-center p-2">
+                              <button class="w-full px-4 py-2 text-white bg-red-900 rounded shadow-xl">
+                                Upload
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="flex justify-center mt-8">
+                          <div class="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
+                            <div class="m-4">
+                              <label class="inline-block mb-2 text-gray-500">
+                                File Upload
+                              </label>
+                              <div class="flex items-center justify-center w-full">
+                                <label class="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                  <div class="flex flex-col items-center justify-center pt-7">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                      />
+                                    </svg>
+                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                      Photo Here
+                                    </p>
+                                  </div>
+                                  <input
+                                    type="file"
+                                    class="opacity-0"
+                                    value={speakers}
+                                    onChange={onProject_TitleChanged}
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                            <div class="flex justify-center p-2">
+                              <button class="w-full px-4 py-2 text-white bg-red-900 rounded shadow-xl">
+                                Upload
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="md:col-span-1">
-                        <label for="zipcode">Zipcode</label>
-                        <input
-                          type="text"
-                          name="zipcode"
-                          id="zipcode"
-                          class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          placeholder=""
-                          value={project_title}
-                          onChange={onProject_TitleChanged}
-                        />
-                      </div>
-                      <div class="md:col-span-7">
-                        <div class="inline-flex items-center">
-                          <input
-                            type="checkbox"
-                            name="billing_same"
-                            id="billing_same"
-                            class="form-checkbox"
-                          />
-                          <label for="billing_same" class="ml-2">
-                            My billing address is different than above.
-                          </label>
-                        </div>
-                      </div>
-
-                      <div class="md:col-span-2">
-                        <label for="soda">How many soda pops?</label>
-                        <div class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                      <div className="md:col-span-9 mt-5 text-right">
+                        <div className="text-center">
                           <button
-                            tabindex="-1"
-                            for="show_more"
-                            class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600"
+                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            title="Save"
+                            onClick={onSaveReportClicked}
+                            disabled={!canSave}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-4 w-4 mx-2"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                          <input
-                            name="soda"
-                            id="soda"
-                            placeholder="0"
-                            class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
-                            value="0"
-                          />
-                          <button
-                            tabindex="-1"
-                            for="show_more"
-                            class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-500 hover:text-blue-600"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-4 w-4 mx-2 fill-current"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="md:col-span-7 text-right">
-                        <div class="inline-flex items-end">
-                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Submit
+                            Submit Report
                           </button>
                         </div>
                       </div>
@@ -1732,16 +2036,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
             </div>
           </div>
         </div>
-        <div className="text-center">
-          <button
-            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-            title="Save"
-            onClick={onSaveReportClicked}
-            disabled={!canSave}
-          >
-            Save
-          </button>
-        </div>
+        <div className="text-center"></div>
       </form>
     </>
   );
