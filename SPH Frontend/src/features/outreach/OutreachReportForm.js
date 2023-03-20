@@ -17,38 +17,35 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   const { id } = useParams()
 
-  console.log(filteredOutreach);
-
   const [createReport, { isLoading, isSuccess, isError, error }] =
   useAddNewAnexCMutation();
 
   const navigate = useNavigate();
-
-    const [prepPhase, setInputFields] = useState([{
-        fullName:'',
-        emailAddress:'',
-        salary:''  
-    } ]);
-    const addInputField = ()=>{
-        setInputFields([...prepPhase, {
-            fullName:'',
-            emailAddress:'',
-            salary:''  
-        } ])
+//     const [prepPhase, setInputFields] = useState([{
+//         fullName:'',
+//         emailAddress:'',
+//         salary:''  
+//     } ]);
+//     const addInputField = ()=>{
+//         setInputFields([...prepPhase, {
+//             fullName:'',
+//             emailAddress:'',
+//             salary:''  
+//         } ])
       
-    }
-    const removeInputFields = (index)=>{
-        const rows = [...prepPhase];
-        rows.splice(index, 1);
-        setInputFields(rows);
-    }
-    const handleChange = (index, evnt)=>{
+//     }
+//     const removeInputFields = (index)=>{
+//         const rows = [...prepPhase];
+//         rows.splice(index, 1);
+//         setInputFields(rows);
+//     }
+//     const handleChange = (index, evnt)=>{
     
-    const { name, value } = evnt.target;
-    const list = [...prepPhase];
-    list[index][name] = value;
-    setInputFields(list);
-}
+//     const { name, value } = evnt.target;
+//     const list = [...prepPhase];
+//     list[index][name] = value;
+//     setInputFields(list);
+// }
 
   // const [title, setTitle] = useState(outreach.title);
 
@@ -263,7 +260,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setCaption1("")
       setCaption2("")
       setImage2("")
-      navigate("/dash/outreach");
+      navigate("/dash/employee");
     }
   }, [isSuccess, navigate]);
 
@@ -654,7 +651,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       <p className={errClass}>{errContent}</p>
       <form
         className="h-full full grid gap-3 px-20 text-black"
-        onSubmit={(e) => e.preventDefault()}
+
       >
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
@@ -693,7 +690,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         </div>
                       </div>
                       <div className="md:col-span-7">
-                        <label for="full_name">
+                        <label htmlFor="full_name">
                           Sponsoring Department(s)/ Proponent(s) :
                         </label>
                         <input
@@ -702,22 +699,22 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           id="full_name"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={project_title}
-                          onChange={onProject_TitleChanged}
+                          onChange={onSponsor_DeptChanged}
                         />
                       </div>
                       <div className="md:col-span-7">
-                        <label for="email">Project Title :</label>
+                        <label htmlFor="email">Project Title :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={sponsor_dept}
-                          onChange={onSponsor_DeptChanged}
+                          value={project_title}
+                          onChange={onProject_TitleChanged}
                         />
                       </div>
                       <div className="md:col-span-7">
-                        <label for="email">Beneficiaries :</label>
+                        <label htmlFor="email">Beneficiaries :</label>
                         <input
                           type="text"
                           name="email"
@@ -728,48 +725,48 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         />
                       </div>
                       <div className="md:col-span-7">
-                        <label for="email">Accomplished Objectives :</label>
+                        <label htmlFor="email">Accomplished Objectives :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          onChange={onAccomp_ObjChanged}
                         />
                       </div>
                       <div className="md:col-span-7">
-                        <label for="email">Venue of CES Activity :</label>
+                        <label htmlFor="email">Venue of CES Activity :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={venue}
-                          onChange={onProject_TitleChanged}
+                          onChange={onVenueChanged}
                         />
                       </div>
                       <div className="md:col-span-7">
-                        <label for="email">Date/Time Implemented :</label>
+                        <label htmlFor="email">Date/Time Implemented :</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={date_implement}
-                          onChange={onProject_TitleChanged}
+                          onChange={onDate_ImplementChanged}
                         />
                       </div>
                       <div className="md:col-span-2"></div>
                       <div className="md:col-span-7">
-                        <label for="email">Brief Narrative :</label>
+                        <label htmlFor="email">Brief Narrative :</label>
                         <textarea
                           type="text"
                           name="email"
                           id="email"
                           className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={brief_narrative}
-                          onChange={onProject_TitleChanged}
+                          onChange={onBrief_NarrativeChanged}
                         />
                       </div>
                       <div className="md:col-span-2 text-gray-600">
@@ -781,26 +778,26 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
                         <div className="">
-                          <label for="address">Topics</label>
+                          <label htmlFor="address">Topics</label>
                           <textarea
                             type="textarea"
                             name="address"
                             id="address"
                             className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
                             value={topics}
-                            onChange={onProject_TitleChanged}
+                            onChange={onTopicsChanged}
                             placeholder=""
                           />
                         </div>
                         <div className="">
-                          <label for="city">Speakers</label>
+                          <label htmlFor="city">Speakers</label>
                           <textarea
                             type="textarea"
                             name="city"
                             id="city"
                             className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
                             value={speakers}
-                            onChange={onProject_TitleChanged}
+                            onChange={onSpeakersChanged}
                             placeholder=""
                           />
                         </div>
@@ -816,13 +813,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
-                          <label for="country">Name of Volunteer</label>
+                          <label htmlFor="country">Name of Volunteer</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_per1}
+                            onChange={onPrep_Per1Changed}
                           >
                             {options}
                           </select>
@@ -830,8 +827,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_per2}
+                            onChange={onPrep_Per2Changed}
                           >
                             {options}
                           </select>
@@ -839,8 +836,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_per3}
+                            onChange={onPrep_Per3Changed}
                           >
                             {options}
                           </select>
@@ -848,202 +845,203 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_per4}
+                            onChange={onPrep_Per4Changed}
                           >
                             {options}
                           </select>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Position/Designation</label>
+                          <label htmlFor="country">Position/Designation</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_pos1}
+                            onChange={onPrep_Pos1Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_pos2}
+                            onChange={onPrep_Pos2Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_pos3}
+                            onChange={onPrep_Pos3Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_pos4}
+                            onChange={onPrep_Pos4Changed}
                           >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Type of Participation</label>
+                          <label htmlFor="country">Type of Participation</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_type1}
+                            onChange={onPrep_Type1Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_type2}
+                            onChange={onPrep_Type2Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_type3}
+                            onChange={onPrep_Type3Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={prep_type4}
+                            onChange={onPrep_Type4Changed}
                           >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                         </div>
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
                           <div className="md:col-span-1">
-                            <label for="country">Start Time</label>
+                            <label htmlFor="country">Start Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_start1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_Start1Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_start2}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_Start2Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_star3}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_Star3Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_star4}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={userId}
-                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_Star4Changed}
                             ></input>
                           </div>
                           <div className="md:col-span-1">
-                            <label for="country">End Time</label>
+                            <label htmlFor="country">End Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_end1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_End1Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_end2}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_End2Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={prep_end3}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_End3Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={userId}
+                              value={prep_end4}
                               className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPrep_End4Changed}
                             ></input>
                           </div>
                         </div>
@@ -1054,13 +1052,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
-                          <label for="country">Name of Volunteer</label>
+                          <label htmlFor="country">Name of Volunteer</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_per1}
+                            onChange={onImplement_Per1Changed}
                           >
                             {options}
                           </select>
@@ -1068,8 +1066,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_per2}
+                            onChange={onImplement_Per2Changed}
                           >
                             {options}
                           </select>
@@ -1077,8 +1075,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_per3}
+                            onChange={onImplement_Per3Changed}
                           >
                             {options}
                           </select>
@@ -1086,202 +1084,203 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_per4}
+                            onChange={onImplement_Per4Changed}
                           >
                             {options}
                           </select>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Position/Designation</label>
+                          <label htmlFor="country">Position/Designation</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_pos1}
+                            onChange={onImplement_Pos1Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_pos2}
+                            onChange={onImplement_Pos2Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_pos3}
+                            onChange={onImplement_Pos3Changed}
                           >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_pos4}
+                            onChange={onImplement_Pos4Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Type of Participation</label>
+                          <label htmlFor="country">Type of Participation</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_type1}
+                            onChange={onImplement_Type1Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_type2}
+                            onChange={onImplement_Type2Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_type3}
+                            onChange={onImplement_Type3Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={implement_type4}
+                            onChange={onImplement_Type4Changed}
                           >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                         </div>
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
                           <div className="md:col-span-1">
-                            <label for="country">Start Time</label>
+                            <label htmlFor="country">Start Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_start1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_Start1Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_start2}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_Start2Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_star3}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_Star3Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_star4}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={userId}
-                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_Star4Changed}
                             ></input>
                           </div>
                           <div className="md:col-span-1">
-                            <label for="country">End Time</label>
+                            <label htmlFor="country">End Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_end1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_End1Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_end2}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_End2Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_end3}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_End3Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={implement_end4}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={userId}
-                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onImplement_End4Changed}
                             ></input>
                           </div>
                         </div>
@@ -1293,13 +1292,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
-                          <label for="country">Name of Volunteer</label>
+                          <label htmlFor="country">Name of Volunteer</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_per1}
+                            onChange={onPost_Per1Changed}
                           >
                             {options}
                           </select>
@@ -1307,8 +1306,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_per2}
+                            onChange={onPost_Per2Changed}
                           >
                             {options}
                           </select>
@@ -1316,8 +1315,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_per3}
+                            onChange={onPost_Per3Changed}
                           >
                             {options}
                           </select>
@@ -1325,248 +1324,249 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_per4}
+                            onChange={onPost_Per4Changed}
                           >
                             {options}
                           </select>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Position/Designation</label>
+                          <label htmlFor="country">Position/Designation</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_pos1}
+                            onChange={onPost_Pos1Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_pos2}
+                            onChange={onPost_Pos2Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_pos3}
+                            onChange={onPost_Pos3Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_pos4}
+                            onChange={onPost_Pos4Changed}
                           >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
                           </select>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Type of Participation</label>
+                          <label htmlFor="country">Type of Participation</label>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_type1}
+                            onChange={onPost_Type1Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_type2}
+                            onChange={onPost_Type2Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_type3}
+                            onChange={onPost_Type3Changed}
                           >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                           <select
                             id="user"
                             name="user"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
+                            value={post_type4}
+                            onChange={onPost_Type4Changed}
                           >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={userId}
-                            onChange={onUserIdChanged}
-                          >
-                            {options}
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
                         </div>
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
                           <div className="md:col-span-1">
-                            <label for="country">Start Time</label>
+                            <label htmlFor="country">Start Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_start1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_Start1Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_start2}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_Start2Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_star3}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_Star3Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_star4}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={userId}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_Star4Changed}
                             ></input>
                           </div>
                           <div className="md:col-span-1">
-                            <label for="country">End Time</label>
+                            <label htmlFor="country">End Time</label>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_end1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_End1Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_end2}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_End2Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_end3}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_End3Changed}
                             ></input>
                             <input
                               type="time"
                               id="start-time"
                               name="start-time"
-                              value={userId}
+                              value={post_end4}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={userId}
-                              className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onUserIdChanged}
+                              onChange={onPost_End4Changed}
                             ></input>
                           </div>
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-1"></div>
                       <div className="md:col-span-7">
-                        <label for="country">Learnings/Insights:</label>
+                        <label htmlFor="country">Learnings/Insights:</label>
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={learnings1}
+                          onChange={onLearnings1Changed}
                         />
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={learnings2}
+                          onChange={onLearnings2Changed}
                         />
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={learnings3}
+                          onChange={onLearnings3Changed}
                         />
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={learnings4}
+                          onChange={onLearnings4Changed}
                         />
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={learnings5}
+                          onChange={onLearnings5Changed}
                         />
                       </div>
                       <div className="md:col-span-2 text-gray-600">
@@ -1576,138 +1576,138 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-1">
-                          <label for="country">Strengths</label>
+                          <label htmlFor="country">Strengths</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={strengths1}
+                            onChange={onStrengths1Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={strengths2}
+                            onChange={onStrengths2Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={strengths3}
+                            onChange={onStrengths3Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={strengths4}
+                            onChange={onStrengths4Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={strengths5}
+                            onChange={onStrengths5Changed}
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Weaknesses</label>
+                          <label htmlFor="country">Weaknesses</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={weakness1}
+                            onChange={onWeakness1Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={weakness2}
+                            onChange={onWeakness2Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={weakness3}
+                            onChange={onWeakness3Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={weakness4}
+                            onChange={onWeakness4Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={weakness5}
+                            onChange={onWeakness5Changed}
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Areas for Improvement</label>
+                          <label htmlFor="country">Areas for Improvement</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={improvement1}
+                            onChange={onImprovement1Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={improvement2}
+                            onChange={onImprovement2Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={improvement3}
+                            onChange={onImprovement3Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={improvement4}
+                            onChange={onImprovement4Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={improvement5}
+                            onChange={onImprovement5Changed}
                           />
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-1"></div>
                       <div className="md:col-span-7">
-                        <label for="country">
+                        <label htmlFor="country">
                           Actual Participation/Counterpart of the Partner
                           Community Served:
                         </label>
@@ -1716,24 +1716,24 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={act_partici1}
+                          onChange={onAct_Partici1Changed}
                         />
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={act_partici2}
+                          onChange={onAct_Partici2Changed}
                         />
                         <input
                           type="text"
                           name="email"
                           id="email"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onProject_TitleChanged}
+                          value={act_partici3}
+                          onChange={onAct_Partici3Changed}
                         />
                       </div>
 
@@ -1742,72 +1742,72 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-2">
-                          <label for="country">Particulars</label>
+                          <label htmlFor="country">Particulars</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={particulars1}
+                            onChange={onParticulars1Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={particulars2}
+                            onChange={onParticulars2Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            value={particulars3}
+                            onChange={onParticulars3Changed}
                           />
                           <p className="text-right pt-3 text-base alig">
                             TOTAL:
                           </p>
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Amount</label>
+                          <label htmlFor="country">Amount</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
+                            value={amount1}
                             placeholder="Php"
-                            onChange={onProject_TitleChanged}
+                            onChange={onAmount1Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
+                            value={amount2}
                             placeholder="Php"
-                            onChange={onProject_TitleChanged}
+                            onChange={onAmount2Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
+                            value={amount3}
                             placeholder="Php"
-                            onChange={onProject_TitleChanged}
+                            onChange={onAmount3Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
+                            value={amount_total}
                             placeholder="Php"
-                            onChange={onProject_TitleChanged}
+                            onChange={onAmount_TotalChanged}
                           />
                         </div>
                       </div>
@@ -1816,7 +1816,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-2">
-                          <label for="country">
+                          <label htmlFor="country">
                             Name of Project Organizer or CSCB Representative
                           </label>
                           <input
@@ -1825,18 +1825,18 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Designation</label>
+                          <label htmlFor="country">Designation</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                       </div>
@@ -1845,7 +1845,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-2">
-                          <label for="country">
+                          <label htmlFor="country">
                             Name of Adviser for Student Organizations
                           </label>
                           <input
@@ -1854,11 +1854,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">
+                          <label htmlFor="country">
                             Name of Student Organization
                           </label>
                           <input
@@ -1867,13 +1867,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-2">
-                          <label for="country">
+                          <label htmlFor="country">
                             Name of CSCB Representative for Departmental CES
                           </label>
                           <input
@@ -1882,25 +1882,27 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Department Represented</label>
+                          <label htmlFor="country">
+                            Department Represented
+                          </label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-1"></div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-2">
-                          <label for="country">
+                          <label htmlFor="country">
                             Name of Dean or Cluster Head
                           </label>
                           <input
@@ -1909,18 +1911,18 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label for="country">Designation</label>
+                          <label htmlFor="country">Designation</label>
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={accomp_obj}
-                            onChange={onProject_TitleChanged}
+                            // onChange={on}
                           />
                         </div>
                       </div>
@@ -1930,87 +1932,87 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         </p>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div class="flex justify-center mt-8">
-                          <div class="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
-                            <div class="m-4">
-                              <label class="inline-block mb-2 text-gray-500">
+                        <div className="flex justify-center mt-8">
+                          <div className="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
+                            <div className="m-4">
+                              <label className="inline-block mb-2 text-gray-500">
                                 File Upload
                               </label>
-                              <div class="flex items-center justify-center w-full">
-                                <label class="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                  <div class="flex flex-col items-center justify-center pt-7">
+                              <div className="flex items-center justify-center w-full">
+                                <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                  <div className="flex flex-col items-center justify-center pt-7">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
-                                      class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                      className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
                                       fill="none"
                                       viewBox="0 0 24 24"
                                       stroke="currentColor"
                                     >
                                       <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                                       />
                                     </svg>
-                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                       Photo Here
                                     </p>
                                   </div>
                                   <input
                                     type="file"
-                                    class="opacity-0"
-                                    value={speakers}
-                                    onChange={onProject_TitleChanged}
+                                    className="opacity-0"
+                                    value={image1}
+                                    onChange={onImage1Changed}
                                   />
                                 </label>
                               </div>
                             </div>
-                            <div class="flex justify-center p-2">
-                              <button class="w-full px-4 py-2 text-white bg-red-900 rounded shadow-xl">
+                            <div className="flex justify-center p-2">
+                              <button className="w-full px-4 py-2 text-white bg-red-900 rounded shadow-xl">
                                 Upload
                               </button>
                             </div>
                           </div>
                         </div>
-                        <div class="flex justify-center mt-8">
-                          <div class="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
-                            <div class="m-4">
-                              <label class="inline-block mb-2 text-gray-500">
+                        <div className="flex justify-center mt-8">
+                          <div className="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
+                            <div className="m-4">
+                              <label className="inline-block mb-2 text-gray-500">
                                 File Upload
                               </label>
-                              <div class="flex items-center justify-center w-full">
-                                <label class="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                  <div class="flex flex-col items-center justify-center pt-7">
+                              <div className="flex items-center justify-center w-full">
+                                <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                  <div className="flex flex-col items-center justify-center pt-7">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
-                                      class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                      className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
                                       fill="none"
                                       viewBox="0 0 24 24"
                                       stroke="currentColor"
                                     >
                                       <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                                       />
                                     </svg>
-                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                       Photo Here
                                     </p>
                                   </div>
                                   <input
                                     type="file"
-                                    class="opacity-0"
-                                    value={speakers}
-                                    onChange={onProject_TitleChanged}
+                                    className="opacity-0"
+                                    value={image1}
+                                    onChange={onImage2Changed}
                                   />
                                 </label>
                               </div>
                             </div>
-                            <div class="flex justify-center p-2">
-                              <button class="w-full px-4 py-2 text-white bg-red-900 rounded shadow-xl">
+                            <div className="flex justify-center p-2">
+                              <button className="w-full px-4 py-2 text-white bg-red-900 rounded shadow-xl">
                                 Upload
                               </button>
                             </div>
