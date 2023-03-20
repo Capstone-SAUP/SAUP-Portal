@@ -3,7 +3,7 @@ import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
 import { DEPT } from "../../config/department";
-
+import { TENURE } from "../../config/tenure";
 
 const USER_REGEX = /^[0-9]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
@@ -29,6 +29,7 @@ const EditUserForm = ({ user }) => {
     const [validPassword, setValidPassword] = useState(false);
     const [roles, setRoles] = useState(user.roles);
     const [department, setDept] = useState(user.department);
+    const [tenure, setTenure] = useState(user.tenure);
     const [active, setActive] = useState(user.active);
 
     useEffect(() => {
@@ -51,6 +52,7 @@ const EditUserForm = ({ user }) => {
             setPassword("");
             setRoles([]);
             setDept([]);
+            setTenure([]);
             navigate("/dash/users");
         }
     }, [isSuccess, isDelSuccess, navigate]);
@@ -75,6 +77,14 @@ const EditUserForm = ({ user }) => {
         setDept(values);
     };
 
+    const onTenureChanged = (e) => {
+        const values = Array.from(
+            e.target.selectedOptions,
+            (option) => option.value
+        );
+        setTenure(values);
+    };
+
     const onActiveChanged = () => setActive((prev) => !prev);
 
     const onSaveUserClicked = async (e) => {
@@ -86,10 +96,11 @@ const EditUserForm = ({ user }) => {
                 password,
                 roles,
                 department,
+                tenure,
                 active,
             });
         } else {
-            await updateUser({ id: user.id, user_id, email, roles, department, active });
+            await updateUser({ id: user.id, user_id, email, roles, department, tenure, active });
         }
     };
 
@@ -114,15 +125,25 @@ const EditUserForm = ({ user }) => {
             </option>
         );
     });
+
+    const optionTenure = Object.values(TENURE).map((tenur) => {
+        return (
+            <option key={tenur} value={tenur}>
+                {" "}
+                {tenur}
+            </option>
+        );
+    });
+        
         
 
     let canSave;
     if (password) {
         canSave =
-            [roles.length, department.length, validUser_id, validPassword].every(Boolean) &&
+            [roles.length, department.length, tenure.length, validUser_id, validPassword].every(Boolean) &&
             !isLoading;
     } else {
-        canSave = [roles.length, department.length, validUser_id].every(Boolean) && !isLoading;
+        canSave = [roles.length, department.length, tenure.length, validUser_id].every(Boolean) && !isLoading;
     }
 
     const errClass = isError || isDelError ? "errmsg" : "offscreen";
@@ -140,6 +161,9 @@ const EditUserForm = ({ user }) => {
         ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"
         : "";
     const validDeptClass = !Boolean(department.length)
+        ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
+        : "";
+    const validTenure = !Boolean(tenure.length)
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
         
@@ -261,7 +285,23 @@ const EditUserForm = ({ user }) => {
                             </select>
                         </div>
                     </div>
-
+                        <div className="w-full grid">
+                            <label
+                                className="text-base align-middle"
+                                htmlFor="dept"
+                            >
+                                 Tenure:
+                            </label>
+                            <select
+                                id="tenur"
+                                name="tenur"
+                                className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validTenure}`}
+                                value={tenure}
+                                onChange={onTenureChanged}
+                            >
+                                {optionTenure}
+                            </select>
+                        </div>
                 <span className="">
                     <label
                         className="float-left text-base"

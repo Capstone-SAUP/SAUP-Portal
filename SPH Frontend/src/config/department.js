@@ -4,7 +4,8 @@ export const DEPT = {
     SBA: 'SBA',
     SAS: 'SAS',
     SEA: 'SEA',
-    SE: 'SE',
-    CJEF: 'CJEF',
+    SED: 'SED',
+    CCJEF: 'CCJEF',
     SNAMS: 'SNAMS',
+    SHTM: 'SHTM',
 }

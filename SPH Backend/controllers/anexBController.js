@@ -54,6 +54,7 @@ const createNewAnexB = async (req, res) => {
         output2,
         output3,
         status,
+        department,
     } = req.body
 
     // Confirm data
@@ -93,6 +94,8 @@ const createNewAnexB = async (req, res) => {
         output1,
         output2,
         output3,
+        status,
+        department,
     })
 
     if (anexB) { // Created 

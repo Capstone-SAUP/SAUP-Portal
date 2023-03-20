@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         type: [String],
         default: [" "]
     },
+    tenure: {
+        type: [String],
+        default: ["Regular"]
+    },
     active: {
         type: Boolean,
         default: true

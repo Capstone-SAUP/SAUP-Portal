@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAnexBQuery } from "./anexB_ApiSlice";
-import { useGetAnexAQuery } from "./anexA_ApiSlice";
 import { memo } from "react";
-import { Link } from "react-router-dom";
 
 const OutreachEmp = ({ outreachId }) => {
     const { anexB } = useGetAnexBQuery("outreachList", {
@@ -10,7 +8,7 @@ const OutreachEmp = ({ outreachId }) => {
             anexB: data?.entities[outreachId],
         }),
     });
-console.log(outreachId);
+console.log(anexB);
     const navigate = useNavigate();
 
     const allOutreach = { ...anexB };
@@ -37,6 +35,9 @@ console.log(outreachId);
                 </td>
                 <td className="text-sm font-medium text-gray-900">
                     {allOutreach.fullname}
+                </td>
+                <td className="text-sm font-medium text-gray-900">
+                    {allOutreach.department}
                 </td>
                 <td className="whitespace-nowrap text-sm font-medium text-gray-900">
                     {allOutreach.status}

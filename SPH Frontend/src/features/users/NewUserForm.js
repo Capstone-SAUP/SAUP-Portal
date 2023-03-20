@@ -3,6 +3,7 @@ import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
 import { DEPT } from "../../config/department";
+import { TENURE } from "../../config/tenure";
 import useTitle from "../../hooks/useTitle";
 
 const USER_REGEX = /^[0-9]{3,20}$/;
@@ -31,7 +32,9 @@ const NewUserForm = () => {
     const [password, setPassword] = useState("");
     const [validPassword, setValidPassword] = useState(false);
     const [roles, setRoles] = useState(["Student"]);
-    const [department, setDept] = useState([" "]);
+    const [department, setDept] = useState(["N/A"]);
+    const [tenure, setTenure] = useState(["Regular"]);
+
 
 
     useEffect(() => {
@@ -63,6 +66,7 @@ const NewUserForm = () => {
             setPassword("");
             setRoles([]);
             setDept([]);
+            setTenure([]);
             navigate("/dash/users");
         }
     }, [isSuccess, navigate]);
@@ -89,8 +93,18 @@ const NewUserForm = () => {
         setDept(values);
     };
 
+    const onTenureChanged = (e) => {
+        const values = Array.from(
+            e.target.selectedOptions, //HTMLCollection
+            (optionTenure) => optionTenure.value
+        );
+        setTenure(values);
+    };
+
     const canSave =
-        [
+        [   
+            tenure.length,
+            department.length,
             roles.length,
             validLastname,
             validFirstname,
@@ -110,6 +124,7 @@ const NewUserForm = () => {
                 password,
                 roles,
                 department,
+                tenure,
             });
         }
     };
@@ -128,6 +143,15 @@ const NewUserForm = () => {
             <option key={dept} value={dept}>
                 {" "}
                 {dept}
+            </option>
+        );
+    });
+
+    const optionTenure = Object.values(TENURE).map((tenur) => {
+        return (
+            <option key={tenur} value={tenur}>
+                {" "}
+                {tenur}
             </option>
         );
     });
@@ -154,6 +178,10 @@ const NewUserForm = () => {
    const validDeptClass = !Boolean(department.length)
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
+   const validTenureClass = !Boolean(tenure.length)
+        ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
+        : "";
+
     const content = (
         <>
             <img
@@ -295,6 +323,25 @@ const NewUserForm = () => {
                                 onChange={onDeptChanged}
                             >
                                 {optionDept}
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="w-full grid">
+                            <label
+                                className="text-base align-middle"
+                                htmlFor="dept"
+                            >
+                                Tenure:
+                            </label>
+                            <select
+                                id="tenur"
+                                name="tenur"
+                                className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validTenureClass}`}
+                                value={tenure}
+                                onChange={onTenureChanged}
+                            >
+                                {optionTenure}
                             </select>
                         </div>
                     </div>

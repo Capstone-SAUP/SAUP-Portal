@@ -111,6 +111,9 @@ const anexAschema = new mongoose.Schema(
       type: String,
       default: "Pending",
     },
+    department: {
+      type: String,
+    },
   },
   {
     timestamps: true,
