@@ -41,7 +41,7 @@ function FormAndViewer() {
   const [addNewAnexB] = useAddNewAnexBMutation();
   const [addNewAnexC] = useAddNewAnexCMutation();
 
-  const { object_id, user_ids, lastname } = useGetUsersQuery("usersList", {
+  const { object_id, user_ids, department, lastname } = useGetUsersQuery("usersList", {
     selectFromResult: ({ data }) => ({
       object_id: data?.ids.map((id: string | number) => data?.entities[id].id),
       user_ids: data?.ids.map(
@@ -50,6 +50,10 @@ function FormAndViewer() {
       lastname: data?.ids.map(
         (id: string | number) => data?.entities[id].lastname
       ),
+      department: data?.ids.map(
+        (id: string | number) => data?.entities[id].department
+      ),
+
     }),
   });
 
@@ -104,6 +108,15 @@ function FormAndViewer() {
     } catch (error) {}
   };
 
+  const getCurrentDept = () => {
+    try {
+      const currentUser = user_ids.indexOf(user_id);
+      const currentDeptID = department[currentUser];
+      console.log(currentDeptID);
+      return currentDeptID[0];
+    } catch (error) {}
+  };
+
   const onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as Mode;
     setMode(value);
@@ -146,10 +159,11 @@ ${e}`);
       // console.log(inputs);
       localStorage.setItem("inputs", JSON.stringify(inputs));
       inputs[0]["user"] = getCurrentUser();
+      inputs[0]["department"] = getCurrentDept();
       // inputs[0].'user_id' = [{"temp":"100", "humid":"12"}];
 
       // inputs.push({"user_id":"111"});
-      // console.log(inputs);
+      console.log(inputs);
       // console.log(inputs.unshift("user_id"));
 
       try {

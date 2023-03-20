@@ -13,9 +13,10 @@ const OutreachEmpList = () => {
 
   const navigate = useNavigate();
 
-  const { user_id, isAdmin, roles } = useAuth();
+  const { user_id, isAdmin, roles, } = useAuth();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
+  // const [department, setDepartment] = useState("");
 
   const {
     data: anexB,
@@ -27,16 +28,17 @@ const OutreachEmpList = () => {
     pollingInterval: 15000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
-  });
+  }
+  );
 
-  const { test, name, outreach_status } = useGetAnexBQuery("outreachList", {
+  const { test, name, outreach_status, user_dept,  } = useGetAnexBQuery("outreachList", {
     selectFromResult: ({ data }) => ({
       test: data?.ids.map((id) => data?.entities[id]).id,
       name: data?.ids.map((id) => data?.entities[id].fullname),
       outreach_status: data?.ids.map((id) => data?.entities[id].status),
+      // user_dept: data?.ids.map((id) => data?.entities[id].department),
     }),
   });
-
 
   let content;
 
@@ -74,11 +76,17 @@ const OutreachEmpList = () => {
         entities_B[outreachId].status.includes(status)
       );
     }
+    // if (department != "All") {
+    //   filteredIds = ids_B.filter((outreachId) =>
+    //     entities_B[outreachId].department.includes(department)
+    //   );
+    // }
 
     const tableContent = ids_B?.length &&
       filteredIds.map((outreachId) => (
         <OutreachEmp key={outreachId} outreachId={outreachId} />
       ));
+
 
     content = (
       <>
@@ -115,11 +123,20 @@ const OutreachEmpList = () => {
                   type="text"
                   placeholder="Search"
                   className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  // onChange={(e) => setDepartment(e.target.value)}
+
                 >
                   <option value="All">All</option>
-                  <option value="US">SOC</option>
-                  <option value="CA">SAS</option>
-                  <option value="FR">SBA</option>
+                  <option value="NA">N/A</option>
+                  <option value="SOC">SOC</option>
+                  <option value="SAS">SAS</option>
+                  <option value="SEA">SEA</option>
+                  <option value="SED">SED</option>
+                  <option value="SBA">SBA</option>
+                  <option value="SNAMS">SNAMS</option>
+                  <option value="CCJEF">CCJEF</option>
+                  <option value="SHTM">SHTM</option>
+
                 </select>
               </li>
               <li>
@@ -162,6 +179,9 @@ const OutreachEmpList = () => {
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
                   Full Name
+                </th>
+                <th scope="col" className="text-sm font-bold py-4 ">
+                  Department
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
                   Status
