@@ -36,7 +36,7 @@ console.log(anexB);
                 <td className="text-sm font-medium text-gray-900">
                     {allOutreach.fullname}
                 </td>
-                <td className="text-sm font-medium text-gray-900">
+                <td className="text-sm font-medium text-gray-900 pl-5">
                     {allOutreach.department}
                 </td>
                 <td className="whitespace-nowrap text-sm font-medium text-gray-900">

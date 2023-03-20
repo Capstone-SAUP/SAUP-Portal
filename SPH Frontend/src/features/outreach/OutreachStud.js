@@ -34,25 +34,28 @@ const OutreachStud = ({ outreachId }) => {
 
     return (
       <tr className="text-left border px-8">
-        <td className="px-6 text-sm font-medium text-gray-900">
+      <td className="px-6 text-sm font-medium text-gray-900">
           {allOutreach.user}
-        </td>
-        <td className="text-sm font-medium text-gray-900">
+      </td>
+      <td className="text-sm font-medium text-gray-900">
           {allOutreach.fullname}
-        </td>
-        <td className="whitespace-nowrap text-sm font-medium text-gray-900">
+      </td>
+      <td className="text-sm font-medium text-gray-900 pl-5">
+          {allOutreach.department}
+      </td>
+      <td className="whitespace-nowrap text-sm font-medium text-gray-900">
           {allOutreach.status}
-        </td>
-        <td className="text-sm font-medium text-gray-900">{created}</td>
-        <td className="text-sm font-medium text-gray-900">
+      </td>
+      <td className="text-sm font-medium text-gray-900">{created}</td>
+      <td className="text-sm font-medium text-gray-900">
           {allOutreach.project_title}
-        </td>
-        <td className="text-sm font-medium text-gray-900">
+      </td>
+      <td className="text-sm font-medium text-gray-900">
           {allOutreach.target_beneficiary}
-        </td>
-        <td className="text-sm font-medium text-gray-900">
+      </td>
+      <td className="text-sm font-medium text-gray-900">
           {allOutreach.venue}
-        </td>
+      </td>
         <td className="text-sm font-medium text-gray-900">
           {/* <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                         onClick={handleEdit}> 
