@@ -11,38 +11,37 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   });
 
   const { isAdmin } = useAuth();
-
   const { id } = useParams();
 
   const [createReport, { isLoading, isSuccess, isError, error }] =
     useAddNewAnexCMutation();
 
   const navigate = useNavigate();
-  //     const [prepPhase, setInputFields] = useState([{
-  //         fullName:'',
-  //         emailAddress:'',
-  //         salary:''
-  //     } ]);
-  //     const addInputField = ()=>{
-  //         setInputFields([...prepPhase, {
-  //             fullName:'',
-  //             emailAddress:'',
-  //             salary:''
-  //         } ])
-
-  //     }
-  //     const removeInputFields = (index)=>{
-  //         const rows = [...prepPhase];
-  //         rows.splice(index, 1);
-  //         setInputFields(rows);
-  //     }
-  //     const handleChange = (index, evnt)=>{
-
-  //     const { name, value } = evnt.target;
-  //     const list = [...prepPhase];
-  //     list[index][name] = value;
-  //     setInputFields(list);
-  // }
+//     const [prepPhase, setInputFields] = useState([{
+//         fullName:'',
+//         emailAddress:'',
+//         salary:''  
+//     } ]);
+//     const addInputField = ()=>{
+//         setInputFields([...prepPhase, {
+//             fullName:'',
+//             emailAddress:'',
+//             salary:''  
+//         } ])
+      
+//     }
+//     const removeInputFields = (index)=>{
+//         const rows = [...prepPhase];
+//         rows.splice(index, 1);
+//         setInputFields(rows);
+//     }
+//     const handleChange = (index, evnt)=>{
+    
+//     const { name, value } = evnt.target;
+//     const list = [...prepPhase];
+//     list[index][name] = value;
+//     setInputFields(list);
+// }
 
   // const [title, setTitle] = useState(outreach.title);
 
@@ -226,111 +225,111 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [image2, setImage2] = useState(filteredOutreach.image2);
 
   useEffect(() => {
-    if (isSuccess) {
-      setUserId("");
-      setSponsor_Dept("");
-      setProject_Title("");
-      setBeneficiaries("");
-      setAccomp_Obj("");
-      setVenue("");
-      setDate_Implement("");
-      setBrief_Narrative("");
-      setTopics("");
-      setSpeakers("");
-      setPrep_Per1("");
-      setPrep_Per2("");
-      setPrep_Per3("");
-      setPrep_Per4("");
-      setPrep_Pos1("");
-      setPrep_Pos2("");
-      setPrep_Pos3("");
-      setPrep_Type1("");
-      setPrep_Type2("");
-      setPrep_Pos4("");
-      setPrep_Type3("");
-      setPrep_Type4("");
-      setPrep_Start1("");
-      setPrep_Start2("");
-      setPrep_Star3("");
-      setPrep_Star4("");
-      setPrep_End1("");
-      setPrep_End2("");
-      setPrep_End3("");
-      setPrep_End4("");
-      setImplement_Per1("");
-      setImplement_Per2("");
-      setImplement_Per3("");
-      setImplement_Per4("");
-      setImplement_Pos1("");
-      setImplement_Pos2("");
-      setImplement_Pos3("");
-      setImplement_Type1("");
-      setImplement_Type2("");
-      setImplement_Pos4("");
-      setImplement_Type3("");
-      setImplement_Type4("");
-      setImplement_Start1("");
-      setImplement_Start2("");
-      setImplement_Star3("");
-      setImplement_Star4("");
-      setImplement_End1("");
-      setImplement_End2("");
-      setImplement_End3("");
-      setImplement_End4("");
-      setPost_Per1("");
-      setPost_Per2("");
-      setPost_Per3("");
-      setPost_Per4("");
-      setPost_Pos1("");
-      setPost_Pos2("");
-      setPost_Pos3("");
-      setPost_Type1("");
-      setPost_Type2("");
-      setPost_Pos4("");
-      setPost_Type3("");
-      setPost_Type4("");
-      setPost_Start1("");
-      setPost_Start2("");
-      setPost_Star3("");
-      setPost_Star4("");
-      setPost_End1("");
-      setPost_End2("");
-      setPost_End3("");
-      setPost_End4("");
-      setLearnings1("");
-      setLearnings2("");
-      setLearnings3("");
-      setLearnings4("");
-      setLearnings5("");
-      setStrengths1("");
-      setStrengths2("");
-      setStrengths3("");
-      setStrengths4("");
-      setStrengths5("");
-      setWeakness1("");
-      setWeakness2("");
-      setWeakness3("");
-      setWeakness4("");
-      setWeakness5("");
-      setImprovement1("");
-      setImprovement2("");
-      setImprovement3("");
-      setImprovement4("");
-      setImprovement5("");
-      setAct_Partici1("");
-      setAct_Partici2("");
-      setAct_Partici3("");
-      setParticulars1("");
-      setParticulars2("");
-      setParticulars3("");
-      setAmount1("");
-      setAmount2("");
-      setAmount3("");
-      setAmount_Total("");
-      setImage1("");
-      setCaption1("");
-      setCaption2("");
-      setImage2("");
+          if (isSuccess) {
+      setUserId("")
+      setSponsor_Dept("")
+      setProject_Title("")
+      setBeneficiaries("")
+      setAccomp_Obj("")
+      setVenue("")
+      setDate_Implement("")
+      setBrief_Narrative("")
+      setTopics("")
+      setSpeakers("")
+      setPrep_Per1("")
+      setPrep_Per2("")
+      setPrep_Per3("")
+      setPrep_Per4("")
+      setPrep_Pos1("")
+      setPrep_Pos2("")
+      setPrep_Pos3("")
+      setPrep_Type1("")
+      setPrep_Type2("")
+      setPrep_Pos4("")
+      setPrep_Type3("")
+      setPrep_Type4("")
+      setPrep_Start1("")
+      setPrep_Start2("")
+      setPrep_Star3("")
+      setPrep_Star4("")
+      setPrep_End1("")
+      setPrep_End2("")
+      setPrep_End3("")
+      setPrep_End4("")
+      setImplement_Per1("")
+      setImplement_Per2("")
+      setImplement_Per3("")
+      setImplement_Per4("")
+      setImplement_Pos1("")
+      setImplement_Pos2("")
+      setImplement_Pos3("")
+      setImplement_Type1("")
+      setImplement_Type2("")
+      setImplement_Pos4("")
+      setImplement_Type3("")
+      setImplement_Type4("")
+      setImplement_Start1("")
+      setImplement_Start2("")
+      setImplement_Star3("")
+      setImplement_Star4("")
+      setImplement_End1("")
+      setImplement_End2("")
+      setImplement_End3("")
+      setImplement_End4("")
+      setPost_Per1("")
+      setPost_Per2("")
+      setPost_Per3("")
+      setPost_Per4("")
+      setPost_Pos1("")
+      setPost_Pos2("")
+      setPost_Pos3("")
+      setPost_Type1("")
+      setPost_Type2("")
+      setPost_Pos4("")
+      setPost_Type3("")
+      setPost_Type4("")
+      setPost_Start1("")
+      setPost_Start2("")
+      setPost_Star3("")
+      setPost_Star4("")
+      setPost_End1("")
+      setPost_End2("")
+      setPost_End3("")
+      setPost_End4("")
+      setLearnings1("")
+      setLearnings2("")
+      setLearnings3("")
+      setLearnings4("")
+      setLearnings5("")
+      setStrengths1("")
+      setStrengths2("")
+      setStrengths3("")
+      setStrengths4("")
+      setStrengths5("")
+      setWeakness1("")
+      setWeakness2("")
+      setWeakness3("")
+      setWeakness4("")
+      setWeakness5("")
+      setImprovement1("")
+      setImprovement2("")
+      setImprovement3("")
+      setImprovement4("")
+      setImprovement5("")
+      setAct_Partici1("")
+      setAct_Partici2("")
+      setAct_Partici3("")
+      setParticulars1("")
+      setParticulars2("")
+      setParticulars3("")
+      setAmount1("")
+      setAmount2("")
+      setAmount3("")
+      setAmount_Total("")
+      setImage1("")
+      setCaption1("")
+      setCaption2("")
+      setImage2("")
       navigate("/dash/employee");
     }
   }, [isSuccess, navigate]);

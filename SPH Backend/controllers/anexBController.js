@@ -54,6 +54,7 @@ const createNewAnexB = async (req, res) => {
         output2,
         output3,
         status,
+        department,
     } = req.body
 
     // Confirm data
@@ -94,6 +95,7 @@ const createNewAnexB = async (req, res) => {
         output2,
         output3,
         status,
+        department,
     })
 
     if (anexB) { // Created 
@@ -108,29 +110,31 @@ const createNewAnexB = async (req, res) => {
 // @route PATCH /anexa
 // @access Private
 const updateAnexB = async (req, res) => {
-const { id, status } = req.body
+const { id, user, title, text, status } = req.body
 
-console.log();
 // Confirm data
-// if (!id || !status) {
-//     return res.status(400).json({ message: 'All fields are required' })
-// }
+if (!id || !user || !title || !text) {
+    return res.status(400).json({ message: 'All fields are required' })
+}
 
 // Confirm anexa exists to update
-const anexB = await AnexB.findById(id).exec()
+const anexB = await AnexA.findById(id).exec()
 
-// if (!anexB) {
-//     return res.status(400).json({ message: 'AnexB not found' })
-// }
+if (!anexB) {
+    return res.status(400).json({ message: 'AnexB not found' })
+}
 
-// // Check for duplicate title
-// const duplicate = await AnexB.findOne({ id }).collation({ locale: 'en', strength: 2 }).lean().exec()
+// Check for duplicate title
+const duplicate = await AnexB.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
-// // Allow renaming of the original anexa 
-// if (duplicate && duplicate?._id.toString() !== id) {
-//     return res.status(409).json({ message: 'Duplicate anexa title' })
-// }
+// Allow renaming of the original anexa 
+if (duplicate && duplicate?._id.toString() !== id) {
+    return res.status(409).json({ message: 'Duplicate anexa title' })
+}
 
+anexB.user = user
+anexB.title = title
+anexB.text = text
 anexB.status = status
 
 const updatedAnexB = await anexB.save()

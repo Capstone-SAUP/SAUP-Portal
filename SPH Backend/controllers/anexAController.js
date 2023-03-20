@@ -63,7 +63,8 @@ const createNewAnexA = async (req, res) => {
         beneficiaries,
         budget,
         prog_indicator,
-        
+        status,
+        department,
         } = req.body
 
     // Confirm data
@@ -113,6 +114,8 @@ const createNewAnexA = async (req, res) => {
         beneficiaries,
         budget,
         prog_indicator,
+        status,
+        department,
     })
 
     if (anexaA) { // Created 

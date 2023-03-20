@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAnexBQuery } from "./anexB_ApiSlice";
-import { useGetAnexAQuery } from "./anexA_ApiSlice";
 import { memo } from "react";
-import { Link } from "react-router-dom";
 
 const OutreachEmp = ({ outreachId }) => {
     const { anexB } = useGetAnexBQuery("outreachList", {
@@ -10,12 +8,12 @@ const OutreachEmp = ({ outreachId }) => {
             anexB: data?.entities[outreachId],
         }),
     });
+console.log(anexB);
     const navigate = useNavigate();
 
     const allOutreach = { ...anexB };
 
-    const handleView = () => navigate(`/dash/employee/view/${allOutreach.id}`);
-    const handleReport = () => navigate(`/dash/employee/report/${allOutreach.id}`);
+    const handleEdit = () => navigate(`/dash/employee/view/type-${allOutreach.user_role}/${allOutreach.id}`);
     
     if (allOutreach) {
         const created = new Date(allOutreach.createdAt).toLocaleString(
@@ -28,7 +26,7 @@ const OutreachEmp = ({ outreachId }) => {
             { day: "numeric", month: "long" }
         );
 
-        const handleEdit = () => navigate(`/dash/outreach/${outreachId}`)
+        // const handleEdit = () => navigate(`/dash/outreach/${outreachId}`)
 
         return (
             <tr className="text-left border px-8">
@@ -37,6 +35,9 @@ const OutreachEmp = ({ outreachId }) => {
                 </td>
                 <td className="text-sm font-medium text-gray-900">
                     {allOutreach.fullname}
+                </td>
+                <td className="text-sm font-medium text-gray-900 pl-5">
+                    {allOutreach.department}
                 </td>
                 <td className="whitespace-nowrap text-sm font-medium text-gray-900">
                     {allOutreach.status}
@@ -51,16 +52,16 @@ const OutreachEmp = ({ outreachId }) => {
                 <td className="text-sm font-medium text-gray-900">
                     {allOutreach.venue}
                 </td>
-                <td className="text-sm flex font-medium grid-cols-2 text-gray-900">
-                    <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-2.5 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                        onClick={handleReport}> 
-                                            Report
-                    </button>
+                <td className="text-sm font-medium text-gray-900">
+                    {/* <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                        onClick={handleEdit}> 
+                                            Edit
+                    </button> */}
                     <button
-                        className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-2.5 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                        onClick={handleView}
+                        className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                        onClick={handleEdit}
                     >
-                        View
+                        Form
                     </button>
                 </td>
             </tr>
