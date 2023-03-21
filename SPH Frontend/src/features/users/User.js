@@ -20,7 +20,7 @@ const User = ({ userId }) => {
         const userDeptString = user.department.toString().replaceAll(',', ', ')
         const userTenurString = user.tenure.toString().replaceAll(',', ', ')
 
-        console.log(user);
+        // console.log(user);
 
 
         const cellStatus = user.active ? '' : 'table__cell--inactive'

@@ -16,11 +16,17 @@ const getAllAnexB = async (req, res) => {
     // Add user_id to each anexa before sending the response 
     // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
     // You could also do this with a for...of loop
-    const outreachWithUser = await Promise.all(anexB.map(async (anexB) => {
-        const user = await User.findById(anexB.user).lean().exec()
-        
-        return { ...anexB, user: user.user_id, fullname: user.firstname + " " + user.lastname, user_role: user.roles[0]}
-    }))
+    const outreachWithUser = await Promise.all(
+      anexB.map(async (anexB) => { const user = await User.findById(anexB.user).lean().exec();
+        console.log(user.user_id);
+        return {
+          ...anexB,
+          user: user.user_id,
+          fullname: user.firstname + " " + user.lastname,
+          user_role: user.roles[0],
+        };
+      })
+    );
 
     res.json(outreachWithUser)
 }
@@ -118,7 +124,7 @@ if (!id || !user || !title || !text) {
 }
 
 // Confirm anexa exists to update
-const anexB = await AnexA.findById(id).exec()
+const anexB = await AnexB.findById(id).exec()
 
 if (!anexB) {
     return res.status(400).json({ message: 'AnexB not found' })

@@ -5,40 +5,42 @@ import useTitle from "../../hooks/useTitle";
 import PulseLoader from "react-spinners/PulseLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNavicon } from "@fortawesome/free-solid-svg-icons";
-import { useGetAnexBQuery } from "./anexB_ApiSlice";
-import OutreachEmp from "./OutreachEmp";
+import { useGetAnexCQuery } from "./anexC_ApiSlice";
+import Reports from "./Reports";
 
-const OutreachEmpList = () => {
+const ReportsList = () => {
   useTitle("SAUP Portal: Outreach List");
 
   const navigate = useNavigate();
 
-  const { user_id, isAdmin, roles, } = useAuth();
+  const { user_id, isAdmin, roles } = useAuth();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   // const [department, setDepartment] = useState("");
 
   const {
-    data: anexB,
+    data: anexC,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetAnexBQuery("outreachList", {
+  } = useGetAnexCQuery("outreachList", {
     pollingInterval: 15000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
-  }
-  );
-
-  const { test, name, outreach_status, user_dept,  } = useGetAnexBQuery("outreachList", {
-    selectFromResult: ({ data }) => ({
-      test: data?.ids.map((id) => data?.entities[id]).id,
-      name: data?.ids.map((id) => data?.entities[id].fullname),
-      outreach_status: data?.ids.map((id) => data?.entities[id].status),
-      // user_dept: data?.ids.map((id) => data?.entities[id].department),
-    }),
   });
+
+  const { test, name, outreach_status, user_dept } = useGetAnexCQuery(
+    "outreachList",
+    {
+      selectFromResult: ({ data }) => ({
+        test: data?.ids.map((id) => data?.entities[id]).id,
+        name: data?.ids.map((id) => data?.entities[id].fullname),
+        outreach_status: data?.ids.map((id) => data?.entities[id].status),
+        // user_dept: data?.ids.map((id) => data?.entities[id].department),
+      }),
+    }
+  );
 
   let content;
 
@@ -47,45 +49,46 @@ const OutreachEmpList = () => {
   if (isError) {
     content = <p className="errmsg">{error?.data?.message}</p>;
   }
+
   if (isSuccess) {
     const handleOutreach = () => navigate(`/dash/outreach/new`);
 
-    const { ids, entities } = anexB;
-    let ids_B = ids;
-    let entities_B = entities;
-    let user_role = entities_B.user_role
+    const { ids, entities } = anexC;
+    let ids_C = ids;
+    let entities_C = entities;
+
+    let user_role = entities_C.user_role;
     let filteredIds;
-    console.log(entities_B);
     if (isAdmin) {
-      filteredIds = [...ids_B];
-    } 
-    if (roles == "Employee") {
-      filteredIds = ids_B.filter(
-        (outreachId) => entities_B[outreachId].user === user_id
-      );
+      filteredIds = [...ids_C];
+
     }
-    if (search != "") {
-      filteredIds = ids_B.filter(
-        (outreachId) =>
-          entities_B[outreachId].fullname.toLowerCase().includes(search)
-      );
-    }
-    if (status != "All") {
-      filteredIds = ids_B.filter((outreachId) =>
-        entities_B[outreachId].status.includes(status)
-      );
-    }
-    // if (department != "All") {
-    //   filteredIds = ids_B.filter((outreachId) =>
-    //     entities_B[outreachId].department.includes(department)
+    // console.log(entities_C);
+    // if (roles == "Employee") {
+    //   filteredIds = ids_C.filter(
+    //     (reportId) => entities_C[reportId].user === user_id
     //   );
     // }
-
-    const tableContent = ids_B?.length &&
-      filteredIds.map((outreachId) => (
-        <OutreachEmp key={outreachId} outreachId={outreachId} />
+    // if (search != "") {
+    //   filteredIds = ids_C.filter((reportId) =>
+    //     entities_C[reportId].fullname.toLowerCase().includes(search)
+    //   );
+    // }
+    // if (status != "All") {
+    //   filteredIds = ids_C.filter((reportId) =>
+    //     entities_C[reportId].status.includes(status)
+    //   );
+    // }
+    // if (department != "All") {
+    //   filteredIds = ids_C.filter((reportId) =>
+    //     entities_C[reportId].department.includes(department)
+    //   );
+    // }
+    const tableContent =
+      ids_C?.length &&
+      filteredIds.map((reportId) => (
+        <Reports key={reportId} reportId={reportId} />
       ));
-
 
     content = (
       <>
@@ -123,7 +126,6 @@ const OutreachEmpList = () => {
                   placeholder="Search"
                   className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   // onChange={(e) => setDepartment(e.target.value)}
-
                 >
                   <option value="All">All</option>
                   <option value="NA">N/A</option>
@@ -135,7 +137,6 @@ const OutreachEmpList = () => {
                   <option value="SNAMS">SNAMS</option>
                   <option value="CCJEF">CCJEF</option>
                   <option value="SHTM">SHTM</option>
-
                 </select>
               </li>
               <li>
@@ -183,7 +184,7 @@ const OutreachEmpList = () => {
                   Department
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
-                  Status
+                  Date
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
                   Date Created
@@ -211,4 +212,4 @@ const OutreachEmpList = () => {
 
   return content;
 };
-export default OutreachEmpList;
+export default ReportsList;

@@ -40,7 +40,7 @@ const OutreachStudList = () => {
         }),
       });
 
-    // console.log(anexA);
+
 
     let content
 
@@ -60,7 +60,6 @@ const OutreachStudList = () => {
 
         // let user_role = entities_A.user_role
 
-        // console.log(entities_A.user_role)
         let filteredIds
         if (isAdmin) {
             filteredIds = [...ids_A]

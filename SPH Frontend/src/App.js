@@ -13,6 +13,7 @@ import ReportOutreach from "./features/outreach/ReportOutreach";
 import NewOutreach from "./features/outreach/NewOutreach";
 import OutreachEmpList from "./features/outreach/OutreachEmpList";
 import OutreachStudList from "./features/outreach/OutreachStudList";
+import ReportsList from "./features/outreach/ReportsList";
 import GenerateSummary from "./features/generate/GenerateSummary";
 import GenerateCertificate from "./features/generate/GenerateCertificate";
 import DataOverview from "./features/infos/DataOverview";
@@ -26,6 +27,7 @@ import useTitle from "./hooks/useTitle";
 import Designer from "./features/forms/Designer";
 import FormAndViewer from "./features/forms/FormAndViewer";
 import ViewerPDF from "./features/forms/ViewerPDF";
+import ReportsView from "./features/outreach/ReportsView";
 
 
 function App() {
@@ -60,7 +62,7 @@ function App() {
                   <Route path="view">
                     <Route path=":id" element={<ViewOutreach />} />
                   </Route>
-                  <Route path="report">
+                  <Route path="reports">
                     <Route path=":id" element={<ReportOutreach />} />
                   </Route>
                   <Route path="new" element={<NewOutreach />} />
@@ -71,10 +73,17 @@ function App() {
                   <Route path="view">
                     <Route path=":id" element={<ViewOutreach />} />
                   </Route>
-                  <Route path="report">
+                  <Route path="reports">
                     <Route path=":id" element={<ReportOutreach />} />
                   </Route>
                   <Route path="new" element={<NewOutreach />} />
+                </Route>
+
+                <Route path="reports">
+                  <Route index element={<ReportsList />} />
+                  <Route path="view">
+                    <Route path=":id" element={<ReportsView />} />
+                  </Route>
                 </Route>
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

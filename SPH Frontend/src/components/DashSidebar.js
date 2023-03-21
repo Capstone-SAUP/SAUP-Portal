@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
 import { IoChevronBack } from "react-icons/io5";
-import { AiOutlineFileAdd } from "react-icons/ai";
-import { RiLogoutBoxRLine, RiSearchLine } from "react-icons/ri";
+import { AiOutlineFileAdd, AiOutlineFileDone } from "react-icons/ai";
+import { RiLogoutBoxRLine, RiSuitcaseLine } from "react-icons/ri";
 import { useGetUsersQuery } from "../features/users/usersApiSlice";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
@@ -59,6 +59,7 @@ const DashSidebar = ({ ids }) => {
   // const onNewUserClicked = () => navigate("/dash/users/new");
   const onEmployeeOutreachClicked = () => navigate("/dash/employee");
   const onStudentOutreachClicked = () => navigate("/dash/student");
+  const onReportsOutreachClicked = () => navigate("/dash/reports");
   const onUsersClicked = () => navigate("/dash/users");
   const onGenerateClicked = () => navigate("/dash/generate-certificate");
   const onSubmitApplication = () => navigate("/dash/application-forms");
@@ -144,10 +145,10 @@ const DashSidebar = ({ ids }) => {
           }`}
         >
           <span className="text-2xl block float-left pt-1">
-            <FaRegHandshake className="text-3xl block float-left" />
+            <RiSuitcaseLine className="text-3xl block float-left" />
           </span>
           <span
-            className={`truncate text-base font-medium flex-1 duration-200 ${
+            className={`truncate text-base font-medium flex-1 duration-200 hover:bg-red-500 rounded-md${
               !open && "hidden"
             }`}
           >
@@ -190,9 +191,39 @@ const DashSidebar = ({ ids }) => {
     }
   }
 
+    let reportsButton = null;
+    if (roles == "Employee" || isAdmin) {
+      if (pathname.includes("/dash")) {
+        reportsButton = (
+          <button
+            className="mb-3 w-full text-left"
+            title="Outreach"
+            onClick={onReportsOutreachClicked}
+          >
+            <div
+              className={`text-white text-base flex items-center gap-x-4 cursor-pointer  p-1 hover:bg-red-500 rounded-md ${
+                pathname.includes("/dash/reports") && "bg-red-500"
+              }`}
+            >
+              <span className="text-2xl block float-left pt-1">
+                <AiOutlineFileDone className="text-3xl block float-left" />
+              </span>
+              <span
+                className={`truncate text-base font-medium flex-1 duration-200 ${
+                  !open && "hidden"
+                }`}
+              >
+                Implementation Reports
+              </span>
+            </div>
+          </button>
+        );
+      }
+    }
+
 
   let certificateButton = null;
-  if (pathname.includes("/dash")) {
+  if (pathname.match("/dash")) {
     certificateButton = (
       <button
         className="mb-3 w-full text-left"
@@ -283,9 +314,10 @@ const DashSidebar = ({ ids }) => {
       <>
         {/* {newOutreachButton}
         {newUserButton} */}
+        {userButton}
         {employeeOutreachButton}
         {studentOutreachButton}
-        {userButton}
+        {reportsButton}
         {applicationButton}
         {certificateButton}
         {logoutButton}
@@ -375,7 +407,11 @@ const DashSidebar = ({ ids }) => {
           </div> */}
           <Link to="/dash">
             <div className={`mb-3 mt-5 ${dashClass}`}>
-              <div className="text-white w-full text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md">
+              <div
+                className={`text-white w-full text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md${
+                  pathname.match("/dash") && "bg-red-500"
+                }`}
+              >
                 <span className="text-2xl block float-left pt-1">
                   <RxDashboard className="text-3xl block float-left" />
                 </span>
