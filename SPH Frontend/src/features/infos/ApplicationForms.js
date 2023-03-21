@@ -16,31 +16,31 @@ const ApplicationForms = () => {
     const onEditForm_C_Clicked = () => navigate("/dash/design-anex-C");
 
     let EditForm_A_Button = null;
-    if (isAdmin) {
-        EditForm_A_Button = (
-            <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_A_Clicked}>
-                <div className="text-base">Edit Form Template</div>
-            </button>
-        );
-    }
+    // if (isAdmin) {
+    //     EditForm_A_Button = (
+    //         <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_A_Clicked}>
+    //             <div className="text-base">Edit Form Template</div>
+    //         </button>
+    //     );
+    // }
 
     let EditForm_B_Button = null;
-    if (isAdmin) {
-        EditForm_B_Button = (
-            <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_B_Clicked}>
-                <div className="text-base">Edit Form Template</div>
-            </button>
-        );
-    }
+    // if (isAdmin) {
+    //     EditForm_B_Button = (
+    //         <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_B_Clicked}>
+    //             <div className="text-base">Edit Form Template</div>
+    //         </button>
+    //     );
+    // }
 
     let EditForm_C_Button = null;
-    if (isAdmin) {
-        EditForm_C_Button = (
-            <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_C_Clicked}>
-                <div className="text-base">Edit Form Template</div>
-            </button>
-        );
-    }
+    // if (isAdmin) {
+    //     EditForm_C_Button = (
+    //         <button className="flex-initial border bg-white shadow-lg sm:rounded-lg p-2 w-44" onClick={onEditForm_C_Clicked}>
+    //             <div className="text-base">Edit Form Template</div>
+    //         </button>
+    //     );
+    // }
 
     // let EditForm_D_Button = null;
     // if (isAdmin) {
@@ -130,20 +130,6 @@ const ApplicationForms = () => {
                 {EmployeeIntake}
                 <div>
                 {EditForm_C_Button}
-                    <Link to="/dash/view-anex-C">
-                        <div className="flex border bg-white shadow-lg sm:rounded-lg p-2 mb-5 w-1/2 lg-md:w-3/5">
-                            <div>
-                                <FolderArrowDownIcon className="text-red-900 h-20 pr-2" />
-                            </div>
-                            <div className="text-base">
-                                <p className="mb-5">
-                                    Implementation Report Form on Community
-                                    Extension Project.pdf
-                                </p>
-                                <p>Upload Date: 11/10/2022</p>
-                            </div>
-                        </div>
-                    </Link>
                 </div>
                 {/* <div>
                 {EditForm_D_Button}

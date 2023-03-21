@@ -223,32 +223,34 @@ const DashSidebar = ({ ids }) => {
 
 
   let certificateButton = null;
-  if (pathname.match("/dash")) {
-    certificateButton = (
-      <button
-        className="mb-3 w-full text-left"
-        title="Generate Certificate"
-        onClick={onGenerateClicked}
-      >
-        <div
-          className={`mb-20 text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
-            pathname.includes("/dash/generate-certificate") && "bg-red-500"
-          }`}
+if (roles == "Employee" || roles == "Admin"){
+    if (pathname.match("/dash")) {
+      certificateButton = (
+        <button
+          className="mb-3 w-full text-left"
+          title="Generate Certificate"
+          onClick={onGenerateClicked}
         >
-          <span className="text-2xl block float-left pt-1">
-            <TfiPrinter className="text-3xl block float-left" />
-          </span>
-          <span
-            className={`truncate text-base font-medium flex-1 duration-200 ${
-              !open && "hidden"
+          <div
+            className={`mb-20 text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
+              pathname.includes("/dash/generate-certificate") && "bg-red-500"
             }`}
           >
-            Certificate
-          </span>
-        </div>
-      </button>
-    );
-  }
+            <span className="text-2xl block float-left pt-1">
+              <TfiPrinter className="text-3xl block float-left" />
+            </span>
+            <span
+              className={`truncate text-base font-medium flex-1 duration-200 ${
+                !open && "hidden"
+              }`}
+            >
+              Certificate
+            </span>
+          </div>
+        </button>
+      );
+    }
+}
 
   let applicationButton = null;
   if (pathname.includes("/dash")) {

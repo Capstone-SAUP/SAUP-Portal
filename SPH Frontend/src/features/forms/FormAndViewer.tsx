@@ -157,7 +157,7 @@ ${e}`);
     if (ui.current) {
       const inputs = ui.current.getInputs();
       // console.log(inputs);
-      localStorage.setItem("inputs", JSON.stringify(inputs));
+      // localStorage.setItem("inputs", JSON.stringify(inputs));
       inputs[0]["user"] = getCurrentUser();
       inputs[0]["department"] = getCurrentDept();
       // inputs[0].'user_id' = [{"temp":"100", "humid":"12"}];
@@ -169,18 +169,22 @@ ${e}`);
       try {
         if (window.location.href.match("/view-anex-A")) {
           await addNewAnexA(inputs[0]);
+      alert("Saved!");
+      navigate("/dash/student");
         }
         if (window.location.href.match("/view-anex-B")) {
           await addNewAnexB(inputs[0]);
+      alert("Saved!");
+      navigate("/dash/employee");
         }
         if (window.location.href.match("/view-anex-C")) {
           await addNewAnexC(inputs[0]);
+      alert("Saved!");
+      navigate("/dash/users");
         }
       } catch (error) {
         console.log(error);
       }
-      alert("Saved!");
-      navigate("/dash/users");
     }
   };
 
