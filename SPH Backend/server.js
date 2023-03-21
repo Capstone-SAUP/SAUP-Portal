@@ -32,7 +32,7 @@ app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/student', require('./routes/anexARoutes'));
 app.use('/employee', require('./routes/anexBRoutes'))
-app.use('/report', require('./routes/anexCRoutes'));
+app.use('/reports', require('./routes/anexCRoutes'));
 app.use('/view-anex-A', require('./routes/anexARoutes'))
 app.use('/view-anex-B', require('./routes/anexBRoutes'))
 

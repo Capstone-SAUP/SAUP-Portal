@@ -5,7 +5,7 @@ import { useGetAnexAQuery } from "./anexA_ApiSlice";
 import { useGetUsersQuery } from '../users/usersApiSlice'
 import useTitle from '../../hooks/useTitle'
 
-const ViewOutreach = () => {
+const ReportOutreach = () => {
     useTitle('SAUP Portal: Edit Outreach')
 
     const { users } = useGetUsersQuery("usersList", {
@@ -45,4 +45,4 @@ const ViewOutreach = () => {
 
     return content
 }
-export default ViewOutreach
+export default ReportOutreach

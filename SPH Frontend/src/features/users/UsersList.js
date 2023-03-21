@@ -89,7 +89,7 @@ const UsersList = () => {
             );
           }
 
-          console.log(department);
+          // console.log(department);
 
 
      const tableContent = ids_B?.length &&

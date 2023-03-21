@@ -18,7 +18,7 @@ const getAllAnexA = async (req, res) => {
     // You could also do this with a for...of loop
     const outreachWithUser = await Promise.all(anexA.map(async (anexA) => {
         const user = await User.findById(anexA.user).lean().exec()
-        
+        console.log(user.user_id);
         return { ...anexA, user: user.user_id, fullname: user.firstname + " " + user.lastname, user_role: user.roles[0]}
     }))
 
