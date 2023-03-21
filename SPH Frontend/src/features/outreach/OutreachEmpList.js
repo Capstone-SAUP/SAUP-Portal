@@ -15,8 +15,8 @@ const OutreachEmpList = () => {
 
   const { user_id, isAdmin, roles, } = useAuth();
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("");
-  // const [department, setDepartment] = useState("");
+  const [status, setStatus] = useState("All");
+  const [department, setDepartment] = useState("All");
 
   const {
     data: anexB,
@@ -36,7 +36,7 @@ const OutreachEmpList = () => {
       test: data?.ids.map((id) => data?.entities[id]).id,
       name: data?.ids.map((id) => data?.entities[id].fullname),
       outreach_status: data?.ids.map((id) => data?.entities[id].status),
-      // user_dept: data?.ids.map((id) => data?.entities[id].department),
+      user_dept: data?.ids.map((id) => data?.entities[id].department),
     }),
   });
 
@@ -76,11 +76,11 @@ const OutreachEmpList = () => {
         entities_B[outreachId].status.includes(status)
       );
     }
-    // if (department != "All") {
-    //   filteredIds = ids_B.filter((outreachId) =>
-    //     entities_B[outreachId].department.includes(department)
-    //   );
-    // }
+    if (department != "All") {
+       filteredIds = ids_B.filter((outreachId) =>
+       entities_B[outreachId].department.includes(department)
+       );
+    }
 
     const tableContent = ids_B?.length &&
       filteredIds.map((outreachId) => (
@@ -123,7 +123,7 @@ const OutreachEmpList = () => {
                   type="text"
                   placeholder="Search"
                   className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  // onChange={(e) => setDepartment(e.target.value)}
+                  onChange={(e) => setDepartment(e.target.value)}
 
                 >
                   <option value="All">All</option>
