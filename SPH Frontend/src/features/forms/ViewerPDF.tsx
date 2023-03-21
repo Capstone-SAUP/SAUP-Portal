@@ -29,9 +29,9 @@ const initTemplate = () => {
 
 const ViewerPDF = (filteredOutreach:any) =>  {
 
-  window.addEventListener("beforeunload", function(event) {
-    event.returnValue = "The information in the document will reset.";
-  });
+  // window.addEventListener("beforeunload", function(event) {
+  //   event.returnValue = "The information in the document will reset.";
+  // });
   
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);

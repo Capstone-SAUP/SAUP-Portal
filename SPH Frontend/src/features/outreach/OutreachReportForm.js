@@ -16,6 +16,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [createReport, { isSuccess, isError, error }] =
     useAddNewAnexCMutation();
 
+      // const currentUserObjectId = object_id[currentUser];
+console.log();
   const navigate = useNavigate();
 //     const [prepPhase, setInputFields] = useState([{
 //         fullName:'',
@@ -45,7 +47,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   // const [title, setTitle] = useState(outreach.title);
 
-  const [userId, setUserId] = useState(user_id);
+  const [userId] = useState(filteredOutreach.user_id);
+  const [fullname] = useState(filteredOutreach.fullname);
   const [sponsor_dept, setSponsor_Dept] = useState(filteredOutreach.sponsor_dept);
   const [project_title, setProject_Title] = useState(filteredOutreach.project_title);
   const [target_beneficiary, setBeneficiaries] = useState(filteredOutreach.target_beneficiary);
@@ -152,7 +155,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   useEffect(() => {
           if (isSuccess) {
-      setUserId("")
       setSponsor_Dept("")
       setProject_Title("")
       setBeneficiaries("")
@@ -262,7 +264,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   // const onTitleChanged = (e) => setTitle(e.target.value)a;
 
   // const [title, setTitle
-  const onUserIdChanged = (e) => setUserId(e.target.value);
   const onSponsor_DeptChanged = (e) => setSponsor_Dept(e.target.value);
   const onProject_TitleChanged = (e) => setProject_Title(e.target.value);
   const onBeneficiariesChanged = (e) => setBeneficiaries(e.target.value);
@@ -479,6 +480,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
         e.preventDefault();
       await createReport({
         userId,
+        fullname,
         sponsor_dept,
         project_title,
         target_beneficiary,

@@ -36,6 +36,7 @@ const getAllAnexC = async (req, res) => {
 const createNewAnexC = async (req, res) => {
     const {
         user,
+        fullname,
         sponsor_dept,
         project_title,
         target_beneficiary,
@@ -156,6 +157,7 @@ const createNewAnexC = async (req, res) => {
     // Create and store the new user
     const anexaC = await AnexC.create({
       user,
+      fullname,
       sponsor_dept,
       project_title,
       target_beneficiary,

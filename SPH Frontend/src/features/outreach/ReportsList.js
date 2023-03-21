@@ -86,7 +86,6 @@ const ReportsList = () => {
     //     entities_C[reportId].department.includes(department)
     //   );
     // }
-    console.log(filteredIds);
     let noOutreachReport = null;
     if (filteredIds.length == 0) {
       noOutreachReport = (
