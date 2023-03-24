@@ -23,11 +23,9 @@ const ViewOutreach = () => {
 
     const unfilteredOutreach = { ...anexA, ...anexB };
 
-    delete unfilteredOutreach._id;
     delete unfilteredOutreach.user;
     delete unfilteredOutreach.id;
     delete unfilteredOutreach.user_role;
-    delete unfilteredOutreach.status;
     delete unfilteredOutreach.updatedAt;
     delete unfilteredOutreach.createdAt;
     delete unfilteredOutreach.fullname;
