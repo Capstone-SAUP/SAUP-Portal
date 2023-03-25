@@ -18,7 +18,7 @@ type Mode = "form" | "viewer";
 const initTemplate = () => {
   let template: Template = getTemplate();
   try {
-    const templateString = localStorage.getItem("template.json");
+    const templateString = localStorage.getItem("template");
     const templateJson = templateString
       ? JSON.parse(templateString)
       : getTemplate();
@@ -181,16 +181,16 @@ const ViewerPDF = (filteredOutreach:any) =>  {
 //     }
 //   };
 
-//   const onGeneratePDF = async () => {
-//     if (ui.current) {
-//       const template = ui.current.getTemplate();
-//       const inputs = ui.current.getInputs();
-//       const font = await getFontsData();
-//       const pdf = await generate({ template, inputs, options: {  } });
-//       const blob = new Blob([pdf.buffer], { type: "application/pdf" });
-//       window.open(URL.createObjectURL(blob));
-//     }
-//   };
+  const onGeneratePDF = async () => {
+    if (ui.current) {
+     const template = ui.current.getTemplate();
+      const inputs = ui.current.getInputs();
+      const font = await getFontsData();
+     const pdf = await generate({ template, inputs, options: {  } });
+     const blob = new Blob([pdf.buffer], { type: "application/pdf" });
+      window.open(URL.createObjectURL(blob));
+    }
+  };
 
   
   return (
@@ -265,9 +265,9 @@ const ViewerPDF = (filteredOutreach:any) =>  {
         <span style={{ margin: "0 1rem" }}>|</span>
         <button onClick={onGeneratePDF}>Generate PDF</button> */}
 </header>
-<div className="w-full grid">
+<div className="w-full inline">
             <label className="text-base align-middle" htmlFor="user_id">
-                Change Status:
+                Change Status: &nbsp;
             </label>
             <select
                 id="roles"
@@ -279,19 +279,26 @@ const ViewerPDF = (filteredOutreach:any) =>  {
                 {list}
             </select>
         </div>
+        &nbsp;
         <button
-            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-            title="Save"
-            onClick={onSaveOutreachClicked}
-            disabled={!canSave}
+className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-10 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
+disabled={!canSave}
           >
             Save
+          </button>
+          &nbsp;
+          <button
+className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-10 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
+            onClick={onGeneratePDF}
+            disabled={!canSave}
+          >
+            Generate PDF
           </button>
       <br></br>
       <br></br>
       <br></br>
-      <div className='max-w-5xl' ref={uiRef}/>
-    </div>
+      <div className='w-fit' ref={uiRef}/>
+</div>
   
   );
   

@@ -208,34 +208,34 @@ const OutreachStudList = () => {
                     Add New Project
                     </button>
                 </div> */}
-          <table className="w-full text-sm text-left table-fixed">
+<table className="max-w-screen-lg text-sm text-left table-fixed inline ">
             <thead className="bg-gray-300">
               <tr>
                 <th scope="col" className="text-sm font-bold px-6 py-4 ">
                   ID
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-4 pr-14">
                   Full Name
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-7 py-4 ">
                   Department
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-7 py-4 ">
                   Status
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-7 py-4 ">
                   Date Created
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-11 py-4 ">
                   Project Title
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-11 py-4 ">
                   Beneficiaries
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-11 py-4 ">
                   Venue
                 </th>
-                <th scope="col" className="px-6 py-4 w-40">
+                <th scope="col" className="px-9 py-4 w-40">
                   Option
                 </th>
               </tr>
