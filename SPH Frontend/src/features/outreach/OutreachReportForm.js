@@ -4,21 +4,53 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { STATUS } from "../../config/status";
+import { useGetUsersQuery } from "../users/usersApiSlice";
+import { current } from "@reduxjs/toolkit";
 
 const OutreachReportForm = ({ filteredOutreach, users }) => {
   // window.addEventListener("beforeunload", function (event) {
   //   event.returnValue = "The information in the document will reset.";
   // });
 
-  const { user_id } = useAuth();
-  const { id } = useParams();
+    const navigate = useNavigate();
+    const { user_id } = useAuth();
+    const { id } = useParams();
 
+  const { object_id, user_ids, department, lastname } = useGetUsersQuery(
+    "usersList",
+    {
+      selectFromResult: ({ data }) => ({
+        object_id: data?.ids.map(
+          (id) => data?.entities[id].id
+        ),
+        user_ids: data?.ids.map(
+          (id) => data?.entities[id].user_id
+        ),
+        lastname: data?.ids.map(
+          (id) => data?.entities[id].lastname
+        ),
+        department: data?.ids.map(
+          (id) => data?.entities[id].department
+        ),
+      }),
+    }
+  );
+
+    const getCurrentUser = () => {
+      try {
+        const currentUser = user_ids.indexOf(user_id);
+        const currentUserObjectId = object_id[currentUser];
+        return currentUserObjectId;
+      } catch (error) {}
+    };
+  // console.log(getCurrentUser());
+
+  const current_user = getCurrentUser();
+  console.log(current_user);
   const [createReport, { isSuccess, isError, error }] =
     useAddNewAnexCMutation();
 
       // const currentUserObjectId = object_id[currentUser];
-console.log();
-  const navigate = useNavigate();
 //     const [prepPhase, setInputFields] = useState([{
 //         fullName:'',
 //         emailAddress:'',
@@ -47,7 +79,7 @@ console.log();
 
   // const [title, setTitle] = useState(outreach.title);
 
-  const [userId] = useState(filteredOutreach.user_id);
+  const [user] = useState(current_user);
   const [fullname] = useState(filteredOutreach.fullname);
   const [sponsor_dept, setSponsor_Dept] = useState(filteredOutreach.sponsor_dept);
   const [project_title, setProject_Title] = useState(filteredOutreach.project_title);
@@ -370,7 +402,7 @@ console.log();
 
   // const canSave =
   //   [
-  //     userId,
+  //     user,
   //     sponsor_dept,
   //     project_title,
   //     target_beneficiary,
@@ -479,7 +511,7 @@ console.log();
   const onSaveReportClicked = async (e) => {
         e.preventDefault();
       await createReport({
-        userId,
+        user,
         fullname,
         sponsor_dept,
         project_title,
@@ -614,10 +646,9 @@ console.log();
     minute: "numeric",
     second: "numeric",
   });
-
   const options = users.map((user) => {
     return (
-      <option className="" key={user.id} value={user.id}>
+      <option className="" key={user.user_id} value={user.user_id}>
         {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
@@ -2118,7 +2149,7 @@ console.log();
             id="user_id"
             name="user_id"
             className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2"
-            // value={userId}
+            // value={user}
             // onChange={onUserIdChanged}
           >
             {options}

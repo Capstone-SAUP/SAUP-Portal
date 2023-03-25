@@ -17,7 +17,7 @@ const Reports = ({ reportId }) => {
 
   // console.log(allReport.target_beneficiary);
 
-
+console.log(allReport);
   if (allReport) {
     const created = new Date(allReport.createdAt).toLocaleString("en-US", {
       day: "numeric",
@@ -38,7 +38,7 @@ const Reports = ({ reportId }) => {
         <td className="text-sm font-medium text-gray-900">
           {allReport.fullname}
         </td>
-        <td className="text-sm font-medium text-gray-900 pl-5">
+        <td className="text-sm font-medium text-gray-900">
           {allReport.sponsor_dept}
         </td>
         <td className="whitespace-nowrap text-sm font-medium text-gray-900">

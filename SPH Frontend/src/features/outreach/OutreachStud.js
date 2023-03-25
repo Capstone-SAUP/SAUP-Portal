@@ -15,7 +15,7 @@ const OutreachStud = ({ outreachId }) => {
   const allOutreach = { ...anexA };
 
   const handleView = () =>navigate(`/dash/student/view/${allOutreach.id}`);
-  const handleReport = () => navigate(`/dash/employee/reports/${allOutreach.id}`);
+  const handleReport = () => navigate(`/dash/student/reports/${allOutreach.id}`);
 
   let ReportButton = null;
   if (allOutreach.status == "Completed") {

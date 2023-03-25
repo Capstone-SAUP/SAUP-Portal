@@ -20,9 +20,12 @@ const getAllAnexC = async (req, res) => {
     const outreachWithUser = await Promise.all(
       anexC.map(async (anexC) => {
         const user = await User.findById(anexC.user).lean().exec();
-
+        console.log(user.user_id);
         return {
           ...anexC,
+          user: user.user_id,
+          // fullname: user.firstname + " " + user.lastname,
+          // user_role: user.roles[0],
         };
       })
     );
