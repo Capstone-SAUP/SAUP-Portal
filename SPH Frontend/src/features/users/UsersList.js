@@ -150,12 +150,13 @@ const UsersList = () => {
                                     onChange={(e) => setTenure(e.target.value)}
                                >
                                             <option value="All">All</option>
+                                            <option value="Non">Non</option>
                                             <option value="Regular">Regular</option>
                                             <option value="Part-Time">Part-Time</option>
                                             <option value="Probationary">Probationary</option>
                                             <option value="Fixed-Term">Fixed-Term</option>
                                             <option value="Contractual">Contractual</option>
-                                            <option value="Guestlecturer">Guest Lecturer</option>
+                                            <option value="Guestlecturer">Guest-Lecturer</option>
                                 </select>
                             </li>
                             <li>

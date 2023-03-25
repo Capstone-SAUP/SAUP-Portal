@@ -33,7 +33,7 @@ const NewUserForm = () => {
     const [validPassword, setValidPassword] = useState(false);
     const [roles, setRoles] = useState(["Student"]);
     const [department, setDept] = useState(["N/A"]);
-    const [tenure, setTenure] = useState(["Regular"]);
+    const [tenure, setTenure] = useState(["Non"]);
 
 
 
