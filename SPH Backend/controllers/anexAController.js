@@ -130,12 +130,12 @@ const createNewAnexA = async (req, res) => {
 // @route PATCH /anexa
 // @access Private
 const updateAnexA = async (req, res) => {
-    const { id, user, title, text, status } = req.body
+    const { id, status } = req.body
 
-    // Confirm data
-    if (!id || !user || !title || !text) {
-        return res.status(400).json({ message: 'All fields are required' })
-    }
+    // // Confirm data
+    // if (!id || !user || !title || !text) {
+    //     return res.status(400).json({ message: 'All fields are required' })
+    // }
 
     // Confirm anexa exists to update
     const anexaA = await AnexA.findById(id).exec()
@@ -144,17 +144,14 @@ const updateAnexA = async (req, res) => {
         return res.status(400).json({ message: 'AnexA not found' })
     }
 
-    // Check for duplicate title
-    const duplicate = await AnexA.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    // // Check for duplicate title
+    // const duplicate = await AnexA.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
-    // Allow renaming of the original anexa 
-    if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate anexa title' })
-    }
+    // // Allow renaming of the original anexa 
+    // if (duplicate && duplicate?._id.toString() !== id) {
+    //     return res.status(409).json({ message: 'Duplicate anexa title' })
+    // }
 
-    anexaA.user = user
-    anexaA.title = title
-    anexaA.text = text
     anexaA.status = status
 
     const updatedAnexA = await anexaA.save()

@@ -56,7 +56,7 @@ const OutreachEmpList = () => {
     let entities_B = entities;
     let user_role = entities_B.user_role
     let filteredIds;
-    console.log(entities_B);
+    // console.log(entities_B);
     if (isAdmin) {
       filteredIds = [...ids_B];
     } 
