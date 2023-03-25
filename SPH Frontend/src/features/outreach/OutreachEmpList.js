@@ -6,7 +6,6 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNavicon } from "@fortawesome/free-solid-svg-icons";
 import { useGetAnexBQuery } from "./anexB_ApiSlice";
-import { Link } from "react-router-dom";
 import OutreachEmp from "./OutreachEmp";
 
 const OutreachEmpList = () => {
@@ -77,36 +76,11 @@ const OutreachEmpList = () => {
       );
     }
     if (department != "All") {
-      filteredIds = ids_B.filter((outreachId) =>
-      entities_B[outreachId].department.includes(department)
-      );
+       filteredIds = ids_B.filter((outreachId) =>
+       entities_B[outreachId].department.includes(department)
+       );
     }
-        let noOutreach = null;
-        if (filteredIds.length == 0) {
-          noOutreach = (
-            <section className="flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
-              <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-                <div className="max-w-md text-center">
-                  <h2 className="mb-8 font-extrabold text-9xl text-red-900">
-                    <span className="sr-only ">Error</span>404
-                  </h2>
-                  <p className="text-2xl font-semibold md:text-3xl">
-                    Sorry, no Outreach was found.
-                  </p>
-                  <p className="mt-4 mb-8 dark:text-gray-400">
-                    You first need to submit a Proposal for a Community Extension Project.
-                  </p>
-                  <Link
-                    to="/dash/application-forms"
-                    className="px-8 py-3 font-semibold rounded bg-red-900 text-white hover:bg-red-500 hover:text-white "
-                  >
-                    Submit a Proposal Form
-                  </Link>
-                </div>
-              </div>
-            </section>
-          );
-        }
+
     const tableContent = ids_B?.length &&
       filteredIds.map((outreachId) => (
         <OutreachEmp key={outreachId} outreachId={outreachId} />
@@ -149,6 +123,7 @@ const OutreachEmpList = () => {
                   placeholder="Search"
                   className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   onChange={(e) => setDepartment(e.target.value)}
+
                 >
                   <option value="All">All</option>
                   <option value="NA">N/A</option>
@@ -160,6 +135,7 @@ const OutreachEmpList = () => {
                   <option value="SNAMS">SNAMS</option>
                   <option value="CCJEF">CCJEF</option>
                   <option value="SHTM">SHTM</option>
+
                 </select>
               </li>
               <li>
@@ -193,41 +169,41 @@ const OutreachEmpList = () => {
                     Add New Project
                     </button>
                 </div> */}
-          <table className="w-full text-sm text-left table-fixed">
+
+<table className="max-w-screen-lg text-sm text-left table-fixed inline ">
             <thead className="bg-gray-300">
               <tr>
                 <th scope="col" className="text-sm font-bold px-6 py-4 ">
                   ID
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-4 pr-14">
                   Full Name
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-4 py-4 ">
                   Department
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-10 py-4 ">
                   Status
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-7 py-4 ">
                   Date Created
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-12 py-4 ">
                   Project Title
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-12 py-4 ">
                   Beneficiaries
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold px-12 py-4 ">
                   Venue
                 </th>
-                <th scope="col" className="px-6 py-4 w-40">
+                <th scope="col" className="px-9 py-4 w-40">
                   Option
                 </th>
               </tr>
             </thead>
             <tbody>{tableContent}</tbody>
           </table>
-          {noOutreach}
         </div>
       </>
     );
