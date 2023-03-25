@@ -4,19 +4,53 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { STATUS } from "../../config/status";
+import { useGetUsersQuery } from "../users/usersApiSlice";
+import { current } from "@reduxjs/toolkit";
 
 const OutreachReportForm = ({ filteredOutreach, users }) => {
   // window.addEventListener("beforeunload", function (event) {
   //   event.returnValue = "The information in the document will reset.";
   // });
 
-  const { user_id } = useAuth();
-  const { id } = useParams();
+    const navigate = useNavigate();
+    const { user_id } = useAuth();
+    const { id } = useParams();
 
+  const { object_id, user_ids, department, lastname } = useGetUsersQuery(
+    "usersList",
+    {
+      selectFromResult: ({ data }) => ({
+        object_id: data?.ids.map(
+          (id) => data?.entities[id].id
+        ),
+        user_ids: data?.ids.map(
+          (id) => data?.entities[id].user_id
+        ),
+        lastname: data?.ids.map(
+          (id) => data?.entities[id].lastname
+        ),
+        department: data?.ids.map(
+          (id) => data?.entities[id].department
+        ),
+      }),
+    }
+  );
+
+    const getCurrentUser = () => {
+      try {
+        const currentUser = user_ids.indexOf(user_id);
+        const currentUserObjectId = object_id[currentUser];
+        return currentUserObjectId;
+      } catch (error) {}
+    };
+  // console.log(getCurrentUser());
+
+  const current_user = getCurrentUser();
+  console.log(current_user);
   const [createReport, { isSuccess, isError, error }] =
     useAddNewAnexCMutation();
 
-  const navigate = useNavigate();
+      // const currentUserObjectId = object_id[currentUser];
 //     const [prepPhase, setInputFields] = useState([{
 //         fullName:'',
 //         emailAddress:'',
@@ -45,7 +79,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   // const [title, setTitle] = useState(outreach.title);
 
-  const [userId, setUserId] = useState(user_id);
+  const [user] = useState(current_user);
+  const [fullname] = useState(filteredOutreach.fullname);
   const [sponsor_dept, setSponsor_Dept] = useState(filteredOutreach.sponsor_dept);
   const [project_title, setProject_Title] = useState(filteredOutreach.project_title);
   const [target_beneficiary, setBeneficiaries] = useState(filteredOutreach.target_beneficiary);
@@ -152,7 +187,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   useEffect(() => {
           if (isSuccess) {
-      setUserId("")
       setSponsor_Dept("")
       setProject_Title("")
       setBeneficiaries("")
@@ -262,7 +296,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   // const onTitleChanged = (e) => setTitle(e.target.value)a;
 
   // const [title, setTitle
-  const onUserIdChanged = (e) => setUserId(e.target.value);
   const onSponsor_DeptChanged = (e) => setSponsor_Dept(e.target.value);
   const onProject_TitleChanged = (e) => setProject_Title(e.target.value);
   const onBeneficiariesChanged = (e) => setBeneficiaries(e.target.value);
@@ -369,7 +402,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   // const canSave =
   //   [
-  //     userId,
+  //     user,
   //     sponsor_dept,
   //     project_title,
   //     target_beneficiary,
@@ -478,7 +511,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onSaveReportClicked = async (e) => {
         e.preventDefault();
       await createReport({
-        userId,
+        user,
+        fullname,
         sponsor_dept,
         project_title,
         target_beneficiary,
@@ -612,10 +646,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     minute: "numeric",
     second: "numeric",
   });
-
   const options = users.map((user) => {
     return (
-      <option className="" key={user.id} value={user.id}>
+      <option className="" key={user.user_id} value={user.user_id}>
         {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
@@ -2116,7 +2149,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
             id="user_id"
             name="user_id"
             className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2"
-            // value={userId}
+            // value={user}
             // onChange={onUserIdChanged}
           >
             {options}

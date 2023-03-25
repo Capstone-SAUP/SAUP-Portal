@@ -29,18 +29,18 @@ const ReportOutreach = () => {
     });
 
     const unfilteredOutreach = { ...anexA, ...anexB };
-    delete unfilteredOutreach._id;
-    delete unfilteredOutreach.user;
-    delete unfilteredOutreach.id;
+    // delete unfilteredOutreach._id;
+    // delete unfilteredOutreach.user;
+    // delete unfilteredOutreach.id;
     delete unfilteredOutreach.user_role;
     delete unfilteredOutreach.status;
     delete unfilteredOutreach.updatedAt;
     delete unfilteredOutreach.createdAt;
-    delete unfilteredOutreach.fullname;
+    // delete unfilteredOutreach.fullname;
     delete unfilteredOutreach.__v;
 
     const filteredOutreach = unfilteredOutreach;
-
+    console.log(filteredOutreach);
     const content = <OutreachReportForm filteredOutreach={filteredOutreach} users={users}/>
 
     return content

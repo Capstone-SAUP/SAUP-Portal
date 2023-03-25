@@ -211,7 +211,7 @@
           "characterSpacing": 0,
           "lineHeight": 1
         },
-        "target_areas": {
+        "venue": {
           "type": "text",
           "position": { "x": 130.61, "y": 113.98 },
           "width": 75.45,
@@ -349,7 +349,7 @@
         "reason_community": "",
         "target_date": "",
         "no_beneficiaries": "",
-        "target_areas": "",
+        "venue": "",
         "target_beneficiary": "",
         "class_outreachdole": "",
         "class_semi_dev": "",
@@ -384,7 +384,7 @@
       "reason_community",
       "target_date",
       "no_beneficiaries",
-      "target_areas",
+      "venue",
       "target_beneficiary",
       "class_outreachdole",
       "class_semi_dev",

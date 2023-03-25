@@ -32,6 +32,7 @@ const initTemplate = () => {
 
 
 const ViewerPDF = (filteredOutreach:any) =>  {
+
   
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);
