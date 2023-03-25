@@ -71,7 +71,7 @@ const anexAschema = new mongoose.Schema(
     no_beneficiaries: {
       type: String,
     },
-    target_areas: {
+    venue: {
       type: String,
     },
     target_beneficiary: {

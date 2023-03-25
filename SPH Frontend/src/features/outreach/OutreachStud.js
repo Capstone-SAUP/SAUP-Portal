@@ -17,7 +17,7 @@ const OutreachStud = ({ outreachId }) => {
 
   const handleView = () => navigate(`/dash/student/view/${allOutreach.id}`);
   const handleReport = () =>
-    navigate(`/dash/employee/reports/${allOutreach.id}`);
+    navigate(`/dash/student/reports/${allOutreach.id}`);
 
   const [updateOutreach, { isLoading, isSuccess }] = useUpdateAnexAMutation();
 

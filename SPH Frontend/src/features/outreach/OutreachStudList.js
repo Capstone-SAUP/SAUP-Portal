@@ -1,106 +1,137 @@
-import useAuth from "../../hooks/useAuth"
-import { useNavigate } from 'react-router-dom'
-import useTitle from "../../hooks/useTitle"
-import PulseLoader from 'react-spinners/PulseLoader'
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
+import PulseLoader from "react-spinners/PulseLoader";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faNavicon } from "@fortawesome/free-solid-svg-icons"
-import { useGetAnexAQuery } from "./anexA_ApiSlice"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faNavicon } from "@fortawesome/free-solid-svg-icons";
+import { useGetAnexAQuery } from "./anexA_ApiSlice";
+import { Link } from "react-router-dom";
 import OutreachStud from "./OutreachStud";
 
 const OutreachStudList = () => {
-    useTitle('SAUP Portal: Outreach List')
+  useTitle("SAUP Portal: Outreach List");
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  const { user_id, isAdmin, roles } = useAuth();
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("All");
+  const [department, setDepartment] = useState("All");
 
-    const { user_id, isAdmin, roles } = useAuth()
-    const [search, setSearch] = useState("");
-    const [status, setStatus] = useState("All");
-    const [department, setDepartment] = useState("All");
+  const {
+    data: anexA,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetAnexAQuery("outreachList", {
+    pollingInterval: 15000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
 
+  let content;
 
-    const {
-        data: anexA,
-        isLoading,
-        isSuccess,
-        isError,
-        error
-    } = useGetAnexAQuery('outreachList', {
-        pollingInterval: 15000,
-        refetchOnFocus: true,
-        refetchOnMountOrArgChange: true
+  if (isLoading) content = <PulseLoader color={"#FFF"} />;
+
+  if (isError) {
+    content = <p className="errmsg">{error?.data?.message}</p>;
+  }
+
+  if (isSuccess) {
+    const handleOutreach = () => navigate(`/dash/outreach/new`);
+
+    const { ids, entities } = anexA;
+    let ids_A = ids;
+    let entities_A = entities;
+
+    // let user_role = entities_A.user_role
+    // console.log(roles);
+    let filteredIds;
+    if (isAdmin) {
+      filteredIds = [...ids_A];
     }
-    );
-
-    const { test, name, outreach_status, user_dept,  } = useGetAnexAQuery("outreachList", {
-        selectFromResult: ({ data }) => ({
-          test: data?.ids.map((id) => data?.entities[id]).id,
-          name: data?.ids.map((id) => data?.entities[id].fullname),
-          outreach_status: data?.ids.map((id) => data?.entities[id].status),
-          user_dept: data?.ids.map((id) => data?.entities[id].department),
-        }),
-      });
-
-
-
-    let content
-
-    if (isLoading) content = <PulseLoader color={"#FFF"} />
-
-    if (isError) {
-        content = <p className="errmsg">{error?.data?.message}</p>
+    if (isAdmin && search !== "") {
+      filteredIds = ids_A.filter(
+        (outreachId) =>
+          entities_A[outreachId].fullname.toLowerCase().includes(search)
+      );
     }
-
-    if (isSuccess) {
-
-        const handleOutreach = () => navigate(`/dash/outreach/new`)
-
-        const { ids, entities } = anexA
-        let ids_A = ids;
-        let entities_A = entities;
-
-        // let user_role = entities_A.user_role
-
-        let filteredIds
-        if (isAdmin) {
-            filteredIds = [...ids_A]
-        // } else {
-        //     filteredIds = ids_A.filter(outreachId => entities_A[outreachId].user === user_id)
-        // }    } 
-        }if (roles == "Employee") {
-        filteredIds = ids_A.filter(
-          (outreachId) => entities_A[outreachId].user === user_id
-        );
-        }
-        if (search != "") {
+    if (isAdmin && status !== "All") {
+      filteredIds = ids_A.filter((outreachId) =>
+        entities_A[outreachId].status.includes(status)
+      );
+    }
+    if (isAdmin && department !== "All") {
+      filteredIds = ids_A.filter((outreachId) =>
+        entities_A[outreachId].department.includes(department)
+      );
+    }
+    if (!isAdmin) {
+      filteredIds = ids_A.filter(
+        (outreachId) => entities_A[outreachId].user === user_id
+      );
+          if (!isAdmin && search !== "") {
             filteredIds = ids_A.filter(
-            (outreachId) =>
-            entities_A[outreachId].fullname.toLowerCase().includes(search)
+              (outreachId) =>
+                entities_A[outreachId].fullname
+                  .toLowerCase()
+                  .includes(search) && entities_A[outreachId].user === user_id
             );
-        }
-        if (status != "All") {
-            filteredIds = ids_A.filter((outreachId) =>
-            entities_A[outreachId].status.includes(status)
+          }
+          if (!isAdmin && status !== "All") {
+            filteredIds = ids_A.filter(
+              (outreachId) =>
+                entities_A[outreachId].status.includes(status) &&
+                entities_A[outreachId].user === user_id
             );
-        }
-        if (department != "All") {
-          filteredIds = ids_A.filter((outreachId) =>
-          entities_A[outreachId].department.includes(department)
-          );
-       }
-            
+          }
+          if (!isAdmin && department !== "All") {
+            filteredIds = ids_A.filter(
+              (outreachId) =>
+                entities_A[outreachId].department.includes(department) &&
+                entities_A[outreachId].user === user_id
+            );
+          }
+    }
 
-        const tableContent =
-        ids_A?.length &&
-            filteredIds.map((outreachId) => (
-                <OutreachStud key={outreachId} outreachId={outreachId} />
-            ));
+    let noOutreach = null;
+    if (filteredIds.length == 0) {
+      noOutreach = (
+        <section className="flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
+          <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+            <div className="max-w-md text-center">
+              <h2 className="mb-8 font-extrabold text-9xl text-red-900">
+                <span className="sr-only ">Error</span>404
+              </h2>
+              <p className="text-2xl font-semibold md:text-3xl">
+                Sorry, no Outreach was found.
+              </p>
+              <p className="mt-4 mb-8 dark:text-gray-400">
+                You first need to submit a Proposal for a Community Extension
+                Project.
+              </p>
+              <Link
+                to="/dash/application-forms"
+                className="px-8 py-3 font-semibold rounded bg-red-900 text-white hover:bg-red-500 hover:text-white "
+              >
+                Submit a Proposal Form
+              </Link>
+            </div>
+          </div>
+        </section>
+      );
+    }
+    const tableContent =
+      ids_A?.length &&
+      filteredIds.map((outreachId) => (
+        <OutreachStud key={outreachId} outreachId={outreachId} />
+      ));
 
-        content = (   
-        <>
-
-<div className="text-2xl font-semibold">
+    content = (
+      <>
+        <div className="text-2xl font-semibold">
           Outreach Projects
           <p className="text-sm font-bold float-right">
             <button className="pr-2">
@@ -134,10 +165,9 @@ const OutreachStudList = () => {
                   placeholder="Search"
                   className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   onChange={(e) => setDepartment(e.target.value)}
-
                 >
                   <option value="All">All</option>
-                  <option value="NA">N/A</option>
+                  <option value="N/A">N/A</option>
                   <option value="SOC">SOC</option>
                   <option value="SAS">SAS</option>
                   <option value="SEA">SEA</option>
@@ -146,7 +176,6 @@ const OutreachStudList = () => {
                   <option value="SNAMS">SNAMS</option>
                   <option value="CCJEF">CCJEF</option>
                   <option value="SHTM">SHTM</option>
-
                 </select>
               </li>
               <li>
@@ -164,10 +193,9 @@ const OutreachStudList = () => {
               <li>
                 <label className=" px-4 py-10 text-sm font-bold">Sort By</label>
                 <select className="mr-20 w-full z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option>Date</option>
-                  <option value="US">SOC</option>
-                  <option value="CA">SAS</option>
-                  <option value="FR">SBA</option>
+                  <option value="All">All</option>
+                  <option value="Oldest">Oldest</option>
+                  <option value="Latest">Latest</option>
                 </select>
               </li>
             </ul>
@@ -180,7 +208,6 @@ const OutreachStudList = () => {
                     Add New Project
                     </button>
                 </div> */}
-
           <table className="w-full text-sm text-left table-fixed">
             <thead className="bg-gray-300">
               <tr>
@@ -215,11 +242,12 @@ const OutreachStudList = () => {
             </thead>
             <tbody>{tableContent}</tbody>
           </table>
+          {noOutreach}
         </div>
-            </>
-        )
-    }
+      </>
+    );
+  }
 
-    return content
-}
-export default OutreachStudList
+  return content;
+};
+export default OutreachStudList;
