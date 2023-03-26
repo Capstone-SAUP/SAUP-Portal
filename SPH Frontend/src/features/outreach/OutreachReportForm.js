@@ -180,6 +180,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [amount2, setAmount2] = useState(filteredOutreach.amount2);
   const [amount3, setAmount3] = useState(filteredOutreach.amount3);
   const [amount_total, setAmount_Total] = useState(filteredOutreach.amount_total);
+  const [proj_rep, setProj_rep] = useState(filteredOutreach.proj_rep);
+  const [designation1, setDesignation1] = useState(filteredOutreach.designation1);
+  const [adviser_name, setAdviser_name] = useState(filteredOutreach.adviser_name);
+  const [stud_org, setStud_org] = useState(filteredOutreach.stud_org);
+  const [cscb_rep, setCscb_rep] = useState(filteredOutreach.cscb_rep);
+  const [dept_rep, setDept_rep] = useState(filteredOutreach.dept_rep);
+  const [dean, setDean] = useState(filteredOutreach.dean);
+  const [designation2, setDesignation2] = useState(filteredOutreach.designation2);
   const [image1, setImage1] = useState(filteredOutreach.image1);
   const [caption1, setCaption1] = useState(filteredOutreach.caption1);
   const [caption2, setCaption2] = useState(filteredOutreach.caption2);
@@ -286,6 +294,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setAmount2("")
       setAmount3("")
       setAmount_Total("")
+      setProj_rep("")
+      setDesignation1("")
+      setAdviser_name("")
+      setStud_org("")
+      setCscb_rep("")
+      setDept_rep("")
+      setDean("")
+      setDesignation2("")
       setImage1("")
       setCaption1("")
       setCaption2("")
@@ -395,10 +411,22 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onAmount2Changed = (e) => setAmount2(e.target.value);
   const onAmount3Changed = (e) => setAmount3(e.target.value);
   const onAmount_TotalChanged = (e) => setAmount_Total(e.target.value);
+  const OnProj_repChanged = (e) => setProj_rep(e.target.value);
+  const OnDesignation1Changed = (e) => setDesignation1(e.target.value);
+  const OnAdviser_nameChanged = (e) => setAdviser_name(e.target.value);
+  const OnStud_orgChanged = (e) => setStud_org(e.target.value);
+  const OnCscb_repChanged = (e) => setCscb_rep(e.target.value);
+  const OnDept_repChanged = (e) => setDept_rep(e.target.value);
+  const OnDeanChanged = (e) => setDean(e.target.value);
+  const OnDesignation2Changed = (e) => setDesignation2(e.target.value);
   const onImage1Changed = (e) => setImage1(e.target.value);
+  const onImage2Changed = (e) => setImage1(e.target.value);
   const onCaption1Changed = (e) => setCaption1(e.target.value);
-  const onCaption2Changed = (e) => setCaption2(e.target.value);
-  const onImage2Changed = (e) => setImage2(e.target.value);
+  const onCaption2Changed = (e) => setCaption2(e.target.value)
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   // const canSave =
   //   [
@@ -612,6 +640,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
         amount2,
         amount3,
         amount_total,
+        proj_rep,
+        designation1,
+        adviser_name,
+        stud_org,
+        cscb_rep,
+        dept_rep,
+        dean,
+        designation2,
         image1,
         caption1,
         caption2,
@@ -1859,8 +1895,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={proj_rep}
+                            onChange={OnProj_repChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -1870,8 +1906,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={designation1}
+                            onChange={OnDesignation1Changed}
                           />
                         </div>
                       </div>
@@ -1888,8 +1924,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={adviser_name}
+                            onChange={OnAdviser_nameChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -1901,8 +1937,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={stud_org}
+                            onChange={OnStud_orgChanged}
                           />
                         </div>
                       </div>
@@ -1916,8 +1952,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={cscb_rep}
+                            onChange={OnCscb_repChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -1929,8 +1965,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={dept_rep}
+                            onChange={OnDept_repChanged}
                           />
                         </div>
                       </div>
@@ -1945,8 +1981,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={dean}
+                            onChange={OnDeanChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -1956,8 +1992,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                            // onChange={on}
+                            value={designation2}
+                            onChange={OnDesignation2Changed}
                           />
                         </div>
                       </div>
@@ -2046,7 +2082,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                                   <input
                                     type="file"
                                     className="opacity-0"
-                                    value={image1}
+                                    value={image2}
                                     onChange={onImage2Changed}
                                   />
                                 </label>

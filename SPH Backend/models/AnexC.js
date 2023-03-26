@@ -305,6 +305,30 @@ const anexaCschema = new mongoose.Schema(
     amount_total: {
       type: String,
     },
+    proj_rep: {
+      type: String,
+    },
+    designation1: {
+      type: String,
+    },
+    adviser_name: {
+      type: String,
+    },
+    stud_org: {
+      type: String,
+    },
+    cscb_rep: {
+      type: String,
+    },
+    dept_rep: {
+      type: String,
+    },
+    dean: {
+      type: String,
+    },
+    designation2: {
+      type: String,
+    },
     image1: {
       type: Buffer,
     },
