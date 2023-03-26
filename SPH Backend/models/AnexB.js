@@ -74,6 +74,24 @@ const anexBschema = new mongoose.Schema(
     output3: {
       type: String,
     },
+    proj_rep: {
+      type: String,
+    },
+    designation1: {
+      type: String,
+    },
+    cscb_rep: {
+      type: String,
+    },
+    dept_rep: {
+      type: String,
+    },
+    dean: {
+      type: String,
+    },
+    designation2: {
+      type: String,
+    },
     status: {
       type: String,
       default: "Pending",
