@@ -153,17 +153,17 @@ const ViewerPDF = (filteredOutreach:any) =>  {
 //     }
 //   };
 
-  const onSetInputs = () => {
-    if (ui.current) {
-      const prompt = window.prompt("Enter Inputs JSONString") || "";
-      try {
-        const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
-        ui.current.setInputs(json);
-      } catch (e) {
-        alert(e);
-      }
-    }
-  };
+  // const onSetInputs = () => {
+  //   if (ui.current) {
+  //     const prompt = window.prompt("Enter Inputs JSONString") || "";
+  //     try {
+  //       const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
+  //       ui.current.setInputs(json);
+  //     } catch (e) {
+  //       alert(e);
+  //     }
+  //   }
+  // };
 
 //   const onSaveInputs = () => {
 //     if (ui.current) {
@@ -185,7 +185,6 @@ const ViewerPDF = (filteredOutreach:any) =>  {
     if (ui.current) {
      const template = ui.current.getTemplate();
       const inputs = ui.current.getInputs();
-      const font = await getFontsData();
      const pdf = await generate({ template, inputs, options: {  } });
      const blob = new Blob([pdf.buffer], { type: "application/pdf" });
       window.open(URL.createObjectURL(blob));
@@ -270,7 +269,7 @@ const ViewerPDF = (filteredOutreach:any) =>  {
                 Change Status: &nbsp;
             </label>
             <select
-                id="roles"
+                id="status"
                 name="roles"
                 className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
                 value={status}
@@ -281,14 +280,15 @@ const ViewerPDF = (filteredOutreach:any) =>  {
         </div>
         &nbsp;
         <button
-className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-10 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
-disabled={!canSave}
+            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            
+            title="Save"
+            onClick={onSaveOutreachClicked}
           >
             Save
           </button>
           &nbsp;
           <button
-className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-10 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
+className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
             onClick={onGeneratePDF}
             disabled={!canSave}
           >
