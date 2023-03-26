@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAddNewAnexCMutation } from "./anexC_ApiSlice";
+import { useGetUsersQuery } from '../users/usersApiSlice'
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -15,15 +16,27 @@ const ReportsView = () => {
   const { user_id } = useAuth();
   const { id } = useParams();
 
-    const { anexC } = useGetAnexCQuery("reportList", {
-      selectFromResult: ({ data }) => ({
-        anexC: data?.entities[id],
-      }),
-    });
-    const filteredOutreach = { ...anexC };
-    console.log(anexC);
+  const { anexC } = useGetAnexCQuery("reportList", {
+    selectFromResult: ({ data }) => ({
+      anexC: data?.entities[id],
+    }),
+  });
+  const filteredOutreach = { ...anexC };
+  console.log(anexC);
 
+  const {prep_per1_name, prep_per2_name, prep_per3_name, prep_per4_name } = useGetUsersQuery("usersList", {
+    selectFromResult: ({ data }) => ({
+      prep_per1_name: data?.entities[filteredOutreach.prep_per1].firstname + " " + data?.entities[filteredOutreach.prep_per1].lastname,
+      prep_per2_name: data?.entities[filteredOutreach.prep_per2].firstname + " " + data?.entities[filteredOutreach.prep_per2].lastname,
+      prep_per3_name: data?.entities[filteredOutreach.prep_per3].firstname + " " + data?.entities[filteredOutreach.prep_per3].lastname,
+      prep_per4_name: data?.entities[filteredOutreach.prep_per4].firstname + " " + data?.entities[filteredOutreach.prep_per4].lastname,
+    }),
+})
 
+  const isprep_per1 = prep_per1_name === undefined ? "None" : prep_per1_name;
+  const isprep_per2 = prep_per2_name === undefined ? "None" : prep_per2_name;
+  const isprep_per3 = prep_per3_name === undefined ? "None" : prep_per3_name;
+  const isprep_per4 = prep_per4_name === undefined ? "None" : prep_per4_name;
   const navigate = useNavigate();
 
   const [userId] = useState(user_id);
@@ -36,10 +49,10 @@ const ReportsView = () => {
   const [brief_narrative] = useState(filteredOutreach.brief_narrative);
   const [topics] = useState(filteredOutreach.topics);
   const [speakers] = useState(filteredOutreach.speakers);
-  const [prep_per1] = useState(filteredOutreach.prep_per1);
-  const [prep_per2] = useState(filteredOutreach.prep_per2);
-  const [prep_per3] = useState(filteredOutreach.prep_per3);
-  const [prep_per4] = useState(filteredOutreach.prep_per4);
+  const [prep_per1] = useState(prep_per1_name);
+  const [prep_per2] = useState(prep_per2_name);
+  const [prep_per3] = useState(prep_per3_name);
+  const [prep_per4] = useState(prep_per4_name);
   const [prep_pos1] = useState(filteredOutreach.prep_pos1);
   const [prep_pos2] = useState(filteredOutreach.prep_pos2);
   const [prep_pos3] = useState(filteredOutreach.prep_pos3);
@@ -130,7 +143,7 @@ const ReportsView = () => {
   const [caption1] = useState(filteredOutreach.caption1);
   const [caption2] = useState(filteredOutreach.caption2);
   const [image2] = useState(filteredOutreach.image2);
-
+  console.log(filteredOutreach);
   const content = (
     <>
       <form className="h-full full grid gap-3 px-20 text-black">
@@ -288,7 +301,7 @@ const ReportsView = () => {
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                          <label htmlFor="country">Type of Participation</label>
+                          <label className="truncate" htmlFor="country">Type of Participation</label>
                           <div
                             className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
                           >
@@ -310,9 +323,9 @@ const ReportsView = () => {
                             {prep_type4}
                           </div>
                         </div>
-                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                        <div className="grid md:col-span-1 grid-cols-1 gap-x-1 md:grid-cols-2">
                           <div className="md:col-span-1">
-                            <label htmlFor="country">Start Time</label>
+                            <label className="truncate" htmlFor="country">Start Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
                             >
@@ -411,7 +424,7 @@ const ReportsView = () => {
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                          <label htmlFor="country">Type of Participation</label>
+                          <label className="truncate" htmlFor="country">Type of Participation</label>
                           <div
                             className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
                           >
@@ -433,9 +446,9 @@ const ReportsView = () => {
                             {implement_type4}
                           </div>
                         </div>
-                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                        <div className="grid md:col-span-1 grid-cols-1 gap-x-1 md:grid-cols-2">
                           <div className="md:col-span-1">
-                            <label htmlFor="country">Start Time</label>
+                            <label className="truncate" htmlFor="country">Start Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
                             >
@@ -535,7 +548,7 @@ const ReportsView = () => {
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                          <label htmlFor="country">Type of Participation</label>
+                          <label className="truncate" htmlFor="country">Type of Participation</label>
                           <div
                             className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
                           >
@@ -557,9 +570,9 @@ const ReportsView = () => {
                             {post_type4}
                           </div>
                         </div>
-                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                        <div className="grid md:col-span-1 grid-cols-1 gap-x-1 md:grid-cols-2">
                           <div className="md:col-span-1">
-                            <label htmlFor="country">Start Time</label>
+                            <label className="truncate" htmlFor="country">Start Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
                             >

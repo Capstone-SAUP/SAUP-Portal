@@ -39,16 +39,20 @@ const anexaCschema = new mongoose.Schema(
       type: String,
     },
     prep_per1: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     prep_per2: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     prep_per3: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     prep_per4: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     prep_pos1: {
       type: String,

@@ -648,7 +648,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   });
   const options = users.map((user) => {
     return (
-      <option className="" key={user.user_id} value={user.user_id}>
+      <option className="" key={user.id} value={user.id}>
         {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
@@ -853,6 +853,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per1}
                             onChange={onPrep_Per1Changed}
                           >
@@ -862,6 +863,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per2"
                             name="prep_per2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per2}
                             onChange={onPrep_Per2Changed}
                           >
@@ -871,6 +873,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per3"
                             name="prep_per3"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per3}
                             onChange={onPrep_Per3Changed}
                           >
@@ -880,6 +883,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per4"
                             name="prep_per4"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per4}
                             onChange={onPrep_Per4Changed}
                           >
@@ -937,7 +941,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             <option value="Employee">Employee</option>
                           </select>
                         </div>
-                        <div className="md:col-span-1">
+                        <div className="md:col-span-1 md:text-">
                           <label htmlFor="country">Type of Participation</label>
                           <select
                             id="user1"
