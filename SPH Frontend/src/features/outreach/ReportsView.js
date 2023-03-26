@@ -126,6 +126,14 @@ const ReportsView = () => {
   const [amount2] = useState(filteredOutreach.amount2);
   const [amount3] = useState(filteredOutreach.amount3);
   const [amount_total] = useState(filteredOutreach.amount_total);
+  const [proj_rep] = useState(filteredOutreach.proj_rep);
+  const [designation1] = useState(filteredOutreach.designation1);
+  const [adviser_name] = useState(filteredOutreach.adviser_name);
+  const [stud_org] = useState(filteredOutreach.stud_org);
+  const [cscb_rep] = useState(filteredOutreach.cscb_rep);
+  const [dept_rep] = useState(filteredOutreach.dept_rep);
+  const [dean] = useState(filteredOutreach.dean);
+  const [designation2] = useState(filteredOutreach.designation2);
   const [image1] = useState(filteredOutreach.image1);
   const [caption1] = useState(filteredOutreach.caption1);
   const [caption2] = useState(filteredOutreach.caption2);
@@ -747,13 +755,13 @@ const ReportsView = () => {
                             Name of Project Organizer or CSCB Representative
                           </label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {proj_rep}
                           </div>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Designation</label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {designation1}
                           </div>
                         </div>
                       </div>
@@ -766,7 +774,7 @@ const ReportsView = () => {
                             Name of Adviser for Student Organizations
                           </label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {adviser_name}
                           </div>
                         </div>
                         <div className="md:col-span-1">
@@ -774,7 +782,7 @@ const ReportsView = () => {
                             Name of Student Organization
                           </label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {stud_org}
                           </div>
                         </div>
                       </div>
@@ -784,7 +792,7 @@ const ReportsView = () => {
                             Name of CSCB Representative for Departmental CES
                           </label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {cscb_rep}
                           </div>
                         </div>
                         <div className="md:col-span-1">
@@ -792,7 +800,7 @@ const ReportsView = () => {
                             Department Represented
                           </label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {dept_rep}
                           </div>
                         </div>
                       </div>
@@ -803,13 +811,13 @@ const ReportsView = () => {
                             Name of Dean or Cluster Head
                           </label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {dean}
                           </div>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Designation</label>
                           <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
-                            {accomp_obj}
+                            {designation2}
                           </div>
                         </div>
                       </div>
@@ -844,7 +852,7 @@ const ReportsView = () => {
                               </label>
                               <div className="flex items-center justify-center w-full">
                                 <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed">
-                                  {image1}
+                                  {image2}
                                 </label>
                               </div>
                             </div>
