@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'https://saup-portal-hau.onrender.com/'
+    'https://saup-portal.vercel.app/'
 ]
 
 module.exports = allowedOrigins
