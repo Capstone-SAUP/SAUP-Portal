@@ -90,10 +90,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [brief_narrative, setBrief_Narrative] = useState(filteredOutreach.brief_narrative);
   const [topics, setTopics] = useState(filteredOutreach.topics);
   const [speakers, setSpeakers] = useState(filteredOutreach.speakers);
-  const [prep_per1, setPrep_Per1] = useState(filteredOutreach.prep_per1);
-  const [prep_per2, setPrep_Per2] = useState(filteredOutreach.prep_per2);
-  const [prep_per3, setPrep_Per3] = useState(filteredOutreach.prep_per3);
-  const [prep_per4, setPrep_Per4] = useState(filteredOutreach.prep_per4);
+  const [prep_person, setPrep_Person] = useState([]);
+  const [prep_per1] = useState(filteredOutreach.prep_per1);
+  const [prep_per2] = useState(filteredOutreach.prep_per2);
+  const [prep_per3] = useState(filteredOutreach.prep_per3);
+  const [prep_per4] = useState(filteredOutreach.prep_per4);
   const [prep_pos1, setPrep_Pos1] = useState(filteredOutreach.prep_pos1);
   const [prep_pos2, setPrep_Pos2] = useState(filteredOutreach.prep_pos2);
   const [prep_pos3, setPrep_Pos3] = useState(filteredOutreach.prep_pos3);
@@ -196,10 +197,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setBrief_Narrative("")
       setTopics("")
       setSpeakers("")
-      setPrep_Per1("")
-      setPrep_Per2("")
-      setPrep_Per3("")
-      setPrep_Per4("")
+      setPrep_Person([])
+      // setPrep_Per1("")
+      // setPrep_Per2("")
+      // setPrep_Per3("")
+      // setPrep_Per4("")
       setPrep_Pos1("")
       setPrep_Pos2("")
       setPrep_Pos3("")
@@ -305,10 +307,15 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onBrief_NarrativeChanged = (e) => setBrief_Narrative(e.target.value);
   const onTopicsChanged = (e) => setTopics(e.target.value);
   const onSpeakersChanged = (e) => setSpeakers(e.target.value);
-  const onPrep_Per1Changed = (e) => setPrep_Per1(e.target.value);
-  const onPrep_Per2Changed = (e) => setPrep_Per2(e.target.value);
-  const onPrep_Per3Changed = (e) => setPrep_Per3(e.target.value);
-  const onPrep_Per4Changed = (e) => setPrep_Per4(e.target.value);
+  const onPrep_PersonChanged = (event, index) => {
+    const newItems = Array.from(prep_person);
+    newItems[index] = event.target.value;
+    setPrep_Person(newItems);
+  };
+  // const onPrep_Per1Changed = (e) => setPrep_Per1(e.target.value);
+  // const onPrep_Per2Changed = (e) => setPrep_Per2(e.target.value);
+  // const onPrep_Per3Changed = (e) => setPrep_Per3(e.target.value);
+  // const onPrep_Per4Changed = (e) => setPrep_Per4(e.target.value);
   const onPrep_Pos1Changed = (e) => setPrep_Pos1(e.target.value);
   const onPrep_Pos2Changed = (e) => setPrep_Pos2(e.target.value);
   const onPrep_Pos3Changed = (e) => setPrep_Pos3(e.target.value);
@@ -522,10 +529,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
         brief_narrative,
         topics,
         speakers,
-        prep_per1,
-        prep_per2,
-        prep_per3,
-        prep_per4,
+        prep_person,
+        // prep_per1,
+        // prep_per2,
+        // prep_per3,
+        // prep_per4,
         prep_pos1,
         prep_pos2,
         prep_pos3,
@@ -653,6 +661,10 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       </option>
     );
   });
+
+  const addInput = () => {
+    setPrep_Person([...prep_person, '']); // add a new input with an empty string value
+  };
 
   const errClass = isError ? "errmsg" : "offscreen";
 
@@ -849,23 +861,29 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
                           <label htmlFor="country">Name of Volunteer</label>
-                          <select
+                          
+        {prep_person.map((prep_person, index) => (
+          <select
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
-                            value={prep_per1}
-                            onChange={onPrep_Per1Changed}
+                            value={prep_person}
+                            key={index}
+                            onChange={(event) => onPrep_PersonChanged(event, index)}
                           >
                             {options}
                           </select>
-                          <select
+        ))}
+        <button type="button" onClick={addInput}>Add Input</button>
+                          
+                          {/* <select
                             id="prep_per2"
                             name="prep_per2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
                             value={prep_per2}
-                            onChange={onPrep_Per2Changed}
+                            onChange={(event) => onPrep_PersonChanged(event)}
                           >
                             {options}
                           </select>
@@ -875,7 +893,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
                             value={prep_per3}
-                            onChange={onPrep_Per3Changed}
+                            onChange={(event) => onPrep_PersonChanged(event)}
                           >
                             {options}
                           </select>
@@ -885,10 +903,10 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
                             value={prep_per4}
-                            onChange={onPrep_Per4Changed}
+                            onChange={(event) => onPrep_PersonChanged(event)}
                           >
                             {options}
-                          </select>
+                          </select> */}
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Position/Designation</label>
