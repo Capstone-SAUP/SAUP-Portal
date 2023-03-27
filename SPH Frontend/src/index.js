@@ -6,9 +6,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 import Navigation from './features/forms/Navigation';
-import { disableReactDevTools } from '@fvilers/disable-react-devtools'
-
-if (process.env.NODE_ENV === 'production') disableReactDevTools()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
