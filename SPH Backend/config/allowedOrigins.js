@@ -1,6 +1,5 @@
 const allowedOrigins = [
-    'http://localhost:3000',
-    'https://hau.saup-portal.com'
+    'https://saup-hau-portal.vercel.app/'
 ]
 
 module.exports = allowedOrigins
