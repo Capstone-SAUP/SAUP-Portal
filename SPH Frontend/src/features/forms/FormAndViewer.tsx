@@ -22,10 +22,7 @@ type Mode = "form" | "viewer";
 const initTemplate = () => {
   let template: Template = getTemplate();
   try {
-    const templateString = localStorage.getItem("template");
-    const templateJson = templateString
-      ? JSON.parse(templateString)
-      : getTemplate();
+    const templateJson = getTemplate();
     checkTemplate(templateJson);
     template = templateJson as Template;
   } catch {
@@ -72,10 +69,7 @@ function FormAndViewer() {
     const template = initTemplate();
     let inputs = template.sampledata ?? [{}];
     try {
-      const inputsString = localStorage.getItem("inputs");
-      const inputsJson = inputsString
-        ? JSON.parse(inputsString)
-        : template.sampledata ?? [{}];
+      const inputsJson = template.sampledata ?? [{}];
       inputs = inputsJson;
     } catch {
       localStorage.removeItem("inputs");
