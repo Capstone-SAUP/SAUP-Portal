@@ -36,11 +36,17 @@ app.use('/reports', require('./routes/anexCRoutes'));
 app.use('/view-anex-A', require('./routes/anexARoutes'))
 app.use('/view-anex-B', require('./routes/anexBRoutes'))
 
-app.use(function (req, res, next) {
-res.header("Access-Control-Allow-Origin", "*");
-res.header("Access-Control-Allow-Methods","GET, HEAD, OPTIONS, POST, PUT, DELETE");
-res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept, Authorization");
-next();
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-Width, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "POST, GET, PATCH, DELETE, OPTIONS"
+  );
+  next();
 });
 
 app.all('*', (req, res) => {
