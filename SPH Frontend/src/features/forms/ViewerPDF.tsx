@@ -183,10 +183,11 @@ const ViewerPDF = (filteredOutreach:any) =>  {
 
   const onGeneratePDF = async () => {
     if (ui.current) {
-     const template = ui.current.getTemplate();
-      const inputs = ui.current.getInputs();
-     const pdf = await generate({ template, inputs, options: {  } });
-     const blob = new Blob([pdf.buffer], { type: "application/pdf" });
+    const template = ui.current.getTemplate();
+    const inputs = ui.current.getInputs();
+    const font = await getFontsData();
+    const pdf = await generate({ template, inputs, options: { font } });
+    const blob = new Blob([pdf.buffer], { type: "application/pdf" });
       window.open(URL.createObjectURL(blob));
     }
   };

@@ -88,8 +88,6 @@ export const getTemplate = () => {
     let anexA = require("./templates/template.json");
     let anexB = require("./templates/template2.json");
     let anexC = require("./templates/template3.json");
-    let anexD = require("./templates/template4.json");
-    let Proposed = require("./templates/template2.json");
 
     let new_schema;
 
