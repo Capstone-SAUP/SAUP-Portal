@@ -91,7 +91,7 @@ export const getTemplate = () => {
     let anexD = require("./templates/template4.json");
     let Proposed = require("./templates/template2.json");
 
-    var new_schema;
+    let new_schema;
 
     if (
         window.location.href.match("/view-anex-A") ||
