@@ -36,19 +36,6 @@ app.use('/reports', require('./routes/anexCRoutes'));
 app.use('/view-anex-A', require('./routes/anexARoutes'))
 app.use('/view-anex-B', require('./routes/anexBRoutes'))
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-Width, Content-Type, Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "POST, GET, PATCH, DELETE, OPTIONS"
-  );
-  next();
-});
-
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {
