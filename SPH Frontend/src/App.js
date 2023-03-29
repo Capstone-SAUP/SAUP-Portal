@@ -28,6 +28,7 @@ import Designer from "./features/forms/Designer";
 import FormAndViewer from "./features/forms/FormAndViewer";
 import ViewerPDF from "./features/forms/ViewerPDF";
 import ReportsView from "./features/outreach/ReportsView";
+import NewStudentOutreach from "./features/forms/NewStudentOutreach";
 
 
 function App() {
@@ -106,7 +107,7 @@ function App() {
                   }
                 >
                   <Route path="view-anex-A">
-                    <Route index element={<FormAndViewer />} />
+                    <Route index element={<NewStudentOutreach />} />
                   </Route>
                 </Route>
                 <Route
