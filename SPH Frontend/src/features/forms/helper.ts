@@ -4,7 +4,7 @@ const fontObjList = [
     {
         fallback: true,
         label: "Arial",
-        url: "/fonts/Arial.ttf",
+        url: "./fonts/Arial.ttf",
     }
 ];
 
