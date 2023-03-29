@@ -311,7 +311,7 @@ ${e}`);
             Generate PDF</button>
       </header>
       <br></br>
-      <div className="w-800px" ref={uiRef} />
+      <div className="w-56" ref={uiRef}></div>
     </div>
   );
 }
