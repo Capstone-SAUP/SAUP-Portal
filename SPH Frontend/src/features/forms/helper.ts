@@ -76,11 +76,11 @@ export const downloadJsonFile = (json: any, title: string) => {
 };
 
 export const isJsonString = (str: string) => {
-    // try {
-    //     JSON.parse(str);
-    // } catch (e) {
-    //     return false;
-    // }
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
     return true;
 };
 
