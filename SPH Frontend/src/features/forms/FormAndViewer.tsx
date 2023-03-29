@@ -89,7 +89,6 @@ function FormAndViewer() {
     try {
       const currentUser = user_ids.indexOf(user_id);
       const currentUserObjectId = object_id[currentUser];
-      console.log(currentUserObjectId);
       return currentUserObjectId;
     } catch (error) {}
   };
@@ -98,7 +97,6 @@ function FormAndViewer() {
     try {
       const currentUser = user_ids.indexOf(user_id);
       const currentDeptID = department[currentUser];
-      console.log(currentDeptID);
       return currentDeptID[0];
     } catch (error) {}
   };
@@ -149,7 +147,6 @@ ${e}`);
       // inputs[0].'user_id' = [{"temp":"100", "humid":"12"}];
 
       // inputs.push({"user_id":"111"});
-      console.log(inputs);
       // console.log(inputs.unshift("user_id"));
 
       try {

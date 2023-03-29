@@ -21,7 +21,6 @@ const ReportsView = () => {
       }),
     });
     const filteredOutreach = { ...anexC };
-    console.log(anexC);
 
 
   const navigate = useNavigate();

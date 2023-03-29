@@ -17,7 +17,6 @@ const Reports = ({ reportId }) => {
 
   // console.log(allReport.target_beneficiary);
 
-console.log(allReport);
   if (allReport) {
     const created = new Date(allReport.createdAt).toLocaleString("en-US", {
       day: "numeric",
@@ -28,7 +27,6 @@ console.log(allReport);
       day: "numeric",
       month: "long",
     });
-    console.log(allReport);
     // const handleEdit = () => navigate(`/dash/report/${reportId}`)
     return (
       <tr className="text-left border px-8">
