@@ -71,15 +71,6 @@ function FormAndViewer() {
   useEffect(() => {
     let template = getTemplate();
     let inputs = template.sampledata ?? [{}];
-    try {
-      let inputsString = localStorage.getItem("inputs");
-      let inputsJson = inputsString
-        ? JSON.parse(inputsString)
-        : template.sampledata ?? [{}];
-      inputs = inputsJson;
-    } catch {
-      localStorage.removeItem("inputs");
-    }
 
     getFontsData().then((font) => {
       if (uiRef.current) {
