@@ -19,29 +19,29 @@ import { current } from "@reduxjs/toolkit";
 
 type Mode = "form" | "viewer";
 
-const initTemplate = () => {
-  let template: Template = getTemplate();
-  try {
-    const templateString = localStorage.getItem("template");
-    const templateJson = templateString
-      ? JSON.parse(templateString)
-      : getTemplate();
-    checkTemplate(templateJson);
-    template = templateJson as Template;
-  } catch {
-    localStorage.removeItem("template");
-  }
-  return template;
-};
+// let initTemplate = () => {
+//   let template: Template = getTemplate();
+//   try {
+//     let templateString = localStorage.getItem("template");
+//     let templateJson = templateString
+//       ? JSON.parse(templateString)
+//       : getTemplate();
+//     checkTemplate(templateJson);
+//     template = templateJson as Template;
+//   } catch {
+//     localStorage.removeItem("template");
+//   }
+//   return template;
+// };
 
 function FormAndViewer() {
-  const navigate = useNavigate();
-  const { user_id } = useAuth();
-  const [addNewAnexA] = useAddNewAnexAMutation();
-  const [addNewAnexB] = useAddNewAnexBMutation();
-  const [addNewAnexC] = useAddNewAnexCMutation();
+  let navigate = useNavigate();
+  let { user_id } = useAuth();
+  let [addNewAnexA] = useAddNewAnexAMutation();
+  let [addNewAnexB] = useAddNewAnexBMutation();
+  let [addNewAnexC] = useAddNewAnexCMutation();
 
-  const { object_id, user_ids, department, lastname } = useGetUsersQuery("usersList", {
+  let { object_id, user_ids, department, lastname } = useGetUsersQuery("usersList", {
     selectFromResult: ({ data }) => ({
       object_id: data?.ids.map((id: string | number) => data?.entities[id].id),
       user_ids: data?.ids.map(
@@ -59,21 +59,21 @@ function FormAndViewer() {
 
   //   console.log(object_id[currentUser]);
 
-  // const [userId, setUserId] = useState(users[0].id);
+  // let [userId, setUserId] = useState(users[0].id);
 
-  const uiRef = useRef<HTMLDivElement | null>(null);
-  const ui = useRef<Form | Viewer | null>(null);
+  let uiRef = useRef<HTMLDivElement | null>(null);
+  let ui = useRef<Form | Viewer | null>(null);
 
-  const [mode, setMode] = useState<Mode>(
+  let [mode, setMode] = useState<Mode>(
     (localStorage.getItem("mode") as Mode) ?? "form"
   );
 
   useEffect(() => {
-    const template = initTemplate();
+    let template = getTemplate();
     let inputs = template.sampledata ?? [{}];
     try {
-      const inputsString = localStorage.getItem("inputs");
-      const inputsJson = inputsString
+      let inputsString = localStorage.getItem("inputs");
+      let inputsJson = inputsString
         ? JSON.parse(inputsString)
         : template.sampledata ?? [{}];
       inputs = inputsJson;
@@ -99,29 +99,29 @@ function FormAndViewer() {
     };
   }, [uiRef, mode]);
 
-  const getCurrentUser = () => {
+  let getCurrentUser = () => {
     try {
-      const currentUser = user_ids.indexOf(user_id);
-      const currentUserObjectId = object_id[currentUser];
+      let currentUser = user_ids.indexOf(user_id);
+      let currentUserObjectId = object_id[currentUser];
       return currentUserObjectId;
     } catch (error) {}
   };
 
-  const getCurrentDept = () => {
+  let getCurrentDept = () => {
     try {
-      const currentUser = user_ids.indexOf(user_id);
-      const currentDeptID = department[currentUser];
+      let currentUser = user_ids.indexOf(user_id);
+      let currentDeptID = department[currentUser];
       return currentDeptID[0];
     } catch (error) {}
   };
 
-  const onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value as Mode;
+  let onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value as Mode;
     setMode(value);
     localStorage.setItem("mode", value);
   };
 
-  const onLoadTemplate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  let onLoadTemplate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target && e.target.files) {
       getTemplateFromJsonFile(e.target.files[0])
         .then((t) => {
@@ -137,23 +137,23 @@ ${e}`);
     }
   };
 
-  const onGetInputs = () => {
+  let onGetInputs = () => {
     if (ui.current) {
-      const inputs = ui.current.getInputs();
+      let inputs = ui.current.getInputs();
       alert(JSON.stringify(inputs, null, 2));
       alert("Dumped as console.log");
       console.log(inputs);
     }
   };
 
-  //     const { users } = useGetUsersQuery("usersList", {
+  //     let { users } = useGetUsersQuery("usersList", {
   //       selectFromResult: ({ data }) => ({
   //           users: data?.ids.map((id: string | number) => data?.entities[id])
   //       }),
   //   });
-  const onSaveAnexClicked = async () => {
+  let onSaveAnexClicked = async () => {
     if (ui.current) {
-      const inputs = ui.current.getInputs();
+      let inputs = ui.current.getInputs();
       // console.log(inputs);
       // localStorage.setItem("inputs", JSON.stringify(inputs));
       inputs[0]["user"] = getCurrentUser();
@@ -185,11 +185,11 @@ ${e}`);
     }
   };
 
-  const onSetInputs = () => {
+  let onSetInputs = () => {
     if (ui.current) {
-      const prompt = window.prompt("Enter Inputs JSONString") || "";
+      let prompt = window.prompt("Enter Inputs JSONString") || "";
       try {
-        const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
+        let json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
         ui.current.setInputs(json);
       } catch (e) {
         alert(e);
@@ -197,29 +197,29 @@ ${e}`);
     }
   };
 
-  const onSaveInputs = () => {
+  let onSaveInputs = () => {
     if (ui.current) {
-      const inputs = ui.current.getInputs();
+      let inputs = ui.current.getInputs();
       localStorage.setItem("inputs", JSON.stringify(inputs));
       alert("Saved!");
     }
   };
 
-  const onResetInputs = () => {
+  let onResetInputs = () => {
     localStorage.removeItem("inputs");
     if (ui.current) {
-      const template = initTemplate();
+      let template = getTemplate();
       ui.current.setInputs(template.sampledata ?? [{}]);
     }
   };
 
-  const onGeneratePDF = async () => {
+  let onGeneratePDF = async () => {
     if (ui.current) {
-      const template = ui.current.getTemplate();
-      const inputs = ui.current.getInputs();
-      const font = await getFontsData();
-      const pdf = await generate({ template, inputs, options: { font } });
-      const blob = new Blob([pdf.buffer], { type: "application/pdf" });
+      let template = ui.current.getTemplate();
+      let inputs = ui.current.getInputs();
+      let font = await getFontsData();
+      let pdf = await generate({ template, inputs, options: { font } });
+      let blob = new Blob([pdf.buffer], { type: "application/pdf" });
       window.open(URL.createObjectURL(blob));
     }
   };
