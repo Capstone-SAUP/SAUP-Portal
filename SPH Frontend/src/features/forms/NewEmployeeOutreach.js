@@ -12,7 +12,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
   const { user_id } = useAuth();
   const { id } = useParams();
 
-  const { object_id, user_ids, department, fullname } = useGetUsersQuery(
+  const { object_id, user_ids, listdepartment, fullname } = useGetUsersQuery(
     "usersList",
     {
       selectFromResult: ({ data }) => ({
@@ -23,7 +23,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
           " " +
           data?.ids.map((id) => data?.entities[id].lastname),
 
-        department: data?.ids.map((id) => data?.entities[id].department),
+        listdepartment: data?.ids.map((id) => data?.entities[id].department),
       }),
     }
   );
@@ -38,8 +38,8 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
   let getCurrentDept = () => {
     try {
       let currentUser = user_ids.indexOf(user_id);
-      let currentDeptID = department[currentUser];
-      return currentDeptID;
+      let currentDeptID = listdepartment[currentUser];
+      return currentDeptID[0];
     } catch (error) {}
   };
 
@@ -49,7 +49,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
     useAddNewAnexBMutation();
 
   const [user] = useState(current_user);
-  const [current_department] = useState(getCurrentDept());
+  const [department] = useState(getCurrentDept());
   const [sponsor_dept, setSponsor_Dept] = useState("");
   const [project_title, setProject_Title] = useState("");
   const [target_beneficiary, setBeneficiaries] = useState("");
@@ -149,7 +149,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
     e.preventDefault();
     await createEmployeeOutreach({
       user,
-      current_department,
+      department,
       sponsor_dept,
       project_title,
       target_beneficiary,
