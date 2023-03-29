@@ -227,12 +227,12 @@ if (roles == "Employee" || roles == "Admin"){
     if (pathname.match("/dash")) {
       certificateButton = (
         <button
-          className="mb-3 w-full text-left"
+          className="w-full text-left"
           title="Generate Certificate"
           onClick={onGenerateClicked}
         >
           <div
-            className={`mb-20 text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
+            className={`text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
               pathname.includes("/dash/generate-certificate") && "bg-red-500"
             }`}
           >

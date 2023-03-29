@@ -21,11 +21,9 @@ const ReportsView = () => {
       }),
     });
     const filteredOutreach = { ...anexC };
-    console.log(anexC);
 
 
   const navigate = useNavigate();
-
   const [userId] = useState(user_id);
   const [sponsor_dept] = useState(filteredOutreach.sponsor_dept);
   const [project_title] = useState(filteredOutreach.project_title);

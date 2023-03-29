@@ -40,7 +40,6 @@ const ReportOutreach = () => {
     delete unfilteredOutreach.__v;
 
     const filteredOutreach = unfilteredOutreach;
-    console.log(filteredOutreach);
     const content = <OutreachReportForm filteredOutreach={filteredOutreach} users={users}/>
 
     return content

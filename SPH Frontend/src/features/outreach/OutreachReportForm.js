@@ -90,30 +90,31 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [brief_narrative, setBrief_Narrative] = useState(filteredOutreach.brief_narrative);
   const [topics, setTopics] = useState(filteredOutreach.topics);
   const [speakers, setSpeakers] = useState(filteredOutreach.speakers);
-  const [prep_person, setPrep_Person] = useState([]);
-  const [prep_pos, setPrep_Position] = useState([]);
-  const [prep_type, setPrep_Type] = useState([]);
-  const [prep_start, setPrep_Start] = useState([]);
-  const [prep_end, setPrep_End] = useState([]);
-  // const [prep_per1] = useState(filteredOutreach.prep_per1);
-  // const [prep_per2] = useState(filteredOutreach.prep_per2);
-  // const [prep_per3] = useState(filteredOutreach.prep_per3);
-  // const [prep_per4] = useState(filteredOutreach.prep_per4);
-  // const [prep_pos1, setPrep_Pos1] = useState(filteredOutreach.prep_pos1);
-  // const [prep_pos2, setPrep_Pos2] = useState(filteredOutreach.prep_pos2);
-  // const [prep_pos3, setPrep_Pos3] = useState(filteredOutreach.prep_pos3);
-  // const [prep_pos4, setPrep_Pos4] = useState(filteredOutreach.prep_pos4);
-  // const [prep_type1, setPrep_Type1] = useState(filteredOutreach.prep_type1);
-  // const [prep_type2, setPrep_Type2] = useState(filteredOutreach.prep_type2);
-  // const [prep_type3, setPrep_Type3] = useState(filteredOutreach.prep_type3);
-  // const [prep_type4, setPrep_Type4] = useState(filteredOutreach.prep_type4);
-  // const [prep_start1, setPrep_Start1] = useState(filteredOutreach.prep_start1);
-  // const [prep_start2, setPrep_Start2] = useState(filteredOutreach.prep_start2);
-  // const [prep_star3, setPrep_Star3] = useState(filteredOutreach.prep_star3);
-  // const [prep_star4, setPrep_Star4] = useState(filteredOutreach.prep_star4);
-  // const [prep_end2, setPrep_End2] = useState(filteredOutreach.prep_end2);
-  // const [prep_end3, setPrep_End3] = useState(filteredOutreach.prep_end3);
-  // const [prep_end4, setPrep_End4] = useState(filteredOutreach.prep_end4);
+  // const [prep_person, setPrep_Person] = useState([]);
+  // const [prep_pos, setPrep_Position] = useState([]);
+  // const [prep_type, setPrep_Type] = useState([]);
+  // const [prep_start, setPrep_Start] = useState([]);
+  // const [prep_end, setPrep_End] = useState([]);
+  const [prep_per1, setPrep_Per1] = useState(filteredOutreach.prep_per1);
+  const [prep_per2, setPrep_Per2] = useState(filteredOutreach.prep_per2);
+  const [prep_per3, setPrep_Per3] = useState(filteredOutreach.prep_per3);
+  const [prep_per4, setPrep_Per4] = useState(filteredOutreach.prep_per4);
+  const [prep_pos1, setPrep_Pos1] = useState(filteredOutreach.prep_pos1);
+  const [prep_pos2, setPrep_Pos2] = useState(filteredOutreach.prep_pos2);
+  const [prep_pos3, setPrep_Pos3] = useState(filteredOutreach.prep_pos3);
+  const [prep_pos4, setPrep_Pos4] = useState(filteredOutreach.prep_pos4);
+  const [prep_type1, setPrep_Type1] = useState(filteredOutreach.prep_type1);
+  const [prep_type2, setPrep_Type2] = useState(filteredOutreach.prep_type2);
+  const [prep_type3, setPrep_Type3] = useState(filteredOutreach.prep_type3);
+  const [prep_type4, setPrep_Type4] = useState(filteredOutreach.prep_type4);
+  const [prep_start1, setPrep_Start1] = useState(filteredOutreach.prep_start1);
+  const [prep_start2, setPrep_Start2] = useState(filteredOutreach.prep_start2);
+  const [prep_star3, setPrep_Star3] = useState(filteredOutreach.prep_star3);
+  const [prep_star4, setPrep_Star4] = useState(filteredOutreach.prep_star4);
+  const [prep_end1, setPrep_End1] = useState(filteredOutreach.prep_end1);
+  const [prep_end2, setPrep_End2] = useState(filteredOutreach.prep_end2);
+  const [prep_end3, setPrep_End3] = useState(filteredOutreach.prep_end3);
+  const [prep_end4, setPrep_End4] = useState(filteredOutreach.prep_end4);
   const [implement_per1, setImplement_Per1] = useState(filteredOutreach.implement_per1);
   const [implement_per2, setImplement_Per2] = useState(filteredOutreach.implement_per2);
   const [implement_per3, setImplement_Per3] = useState(filteredOutreach.implement_per3);
@@ -184,6 +185,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [amount2, setAmount2] = useState(filteredOutreach.amount2);
   const [amount3, setAmount3] = useState(filteredOutreach.amount3);
   const [amount_total, setAmount_Total] = useState(filteredOutreach.amount_total);
+  const [proj_rep, setProj_rep] = useState(filteredOutreach.proj_rep);
+  const [designation1, setDesignation1] = useState(filteredOutreach.designation1);
+  const [adviser_name, setAdviser_name] = useState(filteredOutreach.adviser_name);
+  const [stud_org, setStud_org] = useState(filteredOutreach.stud_org);
+  const [cscb_rep, setCscb_rep] = useState(filteredOutreach.cscb_rep);
+  const [dept_rep, setDept_rep] = useState(filteredOutreach.dept_rep);
+  const [dean, setDean] = useState(filteredOutreach.dean);
+  const [designation2, setDesignation2] = useState(filteredOutreach.designation2);
   const [image1, setImage1] = useState(filteredOutreach.image1);
   const [caption1, setCaption1] = useState(filteredOutreach.caption1);
   const [caption2, setCaption2] = useState(filteredOutreach.caption2);
@@ -200,30 +209,31 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setBrief_Narrative("")
       setTopics("")
       setSpeakers("")
-      setPrep_Person([])
-      setPrep_Position([])
-      setPrep_Type([])
-      setPrep_Start([])
-      setPrep_End([])
-      // setPrep_Per1("")
-      // setPrep_Per2("")
-      // setPrep_Per3("")
-      // setPrep_Per4("")
-      // setPrep_Pos1("")
-      // setPrep_Pos2("")
-      // setPrep_Pos3("")
-      // setPrep_Type1("")
-      // setPrep_Type2("")
-      // setPrep_Pos4("")
-      // setPrep_Type3("")
-      // setPrep_Type4("")
-      // setPrep_Start1("")
-      // setPrep_Start2("")
-      // setPrep_Star3("")
-      // setPrep_Star4("")
-      // setPrep_End2("")
-      // setPrep_End3("")
-      // setPrep_End4("")
+      // setPrep_Person([])
+      // setPrep_Position([])
+      // setPrep_Type([])
+      // setPrep_Start([])
+      // setPrep_End([])
+      setPrep_Per1("")
+      setPrep_Per2("")
+      setPrep_Per3("")
+      setPrep_Per4("")
+      setPrep_Pos1("")
+      setPrep_Pos2("")
+      setPrep_Pos3("")
+      setPrep_Type1("")
+      setPrep_Type2("")
+      setPrep_Pos4("")
+      setPrep_Type3("")
+      setPrep_Type4("")
+      setPrep_Start1("")
+      setPrep_Start2("")
+      setPrep_Star3("")
+      setPrep_Star4("")
+      setPrep_End1("")
+      setPrep_End2("")
+      setPrep_End3("")
+      setPrep_End4("")
       setImplement_Per1("")
       setImplement_Per2("")
       setImplement_Per3("")
@@ -294,6 +304,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setAmount2("")
       setAmount3("")
       setAmount_Total("")
+      setProj_rep("")
+      setDesignation1("")
+      setAdviser_name("")
+      setStud_org("")
+      setCscb_rep("")
+      setDept_rep("")
+      setDean("")
+      setDesignation2("")
       setImage1("")
       setCaption1("")
       setCaption2("")
@@ -313,57 +331,26 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onBrief_NarrativeChanged = (e) => setBrief_Narrative(e.target.value);
   const onTopicsChanged = (e) => setTopics(e.target.value);
   const onSpeakersChanged = (e) => setSpeakers(e.target.value);
-
-  const onPrep_PersonChanged = (event, index) => {
-    const newItems = Array.from(prep_person);
-    newItems[index] = event.target.value;
-    setPrep_Person(newItems);
-  };
-
-  const onPrep_PositionChanged = (event, index) => {
-    const newItems = Array.from(prep_pos);
-    newItems[index] = event.target.value;
-    setPrep_Position(newItems);
-  };
-
-  const onPrep_TypeChanged = (event, index) => {
-    const newItems = Array.from(prep_type);
-    newItems[index] = event.target.value;
-    setPrep_Type(newItems);
-  };
-
-  const onPrep_StartChanged = (event, index) => {
-    const newItems = Array.from(prep_start);
-    newItems[index] = event.target.value;
-    setPrep_Start(newItems);
-  };
-
-  const onPrep_EndChanged = (event, index) => {
-    const newItems = Array.from(prep_end);
-    newItems[index] = event.target.value;
-    setPrep_End(newItems);
-  };
-
-  // const onPrep_Per1Changed = (e) => setPrep_Per1(e.target.value);
-  // const onPrep_Per2Changed = (e) => setPrep_Per2(e.target.value);
-  // const onPrep_Per3Changed = (e) => setPrep_Per3(e.target.value);
-  // const onPrep_Per4Changed = (e) => setPrep_Per4(e.target.value);
-  // const onPrep_Pos1Changed = (e) => setPrep_Pos1(e.target.value);
-  // const onPrep_Pos2Changed = (e) => setPrep_Pos2(e.target.value);
-  // const onPrep_Pos3Changed = (e) => setPrep_Pos3(e.target.value);
-  // const onPrep_Type1Changed = (e) => setPrep_Type1(e.target.value);
-  // const onPrep_Type2Changed = (e) => setPrep_Type2(e.target.value);
-  // const onPrep_Pos4Changed = (e) => setPrep_Pos4(e.target.value);
-  // const onPrep_Type3Changed = (e) => setPrep_Type3(e.target.value);
-  // const onPrep_Type4Changed = (e) => setPrep_Type4(e.target.value);
-  // const onPrep_Start1Changed = (e) => setPrep_Start1(e.target.value);
-  // const onPrep_Start2Changed = (e) => setPrep_Start2(e.target.value);
-  // const onPrep_Star3Changed = (e) => setPrep_Star3(e.target.value);
-  // const onPrep_Star4Changed = (e) => setPrep_Star4(e.target.value);
-  // const onPrep_EndChanged = (e) => setPrep_End(e.target.value);
-  // const onPrep_End2Changed = (e) => setPrep_End2(e.target.value);
-  // const onPrep_End3Changed = (e) => setPrep_End3(e.target.value);
-  // const onPrep_End4Changed = (e) => setPrep_End4(e.target.value);
+  const onPrep_Per1Changed = (e) => setPrep_Per1(e.target.value);
+  const onPrep_Per2Changed = (e) => setPrep_Per2(e.target.value);
+  const onPrep_Per3Changed = (e) => setPrep_Per3(e.target.value);
+  const onPrep_Per4Changed = (e) => setPrep_Per4(e.target.value);
+  const onPrep_Pos1Changed = (e) => setPrep_Pos1(e.target.value);
+  const onPrep_Pos2Changed = (e) => setPrep_Pos2(e.target.value);
+  const onPrep_Pos3Changed = (e) => setPrep_Pos3(e.target.value);
+  const onPrep_Type1Changed = (e) => setPrep_Type1(e.target.value);
+  const onPrep_Type2Changed = (e) => setPrep_Type2(e.target.value);
+  const onPrep_Pos4Changed = (e) => setPrep_Pos4(e.target.value);
+  const onPrep_Type3Changed = (e) => setPrep_Type3(e.target.value);
+  const onPrep_Type4Changed = (e) => setPrep_Type4(e.target.value);
+  const onPrep_Start1Changed = (e) => setPrep_Start1(e.target.value);
+  const onPrep_Start2Changed = (e) => setPrep_Start2(e.target.value);
+  const onPrep_Star3Changed = (e) => setPrep_Star3(e.target.value);
+  const onPrep_Star4Changed = (e) => setPrep_Star4(e.target.value);
+  const onPrep_End1Changed = (e) => setPrep_End1(e.target.value);
+  const onPrep_End2Changed = (e) => setPrep_End2(e.target.value);
+  const onPrep_End3Changed = (e) => setPrep_End3(e.target.value);
+  const onPrep_End4Changed = (e) => setPrep_End4(e.target.value);
   const onImplement_Per1Changed = (e) => setImplement_Per1(e.target.value);
   const onImplement_Per2Changed = (e) => setImplement_Per2(e.target.value);
   const onImplement_Per3Changed = (e) => setImplement_Per3(e.target.value);
@@ -434,6 +421,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onAmount2Changed = (e) => setAmount2(e.target.value);
   const onAmount3Changed = (e) => setAmount3(e.target.value);
   const onAmount_TotalChanged = (e) => setAmount_Total(e.target.value);
+  const OnProj_repChanged = (e) => setProj_rep(e.target.value);
+  const OnDesignation1Changed = (e) => setDesignation1(e.target.value);
+  const OnAdviser_nameChanged = (e) => setAdviser_name(e.target.value);
+  const OnStud_orgChanged = (e) => setStud_org(e.target.value);
+  const OnCscb_repChanged = (e) => setCscb_rep(e.target.value);
+  const OnDept_repChanged = (e) => setDept_rep(e.target.value);
+  const OnDeanChanged = (e) => setDean(e.target.value);
+  const OnDesignation2Changed = (e) => setDesignation2(e.target.value);
   const onImage1Changed = (e) => setImage1(e.target.value);
   const onCaption1Changed = (e) => setCaption1(e.target.value);
   const onCaption2Changed = (e) => setCaption2(e.target.value);
@@ -561,30 +556,26 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       brief_narrative,
       topics,
       speakers,
-      prep_person,
-      prep_pos,
-      prep_type,
-      prep_start,
-      // prep_per1,
-      // prep_per2,
-      // prep_per3,
-      // prep_per4,
-      // prep_pos1,
-      // prep_pos2,
-      // prep_pos3,
-      // prep_type1,
-      // prep_type2,
-      // prep_pos4,
-      // prep_type3,
-      // prep_type4,
-      // prep_start1,
-      // prep_start2,
-      // prep_star3,
-      // prep_star4,
-      prep_end,
-      // prep_end2,
-      // prep_end3,
-      // prep_end4,
+      prep_per1,
+      prep_per2,
+      prep_per3,
+      prep_per4,
+      prep_pos1,
+      prep_pos2,
+      prep_pos3,
+      prep_type1,
+      prep_type2,
+      prep_pos4,
+      prep_type3,
+      prep_type4,
+      prep_start1,
+      prep_start2,
+      prep_star3,
+      prep_star4,
+      prep_end1,
+      prep_end2,
+      prep_end3,
+      prep_end4,
       implement_per1,
       implement_per2,
       implement_per3,
@@ -655,6 +646,14 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       amount2,
       amount3,
       amount_total,
+      proj_rep,
+      designation1,
+      adviser_name,
+      stud_org,
+      cscb_rep,
+      dept_rep,
+      dean,
+      designation2,
       image1,
       caption1,
       caption2,
@@ -691,31 +690,31 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   });
   const options = users.map((user) => {
     return (
-      <option className="" key={user.id} value={user.id}>
+      <option className="" key={user.lastname + ", " + user.firstname} value={user.lastname + ", " + user.firstname}>
         {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
   });
 
-  const addInput = () => {
-    setPrep_Person([...prep_person, '']); // add a new input with an empty string value
-  };
+  // const addInput = () => {
+  //   setPrep_Person([...prep_person, '']); // add a new input with an empty string value
+  // };
 
-  const addPosition = () => {
-    setPrep_Position([...prep_pos, '']); // add a new input with an empty string value
-  };
+  // const addPosition = () => {
+  //   setPrep_Position([...prep_pos, '']); // add a new input with an empty string value
+  // };
 
-  const addType = () => {
-    setPrep_Type([...prep_type, '']); // add a new input with an empty string value
-  };
+  // const addType = () => {
+  //   setPrep_Type([...prep_type, '']); // add a new input with an empty string value
+  // };
 
-  const addStart = () => {
-    setPrep_Start([...prep_start, '']); // add a new input with an empty string value
-  };
+  // const addStart = () => {
+  //   setPrep_Start([...prep_start, '']); // add a new input with an empty string value
+  // };
 
-  const addEnd = () => {
-    setPrep_End([...prep_end, '']); // add a new input with an empty string value
-  };
+  // const addEnd = () => {
+  //   setPrep_End([...prep_end, '']); // add a new input with an empty string value
+  // };
 
 
   const errClass = isError ? "errmsg" : "offscreen";
@@ -771,7 +770,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
                   </div> */}
 
-
                   <div className="lg:col-span-3">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
                       <div className="md:col-span-2 md:row-span-6 text-gray-600">
@@ -791,7 +789,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           name="sponsor_dept"
                           id="sponsor_dept"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={project_title}
+                          value={sponsor_dept}
                           onChange={onSponsor_DeptChanged}
                         />
                       </div>
@@ -915,29 +913,23 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
                           <label htmlFor="country">Name of Volunteer</label>
-                          {prep_person.map((prep_person, index) => (
-                            <select
-                              id="prep_per1"
-                              name="prep_per1"
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              required
-                              value={prep_person}
-                              key={index}
-                              onChange={(event) => onPrep_PersonChanged(event, index)}
-                            >
-                              {options}
-                            </select>
-                          ))}
-                            <button type="button" className="text-white text-xs bg-red-900 hover:bg-red-800 font-medium rounded-lg px-2 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                          onClick={addInput}>Add Input</button>
-
-                          {/* <select
+                          <select
+                            id="prep_per2"
+                            name="prep_per2"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
+                            value={prep_per1}
+                            onChange={onPrep_Per1Changed}
+                          >
+                            {options}
+                          </select>
+                          <select
                             id="prep_per2"
                             name="prep_per2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
                             value={prep_per2}
-                            onChange={(event) => onPrep_PersonChanged(event)}
+                            onChange={onPrep_Per2Changed}
                           >
                             {options}
                           </select>
@@ -947,7 +939,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
                             value={prep_per3}
-                            onChange={(event) => onPrep_PersonChanged(event)}
+                            onChange={onPrep_Per3Changed}
                           >
                             {options}
                           </select>
@@ -957,34 +949,26 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             required
                             value={prep_per4}
-                            onChange={(event) => onPrep_PersonChanged(event)}
+                            onChange={onPrep_Per4Changed}
                           >
                             {options}
-                          </select> */}
+                          </select>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Position/Designation</label>
-                          {prep_pos.map((prep_pos, index) => (
-                            <select
-                              id="prep_pos"
-                              name="prep_pos"
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              required
-                              value={prep_pos}
-                              key={index}
-                              onChange={(event) => onPrep_PositionChanged(event, index)}
-                            >
-                              <option value="Facilitator">Facilitator</option>
-                              <option value="Participant">Participant</option>
-                              <option value="Student">Student</option>
-                              <option value="Employee">Employee</option>
-                            </select>
-                          ))}
-                            <button type="button" className="text-white text-xs bg-red-900 hover:bg-red-800 font-medium rounded-lg px-2 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                          onClick={addPosition}>Add Input</button>
-                        </div>
-
-                        {/* <select
+                          <select
+                            id="user2"
+                            name="user2"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            value={prep_pos1}
+                            onChange={onPrep_Pos1Changed}
+                          >
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
+                          </select>
+                          <select
                             id="user2"
                             name="user2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -1020,56 +1004,27 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             <option value="Student">Student</option>
                             <option value="Employee">Employee</option>
                           </select>
-                        </div> */}
-
-
+                        </div>
 
                         <div className="md:col-span-1 md:text-">
                           <label htmlFor="country">Type of Participation</label>
-                          {prep_type.map((prep_type, index) => (
-                            <select
-                              id="prep_type"
-                              name="prep_type"
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              required
-                              value={prep_type}
-                              key={index}
-                              onChange={(event) => onPrep_TypeChanged(event, index)}
-                            >
-                              <option value="Facilitator">Facilitator</option>
-                              <option value="Participant">Participant</option>
-                              <option value="Game Facilitator">Game Facilitator</option>
-                              <option value="Donor">Donor</option>
-                              <option value="Resource Speaker">Resource Speaker</option>
-                            </select>
-                          ))}
-                            <button type="button" className="text-white text-xs bg-red-900 hover:bg-red-800 font-medium rounded-lg px-2 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                          onClick={addType}>Add Input</button>
-                        </div>
-
-                        {/* <label htmlFor="country">Position/Designation</label>
-                          {prep_pos.map((prep_pos, index) => (
-                            <select
-                            id="prep_pos"
-                            name="prep_pos"
+                          <select
+                            id="user2"
+                            name="user2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            required
-                            value={prep_pos}
-                            key={index}
-                            onChange={(event) => onPrep_PositionChanged(event, index)}
+                            value={prep_type1}
+                            onChange={onPrep_Type1Changed}
                           >
                             <option value="Facilitator">Facilitator</option>
                             <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
+                            <option value="Game Facilitator">
+                              Game Facilitator
+                            </option>
+                            <option value="Donor">Donor</option>
+                            <option value="Resource Speaker">
+                              Resource Speaker
+                            </option>
                           </select>
-                             ))}
-                          <button type="button" onClick={addPosition}>Add Input</button>
-                          </div> */}
-
-
-
-                        {/*                           
                           <select
                             id="user2"
                             name="user2"
@@ -1120,29 +1075,41 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             <option value="Resource Speaker">
                               Resource Speaker
                             </option>
-                          </select>*/}
+                          </select>
+                        </div>
+
+                        {/* <label htmlFor="country">Position/Designation</label>
+                          {prep_pos.map((prep_pos, index) => (
+                            <select
+                            id="prep_pos"
+                            name="prep_pos"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
+                            value={prep_pos}
+                            key={index}
+                            onChange={(event) => onPrep_PositionChanged(event, index)}
+                          >
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
+                          </select>
+                             ))}
+                          <button type="button" onClick={addPosition}>Add Input</button>
+                          </div> */}
 
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
                           <div className="md:col-span-1">
                             <label htmlFor="country">Start Time</label>
-                            {prep_start.map((prep_start, index) => (
-                              <input
-                                type="time"
-                                id="prep_start"
-                                name="prep_type"
-                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                                required
-                                value={prep_start}
-                                key={index}
-                                onChange={(event) => onPrep_StartChanged(event, index)}
-                              ></input>
-                            ))}
-                            <button type="button" className="text-white text-xs bg-red-900 hover:bg-red-800 font-medium rounded-lg px-2 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                            onClick={addStart}>Add Start</button>
-                          </div>
-
-
-                          {/* <input
+                            <input
+                              type="time"
+                              id="prep_start1"
+                              name="prep_start1"
+                              value={prep_start1}
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onPrep_Start1Changed}
+                            ></input>
+                            <input
                               type="time"
                               id="prep_start2"
                               name="prep_start2"
@@ -1166,25 +1133,19 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onPrep_Star4Changed}
                             ></input>
-                          </div> */}
+                          </div>
 
                           <div className="md:col-span-1">
                             <label htmlFor="country">End Time</label>
-                            {prep_end.map((prep_end, index) => (
-                              <input
-                                type="time"
-                                id="prep_end"
-                                name="prep_end"
-                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                                required
-                                value={prep_end}
-                                key={index}
-                                onChange={(event) => onPrep_EndChanged(event, index)}
-                              ></input>
-                            ))}
-                            <button type="button" className="text-white text-xs bg-red-900 hover:bg-red-800 font-medium rounded-lg px-2 py-2.5 m-1 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                            onClick={addEnd}>Add Start</button>
-                            {/* <input
+                            <input
+                              type="time"
+                              id="prep_end2"
+                              name="prep_end2"
+                              value={prep_end1}
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              onChange={onPrep_End1Changed}
+                            ></input>
+                            <input
                               type="time"
                               id="prep_end2"
                               name="prep_end2"
@@ -1207,7 +1168,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               value={prep_end4}
                               className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onPrep_End4Changed}
-                            ></input> */}
+                            ></input>
                           </div>
                         </div>
                       </div>
@@ -1989,8 +1950,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={proj_rep}
+                            onChange={OnProj_repChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -2000,8 +1961,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={designation1}
+                            onChange={OnDesignation1Changed}
                           />
                         </div>
                       </div>
@@ -2018,8 +1979,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={adviser_name}
+                            onChange={OnAdviser_nameChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -2031,8 +1992,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={stud_org}
+                            onChange={OnStud_orgChanged}
                           />
                         </div>
                       </div>
@@ -2046,8 +2007,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={cscb_rep}
+                            onChange={OnCscb_repChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -2059,8 +2020,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={dept_rep}
+                            onChange={OnDept_repChanged}
                           />
                         </div>
                       </div>
@@ -2075,8 +2036,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={dean}
+                            onChange={OnDeanChanged}
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -2086,8 +2047,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={accomp_obj}
-                          // onChange={on}
+                            value={designation2}
+                            onChange={OnDesignation2Changed}
                           />
                         </div>
                       </div>
