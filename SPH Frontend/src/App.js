@@ -26,9 +26,12 @@ import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
 import Designer from "./features/forms/Designer";
 import FormAndViewer from "./features/forms/FormAndViewer";
-import ViewerPDF from "./features/forms/ViewerPDF";
+import NewEmployeeOutreach from "./features/forms/NewEmployeeOutreach";
 import ReportsView from "./features/outreach/ReportsView";
 import NewStudentOutreach from "./features/forms/NewStudentOutreach";
+import OutreachStudentView from "./features/forms/OutreachStudentView";
+import ViewStudentOutreach from "./features/outreach/ViewStudentOutreach";
+import ViewEmployeeOutreach from "./features/outreach/ViewEmployeeOutreach";
 
 
 function App() {
@@ -61,7 +64,7 @@ function App() {
                 <Route path="employee">
                   <Route index element={<OutreachEmpList />} />
                   <Route path="view">
-                    <Route path=":id" element={<ViewOutreach />} />
+                    <Route path=":id" element={<ViewEmployeeOutreach />} />
                   </Route>
                   <Route path="reports">
                     <Route path=":id" element={<ReportOutreach />} />
@@ -72,7 +75,7 @@ function App() {
                 <Route path="student">
                   <Route index element={<OutreachStudList />} />
                   <Route path="view">
-                    <Route path=":id" element={<ViewOutreach />} />
+                    <Route path=":id" element={<ViewStudentOutreach />} />
                   </Route>
                   <Route path="reports">
                     <Route path=":id" element={<ReportOutreach />} />
@@ -119,14 +122,11 @@ function App() {
                     <Route index element={<GenerateCertificate />} />
                   </Route>
                   <Route path="view-anex-B">
-                    <Route index element={<FormAndViewer />} />
+                    <Route index element={<NewEmployeeOutreach />} />
                   </Route>
                 </Route>
                 <Route path="view-anex-C">
                   <Route index element={<FormAndViewer />} />
-                </Route>
-                <Route path="viewerPDF">
-                  <Route index element={<ViewerPDF />} />
                 </Route>
 
                 {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

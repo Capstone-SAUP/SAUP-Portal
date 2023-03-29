@@ -91,7 +91,6 @@ const currentuser = getCurrentUser();
 //   };
 
   const [user] = useState(getCurrentUser())
-  console.log(user);
   const [department] = useState(getCurrentDept())
   const [name_org, setname_org] = useState("");
   const [date_est, setdate_est] = useState("");
@@ -248,28 +247,28 @@ const errClass = isError ? "errmsg" : "offscreen";
 const errContent = error?.data?.message ?? "";
 
 const content = (
-    <>
-      {/* <img
+  <>
+    {/* <img
         className=" w-1/2 h-screen float-right mix-blend-multiply object-cover "
         src={require("../../img/background.jpg")}
         alt="background"
       ></img> */}
-      <p className={errClass}>{errContent}</p>
-      <form className="h-full full grid gap-3 px-20 text-black">
-        <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-          <div className="container max-w-screen-lg mx-auto">
-            <div>
-              <h2 className="font-semibold text-xl">
-                Implementation Report Form
-              </h2>
-              <p className="mb-6 text-base">
-                The form is both for student and employee initiated activities
-                and should be submitted within one (1) month after the activity.
-              </p>
+    <p className={errClass}>{errContent}</p>
+    <form className="h-full full grid gap-3 px-20 text-black">
+      <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+        <div className="container max-w-screen-lg mx-auto">
+          <div>
+            <h2 className="font-semibold text-xl">
+              Student Organization Intake Form
+            </h2>
+            <p className="mb-6 text-base">
+              This is intended for student initiated activities and should be
+              submitted a week before the activity.
+            </p>
 
-              <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                  {/* <div className="text-gray-600">
+            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+              <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                {/* <div className="text-gray-600">
                     <div className="mb-[756px]">
                       <p className="font-medium text-lg">Outreach Details</p>
                       <p>Please fill out all the blank fields.</p>
@@ -282,447 +281,439 @@ const content = (
                     </div>
                   </div> */}
 
-                  <div className="lg:col-span-3">
-                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
-                      <div className="md:col-span-2 md:row-span-5 text-gray-600">
-                        <div className="">
-                          <p className="font-medium text-lg">
-                            Student Organization Intake Form
-                          </p>
-                          <p>Please fill out all the blank fields.</p>
-                        </div>
+                <div className="lg:col-span-3">
+                  <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
+                    <div className="md:col-span-2 md:row-span-5 text-gray-600">
+                      <div className="">
+                        <p className="font-medium text-lg">
+                          Student Organization Intake Form
+                        </p>
+                        <p>Please fill out all the blank fields.</p>
                       </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="name_org">
-                          Name of Organization:
+                    </div>
+                    <div className="md:col-span-7">
+                      <label htmlFor="name_org">Name of Organization:</label>
+                      <input
+                        type="text"
+                        name="name_org"
+                        id="name_org"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        value={name_org}
+                        onChange={onname_orgChanged}
+                      />
+                    </div>
+                    <div className="md:col-span-7">
+                      <label htmlFor="date_est">Date Established :</label>
+                      <input
+                        type="text"
+                        name="date_est"
+                        id="date_est"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        value={date_est}
+                        onChange={ondate_estChanged}
+                      />
+                    </div>
+                    <div className="md:col-span-4 text-base font-semibold text-gray-600">
+                      {" "}
+                      Designated Contact Person/s for Community Outreach
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                      <div className="md:col-span-2">
+                        <label htmlFor="country">Name :</label>
+                        <input
+                          id="prep_per1"
+                          name="prep_per1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={designated_per1}
+                          onChange={ondesignated_per1Changed}
+                        >
+                          {/* {options} */}
+                        </input>
+                        <input
+                          id="prep_per2"
+                          name="prep_per2"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={designated_per2}
+                          onChange={ondesignated_per2Changed}
+                        >
+                          {/* {options} */}
+                        </input>
+                        <input
+                          id="prep_per3"
+                          name="prep_per3"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={designated_per3}
+                          onChange={ondesignated_per3Changed}
+                        >
+                          {/* {options} */}
+                        </input>
+                        <input
+                          id="prep_per4"
+                          name="prep_per4"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={designated_per4}
+                          onChange={ondesignated_per4Changed}
+                        >
+                          {/* {options} */}
+                        </input>
+                      </div>
+                      <div className="md:col-span-1">
+                        <label htmlFor="country">Designation/Position :</label>
+                        <select
+                          id="user1"
+                          name="user1"
+                          className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={position_per1}
+                          onChange={onposition_per1Changed}
+                        >
+                          <option value="Facilitator">Facilitator</option>
+                          <option value="Participant">Participant</option>
+                          <option value="Student">Student</option>
+                          <option value="Employee">Employee</option>
+                        </select>
+                        <select
+                          id="user2"
+                          name="user2"
+                          className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={position_per2}
+                          onChange={onposition_per2Changed}
+                        >
+                          <option value="Facilitator">Facilitator</option>
+                          <option value="Participant">Participant</option>
+                          <option value="Student">Student</option>
+                          <option value="Employee">Employee</option>
+                        </select>
+                        <select
+                          id="user3"
+                          name="user3"
+                          className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={position_per3}
+                          onChange={onposition_per3Changed}
+                        >
+                          <option value="Facilitator">Facilitator</option>
+                          <option value="Participant">Participant</option>
+                          <option value="Student">Student</option>
+                          <option value="Employee">Employee</option>
+                        </select>
+                        <select
+                          id="user4"
+                          name="user4"
+                          className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={position_per4}
+                          onChange={onposition_per4Changed}
+                        >
+                          <option value="Facilitator">Facilitator</option>
+                          <option value="Participant">Participant</option>
+                          <option value="Student">Student</option>
+                          <option value="Employee">Employee</option>
+                        </select>
+                      </div>
+                      <div className="md:col-span-1">
+                        <label htmlFor="country">Contact Number :</label>
+                        <input
+                          id="user1"
+                          name="user1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={contact_per1}
+                          onChange={oncontact_per1Changed}
+                        ></input>
+                        <input
+                          id="user1"
+                          name="user1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={contact_per2}
+                          onChange={oncontact_per2Changed}
+                        ></input>
+                        <input
+                          id="user1"
+                          name="user1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={contact_per3}
+                          onChange={oncontact_per3Changed}
+                        ></input>
+                        <input
+                          id="user1"
+                          name="user1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={contact_per4}
+                          onChange={oncontact_per4Changed}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                      <div className="md:col-span-1">
+                        <label htmlFor="country">No. of Members :</label>
+                        <input
+                          id="prep_per1"
+                          name="prep_per1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={no_members}
+                          onChange={onno_membersChanged}
+                        >
+                          {/* {options} */}
+                        </input>
+                      </div>
+                      <div className="md:col-span-3">
+                        <label htmlFor="country">
+                          Organizational Expertise/Skills :
                         </label>
                         <input
-                          type="text"
-                          name="name_org"
-                          id="name_org"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={name_org}
-                          onChange={onname_orgChanged }
-                        />
+                          id="user1"
+                          name="user1"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={org_skills}
+                          onChange={onorg_skillsChanged}
+                        ></input>
                       </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="date_est">Date Established :</label>
-                        <input
-                          type="text"
-                          name="date_est"
-                          id="date_est"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={date_est}
-                          onChange={ondate_estChanged }
-                        />
+                    </div>
+                    <div className="md:col-span-2 md:row-span-5 text-gray-600">
+                      <div className="">
+                        <p className="font-medium text-lg">
+                          Outreach Information
+                        </p>
                       </div>
-                      <div className="md:col-span-4 text-base font-semibold text-gray-600">
-                        {" "}
-                        Designated Contact Person/s for Community Outreach
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div className="md:col-span-2">
-                          <label htmlFor="country">Name :</label>
-                          <input
-                            id="prep_per1"
-                            name="prep_per1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={designated_per1}
-                            onChange={ondesignated_per1Changed}
-                          >
-                            {/* {options} */}
-                          </input>
-                          <input
-                            id="prep_per2"
-                            name="prep_per2"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={designated_per2}
-                            onChange={ondesignated_per2Changed}
-                          >
-                            {/* {options} */}
-                          </input>
-                          <input
-                            id="prep_per3"
-                            name="prep_per3"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={designated_per3}
-                            onChange={ondesignated_per3Changed}
-                          >
-                            {/* {options} */}
-                          </input>
-                          <input
-                            id="prep_per4"
-                            name="prep_per4"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={designated_per4}
-                            onChange={ondesignated_per4Changed}
-                          >
-                            {/* {options} */}
-                          </input>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Designation/Position :</label>
-                          <select
-                            id="user1"
-                            name="user1"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={position_per1}
-                            onChange={onposition_per1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user2"
-                            name="user2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={position_per2}
-                            onChange={onposition_per2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user3"
-                            name="user3"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={position_per3}
-                            onChange={onposition_per3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user4"
-                            name="user4"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={position_per4}
-                            onChange={onposition_per4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Contact Number :</label>
-                          <input
-                            id="user1"
-                            name="user1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={contact_per1}
-                            onChange={oncontact_per1Changed}
-                          >
-                          </input>
-                          <input
-                            id="user1"
-                            name="user1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={contact_per2}
-                            onChange={oncontact_per2Changed}
-                          >
-                          </input>
-                          <input
-                            id="user1"
-                            name="user1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={contact_per3}
-                            onChange={oncontact_per3Changed}
-                          >
-                          </input>
-                          <input
-                            id="user1"
-                            name="user1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={contact_per4}
-                            onChange={oncontact_per4Changed}
-                          >
-                          </input>
-                        </div>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">No. of Members :</label>
-                          <input
-                            id="prep_per1"
-                            name="prep_per1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={no_members}
-                            onChange={onno_membersChanged}
-                          >
-                            {/* {options} */}
-                          </input>
-                        </div>
-                        <div className="md:col-span-3">
-                          <label htmlFor="country">Organizational Expertise/Skills :</label>
-                          <input
-                            id="user1"
-                            name="user1"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={org_skills}
-                            onChange={onorg_skillsChanged}
-                          >
-                          </input>
-                        </div>
-                      </div>
-                      <div className="md:col-span-2 md:row-span-5 text-gray-600">
-                        <div className="">
-                          <p className="font-medium text-lg">
-                            Outreach Information
-                          </p>
-                        </div>
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="target_beneficiary">
-                          Title of Activity :
-                        </label>
-                        <input
-                          type="text"
-                          name="target_beneficiary"
-                          id="target_beneficiary"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={project_title}
-                          onChange={onproject_titleChanged }
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="purpose_activity">
-                          Purpose of Activity :
-                        </label>
-                        <input
-                          type="text"
-                          name="purpose_activity"
-                          id="purpose_activity"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={purpose_activity}
-                          onChange={onpurpose_activityChanged }
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="reason_community">Reason for Choosing the Community/Sector :</label>
-                        <input
-                          type="text"
-                          name="reason_community"
-                          id="reason_community"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={reason_community}
-                          onChange={onreason_communityChanged }
-                        />
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div>
-                        <label htmlFor="target_date">
-                        Target Date/s :
-                        </label>
+                    </div>
+                    <div className="md:col-span-7">
+                      <label htmlFor="target_beneficiary">
+                        Title of Activity :
+                      </label>
+                      <input
+                        type="text"
+                        name="target_beneficiary"
+                        id="target_beneficiary"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        value={project_title}
+                        onChange={onproject_titleChanged}
+                      />
+                    </div>
+                    <div className="md:col-span-7">
+                      <label htmlFor="purpose_activity">
+                        Purpose of Activity :
+                      </label>
+                      <input
+                        type="text"
+                        name="purpose_activity"
+                        id="purpose_activity"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        value={purpose_activity}
+                        onChange={onpurpose_activityChanged}
+                      />
+                    </div>
+                    <div className="md:col-span-7">
+                      <label htmlFor="reason_community">
+                        Reason for Choosing the Community/Sector :
+                      </label>
+                      <input
+                        type="text"
+                        name="reason_community"
+                        id="reason_community"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        value={reason_community}
+                        onChange={onreason_communityChanged}
+                      />
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
+                      <div>
+                        <label htmlFor="target_date">Target Date/s :</label>
                         <input
                           type="text"
                           name="target_date"
                           id="target_date"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={target_date}
-                          onChange={ontarget_dateChanged }
+                          onChange={ontarget_dateChanged}
                         />
-                        </div>
-                        <div>
-                        <label htmlFor="venue">
-                        Target Area/s :
-                        </label>
+                      </div>
+                      <div>
+                        <label htmlFor="venue">Target Area/s :</label>
                         <input
                           type="text"
                           name="venue"
                           id="venue"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                           value={venue}
-                          onChange={onvenueChanged }
+                          onChange={onvenueChanged}
                         />
-                        </div>
-
                       </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div className="md:col-span-3">
-                          <label htmlFor="country">Target Beneficiary :</label>
-                          <input
-                            id="target_beneficiary"
-                            name="target_beneficiary"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={target_beneficiary}
-                            onChange={ontarget_beneficiaryChanged}
-                          >
-                          </input>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="no_beneficiaries">No. of Beneficiaries :</label>
-                          <input
-                            id="no_beneficiaries"
-                            name="no_beneficiaries"
-                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={no_beneficiaries}
-                            onChange={onno_beneficiariesChanged}
-                          >
-                          </input>
-                        </div>
-                      </div>
-                      <div className="md:col-span-2 md:row-span-1 text-gray-600">
-                        <div className="">
-                          <p className="font-medium text-lg">
-                            Classification of Community Extension Project
-                          </p>
-                          <p>Put x on the chosen classification</p>
-                        </div>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-1">
-                          <label htmlFor="class_outreachdole">Outreach/Dole out :</label>
-                          <input
-                            id="class_outreachdole"
-                            name="class_outreachdole"
-                            className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={class_outreachdole}
-                            onChange={onclass_outreachdoleChanged}
-                          >
-                          </input>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="class_semi_dev">Semi-Developmental :</label>
-                          <input
-                            id="class_semi_dev"
-                            name="class_semi_dev"
-                            className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={class_semi_dev}
-                            onChange={onclass_semi_devChanged}
-                          >
-                          </input>
-                        </div>
-                        <div className="md:col-span-1">
-                        <label htmlFor="class_dev">Developmental :</label>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                      <div className="md:col-span-3">
+                        <label htmlFor="country">Target Beneficiary :</label>
                         <input
-                            id="class_dev"
-                            name="class_dev"
-                            className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={class_dev}
-                            onChange={onclass_devChanged}
-                          >
-                          </input>
-                        </div>
+                          id="target_beneficiary"
+                          name="target_beneficiary"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={target_beneficiary}
+                          onChange={ontarget_beneficiaryChanged}
+                        ></input>
                       </div>
-                      <div className="md:col-span-2 md:row-span-4 text-gray-600">
-                        <p className="font-medium text-lg">
-                        Community Outreach Proposal
-                        </p>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
-                        <div className="">
-                          <label htmlFor="target_obj">Targets/Objectives :</label>
-                          <textarea
-                            type="textarea"
-                            name="target_obj"
-                            id="target_obj"
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={target_obj}
-                            onChange={ontarget_objChanged }
-                            placeholder=""
-                          />
-                        </div>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
-                        <div className="">
-                          <label htmlFor="activities">Activities :</label>
-                          <textarea
-                            type="textarea"
-                            name="activities"
-                            id="activities"
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={activities}
-                            onChange={onactivitiesChanged }
-                            placeholder=""
-                          />
-                        </div>
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="time_frame">
-                        Time Frame:
+                      <div className="md:col-span-1">
+                        <label htmlFor="no_beneficiaries">
+                          No. of Beneficiaries :
                         </label>
                         <input
-                          type="text"
-                          name="time_frame"
-                          id="time_frame"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={time_frame}
-                          onChange={ontime_frameChanged }
+                          id="no_beneficiaries"
+                          name="no_beneficiaries"
+                          className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={no_beneficiaries}
+                          onChange={onno_beneficiariesChanged}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="md:col-span-2 md:row-span-1 text-gray-600">
+                      <div className="">
+                        <p className="font-medium text-lg">
+                          Classification of Community Extension Project
+                        </p>
+                        <p>Put x on the chosen classification</p>
+                      </div>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                      <div className="md:col-span-1">
+                        <label htmlFor="class_outreachdole">
+                          Outreach/Dole out :
+                        </label>
+                        <input
+                          id="class_outreachdole"
+                          name="class_outreachdole"
+                          className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={class_outreachdole}
+                          onChange={onclass_outreachdoleChanged}
+                        ></input>
+                      </div>
+                      <div className="md:col-span-1">
+                        <label htmlFor="class_semi_dev">
+                          Semi-Developmental :
+                        </label>
+                        <input
+                          id="class_semi_dev"
+                          name="class_semi_dev"
+                          className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={class_semi_dev}
+                          onChange={onclass_semi_devChanged}
+                        ></input>
+                      </div>
+                      <div className="md:col-span-1">
+                        <label htmlFor="class_dev">Developmental :</label>
+                        <input
+                          id="class_dev"
+                          name="class_dev"
+                          className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value={class_dev}
+                          onChange={onclass_devChanged}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="md:col-span-2 md:row-span-4 text-gray-600">
+                      <p className="font-medium text-lg">
+                        Community Outreach Proposal
+                      </p>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
+                      <div className="">
+                        <label htmlFor="target_obj">Targets/Objectives :</label>
+                        <textarea
+                          type="textarea"
+                          name="target_obj"
+                          id="target_obj"
+                          className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={target_obj}
+                          onChange={ontarget_objChanged}
+                          placeholder=""
                         />
                       </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
-                        <div className="">
-                          <label htmlFor="beneficiaries">Beneficiaries :</label>
-                          <textarea
-                            type="textarea"
-                            name="beneficiaries"
-                            id="beneficiaries"
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={beneficiaries}
-                            onChange={onbeneficiariesChanged }
-                            placeholder=""
-                          />
-                        </div>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
+                      <div className="">
+                        <label htmlFor="activities">Activities :</label>
+                        <textarea
+                          type="textarea"
+                          name="activities"
+                          id="activities"
+                          className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={activities}
+                          onChange={onactivitiesChanged}
+                          placeholder=""
+                        />
                       </div>
-                      <div className="md:col-span-2 md:row-span-4 text-gray-600"></div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
-                        <div className="">
-                          <label htmlFor="budget">Budget :</label>
-                          <input
-                            type="textarea"
-                            name="budget"
-                            id="budget"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={budget}
-                            onChange={onbudgetChanged }
-                            placeholder=""
-                          />
-                        </div>
+                    </div>
+                    <div className="md:col-span-7">
+                      <label htmlFor="time_frame">Time Frame:</label>
+                      <input
+                        type="text"
+                        name="time_frame"
+                        id="time_frame"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        value={time_frame}
+                        onChange={ontime_frameChanged}
+                      />
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
+                      <div className="">
+                        <label htmlFor="beneficiaries">Beneficiaries :</label>
+                        <textarea
+                          type="textarea"
+                          name="beneficiaries"
+                          id="beneficiaries"
+                          className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={beneficiaries}
+                          onChange={onbeneficiariesChanged}
+                          placeholder=""
+                        />
                       </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
-                        <div className="">
-                          <label htmlFor="prog_indicator">Progress Indicators :</label>
-                          <textarea
-                            type="textarea"
-                            name="prog_indicator"
-                            id="prog_indicator"
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={prog_indicator}
-                            onChange={onprog_indicatorChanged }
-                            placeholder=""
-                          />
-                        </div>
+                    </div>
+                    <div className="md:col-span-2 md:row-span-4 text-gray-600"></div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
+                      <div className="">
+                        <label htmlFor="budget">Budget :</label>
+                        <input
+                          type="textarea"
+                          name="budget"
+                          id="budget"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={budget}
+                          onChange={onbudgetChanged}
+                          placeholder=""
+                        />
                       </div>
-                      
-                          </div>
-                        </div>
-                      </div>
-                      <div className="md:col-span-9 mt-5 text-right">
-                        <div className="text-center">
-                          <button
-                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                            title="Save"
-                            onClick={onSaveReportClicked}
-                          >
-                            Submit Report
-                          </button>
-                        </div>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
+                      <div className="">
+                        <label htmlFor="prog_indicator">
+                          Progress Indicators :
+                        </label>
+                        <textarea
+                          type="textarea"
+                          name="prog_indicator"
+                          id="prog_indicator"
+                          className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={prog_indicator}
+                          onChange={onprog_indicatorChanged}
+                          placeholder=""
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-      </form>
-    </>
-  );
+              <div className="md:col-span-9 mt-5 text-right">
+                <div className="text-center">
+                  <button
+                    className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                    title="Save"
+                    onClick={onSaveReportClicked}
+                  >
+                    Submit Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </>
+);
   
   return content;
 };
