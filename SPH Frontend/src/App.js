@@ -24,8 +24,8 @@ import PersistLogin from "./features/auth/PersistLogin";
 import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
-import Designer from "./features/forms/Designer";
 import FormAndViewer from "./features/forms/FormAndViewer";
+import TestForm from "./features/forms/TestForm";
 import ViewerPDF from "./features/forms/ViewerPDF";
 import ReportsView from "./features/outreach/ReportsView";
 
@@ -106,7 +106,7 @@ function App() {
                   }
                 >
                   <Route path="view-anex-A">
-                    <Route index element={<FormAndViewer />} />
+                    <Route index element={<TestForm />} />
                   </Route>
                 </Route>
                 <Route
@@ -128,7 +128,7 @@ function App() {
                   <Route index element={<ViewerPDF />} />
                 </Route>
 
-                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="design-anex-A">
                     <Route index element={<Designer />} />
                   </Route>
@@ -141,7 +141,7 @@ function App() {
                   <Route path="design-anex-D">
                     <Route index element={<Designer />} />
                   </Route>
-                </Route>
+                </Route> */}
               </Route>
               {/* End Dash */}
             </Route>
