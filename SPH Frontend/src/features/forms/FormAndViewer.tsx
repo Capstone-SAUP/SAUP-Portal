@@ -225,7 +225,7 @@ ${e}`);
   };
 
   return (
-    <div>
+    <div className="w-800px">
       <header
         style={{
           display: "flex",
@@ -311,7 +311,7 @@ ${e}`);
             Generate PDF</button>
       </header>
       <br></br>
-      <div ref={uiRef} />
+      <div className="w-800px" ref={uiRef} />
     </div>
   );
 }
