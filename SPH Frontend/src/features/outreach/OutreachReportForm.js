@@ -12,9 +12,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   //   event.returnValue = "The information in the document will reset.";
   // });
 
-    const navigate = useNavigate();
-    const { user_id } = useAuth();
-    const { id } = useParams();
+  const navigate = useNavigate();
+  const { user_id } = useAuth();
+  const { id } = useParams();
 
   const { object_id, user_ids, department, lastname } = useGetUsersQuery(
     "usersList",
@@ -36,13 +36,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     }
   );
 
-    const getCurrentUser = () => {
-      try {
-        const currentUser = user_ids.indexOf(user_id);
-        const currentUserObjectId = object_id[currentUser];
-        return currentUserObjectId;
-      } catch (error) {}
-    };
+  const getCurrentUser = () => {
+    try {
+      const currentUser = user_ids.indexOf(user_id);
+      const currentUserObjectId = object_id[currentUser];
+      return currentUserObjectId;
+    } catch (error) { }
+  };
   // console.log(getCurrentUser());
 
   const current_user = getCurrentUser();
@@ -50,32 +50,32 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [createReport, { isSuccess, isError, error }] =
     useAddNewAnexCMutation();
 
-      // const currentUserObjectId = object_id[currentUser];
-//     const [prepPhase, setInputFields] = useState([{
-//         fullName:'',
-//         emailAddress:'',
-//         salary:''  
-//     } ]);
-//     const addInputField = ()=>{
-//         setInputFields([...prepPhase, {
-//             fullName:'',
-//             emailAddress:'',
-//             salary:''  
-//         } ])
-      
-//     }
-//     const removeInputFields = (index)=>{
-//         const rows = [...prepPhase];
-//         rows.splice(index, 1);
-//         setInputFields(rows);
-//     }
-//     const handleChange = (index, evnt)=>{
-    
-//     const { name, value } = evnt.target;
-//     const list = [...prepPhase];
-//     list[index][name] = value;
-//     setInputFields(list);
-// }
+  // const currentUserObjectId = object_id[currentUser];
+  //     const [prepPhase, setInputFields] = useState([{
+  //         fullName:'',
+  //         emailAddress:'',
+  //         salary:''  
+  //     } ]);
+  //     const addInputField = ()=>{
+  //         setInputFields([...prepPhase, {
+  //             fullName:'',
+  //             emailAddress:'',
+  //             salary:''  
+  //         } ])
+
+  //     }
+  //     const removeInputFields = (index)=>{
+  //         const rows = [...prepPhase];
+  //         rows.splice(index, 1);
+  //         setInputFields(rows);
+  //     }
+  //     const handleChange = (index, evnt)=>{
+
+  //     const { name, value } = evnt.target;
+  //     const list = [...prepPhase];
+  //     list[index][name] = value;
+  //     setInputFields(list);
+  // }
 
   // const [title, setTitle] = useState(outreach.title);
 
@@ -90,6 +90,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [brief_narrative, setBrief_Narrative] = useState(filteredOutreach.brief_narrative);
   const [topics, setTopics] = useState(filteredOutreach.topics);
   const [speakers, setSpeakers] = useState(filteredOutreach.speakers);
+  // const [prep_person, setPrep_Person] = useState([]);
+  // const [prep_pos, setPrep_Position] = useState([]);
+  // const [prep_type, setPrep_Type] = useState([]);
+  // const [prep_start, setPrep_Start] = useState([]);
+  // const [prep_end, setPrep_End] = useState([]);
   const [prep_per1, setPrep_Per1] = useState(filteredOutreach.prep_per1);
   const [prep_per2, setPrep_Per2] = useState(filteredOutreach.prep_per2);
   const [prep_per3, setPrep_Per3] = useState(filteredOutreach.prep_per3);
@@ -194,7 +199,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [image2, setImage2] = useState(filteredOutreach.image2);
 
   useEffect(() => {
-          if (isSuccess) {
+    if (isSuccess) {
       setSponsor_Dept("")
       setProject_Title("")
       setBeneficiaries("")
@@ -204,6 +209,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setBrief_Narrative("")
       setTopics("")
       setSpeakers("")
+      // setPrep_Person([])
+      // setPrep_Position([])
+      // setPrep_Type([])
+      // setPrep_Start([])
+      // setPrep_End([])
       setPrep_Per1("")
       setPrep_Per2("")
       setPrep_Per3("")
@@ -420,13 +430,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const OnDeanChanged = (e) => setDean(e.target.value);
   const OnDesignation2Changed = (e) => setDesignation2(e.target.value);
   const onImage1Changed = (e) => setImage1(e.target.value);
-  const onImage2Changed = (e) => setImage1(e.target.value);
   const onCaption1Changed = (e) => setCaption1(e.target.value);
-  const onCaption2Changed = (e) => setCaption2(e.target.value)
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const onCaption2Changed = (e) => setCaption2(e.target.value);
+  const onImage2Changed = (e) => setImage2(e.target.value);
 
   // const canSave =
   //   [
@@ -537,124 +543,124 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   //   ].every(Boolean) && !isLoading;
 
   const onSaveReportClicked = async (e) => {
-        e.preventDefault();
-      await createReport({
-        user,
-        fullname,
-        sponsor_dept,
-        project_title,
-        target_beneficiary,
-        accomp_obj,
-        venue,
-        date_implement,
-        brief_narrative,
-        topics,
-        speakers,
-        prep_per1,
-        prep_per2,
-        prep_per3,
-        prep_per4,
-        prep_pos1,
-        prep_pos2,
-        prep_pos3,
-        prep_type1,
-        prep_type2,
-        prep_pos4,
-        prep_type3,
-        prep_type4,
-        prep_start1,
-        prep_start2,
-        prep_star3,
-        prep_star4,
-        prep_end1,
-        prep_end2,
-        prep_end3,
-        prep_end4,
-        implement_per1,
-        implement_per2,
-        implement_per3,
-        implement_per4,
-        implement_pos1,
-        implement_pos2,
-        implement_pos3,
-        implement_type1,
-        implement_type2,
-        implement_pos4,
-        implement_type3,
-        implement_type4,
-        implement_start1,
-        implement_start2,
-        implement_star3,
-        implement_star4,
-        implement_end1,
-        implement_end2,
-        implement_end3,
-        implement_end4,
-        post_per1,
-        post_per2,
-        post_per3,
-        post_per4,
-        post_pos1,
-        post_pos2,
-        post_pos3,
-        post_type1,
-        post_type2,
-        post_pos4,
-        post_type3,
-        post_type4,
-        post_start1,
-        post_start2,
-        post_star3,
-        post_star4,
-        post_end1,
-        post_end2,
-        post_end3,
-        post_end4,
-        learnings1,
-        learnings2,
-        learnings3,
-        learnings4,
-        learnings5,
-        strengths1,
-        strengths2,
-        strengths3,
-        strengths4,
-        strengths5,
-        weakness1,
-        weakness2,
-        weakness3,
-        weakness4,
-        weakness5,
-        improvement1,
-        improvement2,
-        improvement3,
-        improvement4,
-        improvement5,
-        act_partici1,
-        act_partici2,
-        act_partici3,
-        particulars1,
-        particulars2,
-        particulars3,
-        amount1,
-        amount2,
-        amount3,
-        amount_total,
-        proj_rep,
-        designation1,
-        adviser_name,
-        stud_org,
-        cscb_rep,
-        dept_rep,
-        dean,
-        designation2,
-        image1,
-        caption1,
-        caption2,
-        image2,
-      });
-            alert("Saved!");
-            navigate("/dash/employee");
+    e.preventDefault();
+    await createReport({
+      user,
+      fullname,
+      sponsor_dept,
+      project_title,
+      target_beneficiary,
+      accomp_obj,
+      venue,
+      date_implement,
+      brief_narrative,
+      topics,
+      speakers,
+      prep_per1,
+      prep_per2,
+      prep_per3,
+      prep_per4,
+      prep_pos1,
+      prep_pos2,
+      prep_pos3,
+      prep_type1,
+      prep_type2,
+      prep_pos4,
+      prep_type3,
+      prep_type4,
+      prep_start1,
+      prep_start2,
+      prep_star3,
+      prep_star4,
+      prep_end1,
+      prep_end2,
+      prep_end3,
+      prep_end4,
+      implement_per1,
+      implement_per2,
+      implement_per3,
+      implement_per4,
+      implement_pos1,
+      implement_pos2,
+      implement_pos3,
+      implement_type1,
+      implement_type2,
+      implement_pos4,
+      implement_type3,
+      implement_type4,
+      implement_start1,
+      implement_start2,
+      implement_star3,
+      implement_star4,
+      implement_end1,
+      implement_end2,
+      implement_end3,
+      implement_end4,
+      post_per1,
+      post_per2,
+      post_per3,
+      post_per4,
+      post_pos1,
+      post_pos2,
+      post_pos3,
+      post_type1,
+      post_type2,
+      post_pos4,
+      post_type3,
+      post_type4,
+      post_start1,
+      post_start2,
+      post_star3,
+      post_star4,
+      post_end1,
+      post_end2,
+      post_end3,
+      post_end4,
+      learnings1,
+      learnings2,
+      learnings3,
+      learnings4,
+      learnings5,
+      strengths1,
+      strengths2,
+      strengths3,
+      strengths4,
+      strengths5,
+      weakness1,
+      weakness2,
+      weakness3,
+      weakness4,
+      weakness5,
+      improvement1,
+      improvement2,
+      improvement3,
+      improvement4,
+      improvement5,
+      act_partici1,
+      act_partici2,
+      act_partici3,
+      particulars1,
+      particulars2,
+      particulars3,
+      amount1,
+      amount2,
+      amount3,
+      amount_total,
+      proj_rep,
+      designation1,
+      adviser_name,
+      stud_org,
+      cscb_rep,
+      dept_rep,
+      dean,
+      designation2,
+      image1,
+      caption1,
+      caption2,
+      image2,
+    });
+    alert("Saved!");
+    navigate("/dash/employee");
   };
 
   const list = Object.values(STATUS).map((status) => {
@@ -684,11 +690,32 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   });
   const options = users.map((user) => {
     return (
-      <option className="" key={user.user_id} value={user.user_id}>
+      <option className="" key={user.lastname + ", " + user.firstname} value={user.lastname + ", " + user.firstname}>
         {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
   });
+
+  // const addInput = () => {
+  //   setPrep_Person([...prep_person, '']); // add a new input with an empty string value
+  // };
+
+  // const addPosition = () => {
+  //   setPrep_Position([...prep_pos, '']); // add a new input with an empty string value
+  // };
+
+  // const addType = () => {
+  //   setPrep_Type([...prep_type, '']); // add a new input with an empty string value
+  // };
+
+  // const addStart = () => {
+  //   setPrep_Start([...prep_start, '']); // add a new input with an empty string value
+  // };
+
+  // const addEnd = () => {
+  //   setPrep_End([...prep_end, '']); // add a new input with an empty string value
+  // };
+
 
   const errClass = isError ? "errmsg" : "offscreen";
 
@@ -740,6 +767,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                       </p>
                       <p>Please fill out all the blank fields.</p>
                     </div>
+
                   </div> */}
 
                   <div className="lg:col-span-3">
@@ -761,7 +789,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           name="sponsor_dept"
                           id="sponsor_dept"
                           className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={project_title}
+                          value={sponsor_dept}
                           onChange={onSponsor_DeptChanged}
                         />
                       </div>
@@ -886,9 +914,10 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         <div className="md:col-span-1">
                           <label htmlFor="country">Name of Volunteer</label>
                           <select
-                            id="prep_per1"
-                            name="prep_per1"
+                            id="prep_per2"
+                            name="prep_per2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per1}
                             onChange={onPrep_Per1Changed}
                           >
@@ -898,6 +927,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per2"
                             name="prep_per2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per2}
                             onChange={onPrep_Per2Changed}
                           >
@@ -907,6 +937,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per3"
                             name="prep_per3"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per3}
                             onChange={onPrep_Per3Changed}
                           >
@@ -916,6 +947,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="prep_per4"
                             name="prep_per4"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
                             value={prep_per4}
                             onChange={onPrep_Per4Changed}
                           >
@@ -925,8 +957,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         <div className="md:col-span-1">
                           <label htmlFor="country">Position/Designation</label>
                           <select
-                            id="user1"
-                            name="user1"
+                            id="user2"
+                            name="user2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={prep_pos1}
                             onChange={onPrep_Pos1Changed}
@@ -973,11 +1005,12 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             <option value="Employee">Employee</option>
                           </select>
                         </div>
-                        <div className="md:col-span-1">
+
+                        <div className="md:col-span-1 md:text-">
                           <label htmlFor="country">Type of Participation</label>
                           <select
-                            id="user1"
-                            name="user1"
+                            id="user2"
+                            name="user2"
                             className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={prep_type1}
                             onChange={onPrep_Type1Changed}
@@ -1044,6 +1077,27 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             </option>
                           </select>
                         </div>
+
+                        {/* <label htmlFor="country">Position/Designation</label>
+                          {prep_pos.map((prep_pos, index) => (
+                            <select
+                            id="prep_pos"
+                            name="prep_pos"
+                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                            required
+                            value={prep_pos}
+                            key={index}
+                            onChange={(event) => onPrep_PositionChanged(event, index)}
+                          >
+                            <option value="Facilitator">Facilitator</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
+                          </select>
+                             ))}
+                          <button type="button" onClick={addPosition}>Add Input</button>
+                          </div> */}
+
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
                           <div className="md:col-span-1">
                             <label htmlFor="country">Start Time</label>
@@ -1080,12 +1134,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               onChange={onPrep_Star4Changed}
                             ></input>
                           </div>
+
                           <div className="md:col-span-1">
                             <label htmlFor="country">End Time</label>
                             <input
                               type="time"
-                              id="prep_end1"
-                              name="prep_end1"
+                              id="prep_end2"
+                              name="prep_end2"
                               value={prep_end1}
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                               onChange={onPrep_End1Changed}
@@ -2082,7 +2137,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                                   <input
                                     type="file"
                                     className="opacity-0"
-                                    value={image2}
+                                    value={image1}
                                     onChange={onImage2Changed}
                                   />
                                 </label>

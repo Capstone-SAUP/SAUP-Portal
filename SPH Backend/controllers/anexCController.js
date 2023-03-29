@@ -23,8 +23,9 @@ const getAllAnexC = async (req, res) => {
         return {
           ...anexC,
           user: user.user_id,
-          // fullname: user.firstname + " " + user.lastname,
-          // user_role: user.roles[0],
+
+          // fullname: prep_per1.firstname + " " + prep_per1.lastname,
+          // // user_role: user.roles[0],
         };
       })
     );
