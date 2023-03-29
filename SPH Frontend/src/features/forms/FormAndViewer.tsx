@@ -21,13 +21,9 @@ type Mode = "form" | "viewer";
 
 const initTemplate = () => {
   let template: Template = getTemplate();
-  try {
-    const templateJson = getTemplate();
-    checkTemplate(templateJson);
-    template = templateJson as Template;
-  } catch {
-    localStorage.removeItem("template");
-  }
+  const templateJson = getTemplate();
+  checkTemplate(templateJson);
+  template = templateJson as Template;
   return template;
 };
 
@@ -62,18 +58,14 @@ function FormAndViewer() {
   const ui = useRef<Form | Viewer | null>(null);
 
   const [mode, setMode] = useState<Mode>(
-    (localStorage.getItem("mode") as Mode) ?? "form"
+    "form"
   );
 
   useEffect(() => {
     const template = initTemplate();
     let inputs = template.sampledata ?? [{}];
-    try {
-      const inputsJson = template.sampledata ?? [{}];
-      inputs = inputsJson;
-    } catch {
-      localStorage.removeItem("inputs");
-    }
+    const inputsJson = template.sampledata ?? [{}];
+    inputs = inputsJson;
 
     getFontsData().then((font) => {
       if (uiRef.current) {
