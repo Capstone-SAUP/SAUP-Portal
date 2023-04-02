@@ -11,7 +11,8 @@ const FNAME_REGEX = /^[a-zA-Z ]{3,20}$/;
 const LNAME_REGEX = /^[a-zA-Z ]{3,20}$/;
 const EMAIL_REGEX =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
+const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
+
 
 const NewUserForm = () => {
     useTitle("SAUP Portal: New User");
@@ -181,6 +182,7 @@ const NewUserForm = () => {
    const validTenureClass = !Boolean(tenure.length)
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
+        console.log(validPassword)
 
     const content = (
         <>
@@ -285,7 +287,7 @@ const NewUserForm = () => {
                             onChange={onPasswordChanged}
                         />
                         <div className="text-gray-500 text-xs">
-                            4-12 chars incl. !@#$%
+                            8-16 chars must include a number and special characters.  
                         </div>
                     </div>
                     <div>

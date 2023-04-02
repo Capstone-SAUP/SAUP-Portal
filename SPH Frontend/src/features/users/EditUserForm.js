@@ -6,7 +6,7 @@ import { DEPT } from "../../config/department";
 import { TENURE } from "../../config/tenure";
 
 const USER_REGEX = /^[0-9]{3,20}$/;
-const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
+const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
 const EMAIL_REGEX =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -233,7 +233,7 @@ const EditUserForm = ({ user }) => {
                         onChange={onPasswordChanged}
                     />
                     <div className="text-gray-500 text-xs">
-                        blank = no change, 4-12 chars incl. !@#$%
+                        blank = no change, 8-16 chars incl. !@#$%
                     </div>
                 </div>
                 <label
