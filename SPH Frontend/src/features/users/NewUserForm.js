@@ -182,7 +182,6 @@ const NewUserForm = () => {
    const validTenureClass = !Boolean(tenure.length)
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
-        console.log(validPassword)
 
     const content = (
         <>

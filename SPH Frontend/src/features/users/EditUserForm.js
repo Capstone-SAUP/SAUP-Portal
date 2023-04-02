@@ -233,7 +233,7 @@ const EditUserForm = ({ user }) => {
                         onChange={onPasswordChanged}
                     />
                     <div className="text-gray-500 text-xs">
-                        blank = no change, 8-16 chars incl. !@#$%
+                        Can leave blank, 8-16 chars incl. !@#$%
                     </div>
                 </div>
                 <label
