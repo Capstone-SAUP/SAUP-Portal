@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetAnexAQuery, useUpdateAnexAMutation } from "./anexA_ApiSlice";
 import { STATUS } from "../../config/status";
 import { memo } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const OutreachStud = ({ outreachId }) => {
   const { anexA } = useGetAnexAQuery("outreachList", {
@@ -10,8 +11,10 @@ const OutreachStud = ({ outreachId }) => {
       anexA: data?.entities[outreachId],
     }),
   });
-  // console.log(anexA);
+
   const navigate = useNavigate();
+
+  const { roles } = useAuth();
 
   const allOutreach = { ...anexA };
 
@@ -67,6 +70,23 @@ const OutreachStud = ({ outreachId }) => {
     );
   }
 
+  let StatusButton = null;
+  if (roles == "Admin") {
+    StatusButton = (
+      <select
+            id="roles"
+            name="roles"
+            className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
+            value={status}
+            onChange={onCompletedChanged}
+          >
+            {list}
+          </select>
+    );
+  }else{
+    StatusButton = (status)
+  }
+  
   if (allOutreach) {
     const created = new Date(allOutreach.createdAt).toLocaleString("en-US", {
       day: "numeric",
@@ -92,15 +112,7 @@ const OutreachStud = ({ outreachId }) => {
           {allOutreach.department}
         </td>
         <td className="whitespace-nowrap text-sm font-medium text-gray-900 pl-6 pr-4">
-          <select
-            id="roles"
-            name="roles"
-            className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
-            value={status}
-            onChange={onCompletedChanged}
-          >
-            {list}
-          </select>
+        {StatusButton}
           <button
             className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800
           ${status == originalStatus && "hidden"}`}
