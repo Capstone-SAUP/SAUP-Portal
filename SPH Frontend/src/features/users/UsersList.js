@@ -200,7 +200,7 @@ const UsersList = () => {
                     <th scope="col" className="">
                       Tenure
                     </th>
-                    <th scope="col" className="px-4 w-32">
+                    <th scope="col" className="px-4 w-32"> 
                       Edit
                     </th>
                   </tr>
