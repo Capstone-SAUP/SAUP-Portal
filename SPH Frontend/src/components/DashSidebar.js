@@ -20,7 +20,7 @@ const USERS_REGEX = /^\/dash\/users(\/)?$/;
 
 const DashSidebar = ({ ids }) => {
   const [open, setOpen] = useState(true);
-
+  
   const { roles, user_id, isAdmin } = useAuth();
 
   

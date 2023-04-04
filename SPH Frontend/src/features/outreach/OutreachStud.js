@@ -86,7 +86,7 @@ const OutreachStud = ({ outreachId }) => {
   }else{
     StatusButton = (status)
   }
-
+  
   if (allOutreach) {
     const created = new Date(allOutreach.createdAt).toLocaleString("en-US", {
       day: "numeric",
