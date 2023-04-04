@@ -227,7 +227,7 @@ if (roles == "Employee" || roles == "Admin"){
     if (pathname.match("/dash")) {
       certificateButton = (
         <button
-          className="w-full text-left"
+          className="mb-20 w-full text-left"
           title="Generate Certificate"
           onClick={onGenerateClicked}
         >
