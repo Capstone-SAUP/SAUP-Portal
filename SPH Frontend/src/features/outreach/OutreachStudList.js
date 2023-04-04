@@ -101,14 +101,11 @@ const OutreachStudList = () => {
       noOutreach = (
         <section className="flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
           <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-            <div className="max-w-md text-center">
-              <h2 className="mb-8 font-extrabold text-9xl text-red-900">
-                <span className="sr-only ">Error</span>404
-              </h2>
+            <div className="text-center">
               <p className="text-2xl font-semibold md:text-3xl">
                 Sorry, no Outreach was found.
               </p>
-              <p className="mt-4 mb-8 dark:text-gray-400">
+              <p className="mt-4 mb-8 dark:text-gray-400 italic">
                 You first need to submit a Proposal for a Community Extension
                 Project.
               </p>
@@ -145,13 +142,11 @@ const OutreachStudList = () => {
           <div className="flex flex-wrap items-center justify-between mx-auto">
             <ul className="flex gap-x-20 mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-4 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
               <li>
-                <div className=" px-4 text-sm font-bold">
-                  What are you looking for?
-                </div>
+                <div className=" px-4 text-sm font-bold">Name of User</div>
                 <header>
                   <input
                     className="z-1 block ml-4 bg-gray-300 border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900"
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => setSearch(e.target.value.toLowerCase())}
                     placeholder="Search"
                   ></input>
                 </header>
@@ -208,7 +203,7 @@ const OutreachStudList = () => {
                     Add New Project
                     </button>
                 </div> */}
-<table className="max-w-screen-lg text-sm text-left table-fixed inline ">
+          <table className="w-full text-sm text-left table-fixed">
             <thead className="bg-gray-300">
               <tr>
                 <th scope="col" className="text-sm font-bold px-6 py-4 ">
@@ -217,25 +212,25 @@ const OutreachStudList = () => {
                 <th scope="col" className="text-sm font-bold py-4 pr-14">
                   Full Name
                 </th>
-                <th scope="col" className="text-sm font-bold px-7 py-4 ">
+                <th scope="col" className="text-sm font-bold py-4 ">
                   Department
                 </th>
-                <th scope="col" className="text-sm font-bold px-7 py-4 ">
+                <th scope="col" className="text-sm font-bold py-4 ">
                   Status
                 </th>
-                <th scope="col" className="text-sm font-bold px-7 py-4 ">
+                <th scope="col" className="text-sm font-bold py-4 ">
                   Date Created
                 </th>
-                <th scope="col" className="text-sm font-bold px-11 py-4 ">
+                <th scope="col" className="text-sm font-bold  py-4 ">
                   Project Title
                 </th>
-                <th scope="col" className="text-sm font-bold px-11 py-4 ">
+                <th scope="col" className="text-sm font-bold  py-4 ">
                   Beneficiaries
                 </th>
-                <th scope="col" className="text-sm font-bold px-11 py-4 ">
+                <th scope="col" className="text-sm font-bold  py-4 ">
                   Venue
                 </th>
-                <th scope="col" className="px-9 py-4 w-40">
+                <th scope="col" className="py-4 w-40">
                   Option
                 </th>
               </tr>

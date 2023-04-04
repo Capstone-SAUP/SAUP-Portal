@@ -60,7 +60,7 @@ const DataOverview = () => {
           <ul className="flex gap-x-20 mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-1 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
             <li>
               <div className=" px-4 text-sm font-bold">
-                What are you looking for?
+                Name of User
               </div>
               <input
                 type="text"

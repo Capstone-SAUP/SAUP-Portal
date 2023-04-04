@@ -66,14 +66,14 @@ const Login = () => {
 
     const content = (
       <section className="">
-        <main className="">
+        <main className="inline-flex sm:flex">
           <img
-            className="w-1/2 h-screen float-left object-cover"
+            className="hidden sm:block w-1/2 h-screen object-cover"
             src={require("../../img/background.jpg")}
             alt="background"
           ></img>
           <form
-            className="h-screen grid place-content-center"
+            className="w-full sm:1/2 grid h-screen place-content-center"
             onSubmit={handleSubmit}
           >
             <br></br>
