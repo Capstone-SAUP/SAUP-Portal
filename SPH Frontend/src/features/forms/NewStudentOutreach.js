@@ -13,6 +13,7 @@ import { useAddNewAnexAMutation } from "../outreach/anexA_ApiSlice";
 import { useGetUsersQuery } from "../users/usersApiSlice";
 import useAuth from "../../hooks/useAuth";
 import { current } from "@reduxjs/toolkit";
+import DatePicker from "react-datepicker";
 
 function NewStudentOutreach() {
   let navigate = useNavigate();
@@ -93,7 +94,8 @@ const currentuser = getCurrentUser();
   const [user] = useState(getCurrentUser())
   const [department] = useState(getCurrentDept())
   const [name_org, setname_org] = useState("");
-  const [date_est, setdate_est] = useState("");
+  // const [date_est, setdate_est] = useState("");
+  const [date_est, setdate_est] = useState(new Date());
   const [designated_per1, setdesignated_per1] = useState("");
   const [designated_per2, setdesignated_per2] = useState("");
   const [designated_per3, setdesignated_per3] = useState("");
@@ -111,7 +113,7 @@ const currentuser = getCurrentUser();
   const [project_title, setproject_title] = useState("");
   const [purpose_activity, setpurpose_activity] = useState("");
   const [reason_community, setreason_community] = useState("");
-  const [target_date, settarget_date] = useState("");
+  const [target_date, settarget_date] = useState(new Date());
   const [no_beneficiaries, setno_beneficiaries] = useState("");
   const [venue, setvenue] = useState("");
   const [target_beneficiary, settarget_beneficiary] = useState("");
@@ -304,14 +306,9 @@ const content = (
                     </div>
                     <div className="md:col-span-7">
                       <label htmlFor="date_est">Date Established :</label>
-                      <input
-                        type="text"
+                      <DatePicker type="text"
                         name="date_est"
-                        id="date_est"
-                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                        value={date_est}
-                        onChange={ondate_estChanged}
-                      />
+                        id="date_est" className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50" selected={date_est} onChange={(date) => setdate_est(date)} dateFormat="MMMM d, yyyy"/>
                     </div>
                     <div className="md:col-span-4 text-base font-semibold text-gray-600">
                       {" "}
@@ -515,14 +512,9 @@ const content = (
                     <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
                       <div>
                         <label htmlFor="target_date">Target Date/s :</label>
-                        <input
-                          type="text"
+                        <DatePicker type="text"
                           name="target_date"
-                          id="target_date"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={target_date}
-                          onChange={ontarget_dateChanged}
-                        />
+                          id="target_date" className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50" selected={target_date} onChange={(date) => settarget_date(date)} dateFormat="MMMM d, yyyy"/>
                       </div>
                       <div>
                         <label htmlFor="venue">Target Area/s :</label>

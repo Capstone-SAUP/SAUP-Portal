@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { STATUS } from "../../config/status";
 import { useGetUsersQuery } from "../users/usersApiSlice";
 import { current } from "@reduxjs/toolkit";
+import DatePicker from "react-datepicker";
 
 const OutreachReportForm = ({ filteredOutreach, users }) => {
   // window.addEventListener("beforeunload", function (event) {
@@ -38,7 +39,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   // console.log(getCurrentUser());
 
   const current_user = getCurrentUser();
-  console.log(current_user);
   const [createReport, { isSuccess, isError, error }] =
     useAddNewAnexCMutation();
 
@@ -84,12 +84,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   );
   const [accomp_obj, setAccomp_Obj] = useState(filteredOutreach.accomp_obj);
   const [venue, setVenue] = useState(filteredOutreach.venue);
-  const [date_implement, setDate_Implement] = useState(
-    filteredOutreach.date_implement
-  );
-  const [brief_narrative, setBrief_Narrative] = useState(
-    filteredOutreach.brief_narrative
-  );
+  const [date_implement, setDate_Implement] = useState(new Date());
+  const [brief_narrative, setBrief_Narrative] = useState(filteredOutreach.brief_narrative);
   const [topics, setTopics] = useState(filteredOutreach.topics);
   const [speakers, setSpeakers] = useState(filteredOutreach.speakers);
   // const [prep_person, setPrep_Person] = useState([]);
@@ -1001,14 +997,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                         <label htmlFor="date_implement">
                           Date/Time Implemented :
                         </label>
-                        <input
-                          type="text"
+                        <DatePicker type="text"
                           name="date_implement"
-                          id="date_implement"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={date_implement}
-                          onChange={onDate_ImplementChanged}
-                        />
+                          id="date_implement" className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50" selected={date_implement} onChange={(date) => setDate_Implement(date)} dateFormat="MMMM d, yyyy"/>
                       </div>
                       <div className="md:col-span-2"></div>
                       <div className="md:col-span-7">
