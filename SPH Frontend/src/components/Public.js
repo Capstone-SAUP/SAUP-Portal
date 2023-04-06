@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 
 const Public = () => {
     const content = (
-      <body className="w-full">
+      <div className="w-full">
         <header className="lg:sticky top-0 z-20">
           <nav className="bg-red-900 sticky border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -25,45 +25,36 @@ const Public = () => {
                   Log in
                 </a>
               </div>
-              <div class=" items-center w-full lg:flex lg:w-auto lg:order-1">
+              <div className=" items-center w-full lg:flex lg:w-auto lg:order-1">
                 <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:text-sm lg:space-x-8 lg:mt-0">
                   <li>
-                    <Link to="home" spy={true} offset={-60} smooth={true}>
-                      <a
+                      <Link to="home" spy={true} offset={-60} smooth={true}
                         className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                         aria-current="page"
                       >
                         Home
-                      </a>
-                    </Link>
+                      </Link>
                   </li>
                   <li>
-                    <Link to="partners" spy={true} offset={-60} smooth={true}>
-                      <a className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                      <Link to="partners" spy={true} offset={-60} smooth={true} 
+                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                         Partners
-                      </a>
-                    </Link>
+                      </Link>
                   </li>
                   <li>
-                    <Link to="involve" spy={true} offset={-60} smooth={true}>
-                      <a className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                      <Link to="involve" spy={true} offset={-60} smooth={true} className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                         Get Involved
-                      </a>
-                    </Link>
+                      </Link>
                   </li>
                   <li>
-                    <Link to="aboutus" spy={true} offset={-60} smooth={true}>
-                      <a className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                      <Link to="aboutus" spy={true} offset={-60} smooth={true} className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                         About
-                      </a>
-                    </Link>
+                      </Link>
                   </li>
                   <li>
-                    <Link to="contact" spy={true} offset={-60} smooth={true}>
-                      <a className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                      <Link to="contact" spy={true} offset={-60} smooth={true} className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                         Contact
-                      </a>
-                    </Link>
+                      </Link>
                   </li>
                 </ul>
               </div>
@@ -558,7 +549,7 @@ const Public = () => {
             </div>
           </div>
         </footer>
-      </body>
+      </div>
     );
     return content;
 };
