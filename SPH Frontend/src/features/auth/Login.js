@@ -132,6 +132,7 @@ const Login = () => {
             </main>
 
             {/* <footer> 
+     
                 <Link className='text-gray-900' to="/">Back to Home</Link>
             </footer> */}
         </section>
