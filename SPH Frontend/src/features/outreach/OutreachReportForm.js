@@ -21,18 +21,10 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     "usersList",
     {
       selectFromResult: ({ data }) => ({
-        object_id: data?.ids.map(
-          (id) => data?.entities[id].id
-        ),
-        user_ids: data?.ids.map(
-          (id) => data?.entities[id].user_id
-        ),
-        lastname: data?.ids.map(
-          (id) => data?.entities[id].lastname
-        ),
-        department: data?.ids.map(
-          (id) => data?.entities[id].department
-        ),
+        object_id: data?.ids.map((id) => data?.entities[id].id),
+        user_ids: data?.ids.map((id) => data?.entities[id].user_id),
+        lastname: data?.ids.map((id) => data?.entities[id].lastname),
+        department: data?.ids.map((id) => data?.entities[id].department),
       }),
     }
   );
@@ -42,7 +34,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       const currentUser = user_ids.indexOf(user_id);
       const currentUserObjectId = object_id[currentUser];
       return currentUserObjectId;
-    } catch (error) { }
+    } catch (error) {}
   };
   // console.log(getCurrentUser());
 
@@ -54,13 +46,13 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   //     const [prepPhase, setInputFields] = useState([{
   //         fullName:'',
   //         emailAddress:'',
-  //         salary:''  
+  //         salary:''
   //     } ]);
   //     const addInputField = ()=>{
   //         setInputFields([...prepPhase, {
   //             fullName:'',
   //             emailAddress:'',
-  //             salary:''  
+  //             salary:''
   //         } ])
 
   //     }
@@ -81,9 +73,15 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
   const [user] = useState(current_user);
   const [fullname] = useState(filteredOutreach.fullname);
-  const [sponsor_dept, setSponsor_Dept] = useState(filteredOutreach.sponsor_dept);
-  const [project_title, setProject_Title] = useState(filteredOutreach.project_title);
-  const [target_beneficiary, setBeneficiaries] = useState(filteredOutreach.target_beneficiary);
+  const [sponsor_dept, setSponsor_Dept] = useState(
+    filteredOutreach.sponsor_dept
+  );
+  const [project_title, setProject_Title] = useState(
+    filteredOutreach.project_title
+  );
+  const [target_beneficiary, setBeneficiaries] = useState(
+    filteredOutreach.target_beneficiary
+  );
   const [accomp_obj, setAccomp_Obj] = useState(filteredOutreach.accomp_obj);
   const [venue, setVenue] = useState(filteredOutreach.venue);
   const [date_implement, setDate_Implement] = useState(new Date());
@@ -115,26 +113,66 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [prep_end2, setPrep_End2] = useState(filteredOutreach.prep_end2);
   const [prep_end3, setPrep_End3] = useState(filteredOutreach.prep_end3);
   const [prep_end4, setPrep_End4] = useState(filteredOutreach.prep_end4);
-  const [implement_per1, setImplement_Per1] = useState(filteredOutreach.implement_per1);
-  const [implement_per2, setImplement_Per2] = useState(filteredOutreach.implement_per2);
-  const [implement_per3, setImplement_Per3] = useState(filteredOutreach.implement_per3);
-  const [implement_per4, setImplement_Per4] = useState(filteredOutreach.implement_per4);
-  const [implement_pos1, setImplement_Pos1] = useState(filteredOutreach.implement_pos1);
-  const [implement_pos2, setImplement_Pos2] = useState(filteredOutreach.implement_pos2);
-  const [implement_pos3, setImplement_Pos3] = useState(filteredOutreach.implement_pos3);
-  const [implement_type1, setImplement_Type1] = useState(filteredOutreach.implement_type1);
-  const [implement_type2, setImplement_Type2] = useState(filteredOutreach.implement_type2);
-  const [implement_pos4, setImplement_Pos4] = useState(filteredOutreach.implement_pos4);
-  const [implement_type3, setImplement_Type3] = useState(filteredOutreach.implement_type3);
-  const [implement_type4, setImplement_Type4] = useState(filteredOutreach.implement_type4);
-  const [implement_start1, setImplement_Start1] = useState(filteredOutreach.implement_start1);
-  const [implement_start2, setImplement_Start2] = useState(filteredOutreach.implement_start2);
-  const [implement_star3, setImplement_Star3] = useState(filteredOutreach.implement_star3);
-  const [implement_star4, setImplement_Star4] = useState(filteredOutreach.implement_star4);
-  const [implement_end1, setImplement_End1] = useState(filteredOutreach.implement_end1);
-  const [implement_end2, setImplement_End2] = useState(filteredOutreach.implement_end2);
-  const [implement_end3, setImplement_End3] = useState(filteredOutreach.implement_end3);
-  const [implement_end4, setImplement_End4] = useState(filteredOutreach.implement_end4);
+  const [implement_per1, setImplement_Per1] = useState(
+    filteredOutreach.implement_per1
+  );
+  const [implement_per2, setImplement_Per2] = useState(
+    filteredOutreach.implement_per2
+  );
+  const [implement_per3, setImplement_Per3] = useState(
+    filteredOutreach.implement_per3
+  );
+  const [implement_per4, setImplement_Per4] = useState(
+    filteredOutreach.implement_per4
+  );
+  const [implement_pos1, setImplement_Pos1] = useState(
+    filteredOutreach.implement_pos1
+  );
+  const [implement_pos2, setImplement_Pos2] = useState(
+    filteredOutreach.implement_pos2
+  );
+  const [implement_pos3, setImplement_Pos3] = useState(
+    filteredOutreach.implement_pos3
+  );
+  const [implement_type1, setImplement_Type1] = useState(
+    filteredOutreach.implement_type1
+  );
+  const [implement_type2, setImplement_Type2] = useState(
+    filteredOutreach.implement_type2
+  );
+  const [implement_pos4, setImplement_Pos4] = useState(
+    filteredOutreach.implement_pos4
+  );
+  const [implement_type3, setImplement_Type3] = useState(
+    filteredOutreach.implement_type3
+  );
+  const [implement_type4, setImplement_Type4] = useState(
+    filteredOutreach.implement_type4
+  );
+  const [implement_start1, setImplement_Start1] = useState(
+    filteredOutreach.implement_start1
+  );
+  const [implement_start2, setImplement_Start2] = useState(
+    filteredOutreach.implement_start2
+  );
+  const [implement_star3, setImplement_Star3] = useState(
+    filteredOutreach.implement_star3
+  );
+  const [implement_star4, setImplement_Star4] = useState(
+    filteredOutreach.implement_star4
+  );
+  const [implement_end1, setImplement_End1] = useState(
+    filteredOutreach.implement_end1
+  );
+  const [implement_end2, setImplement_End2] = useState(
+    filteredOutreach.implement_end2
+  );
+  const [implement_end3, setImplement_End3] = useState(
+    filteredOutreach.implement_end3
+  );
+  const [implement_end4, setImplement_End4] = useState(
+    filteredOutreach.implement_end4
+  );
   const [post_per1, setPost_Per1] = useState(filteredOutreach.post_per1);
   const [post_per2, setPost_Per2] = useState(filteredOutreach.post_per2);
   const [post_per3, setPost_Per3] = useState(filteredOutreach.post_per3);
@@ -170,152 +208,188 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [weakness3, setWeakness3] = useState(filteredOutreach.weakness3);
   const [weakness4, setWeakness4] = useState(filteredOutreach.weakness4);
   const [weakness5, setWeakness5] = useState(filteredOutreach.weakness5);
-  const [improvement1, setImprovement1] = useState(filteredOutreach.improvement1);
-  const [improvement2, setImprovement2] = useState(filteredOutreach.improvement2);
-  const [improvement3, setImprovement3] = useState(filteredOutreach.improvement3);
-  const [improvement4, setImprovement4] = useState(filteredOutreach.improvement4);
-  const [improvement5, setImprovement5] = useState(filteredOutreach.improvement5);
-  const [act_partici1, setAct_Partici1] = useState(filteredOutreach.act_partici1);
-  const [act_partici2, setAct_Partici2] = useState(filteredOutreach.act_partici2);
-  const [act_partici3, setAct_Partici3] = useState(filteredOutreach.act_partici3);
-  const [particulars1, setParticulars1] = useState(filteredOutreach.particulars1);
-  const [particulars2, setParticulars2] = useState(filteredOutreach.particulars2);
-  const [particulars3, setParticulars3] = useState(filteredOutreach.particulars3);
+  const [improvement1, setImprovement1] = useState(
+    filteredOutreach.improvement1
+  );
+  const [improvement2, setImprovement2] = useState(
+    filteredOutreach.improvement2
+  );
+  const [improvement3, setImprovement3] = useState(
+    filteredOutreach.improvement3
+  );
+  const [improvement4, setImprovement4] = useState(
+    filteredOutreach.improvement4
+  );
+  const [improvement5, setImprovement5] = useState(
+    filteredOutreach.improvement5
+  );
+  const [act_partici1, setAct_Partici1] = useState(
+    filteredOutreach.act_partici1
+  );
+  const [act_partici2, setAct_Partici2] = useState(
+    filteredOutreach.act_partici2
+  );
+  const [act_partici3, setAct_Partici3] = useState(
+    filteredOutreach.act_partici3
+  );
+  const [particulars1, setParticulars1] = useState(
+    filteredOutreach.particulars1
+  );
+  const [particulars2, setParticulars2] = useState(
+    filteredOutreach.particulars2
+  );
+  const [particulars3, setParticulars3] = useState(
+    filteredOutreach.particulars3
+  );
   const [amount1, setAmount1] = useState(filteredOutreach.amount1);
   const [amount2, setAmount2] = useState(filteredOutreach.amount2);
   const [amount3, setAmount3] = useState(filteredOutreach.amount3);
-  const [amount_total, setAmount_Total] = useState(filteredOutreach.amount_total);
+  const [amount_total, setAmount_Total] = useState(
+    filteredOutreach.amount_total
+  );
   const [proj_rep, setProj_rep] = useState(filteredOutreach.proj_rep);
-  const [designation1, setDesignation1] = useState(filteredOutreach.designation1);
-  const [adviser_name, setAdviser_name] = useState(filteredOutreach.adviser_name);
+  const [designation1, setDesignation1] = useState(
+    filteredOutreach.designation1
+  );
+  const [adviser_name, setAdviser_name] = useState(
+    filteredOutreach.adviser_name
+  );
   const [stud_org, setStud_org] = useState(filteredOutreach.stud_org);
   const [cscb_rep, setCscb_rep] = useState(filteredOutreach.cscb_rep);
   const [dept_rep, setDept_rep] = useState(filteredOutreach.dept_rep);
   const [dean, setDean] = useState(filteredOutreach.dean);
-  const [designation2, setDesignation2] = useState(filteredOutreach.designation2);
+  const [designation2, setDesignation2] = useState(
+    filteredOutreach.designation2
+  );
   const [image1, setImage1] = useState(filteredOutreach.image1);
+  const [previewImage, setPreviewImage] = useState(null);
   const [caption1, setCaption1] = useState(filteredOutreach.caption1);
   const [caption2, setCaption2] = useState(filteredOutreach.caption2);
   const [image2, setImage2] = useState(filteredOutreach.image2);
+  const [previewImage2, setPreviewImage2] = useState(null);
+
 
   useEffect(() => {
     if (isSuccess) {
-      setSponsor_Dept("")
-      setProject_Title("")
-      setBeneficiaries("")
-      setAccomp_Obj("")
-      setVenue("")
-      setDate_Implement("")
-      setBrief_Narrative("")
-      setTopics("")
-      setSpeakers("")
+      setSponsor_Dept("");
+      setProject_Title("");
+      setBeneficiaries("");
+      setAccomp_Obj("");
+      setVenue("");
+      setDate_Implement("");
+      setBrief_Narrative("");
+      setTopics("");
+      setSpeakers("");
       // setPrep_Person([])
       // setPrep_Position([])
       // setPrep_Type([])
       // setPrep_Start([])
       // setPrep_End([])
-      setPrep_Per1("")
-      setPrep_Per2("")
-      setPrep_Per3("")
-      setPrep_Per4("")
-      setPrep_Pos1("")
-      setPrep_Pos2("")
-      setPrep_Pos3("")
-      setPrep_Type1("")
-      setPrep_Type2("")
-      setPrep_Pos4("")
-      setPrep_Type3("")
-      setPrep_Type4("")
-      setPrep_Start1("")
-      setPrep_Start2("")
-      setPrep_Star3("")
-      setPrep_Star4("")
-      setPrep_End1("")
-      setPrep_End2("")
-      setPrep_End3("")
-      setPrep_End4("")
-      setImplement_Per1("")
-      setImplement_Per2("")
-      setImplement_Per3("")
-      setImplement_Per4("")
-      setImplement_Pos1("")
-      setImplement_Pos2("")
-      setImplement_Pos3("")
-      setImplement_Type1("")
-      setImplement_Type2("")
-      setImplement_Pos4("")
-      setImplement_Type3("")
-      setImplement_Type4("")
-      setImplement_Start1("")
-      setImplement_Start2("")
-      setImplement_Star3("")
-      setImplement_Star4("")
-      setImplement_End1("")
-      setImplement_End2("")
-      setImplement_End3("")
-      setImplement_End4("")
-      setPost_Per1("")
-      setPost_Per2("")
-      setPost_Per3("")
-      setPost_Per4("")
-      setPost_Pos1("")
-      setPost_Pos2("")
-      setPost_Pos3("")
-      setPost_Type1("")
-      setPost_Type2("")
-      setPost_Pos4("")
-      setPost_Type3("")
-      setPost_Type4("")
-      setPost_Start1("")
-      setPost_Start2("")
-      setPost_Star3("")
-      setPost_Star4("")
-      setPost_End1("")
-      setPost_End2("")
-      setPost_End3("")
-      setPost_End4("")
-      setLearnings1("")
-      setLearnings2("")
-      setLearnings3("")
-      setLearnings4("")
-      setLearnings5("")
-      setStrengths1("")
-      setStrengths2("")
-      setStrengths3("")
-      setStrengths4("")
-      setStrengths5("")
-      setWeakness1("")
-      setWeakness2("")
-      setWeakness3("")
-      setWeakness4("")
-      setWeakness5("")
-      setImprovement1("")
-      setImprovement2("")
-      setImprovement3("")
-      setImprovement4("")
-      setImprovement5("")
-      setAct_Partici1("")
-      setAct_Partici2("")
-      setAct_Partici3("")
-      setParticulars1("")
-      setParticulars2("")
-      setParticulars3("")
-      setAmount1("")
-      setAmount2("")
-      setAmount3("")
-      setAmount_Total("")
-      setProj_rep("")
-      setDesignation1("")
-      setAdviser_name("")
-      setStud_org("")
-      setCscb_rep("")
-      setDept_rep("")
-      setDean("")
-      setDesignation2("")
-      setImage1("")
-      setCaption1("")
-      setCaption2("")
-      setImage2("")
+      setPrep_Per1("");
+      setPrep_Per2("");
+      setPrep_Per3("");
+      setPrep_Per4("");
+      setPrep_Pos1("");
+      setPrep_Pos2("");
+      setPrep_Pos3("");
+      setPrep_Type1("");
+      setPrep_Type2("");
+      setPrep_Pos4("");
+      setPrep_Type3("");
+      setPrep_Type4("");
+      setPrep_Start1("");
+      setPrep_Start2("");
+      setPrep_Star3("");
+      setPrep_Star4("");
+      setPrep_End1("");
+      setPrep_End2("");
+      setPrep_End3("");
+      setPrep_End4("");
+      setImplement_Per1("");
+      setImplement_Per2("");
+      setImplement_Per3("");
+      setImplement_Per4("");
+      setImplement_Pos1("");
+      setImplement_Pos2("");
+      setImplement_Pos3("");
+      setImplement_Type1("");
+      setImplement_Type2("");
+      setImplement_Pos4("");
+      setImplement_Type3("");
+      setImplement_Type4("");
+      setImplement_Start1("");
+      setImplement_Start2("");
+      setImplement_Star3("");
+      setImplement_Star4("");
+      setImplement_End1("");
+      setImplement_End2("");
+      setImplement_End3("");
+      setImplement_End4("");
+      setPost_Per1("");
+      setPost_Per2("");
+      setPost_Per3("");
+      setPost_Per4("");
+      setPost_Pos1("");
+      setPost_Pos2("");
+      setPost_Pos3("");
+      setPost_Type1("");
+      setPost_Type2("");
+      setPost_Pos4("");
+      setPost_Type3("");
+      setPost_Type4("");
+      setPost_Start1("");
+      setPost_Start2("");
+      setPost_Star3("");
+      setPost_Star4("");
+      setPost_End1("");
+      setPost_End2("");
+      setPost_End3("");
+      setPost_End4("");
+      setLearnings1("");
+      setLearnings2("");
+      setLearnings3("");
+      setLearnings4("");
+      setLearnings5("");
+      setStrengths1("");
+      setStrengths2("");
+      setStrengths3("");
+      setStrengths4("");
+      setStrengths5("");
+      setWeakness1("");
+      setWeakness2("");
+      setWeakness3("");
+      setWeakness4("");
+      setWeakness5("");
+      setImprovement1("");
+      setImprovement2("");
+      setImprovement3("");
+      setImprovement4("");
+      setImprovement5("");
+      setAct_Partici1("");
+      setAct_Partici2("");
+      setAct_Partici3("");
+      setParticulars1("");
+      setParticulars2("");
+      setParticulars3("");
+      setAmount1("");
+      setAmount2("");
+      setAmount3("");
+      setAmount_Total("");
+      setProj_rep("");
+      setDesignation1("");
+      setAdviser_name("");
+      setStud_org("");
+      setCscb_rep("");
+      setDept_rep("");
+      setDean("");
+      setDesignation2("");
+      setImage1("");
+      setPreviewImage(null);
+      setCaption1("");
+      setCaption2("");
+      setImage2("");
+      setPreviewImage2(null);
+
     }
   }, [isSuccess]);
 
@@ -429,10 +503,82 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const OnDept_repChanged = (e) => setDept_rep(e.target.value);
   const OnDeanChanged = (e) => setDean(e.target.value);
   const OnDesignation2Changed = (e) => setDesignation2(e.target.value);
-  const onImage1Changed = (e) => setImage1(e.target.value);
+  // const onImage1Changed = (e) => {
+  //   setImage1(e.target.files[0]);
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(e.target.files[0]);
+  //   reader.onload = () => setPreviewImage(reader.result);
+  // };
+  const onImage1Changed = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const image = new Image();
+      image.src = reader.result;
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        const max_size = 20; // max size in KB
+        let width = image.width;
+        let height = image.height;
+        if (width > height) {
+          if (width > max_size * 1024) {
+            height *= max_size * 1024 / width;
+            width = max_size * 1024;
+          }
+        } else {
+          if (height > max_size * 1024) {
+            width *= max_size * 1024 / height;
+            height = max_size * 1024;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(image, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        setPreviewImage(dataUrl);
+        setImage1(dataUrl);
+      };
+    };
+  };
   const onCaption1Changed = (e) => setCaption1(e.target.value);
   const onCaption2Changed = (e) => setCaption2(e.target.value);
-  const onImage2Changed = (e) => setImage2(e.target.value);
+
+  const onImage2Changed = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const image = new Image();
+      image.src = reader.result;
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        const max_size = 20; // max size in KB
+        let width = image.width;
+        let height = image.height;
+        if (width > height) {
+          if (width > max_size * 1024) {
+            height *= max_size * 1024 / width;
+            width = max_size * 1024;
+          }
+        } else {
+          if (height > max_size * 1024) {
+            width *= max_size * 1024 / height;
+            height = max_size * 1024;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(image, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        setPreviewImage2(dataUrl);
+        setImage2(dataUrl);
+        
+      };
+    };
+  };
 
   // const canSave =
   //   [
@@ -659,6 +805,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       caption2,
       image2,
     });
+    const formData = new FormData();
+    formData.append("image1", image1);
+    await createReport(formData);
     alert("Saved!");
     navigate("/dash/employee");
   };
@@ -690,7 +839,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   });
   const options = users.map((user) => {
     return (
-      <option className="" key={user.lastname + ", " + user.firstname} value={user.lastname + ", " + user.firstname}>
+      <option
+        className=""
+        key={user.lastname + ", " + user.firstname}
+        value={user.lastname + ", " + user.firstname}
+      >
         {user.user_id + " | " + user.lastname + ", " + user.firstname}
       </option>
     );
@@ -715,7 +868,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   // const addEnd = () => {
   //   setPrep_End([...prep_end, '']); // add a new input with an empty string value
   // };
-
 
   const errClass = isError ? "errmsg" : "offscreen";
 
@@ -2062,20 +2214,28 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                               <div className="flex items-center justify-center w-full">
                                 <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
                                   <div className="flex flex-col items-center justify-center pt-7">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                    {previewImage ? (
+                                      <img
+                                        src={previewImage}
+                                        alt="Preview"
+                                        className="h-20"
                                       />
-                                    </svg>
+                                    ) : (
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                        />
+                                      </svg>
+                                    )}
                                     <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                       Photo Here
                                     </p>
@@ -2083,7 +2243,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                                   <input
                                     type="file"
                                     className="opacity-0"
-                                    value={image1}
+                                    accept="image/*"
                                     onChange={onImage1Changed}
                                   />
                                 </label>
@@ -2109,22 +2269,30 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                                 File Upload
                               </label>
                               <div className="flex items-center justify-center w-full">
-                                <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                              <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
                                   <div className="flex flex-col items-center justify-center pt-7">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                    {previewImage2 ? (
+                                      <img
+                                        src={previewImage2}
+                                        alt="Preview"
+                                        className="h-20"
                                       />
-                                    </svg>
+                                    ) : (
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                        />
+                                      </svg>
+                                    )}
                                     <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                       Photo Here
                                     </p>
@@ -2132,7 +2300,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                                   <input
                                     type="file"
                                     className="opacity-0"
-                                    value={image1}
+                                    accept="image/*"
                                     onChange={onImage2Changed}
                                   />
                                 </label>
@@ -2173,6 +2341,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       </form>
     </>
   );
+  console.log(image1);
+
   {
     /* <div>
   <div className="flex justify-between items-center">
