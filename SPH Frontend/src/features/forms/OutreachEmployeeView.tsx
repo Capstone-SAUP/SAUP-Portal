@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useUpdateAnexBMutation } from "../outreach/anexB_ApiSlice";
 import { useUpdateAnexAMutation } from "../outreach/anexA_ApiSlice";
 import { STATUS } from "../../config/status";
-import React from "react";
+import useAuth from "../../hooks/useAuth";
 
 type Mode = "form" | "viewer";
 
@@ -45,10 +45,13 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
 
   const { pathname } = useLocation();
 
+  const { roles } = useAuth();
+
   const [updateOutreachA] = useUpdateAnexAMutation();
   const [updateOutreachB] = useUpdateAnexBMutation();
 
   const [status, setCompleted] = useState(filteredOutreach["filteredOutreach"].status);
+  const [originalStatus] = useState(filteredOutreach["filteredOutreach"].status);
   const [outreachId, setOutreach_id] = useState(filteredOutreach["filteredOutreach"]._id);
   console.log(outreachId);
 
@@ -90,6 +93,28 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
       </option>
     );
   });
+
+  let StatusButton = null;
+  if (roles == "Admin") {
+    StatusButton = (
+            <div className="w-full inline">
+            <label className="text-base align-middle" htmlFor="user_id">
+                Change Status: &nbsp;
+            </label>
+            <select
+                id="status"
+                name="roles"
+                className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                value={status}
+                onChange={onCompletedChanged}
+            >
+                {list}
+            </select>
+        </div>
+    );
+  }else{
+    StatusButton = ("Current Status: "+status)
+  }
   
   useEffect(() => {
     const template = initTemplate();
@@ -165,23 +190,10 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   
   return (
 <div>
-<div className="w-full inline">
-            <label className="text-base align-middle" htmlFor="user_id">
-                Change Status: &nbsp;
-            </label>
-            <select
-                id="status"
-                name="roles"
-                className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                value={status}
-                onChange={onCompletedChanged}
-            >
-                {list}
-            </select>
-        </div>
+        {StatusButton}
         &nbsp;
         <button
-            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            
+            className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 ${status == originalStatus && "hidden"}`}            
             title="Save"
             onClick={onSaveOutreachClicked}
           >
