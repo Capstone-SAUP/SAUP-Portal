@@ -190,6 +190,18 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   const [budget] = useState(filteredOutreach["filteredOutreach"].budget);
   const [prog_indicator] = useState(filteredOutreach["filteredOutreach"].prog_indicator);
   
+  const formatDateEst = new Date(date_est).toLocaleString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const formatTargetDate = new Date(target_date).toLocaleString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
 <div>
         {StatusButton}
@@ -257,7 +269,7 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                       </div>
                       <div className="md:col-span-7">
                         <label htmlFor="date_est">Date Established :</label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{date_est}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{formatDateEst}</div>
                       </div>
                       <div className="md:col-span-4 text-base font-semibold text-gray-600">
                         {" "}
@@ -333,7 +345,7 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                         <label htmlFor="target_date">
                         Target Date/s :
                         </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{target_date}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{formatTargetDate}</div>
                         </div>
                         <div>
                         <label htmlFor="venue">

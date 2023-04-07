@@ -330,7 +330,7 @@ const anexaCschema = new mongoose.Schema(
       type: String,
     },
     image1: {
-      type: Buffer,
+      type: String,
     },
     caption1: {
       type: String,
@@ -339,7 +339,7 @@ const anexaCschema = new mongoose.Schema(
       type: String,
     },
     image2: {
-      type: Buffer,
+      type: String,
     },
   },
   {
