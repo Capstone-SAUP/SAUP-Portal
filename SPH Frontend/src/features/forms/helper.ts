@@ -104,10 +104,11 @@ export const getTemplate = () => {
     ) {
         new_schema = anexB;
     } else if (
-        window.location.href.match("/view-anex-C") ||
-        window.location.href.match("/design-anex-C")
+      window.location.href.match("/view-anex-C") ||
+      window.location.href.match("/design-anex-C") ||
+      window.location.href.match("/reports")
     ) {
-        new_schema = anexC;
+      new_schema = anexC;
     } 
     // console.log(new_schema);
 
