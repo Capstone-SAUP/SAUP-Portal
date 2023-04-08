@@ -15,7 +15,6 @@ import {
 } from "../forms/helper";
 import { Form, Viewer, Template, checkTemplate } from "@pdfme/ui";
 
-
 type Mode = "form" | "viewer";
 
 const initTemplate = () => {
@@ -34,7 +33,6 @@ const initTemplate = () => {
 };
 
 const ReportsView = () => {
-
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<Form | Viewer | null>(null);
 
@@ -49,20 +47,34 @@ const ReportsView = () => {
   const { user_id } = useAuth();
   const { id } = useParams();
 
-    const { anexC } = useGetAnexCQuery("reportList", {
-      selectFromResult: ({ data }) => ({
-        anexC: data?.entities && data.entities[user_id],
-      }),
-    });
+  const currentReportId = id;
 
-    const filteredOutreach = { ...anexC };
+  const { anexC } = useGetAnexCQuery("reportList", {
+    selectFromResult: ({ data }) => ({
+      anexC: data?.entities,
+    }),
+  });
+
+    const getCurrentReport = () => {
+      if (!anexC || currentReportId === undefined) {
+        return null; // or render a loading state
+      }
+      else{
+        return { ...anexC[currentReportId] };
+      }
+    };
+
+  const filteredOutreach = getCurrentReport();
+
+  delete filteredOutreach.__v;
+  delete filteredOutreach.user;
 
   useEffect(() => {
     const template = initTemplate();
     let inputs = template.sampledata ?? [{}];
     try {
-      const inputsString = [filteredOutreach["filteredOutreach"]];
-      const inputsJson = inputsString
+      const inputsString = [filteredOutreach];
+      const inputsJson = inputsString;
       inputs = inputsJson;
     } catch {
       localStorage.removeItem("inputs");
@@ -88,17 +100,17 @@ const ReportsView = () => {
 
   const onGeneratePDF = async () => {
     if (ui.current) {
-    const template = ui.current.getTemplate();
-    const inputs = ui.current.getInputs();
-    const font = await getFontsData();
-    const pdf = await generate({ template, inputs, options: { font } });
-    const blob = new Blob([pdf.buffer], { type: "application/pdf" });
+      const template = ui.current.getTemplate();
+      const inputs = ui.current.getInputs();
+      const font = await getFontsData();
+      const pdf = await generate({ template, inputs, options: {} });
+      const blob = new Blob([pdf.buffer], { type: "application/pdf" });
       window.open(URL.createObjectURL(blob));
     }
   };
-
   const navigate = useNavigate();
   const [userId] = useState(user_id);
+  const [fullname] = useState(filteredOutreach.fullname);
   const [sponsor_dept] = useState(filteredOutreach.sponsor_dept);
   const [project_title] = useState(filteredOutreach.project_title);
   const [target_beneficiary] = useState(filteredOutreach.target_beneficiary);
@@ -213,12 +225,16 @@ const ReportsView = () => {
 
   const content = (
     <>
-                <button
-className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
-            onClick={onGeneratePDF}
-          >
-            Generate PDF
-          </button>
+      <div className="flex px-20 pb-10 justify-between">
+        Report Author: {fullname}
+        <button
+          className="text-white ml-5 bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+          title="Save"
+          onClick={onGeneratePDF}
+        >
+          Generate PDF
+        </button>
+      </div>
       <form className="h-full full grid gap-3 px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
@@ -918,7 +934,9 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
                               </div>
                             </div>
                             <div className="flex justify-center p-2">
-                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">{caption1}</div>
+                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
+                                {caption1}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -935,7 +953,9 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
                               </div>
                             </div>
                             <div className="flex justify-center p-2">
-                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">{caption2}</div>
+                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
+                                {caption2}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -948,6 +968,7 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
           </div>
         </div>
       </form>
+      <div className="hidden" ref={uiRef} />
     </>
   );
   return content;
