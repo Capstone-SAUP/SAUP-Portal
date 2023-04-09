@@ -331,9 +331,9 @@ if (roles == "Employee" || roles == "Admin" || roles == "Facilitator") {
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <header className="flex justify-start">
+      <header className="flex min-h-screen justify-start">
         <div
-          className={`bg-red-900 h-full p-5 pt-8 ${
+          className={`bg-red-900 p-5 pt-8 ${
             open ? "w-60" : "w-20"
           } duration-300 relative`}
         >

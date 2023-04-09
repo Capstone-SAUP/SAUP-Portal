@@ -121,7 +121,6 @@ select {
 #root {
   /* React root div */
   min-height: 100vh;
-  display: flex;
 }
 
 a {
