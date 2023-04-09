@@ -106,7 +106,13 @@ function App() {
                 </Route> */}
                 <Route
                   element={
-                    <RequireAuth allowedRoles={[ROLES.Student, ROLES.Admin]} />
+                    <RequireAuth
+                      allowedRoles={[
+                        ROLES.Student,
+                        ROLES.Admin,
+                        ROLES.Facilitator,
+                      ]}
+                    />
                   }
                 >
                   <Route path="view-anex-A">
@@ -115,7 +121,13 @@ function App() {
                 </Route>
                 <Route
                   element={
-                    <RequireAuth allowedRoles={[ROLES.Employee, ROLES.Admin]} />
+                    <RequireAuth
+                      allowedRoles={[
+                        ROLES.Employee,
+                        ROLES.Admin,
+                        ROLES.Facilitator,
+                      ]}
+                    />
                   }
                 >
                   <Route path="generate-certificate">

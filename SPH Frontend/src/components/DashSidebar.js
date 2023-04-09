@@ -131,7 +131,7 @@ const DashSidebar = ({ ids }) => {
   }
 
   let employeeOutreachButton = null;
-  if (roles == "Employee" || isAdmin) {
+  if (roles == "Employee" || isAdmin || roles == "Facilitator") {
   if (pathname.includes("/dash")) {
     employeeOutreachButton = (
       <button
@@ -162,7 +162,7 @@ const DashSidebar = ({ ids }) => {
 
 
   let studentOutreachButton = null;
-  if (roles == "Student"  || isAdmin) {
+  if (roles == "Student" || isAdmin || roles == "Facilitator") {
     if (pathname.includes("/dash")) {
       studentOutreachButton = (
         <button
@@ -192,7 +192,7 @@ const DashSidebar = ({ ids }) => {
   }
 
     let reportsButton = null;
-    if (roles == "Employee" || isAdmin) {
+    if (roles == "Employee" || isAdmin || roles == "Facilitator") {
       if (pathname.includes("/dash")) {
         reportsButton = (
           <button
@@ -223,33 +223,33 @@ const DashSidebar = ({ ids }) => {
 
 
   let certificateButton = null;
-if (roles == "Employee" || roles == "Admin"){
-    if (pathname.match("/dash")) {
-      certificateButton = (
-        <button
-          className="mb-20 w-full text-left"
-          title="Generate Certificate"
-          onClick={onGenerateClicked}
+if (roles == "Employee" || roles == "Admin" || roles == "Facilitator") {
+  if (pathname.match("/dash")) {
+    certificateButton = (
+      <button
+        className="mb-20 w-full text-left"
+        title="Generate Certificate"
+        onClick={onGenerateClicked}
+      >
+        <div
+          className={`text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
+            pathname.includes("/dash/generate-certificate") && "bg-red-500"
+          }`}
         >
-          <div
-            className={`text-white text-base flex items-center gap-x-4 cursor-pointer p-1 hover:bg-red-500 rounded-md ${
-              pathname.includes("/dash/generate-certificate") && "bg-red-500"
+          <span className="text-2xl block float-left pt-1">
+            <TfiPrinter className="text-3xl block float-left" />
+          </span>
+          <span
+            className={`truncate text-base font-medium flex-1 duration-200 ${
+              !open && "hidden"
             }`}
           >
-            <span className="text-2xl block float-left pt-1">
-              <TfiPrinter className="text-3xl block float-left" />
-            </span>
-            <span
-              className={`truncate text-base font-medium flex-1 duration-200 ${
-                !open && "hidden"
-              }`}
-            >
-              Certificate
-            </span>
-          </div>
-        </button>
-      );
-    }
+            Certificate
+          </span>
+        </div>
+      </button>
+    );
+  }
 }
 
   let applicationButton = null;
