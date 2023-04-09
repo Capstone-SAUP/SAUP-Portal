@@ -247,6 +247,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const [amount_total, setAmount_Total] = useState(
     filteredOutreach.amount_total
   );
+
   const [proj_rep, setProj_rep] = useState(filteredOutreach.proj_rep);
   const [designation1, setDesignation1] = useState(
     filteredOutreach.designation1
@@ -494,7 +495,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   const onAmount1Changed = (e) => setAmount1(e.target.value);
   const onAmount2Changed = (e) => setAmount2(e.target.value);
   const onAmount3Changed = (e) => setAmount3(e.target.value);
-  const onAmount_TotalChanged = (e) => setAmount_Total(e.target.value);
+  const onAmountTotalChanged = (e) => setAmount_Total(e.target.value);
   const OnProj_repChanged = (e) => setProj_rep(e.target.value);
   const OnDesignation1Changed = (e) => setDesignation1(e.target.value);
   const OnAdviser_nameChanged = (e) => setAdviser_name(e.target.value);
@@ -509,6 +510,12 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   //   reader.readAsDataURL(e.target.files[0]);
   //   reader.onload = () => setPreviewImage(reader.result);
   // };
+
+  useEffect(() => {
+    const newTotal = parseFloat(amount1) + parseFloat(amount2) + parseFloat(amount3);
+    setAmount_Total(newTotal.toFixed(3));
+  }, [amount1, amount2, amount3]);
+
   const onImage1Changed = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -2053,6 +2060,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={amount1}
                             placeholder="Php"
+                            inputMode="numeric"
+
                             onChange={onAmount1Changed}
                           />
                           <input
@@ -2062,6 +2071,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={amount2}
                             placeholder="Php"
+                            inputMode="numeric"
                             onChange={onAmount2Changed}
                           />
                           <input
@@ -2071,7 +2081,8 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={amount3}
                             placeholder="Php"
-                            onChange={onAmount3Changed}
+                            inputMode="numeric"
+                            onChange={onAmount3Changed}                    
                           />
                           <input
                             type="text"
@@ -2079,8 +2090,9 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
                             value={amount_total}
+                            readOnly
                             placeholder="Php"
-                            onChange={onAmount_TotalChanged}
+                            onChange={onAmountTotalChanged}
                           />
                         </div>
                       </div>
