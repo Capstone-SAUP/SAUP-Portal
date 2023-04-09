@@ -32,7 +32,7 @@ const createNewUser = async (req, res) => {
     const duplicate = await User.findOne({ user_id }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
     if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate user_id' })
+        return res.status(409).json({ message: 'Duplicate User ID' })
     }
 
     // Hash password 
@@ -75,7 +75,7 @@ const updateUser = async (req, res) => {
 
     // Allow updates to the original user 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate user_id' })
+        return res.status(409).json({ message: 'Duplicate User ID' })
     }
 
     user.user_id = user_id

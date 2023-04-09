@@ -24,37 +24,70 @@ const Public = () => {
                 >
                   Log in
                 </a>
+                <a
+                  href="/signup"
+                  className="text-white dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5  dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                >
+                  Sign up
+                </a>
               </div>
               <div className=" items-center w-full lg:flex lg:w-auto lg:order-1">
                 <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:text-sm lg:space-x-8 lg:mt-0">
                   <li>
-                      <Link to="home" spy={true} offset={-60} smooth={true}
-                        className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                        aria-current="page"
-                      >
-                        Home
-                      </Link>
+                    <Link
+                      to="home"
+                      spy={true}
+                      offset={-60}
+                      smooth={true}
+                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                      aria-current="page"
+                    >
+                      Home
+                    </Link>
                   </li>
                   <li>
-                      <Link to="partners" spy={true} offset={-60} smooth={true} 
-                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                        Partners
-                      </Link>
+                    <Link
+                      to="partners"
+                      spy={true}
+                      offset={-60}
+                      smooth={true}
+                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                      Partners
+                    </Link>
                   </li>
                   <li>
-                      <Link to="involve" spy={true} offset={-60} smooth={true} className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                        Get Involved
-                      </Link>
+                    <Link
+                      to="involve"
+                      spy={true}
+                      offset={-60}
+                      smooth={true}
+                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                      Get Involved
+                    </Link>
                   </li>
                   <li>
-                      <Link to="aboutus" spy={true} offset={-60} smooth={true} className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                        About
-                      </Link>
+                    <Link
+                      to="aboutus"
+                      spy={true}
+                      offset={-60}
+                      smooth={true}
+                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                      About
+                    </Link>
                   </li>
                   <li>
-                      <Link to="contact" spy={true} offset={-60} smooth={true} className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                        Contact
-                      </Link>
+                    <Link
+                      to="contact"
+                      spy={true}
+                      offset={-60}
+                      smooth={true}
+                      className="block cursor-pointer lg:text-base py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent text-xs lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                      Contact
+                    </Link>
                   </li>
                 </ul>
               </div>

@@ -7,6 +7,7 @@ import Welcome from "./features/auth/Welcome";
 import UsersList from "./features/users/UsersList";
 import EditUser from "./features/users/EditUser";
 import NewUserForm from "./features/users/NewUserForm";
+import SignUpForm from "./features/users/SignUpForm";
 import ViewOutreach from "./features/outreach/ViewOutreach";
 import OutreachReportForm from "./features/outreach/OutreachReportForm";
 import ReportOutreach from "./features/outreach/ReportOutreach";
@@ -42,6 +43,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route index element={<Public />} />
+        <Route path="signup" element={<SignUpForm />} />
         <Route path="login" element={<Login />} />
 
         {/* Protected Routes */}

@@ -44,10 +44,8 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
   };
 
   const current_user = getCurrentUser();
-  console.log(current_user);
   const [createEmployeeOutreach, { isSuccess, isError, error }] =
     useAddNewAnexBMutation();
-
   const [user] = useState(current_user);
   const [department] = useState(getCurrentDept());
   const [sponsor_dept, setSponsor_Dept] = useState("");
