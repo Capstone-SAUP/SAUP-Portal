@@ -10,6 +10,7 @@ import {
   BarChart,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 import DatePicker from "react-datepicker";
 import { useState, useEffect } from "react";
@@ -90,7 +91,6 @@ const DataOverview = () => {
     { name: "CCJEF", entries: CCJEF },
     { name: "SNAMS", entries: SNAMS },
   ];
-  console.log(SNAMS);
   const COLORS = [
     "#908d88",
     "#e9a122",
@@ -171,9 +171,10 @@ const DataOverview = () => {
         </div>
       </nav>
       <div className="gap-10 grid grid-cols-2">
-        <div className="border overflow-hidden px-10 bg-white shadow-lg sm:rounded-lg flex items-center">
+        <div className="border p-5 bg-white shadow-lg sm:rounded-lg flex items-center">
+          <ResponsiveContainer>
           <BarChart
-            width={600}
+            width={500}
             height={300}
             data={data}
             margin={{
@@ -189,8 +190,11 @@ const DataOverview = () => {
             <Tooltip />
             <Bar dataKey="entries" fill="#651B1D" />
           </BarChart>
+          </ResponsiveContainer>
+
         </div>
-        <div className=" border overflow-hidden px-10 bg-white shadow-lg sm:rounded-lg">
+        <div className=" border px-10 bg-white shadow-lg sm:rounded-lg">
+        <ResponsiveContainer>
           <PieChart width={600} height={400}>
             <Pie
               data={data}
@@ -210,8 +214,9 @@ const DataOverview = () => {
             <Tooltip />
             <Legend layout="vertical" align="right" verticalAlign="middle" />
           </PieChart>
+          </ResponsiveContainer>
         </div>
-        <div className="border p-5 overflow-hidden bg-white shadow-lg sm:rounded-lg">
+        <div className="border p-5 bg-white shadow-lg sm:rounded-lg">
           <h1 className="font-bold text-2xl pb-5">
             Total Number of Outreach Application
           </h1>
@@ -220,7 +225,7 @@ const DataOverview = () => {
             <p className="flex-shrink-0 ml-2">Overall Outreach Applications</p>
           </div>
         </div>
-        <div className="border p-5 overflow-hidden bg-white shadow-lg sm:rounded-lg">
+        <div className="border p-5 bg-white shadow-lg sm:rounded-lg">
           <h1 className="font-bold text-2xl pb-5">Total this Month</h1>
           <div className="inline-flex items-center">
             <h1 className="font-bold text-5xl"> {totalOutreach} </h1>
@@ -228,7 +233,7 @@ const DataOverview = () => {
           </div>
         </div>
       </div>
-      <GenerateSummary />
+      {/* <GenerateSummary /> */}
     </>
   );
 };

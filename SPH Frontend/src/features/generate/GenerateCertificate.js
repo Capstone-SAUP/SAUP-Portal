@@ -5,7 +5,7 @@ import PDFFile from '../outreach/CertiGen';
 
 const App = () => (
   <PDFViewer className='w-screen h-screen'>
-    <PDFFile />
+    {/* <PDFFile /> */}
   </PDFViewer>
 );
 

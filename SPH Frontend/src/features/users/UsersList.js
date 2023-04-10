@@ -178,7 +178,7 @@ const UsersList = () => {
                   Add New User
                 </button>
               </div>
-              <table className="w-full text-left table-fixed">
+              <table className="w-full text-left">
                 <thead className="">
                   <tr className="text-base bg-gray-200 ">
                     <th scope="col" className="px-5 py-3">

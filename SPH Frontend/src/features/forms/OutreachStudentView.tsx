@@ -53,7 +53,7 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   const [status, setCompleted] = useState(filteredOutreach["filteredOutreach"].status);
   const [originalStatus] = useState(filteredOutreach["filteredOutreach"].status);
   const [outreachId, setOutreach_id] = useState(filteredOutreach["filteredOutreach"]._id);
-  console.log(outreachId);
+  // console.log(outreachId);
 
   const onCompletedChanged = (e: { target: { value: any; }; }) => setCompleted(e.target.value);
   // const onOutreach_idChanged = (e: { target: { value: any; }; }) => setOutreach_id(e.target.value);
@@ -224,7 +224,7 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
       <br></br>
       <br></br>
       <div className='hidden' ref={uiRef}/>
-      <form className="h-full full grid gap-3 px-20 text-black">
+<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>

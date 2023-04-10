@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAddNewSignupUserMutation } from "./signupApiSlice";
 import { useNavigate } from "react-router-dom";
-import { ROLES } from "../../config/roles";
+import { ROLES } from "../../config/signupRoles";
 import { DEPT } from "../../config/department";
 import { TENURE } from "../../config/tenure";
 import useTitle from "../../hooks/useTitle";
@@ -186,12 +186,12 @@ const SignUpForm = () => {
     <section>
       <main>
         <img
-          className="w-1/2 h-screen hidden md:block float-left object-cover"
+          className="w-1/2 sticky top-0 h-screen hidden md:block float-left object-cover"
           src={require("../../img/background.jpg")}
           alt="background"
         ></img>
         <form
-          className="h-screen grid place-content-center"
+          className="grid p-10 md:p-0 place-content-center"
           onSubmit={onSaveUserClicked}
         >
           <div className="flex justify-between items-center">

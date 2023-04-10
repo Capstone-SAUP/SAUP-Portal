@@ -5,7 +5,7 @@ import PDFFile from './CertiGen';
 
 const App = () => (
   <PDFViewer>
-    <PDFFile />
+    {/* <PDFFile /> */}
   </PDFViewer>
 );
 

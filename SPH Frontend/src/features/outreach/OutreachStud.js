@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetAnexAQuery, useUpdateAnexAMutation } from "./anexA_ApiSlice";
+import { IoSend } from "react-icons/io5"
 import { STATUS } from "../../config/status";
 import { memo } from "react";
 import useAuth from "../../hooks/useAuth";
@@ -74,11 +75,11 @@ const OutreachStud = ({ outreachId }) => {
   if (roles == "Admin") {
     StatusButton = (
       <select
-            id="roles"
-            name="roles"
-            className={`form__select bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
-            value={status}
-            onChange={onCompletedChanged}
+        id="roles"
+        name="roles"
+        className={`w-3/4 bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
+        value={status}
+        onChange={onCompletedChanged}
           >
             {list}
           </select>
@@ -114,12 +115,12 @@ const OutreachStud = ({ outreachId }) => {
         <td className="whitespace-nowrap text-sm font-medium text-gray-900 pr-4">
         {StatusButton}
           <button
-            className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800
-          ${status == originalStatus && "hidden"}`}
-            title="Save"
-            onClick={onSaveOutreachClicked}
-          >
-            Save
+            className={`inline-flex text-2xl text-red-900 align-middle ml-2
+            ${status == originalStatus && "hidden"}`}
+              title="Save"
+              onClick={onSaveOutreachClicked}
+            >
+              <IoSend/>
           </button>
         </td>
         <td className="text-sm font-medium text-gray-900 ">

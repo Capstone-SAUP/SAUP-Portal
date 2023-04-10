@@ -222,7 +222,7 @@ const OutreachEmpList = () => {
                 <th scope="col" className="text-sm font-bold py-4 ">
                   Department
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-4 w-40">
                   Status
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
@@ -237,7 +237,7 @@ const OutreachEmpList = () => {
                 <th scope="col" className="text-sm font-bold py-4 ">
                   Venue
                 </th>
-                <th scope="col" className=" py-4 w-40">
+                <th scope="col" className="text-center py-4 w-36">
                   Option
                 </th>
               </tr>

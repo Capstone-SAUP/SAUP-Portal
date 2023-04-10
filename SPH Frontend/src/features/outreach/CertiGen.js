@@ -218,10 +218,10 @@ const PDFFile = () => {
               </Text>
             </View>
             <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>5</Text>
+              <Text style={styles.tableCell}></Text>
             </View>
             <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>5</Text>
+              <Text style={styles.tableCell}></Text>
             </View>
           </View>
         </View>

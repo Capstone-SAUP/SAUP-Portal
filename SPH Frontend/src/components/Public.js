@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 
 const Public = () => {
     const content = (
-      <div className="w-full">
+      <div className="w-screen">
         <header className="lg:sticky top-0 z-20">
           <nav className="bg-red-900 sticky border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -20,19 +20,19 @@ const Public = () => {
               <div className="flex items-center lg:order-2">
                 <a
                   href="/login"
-                  className="text-white dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                  className="text-white dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs lg:text-xs px-2 md:px-5 py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
                 >
                   Log in
                 </a>
                 <a
                   href="/signup"
-                  className="text-white dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5  dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                  className="text-white dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs lg:text-xs px-2 md:px-5 py-2.5  dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
                 >
                   Sign up
                 </a>
               </div>
               <div className=" items-center w-full lg:flex lg:w-auto lg:order-1">
-                <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:text-sm lg:space-x-8 lg:mt-0">
+                <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:text-xs lg:space-x-8 lg:mt-0">
                   <li>
                     <Link
                       to="home"
@@ -108,7 +108,7 @@ const Public = () => {
                 that extend beyond the boundaries of our campus.
               </p>
             </div>
-            <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <div className=" lg:mt-0 lg:col-span-5 lg:flex">
               <img
                 src={require("../img/landing_photo-1.jpg")}
                 alt="mockup"
@@ -123,7 +123,7 @@ const Public = () => {
               You’ll be in good company
             </h2>
             <div className="text-gray-500 flex justify-center">
-              <div className="h-96 aspect-video">
+              <div className="w-full md:w-3/4 aspect-video">
                 <Carousel slideInterval={5000}>
                   <img
                     src={require("../img/landing_slideshow-1.jpg")}
@@ -156,7 +156,7 @@ const Public = () => {
               <h2 className="mb-4 text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white">
                 Community Service Consultative Body
               </h2>
-              <div className="text-sm lg:text-base mb-4">
+              <div className="text-xs lg:text-base mb-4">
                 <p>
                   In carrying out extension activities, the University seeks to
                   coordinate sectoral efforts and resources for the maximum
@@ -171,7 +171,7 @@ const Public = () => {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mt-8">
+            <div className="hidden md:grid md:grid-cols-2 gap-4 mt-8">
               <img
                 className="w-full rounded-lg"
                 src={require("../img/landing_photo-4.jpg")}
@@ -196,8 +196,8 @@ const Public = () => {
                 Our Partners and Linkages
               </h2>
             </div>
-            <div className="space-y-8 grid grid-cols-3 md:gap-12 md:space-y-0">
-              <div className="grid row-span-2 grid-cols-2 gap-4 mt-8">
+            <div className="space-y-8 grid grid-cols-2 md:grid-cols-3 md:gap-12 md:space-y-0">
+              <div className="hidden md:grid row-span-2 grid-cols-2 gap-4 md:mt-8">
                 <img
                   className="w-full rounded-lg"
                   src={require("../img/landing_photo-2.jpg")}
@@ -214,16 +214,16 @@ const Public = () => {
                   Indigenous People’s Communities
                 </h3>
                 <ol className="ml-8" style={{ listStyleType: "disc" }}>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Sitio Pidpid
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Aetahanan
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Kalapi Negrito
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Villa Maria
                   </li>
                 </ol>
@@ -233,13 +233,13 @@ const Public = () => {
                   Public Schools in Angeles City and Pampanga
                 </h3>
                 <ol className="ml-8" style={{ listStyleType: "disc" }}>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Elementary Schools
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     High Schools
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Integrated Schools
                   </li>
                 </ol>
@@ -249,13 +249,13 @@ const Public = () => {
                   Networks and Linkages
                 </h3>
                 <ol className="ml-8" style={{ listStyleType: "disc" }}>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Archdiocese/Parishes
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Public Servants/Government Agencies
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Private/Non-Government Agencies
                   </li>
                 </ol>
@@ -265,13 +265,13 @@ const Public = () => {
                   Other Sectors
                 </h3>
                 <ol className="ml-8" style={{ listStyleType: "disc" }}>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Children with disabilities
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Inmates of Camp 174th (Angeles City Jail)
                   </li>
-                  <li className="text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                  <li className="text-xs lg:text-base text-gray-500 dark:text-gray-400">
                     Women, the elderly, children in conflict with the law and
                     orphans
                   </li>
@@ -295,7 +295,7 @@ const Public = () => {
                   <h2 className="text-lg lg:text-xl font-semibold text-gray-900 dark:text-white">
                     You can share in big or small ways:
                   </h2>
-                  <div className="text-sm lg:text-base text-justify font-semibold">
+                  <div className="text-xs lg:text-base md:text-justify font-semibold">
                     The community programs and services are facilitated through
                     the technical, material, and financial support of our
                     students, employees, partners and other donors. We believe
@@ -309,7 +309,7 @@ const Public = () => {
                     Serve our partner communities:
                   </h2>
                   <ol
-                    className="text-sm lg:text-base ml-8"
+                    className="text-xs lg:text-base ml-8"
                     style={{ listStyleType: "disc" }}
                   >
                     <li>Public schools</li>
@@ -334,7 +334,7 @@ const Public = () => {
                     You can volunteer as:
                   </h2>
                   <ol
-                    className="text-sm lg:text-base ml-8"
+                    className="text-xs lg:text-base ml-8"
                     style={{ listStyleType: "disc" }}
                   >
                     <li>Resource speaker/facilitator/trainer</li>
@@ -348,7 +348,7 @@ const Public = () => {
                     Get involved in the areas of:
                   </h2>
                   <ol
-                    className="text-sm lg:text-base ml-8"
+                    className="text-xs lg:text-base ml-8"
                     style={{ listStyleType: "disc" }}
                   >
                     <li>Research and Documentation</li>
@@ -378,7 +378,7 @@ const Public = () => {
               <h2 className="mb-4 text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
                 About
               </h2>
-              <p className="mb-4 text-sm lg:text-base font-light">
+              <p className="mb-4 text-xs lg:text-base font-light">
                 This is the extension service arm of the University that
                 implements programs and activities ranging from outreach to
                 developmental forms. It engages the university’s faculty,
@@ -387,22 +387,22 @@ const Public = () => {
                 sectors/communities in terms of material, technical,
                 educational, service learning, as well as values formation.
               </p>
-              <div className="grid grid-cols-2 gap-x-24 ">
-                <div className="px-16">
+              <div className="grid grid-cols-2 gap-x-5 md:gap-x-24 ">
+                <div className="w-full">
                   <h2 className="text-center text-xl font-semibold text-gray-900 uppercase dark:text-white">
                     Mission
                   </h2>
-                  <div className="text-sm lg:text-base text-justify font-semibold">
+                  <div className="text-xs lg:text-base text-justify font-semibold">
                     Capable, committed and compassionate Holy Angel University
                     volunteers and workers in communion with empowered and
                     enabled ecclesial communities
                   </div>
                 </div>
-                <div className="px-16">
+                <div className="w-full">
                   <h2 className="text-xl text-center font-semibold text-gray-900 uppercase dark:text-white">
                     Vision
                   </h2>
-                  <div className="text-sm lg:text-base text-justify font-semibold">
+                  <div className="text-xs lg:text-base text-justify font-semibold">
                     Participating in the mission of Christ, we, the community
                     extension volunteers and workers, promote stewardship,
                     growth and development by generating options for and with
@@ -415,14 +415,14 @@ const Public = () => {
                   <h2 className=" text-xl font-semibold text-gray-900 uppercase dark:text-white">
                     Goals and Objectives:
                   </h2>
-                  <div className="text-sm lg:text-base col-span-1 mb-4 font-semibold">
+                  <div className="text-xs lg:text-base col-span-1 mb-4 font-semibold">
                     To engage the staff, volunteers, and partner communities in
                     enabling, community building, and developmental programs by
                     working on the following components:
                   </div>
                   <div>
                     <ol
-                      className="px-28 text-left text-sm lg:text-base grid grid-cols-2 gap-x-24"
+                      className="px-6 md:px-28 text-left text-xs lg:text-base grid grid-cols-2 gap-x-5 md:gap-x-24"
                       style={{ listStyleType: "upper-greek" }}
                     >
                       <div>
@@ -484,8 +484,8 @@ const Public = () => {
         <footer className="p-4 bg-white sm:p-6 dark:bg-gray-800">
           <div className="mx-auto max-w-screen-xl">
             <div className="md:flex md:justify-between">
-              <div className="grid grid-cols-5 lg:gap-8 sm:gap-4 sm:grid-cols-3">
-                <div className="row-span-3">
+              <div className="grid md:grid-cols-3 md:gap-8 gap-5 grid-cols-2">
+                <div className="md:row-span-3 col-span-2 md:col-span-1">
                   <div className="flex items-center">
                     <img
                       src={require("../img/ICFSI Logo.png")}
@@ -498,15 +498,15 @@ const Public = () => {
                   </div>
                 </div>
                 <div>
-                  <h2 className="mb-2 sm:text-xs lg:text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="mb-2 text-xs md:text-base font-semibold text-gray-900 uppercase dark:text-white">
                     Head, Office of the Community Extension Services and
                     National Service Training Program
                   </h2>
                   <div className="text-gray-600">
-                    <div className="mb-2 text-sm lg:text-base font-semibold">
+                    <div className="mb-2 text-xs lg:text-base font-semibold">
                       Ms. Shirley Mae B. Marcos
                     </div>
-                    <div className="text-sm lg:text-base">
+                    <div className="text-xs lg:text-base">
                       smbarrera@hau.edu.ph
                       <br></br>
                       Monday to Friday 8:00 a.m. to 5:00 p.m.
@@ -518,15 +518,15 @@ const Public = () => {
                   </div>
                 </div>
                 <div>
-                  <h2 className="mb-2 sm:text-xs lg:text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="mb-2 text-xs md:text-base font-semibold text-gray-900 uppercase dark:text-white">
                     Coordinator, National Service Training Program (NSTP) /
                     Staff, Campus Ministry Office
                   </h2>
                   <div className="text-gray-600">
-                    <div className="mb-2 text-sm lg:text-base font-semibold">
+                    <div className="mb-2 text-xs lg:text-base font-semibold">
                       Ms. Hazel A. Basilio
                     </div>
-                    <div className="text-sm lg:text-base">
+                    <div className="text-xs lg:text-base">
                       hbasilio@hau.edu.ph
                       <br></br>
                       Monday 8:00 a.m. to 12:00 nn.
@@ -540,15 +540,15 @@ const Public = () => {
                   </div>
                 </div>
                 <div className="col-span-2">
-                  <h2 className="-mb-3 sm:text-xs lg:text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="-mb-3 text-xs md:text-base font-semibold text-gray-900 uppercase dark:text-white">
                     Staff, Office of the Community Extension Services (OCES)
                   </h2>
                 </div>
                 <div className="text-gray-600">
-                  <div className="mb-2 text-sm lg:text-base font-semibold">
+                  <div className="mb-2 text-xs lg:text-base font-semibold">
                     Ms. Emee Rose L. Balilu
                   </div>
-                  <div className="text-sm lg:text-base">
+                  <div className="text-xs lg:text-base">
                     erbalilu@hau.edu.ph
                     <br></br>
                     Monday to Friday 8:00 a.m. to 5:00 p.m.
@@ -559,10 +559,10 @@ const Public = () => {
                   </div>
                 </div>
                 <div className="text-gray-600">
-                  <div className="mb-2 text-sm lg:text-base font-semibold">
+                  <div className="mb-2 text-xs lg:text-base font-semibold">
                     Ms. Emee Rose L. Balilu
                   </div>
-                  <div className="text-sm lg:text-base">
+                  <div className="text-xs lg:text-base">
                     erbalilu@hau.edu.ph
                     <br></br>
                     Monday to Friday 8:00 a.m. to 5:00 p.m.
@@ -576,7 +576,7 @@ const Public = () => {
             </div>
             <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
-              <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+              <span className="text-xs text-gray-500 sm:text-center dark:text-gray-400">
                 © 2023 SAUP HAU .
               </span>
             </div>

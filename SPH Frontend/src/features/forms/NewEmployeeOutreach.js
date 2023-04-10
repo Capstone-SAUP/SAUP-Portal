@@ -197,7 +197,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
   const content = (
     <>
       <p className={errClass}>{errContent}</p>
-      <form className="h-full full grid gap-3 px-20 text-black">
+<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>

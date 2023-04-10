@@ -132,16 +132,16 @@ function App() {
                     />
                   }
                 >
-                  <Route path="generate-certificate">
+                  {/* <Route path="generate-certificate">
                     <Route index element={<GenerateCertificate />} />
-                  </Route>
+                  </Route> */}
                   <Route path="view-anex-B">
                     <Route index element={<NewEmployeeOutreach />} />
                   </Route>
                 </Route>
-                <Route path="view-anex-C">
+                {/* <Route path="view-anex-C">
                   <Route index element={<FormAndViewer />} />
-                </Route>
+                </Route> */}
 
                 {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="design-anex-A">
