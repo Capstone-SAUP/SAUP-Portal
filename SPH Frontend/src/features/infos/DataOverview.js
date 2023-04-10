@@ -172,10 +172,8 @@ const DataOverview = () => {
       </nav>
       <div className="gap-10 grid grid-cols-2">
         <div className="border p-5 bg-white shadow-lg sm:rounded-lg flex items-center">
-          <ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={300}>
           <BarChart
-            width={500}
-            height={300}
             data={data}
             margin={{
               top: 5,
@@ -194,8 +192,8 @@ const DataOverview = () => {
 
         </div>
         <div className=" border px-10 bg-white shadow-lg sm:rounded-lg">
-        <ResponsiveContainer>
-          <PieChart width={600} height={400}>
+        <ResponsiveContainer width="100%" height={400} >
+          <PieChart>
             <Pie
               data={data}
               labelLine={false}
