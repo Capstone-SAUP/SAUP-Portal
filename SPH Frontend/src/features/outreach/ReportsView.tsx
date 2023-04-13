@@ -65,10 +65,8 @@ const ReportsView = () => {
     };
 
   const filteredOutreach = getCurrentReport();
-
-  delete filteredOutreach.__v;
   delete filteredOutreach.user;
-
+  delete filteredOutreach.__v;
   useEffect(() => {
     const template = initTemplate();
     let inputs = template.sampledata ?? [{}];
@@ -97,7 +95,7 @@ const ReportsView = () => {
       }
     };
   }, [uiRef, mode]);
-
+  
   const onGeneratePDF = async () => {
     if (ui.current) {
       const template = ui.current.getTemplate();
@@ -110,118 +108,125 @@ const ReportsView = () => {
   };
   const navigate = useNavigate();
   const [userId] = useState(user_id);
-  const [fullname] = useState(filteredOutreach.fullname);
-  const [sponsor_dept] = useState(filteredOutreach.sponsor_dept);
-  const [project_title] = useState(filteredOutreach.project_title);
-  const [target_beneficiary] = useState(filteredOutreach.target_beneficiary);
-  const [accomp_obj] = useState(filteredOutreach.accomp_obj);
-  const [venue] = useState(filteredOutreach.venue);
-  const [date_implement] = useState(filteredOutreach.date_implement);
-  const [brief_narrative] = useState(filteredOutreach.brief_narrative);
-  const [topics] = useState(filteredOutreach.topics);
-  const [speakers] = useState(filteredOutreach.speakers);
-  const [prep_per1] = useState(filteredOutreach.prep_per1);
-  const [prep_per2] = useState(filteredOutreach.prep_per2);
-  const [prep_per3] = useState(filteredOutreach.prep_per3);
-  const [prep_per4] = useState(filteredOutreach.prep_per4);
-  const [prep_pos1] = useState(filteredOutreach.prep_pos1);
-  const [prep_pos2] = useState(filteredOutreach.prep_pos2);
-  const [prep_pos3] = useState(filteredOutreach.prep_pos3);
-  const [prep_pos4] = useState(filteredOutreach.prep_pos4);
-  const [prep_type1] = useState(filteredOutreach.prep_type1);
-  const [prep_type2] = useState(filteredOutreach.prep_type2);
-  const [prep_type3] = useState(filteredOutreach.prep_type3);
-  const [prep_type4] = useState(filteredOutreach.prep_type4);
-  const [prep_start1] = useState(filteredOutreach.prep_start1);
-  const [prep_start2] = useState(filteredOutreach.prep_start2);
-  const [prep_star3] = useState(filteredOutreach.prep_star3);
-  const [prep_star4] = useState(filteredOutreach.prep_star4);
-  const [prep_end1] = useState(filteredOutreach.prep_end1);
-  const [prep_end2] = useState(filteredOutreach.prep_end2);
-  const [prep_end3] = useState(filteredOutreach.prep_end3);
-  const [prep_end4] = useState(filteredOutreach.prep_end4);
-  const [implement_per1] = useState(filteredOutreach.implement_per1);
-  const [implement_per2] = useState(filteredOutreach.implement_per2);
-  const [implement_per3] = useState(filteredOutreach.implement_per3);
-  const [implement_per4] = useState(filteredOutreach.implement_per4);
-  const [implement_pos1] = useState(filteredOutreach.implement_pos1);
-  const [implement_pos2] = useState(filteredOutreach.implement_pos2);
-  const [implement_pos3] = useState(filteredOutreach.implement_pos3);
-  const [implement_type1] = useState(filteredOutreach.implement_type1);
-  const [implement_type2] = useState(filteredOutreach.implement_type2);
-  const [implement_pos4] = useState(filteredOutreach.implement_pos4);
-  const [implement_type3] = useState(filteredOutreach.implement_type3);
-  const [implement_type4] = useState(filteredOutreach.implement_type4);
-  const [implement_start1] = useState(filteredOutreach.implement_start1);
-  const [implement_start2] = useState(filteredOutreach.implement_start2);
-  const [implement_star3] = useState(filteredOutreach.implement_star3);
-  const [implement_star4] = useState(filteredOutreach.implement_star4);
-  const [implement_end1] = useState(filteredOutreach.implement_end1);
-  const [implement_end2] = useState(filteredOutreach.implement_end2);
-  const [implement_end3] = useState(filteredOutreach.implement_end3);
-  const [implement_end4] = useState(filteredOutreach.implement_end4);
-  const [post_per1] = useState(filteredOutreach.post_per1);
-  const [post_per2] = useState(filteredOutreach.post_per2);
-  const [post_per3] = useState(filteredOutreach.post_per3);
-  const [post_per4] = useState(filteredOutreach.post_per4);
-  const [post_pos1] = useState(filteredOutreach.post_pos1);
-  const [post_pos2] = useState(filteredOutreach.post_pos2);
-  const [post_pos3] = useState(filteredOutreach.post_pos3);
-  const [post_type1] = useState(filteredOutreach.post_type1);
-  const [post_type2] = useState(filteredOutreach.post_type2);
-  const [post_pos4] = useState(filteredOutreach.post_pos4);
-  const [post_type3] = useState(filteredOutreach.post_type3);
-  const [post_type4] = useState(filteredOutreach.post_type4);
-  const [post_start1] = useState(filteredOutreach.post_start1);
-  const [post_start2] = useState(filteredOutreach.post_start2);
-  const [post_star3] = useState(filteredOutreach.post_star3);
-  const [post_star4] = useState(filteredOutreach.post_star4);
-  const [post_end1] = useState(filteredOutreach.post_end1);
-  const [post_end2] = useState(filteredOutreach.post_end2);
-  const [post_end3] = useState(filteredOutreach.post_end3);
-  const [post_end4] = useState(filteredOutreach.post_end4);
-  const [learnings1] = useState(filteredOutreach.learnings1);
-  const [learnings2] = useState(filteredOutreach.learnings2);
-  const [learnings3] = useState(filteredOutreach.learnings3);
-  const [learnings4] = useState(filteredOutreach.learnings4);
-  const [learnings5] = useState(filteredOutreach.learnings5);
-  const [strengths1] = useState(filteredOutreach.strengths1);
-  const [strengths2] = useState(filteredOutreach.strengths2);
-  const [strengths3] = useState(filteredOutreach.strengths3);
-  const [strengths4] = useState(filteredOutreach.strengths4);
-  const [strengths5] = useState(filteredOutreach.strengths5);
-  const [weakness1] = useState(filteredOutreach.weakness1);
-  const [weakness2] = useState(filteredOutreach.weakness2);
-  const [weakness3] = useState(filteredOutreach.weakness3);
-  const [weakness4] = useState(filteredOutreach.weakness4);
-  const [weakness5] = useState(filteredOutreach.weakness5);
-  const [improvement1] = useState(filteredOutreach.improvement1);
-  const [improvement2] = useState(filteredOutreach.improvement2);
-  const [improvement3] = useState(filteredOutreach.improvement3);
-  const [improvement4] = useState(filteredOutreach.improvement4);
-  const [improvement5] = useState(filteredOutreach.improvement5);
-  const [act_partici1] = useState(filteredOutreach.act_partici1);
-  const [act_partici2] = useState(filteredOutreach.act_partici2);
-  const [act_partici3] = useState(filteredOutreach.act_partici3);
-  const [particulars1] = useState(filteredOutreach.particulars1);
-  const [particulars2] = useState(filteredOutreach.particulars2);
-  const [particulars3] = useState(filteredOutreach.particulars3);
-  const [amount1] = useState(filteredOutreach.amount1);
-  const [amount2] = useState(filteredOutreach.amount2);
-  const [amount3] = useState(filteredOutreach.amount3);
-  const [amount_total] = useState(filteredOutreach.amount_total);
-  const [proj_rep] = useState(filteredOutreach.proj_rep);
-  const [designation1] = useState(filteredOutreach.designation1);
-  const [adviser_name] = useState(filteredOutreach.adviser_name);
-  const [stud_org] = useState(filteredOutreach.stud_org);
-  const [cscb_rep] = useState(filteredOutreach.cscb_rep);
-  const [dept_rep] = useState(filteredOutreach.dept_rep);
-  const [dean] = useState(filteredOutreach.dean);
-  const [designation2] = useState(filteredOutreach.designation2);
-  const [image1] = useState(filteredOutreach.image1);
-  const [caption1] = useState(filteredOutreach.caption1);
-  const [caption2] = useState(filteredOutreach.caption2);
-  const [image2] = useState(filteredOutreach.image2);
+  const [fullname] = useState(filteredOutreach?.fullname);
+  const [sponsor_dept] = useState(filteredOutreach?.sponsor_dept);
+  const [project_title] = useState(filteredOutreach?.project_title);
+  const [target_beneficiary] = useState(filteredOutreach?.target_beneficiary);
+  const [accomp_obj] = useState(filteredOutreach?.accomp_obj);
+  const [venue] = useState(filteredOutreach?.venue);
+  const [date_implement] = useState(new Date(filteredOutreach?.date_implement).toLocaleString(
+     "en-US",
+     {
+       day: "numeric",
+       month: "long",
+       year: "numeric",
+     }
+   ));
+  const [brief_narrative] = useState(filteredOutreach?.brief_narrative);
+  const [topics] = useState(filteredOutreach?.topics);
+  const [speakers] = useState(filteredOutreach?.speakers);
+  const [prep_per1] = useState(filteredOutreach?.prep_per1);
+  const [prep_per2] = useState(filteredOutreach?.prep_per2);
+  const [prep_per3] = useState(filteredOutreach?.prep_per3);
+  const [prep_per4] = useState(filteredOutreach?.prep_per4);
+  const [prep_pos1] = useState(filteredOutreach?.prep_pos1);
+  const [prep_pos2] = useState(filteredOutreach?.prep_pos2);
+  const [prep_pos3] = useState(filteredOutreach?.prep_pos3);
+  const [prep_pos4] = useState(filteredOutreach?.prep_pos4);
+  const [prep_type1] = useState(filteredOutreach?.prep_type1);
+  const [prep_type2] = useState(filteredOutreach?.prep_type2);
+  const [prep_type3] = useState(filteredOutreach?.prep_type3);
+  const [prep_type4] = useState(filteredOutreach?.prep_type4);
+  const [prep_start1] = useState(filteredOutreach?.prep_start1);
+  const [prep_start2] = useState(filteredOutreach?.prep_start2);
+  const [prep_star3] = useState(filteredOutreach?.prep_star3);
+  const [prep_star4] = useState(filteredOutreach?.prep_star4);
+  const [prep_end1] = useState(filteredOutreach?.prep_end1);
+  const [prep_end2] = useState(filteredOutreach?.prep_end2);
+  const [prep_end3] = useState(filteredOutreach?.prep_end3);
+  const [prep_end4] = useState(filteredOutreach?.prep_end4);
+  const [implement_per1] = useState(filteredOutreach?.implement_per1);
+  const [implement_per2] = useState(filteredOutreach?.implement_per2);
+  const [implement_per3] = useState(filteredOutreach?.implement_per3);
+  const [implement_per4] = useState(filteredOutreach?.implement_per4);
+  const [implement_pos1] = useState(filteredOutreach?.implement_pos1);
+  const [implement_pos2] = useState(filteredOutreach?.implement_pos2);
+  const [implement_pos3] = useState(filteredOutreach?.implement_pos3);
+  const [implement_type1] = useState(filteredOutreach?.implement_type1);
+  const [implement_type2] = useState(filteredOutreach?.implement_type2);
+  const [implement_pos4] = useState(filteredOutreach?.implement_pos4);
+  const [implement_type3] = useState(filteredOutreach?.implement_type3);
+  const [implement_type4] = useState(filteredOutreach?.implement_type4);
+  const [implement_start1] = useState(filteredOutreach?.implement_start1);
+  const [implement_start2] = useState(filteredOutreach?.implement_start2);
+  const [implement_star3] = useState(filteredOutreach?.implement_star3);
+  const [implement_star4] = useState(filteredOutreach?.implement_star4);
+  const [implement_end1] = useState(filteredOutreach?.implement_end1);
+  const [implement_end2] = useState(filteredOutreach?.implement_end2);
+  const [implement_end3] = useState(filteredOutreach?.implement_end3);
+  const [implement_end4] = useState(filteredOutreach?.implement_end4);
+  const [post_per1] = useState(filteredOutreach?.post_per1);
+  const [post_per2] = useState(filteredOutreach?.post_per2);
+  const [post_per3] = useState(filteredOutreach?.post_per3);
+  const [post_per4] = useState(filteredOutreach?.post_per4);
+  const [post_pos1] = useState(filteredOutreach?.post_pos1);
+  const [post_pos2] = useState(filteredOutreach?.post_pos2);
+  const [post_pos3] = useState(filteredOutreach?.post_pos3);
+  const [post_type1] = useState(filteredOutreach?.post_type1);
+  const [post_type2] = useState(filteredOutreach?.post_type2);
+  const [post_pos4] = useState(filteredOutreach?.post_pos4);
+  const [post_type3] = useState(filteredOutreach?.post_type3);
+  const [post_type4] = useState(filteredOutreach?.post_type4);
+  const [post_start1] = useState(filteredOutreach?.post_start1);
+  const [post_start2] = useState(filteredOutreach?.post_start2);
+  const [post_star3] = useState(filteredOutreach?.post_star3);
+  const [post_star4] = useState(filteredOutreach?.post_star4);
+  const [post_end1] = useState(filteredOutreach?.post_end1);
+  const [post_end2] = useState(filteredOutreach?.post_end2);
+  const [post_end3] = useState(filteredOutreach?.post_end3);
+  const [post_end4] = useState(filteredOutreach?.post_end4);
+  const [learnings1] = useState(filteredOutreach?.learnings1);
+  const [learnings2] = useState(filteredOutreach?.learnings2);
+  const [learnings3] = useState(filteredOutreach?.learnings3);
+  const [learnings4] = useState(filteredOutreach?.learnings4);
+  const [learnings5] = useState(filteredOutreach?.learnings5);
+  const [strengths1] = useState(filteredOutreach?.strengths1);
+  const [strengths2] = useState(filteredOutreach?.strengths2);
+  const [strengths3] = useState(filteredOutreach?.strengths3);
+  const [strengths4] = useState(filteredOutreach?.strengths4);
+  const [strengths5] = useState(filteredOutreach?.strengths5);
+  const [weakness1] = useState(filteredOutreach?.weakness1);
+  const [weakness2] = useState(filteredOutreach?.weakness2);
+  const [weakness3] = useState(filteredOutreach?.weakness3);
+  const [weakness4] = useState(filteredOutreach?.weakness4);
+  const [weakness5] = useState(filteredOutreach?.weakness5);
+  const [improvement1] = useState(filteredOutreach?.improvement1);
+  const [improvement2] = useState(filteredOutreach?.improvement2);
+  const [improvement3] = useState(filteredOutreach?.improvement3);
+  const [improvement4] = useState(filteredOutreach?.improvement4);
+  const [improvement5] = useState(filteredOutreach?.improvement5);
+  const [act_partici1] = useState(filteredOutreach?.act_partici1);
+  const [act_partici2] = useState(filteredOutreach?.act_partici2);
+  const [act_partici3] = useState(filteredOutreach?.act_partici3);
+  const [particulars1] = useState(filteredOutreach?.particulars1);
+  const [particulars2] = useState(filteredOutreach?.particulars2);
+  const [particulars3] = useState(filteredOutreach?.particulars3);
+  const [amount1] = useState(filteredOutreach?.amount1);
+  const [amount2] = useState(filteredOutreach?.amount2);
+  const [amount3] = useState(filteredOutreach?.amount3);
+  const [amount_total] = useState(filteredOutreach?.amount_total);
+  const [proj_rep] = useState(filteredOutreach?.proj_rep);
+  const [designation1] = useState(filteredOutreach?.designation1);
+  const [adviser_name] = useState(filteredOutreach?.adviser_name);
+  const [stud_org] = useState(filteredOutreach?.stud_org);
+  const [cscb_rep] = useState(filteredOutreach?.cscb_rep);
+  const [dept_rep] = useState(filteredOutreach?.dept_rep);
+  const [dean] = useState(filteredOutreach?.dean);
+  const [designation2] = useState(filteredOutreach?.designation2);
+  const [image1] = useState(filteredOutreach?.image1);
+  const [caption1] = useState(filteredOutreach?.caption1);
+  const [caption2] = useState(filteredOutreach?.caption2);
+  const [image2] = useState(filteredOutreach?.image2);
 
   const content = (
     <>
@@ -235,7 +240,7 @@ const ReportsView = () => {
           Generate PDF
         </button>
       </div>
-<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
+      <form className="h-full full grid gap-3 w-screen md:w-full md:px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>

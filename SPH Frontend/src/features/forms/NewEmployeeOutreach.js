@@ -7,15 +7,16 @@ import { STATUS } from "../../config/status";
 import { useGetUsersQuery } from "../users/usersApiSlice";
 import { current } from "@reduxjs/toolkit";
 
-const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
+const NewEmployeeOutreach = () => {
   const navigate = useNavigate();
   const { user_id } = useAuth();
   const { id } = useParams();
 
-  const { object_id, user_ids, listdepartment, fullname } = useGetUsersQuery(
+  const { users, object_id, user_ids, listdepartment, fullname } = useGetUsersQuery(
     "usersList",
     {
       selectFromResult: ({ data }) => ({
+        users: data?.ids.map((id) => data?.entities[id]),
         object_id: data?.ids.map((id) => data?.entities[id].id),
         user_ids: data?.ids.map((id) => data?.entities[id].user_id),
         fullname:
@@ -42,6 +43,27 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
       return currentDeptID[0];
     } catch (error) {}
   };
+  console.log(users);
+    let options = null;
+    if (users) {
+      options = users.map((user) => {
+        return (
+          <option
+            className=""
+            key={user.lastname + ", " + user.firstname}
+            value={user.lastname + ", " + user.firstname}
+          >
+            {user.user_id + " | " + user.lastname + ", " + user.firstname}
+          </option>
+        );
+      });
+
+      options.unshift(
+        <option key="none" value="">
+          None
+        </option>
+      );
+    }
 
   const current_user = getCurrentUser();
   const [createEmployeeOutreach, { isSuccess, isError, error }] =
@@ -137,7 +159,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
   const OnCscbChanged = (e) => setCscb_rep(e.target.value);
   const OnDept_repChanged = (e) => setDept_rep(e.target.value);
   const OnDeanChanged = (e) => setDean(e.target.value);
-  const OnDesignation2Changed = (e) => setDesignation1(e.target.value);
+  const OnDesignation2Changed = (e) => setDesignation2(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -181,15 +203,6 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
     navigate("/dash/employee");
   };
 
-  const list = Object.values(STATUS).map((status) => {
-    return (
-      <option key={status} value={status}>
-        {" "}
-        {status}
-      </option>
-    );
-  });
-
   const errClass = isError ? "errmsg" : "offscreen";
 
   const errContent = error?.data?.message ?? "";
@@ -197,7 +210,10 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
   const content = (
     <>
       <p className={errClass}>{errContent}</p>
-<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
+      <form
+        onSubmit={onSaveReportClicked}
+        className="h-full full grid gap-3 w-screen md:w-full md:px-20 text-black"
+      >
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>
@@ -226,6 +242,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                           Sponsoring Department(s)/ Proponent(s) :
                         </label>
                         <input
+                          required
                           type="text"
                           name="sponsor_dept"
                           id="sponsor_dept"
@@ -237,6 +254,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                       <div className="md:col-span-7">
                         <label htmlFor="project_title">Project Title :</label>
                         <input
+                          required
                           type="text"
                           name="project_title"
                           id="project_title"
@@ -250,6 +268,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                           Target Beneficiaries :
                         </label>
                         <input
+                          required
                           type="text"
                           name="target_beneficiary"
                           id="target_beneficiary"
@@ -261,6 +280,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                       <div className="md:col-span-7">
                         <label htmlFor="venue">Venue of CES Activity :</label>
                         <input
+                          required
                           type="text"
                           name="venue"
                           id="venue"
@@ -274,13 +294,14 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                         <div className="">
                           <p className="font-medium text-lg">
                             Proposed Action Plan:
-                            </p>
+                          </p>
                         </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
                           <label htmlFor="country">Objectives</label>
                           <input
+                            required
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -306,6 +327,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                         <div className="md:col-span-1">
                           <label htmlFor="country">Activities</label>
                           <input
+                            required
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -330,32 +352,34 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
 
                         <div className="md:col-span-1">
                           <label htmlFor="country">Responsible Person(s)</label>
-                          <input
+                          <select
+                            required
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={respon_per1}
                             onChange={onRespon_per1Changed}
-                          ></input>
-                          <input
+                          >{options}</select>
+                          <select
                             id="prep_per2"
                             name="prep_per2"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={respon_per2}
                             onChange={onRespon_per2Changed}
-                          ></input>
-                          <input
+                          >{options}</select>
+                          <select
                             id="prep_per3"
                             name="prep_per3"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                             value={respon_per3}
                             onChange={onRespon_per3Changed}
-                          ></input>
+                          >{options}</select>
                         </div>
 
                         <div className="md:col-span-1">
                           <label htmlFor="country">Time Frame</label>
                           <input
+                            required
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -381,6 +405,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                         <div className="md:col-span-1">
                           <label htmlFor="country">Output</label>
                           <input
+                            required
                             id="prep_per1"
                             name="prep_per1"
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -414,6 +439,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                             Name of Project Organizer or CSCB Representative
                           </label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -425,6 +451,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                         <div className="md:col-span-1">
                           <label htmlFor="country">Designation</label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -443,6 +470,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                             Name of CSCB Representative for Departmental CES
                           </label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -456,6 +484,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                             Department Represented
                           </label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -472,6 +501,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                             Name of Dean or Cluster Head
                           </label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -483,6 +513,7 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                         <div className="md:col-span-1">
                           <label htmlFor="country">Designation</label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -498,7 +529,6 @@ const NewEmployeeOutreach = ({ filteredOutreach, users }) => {
                           <button
                             className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                             title="Save"
-                            onClick={onSaveReportClicked}
                           >
                             Submit Report
                           </button>

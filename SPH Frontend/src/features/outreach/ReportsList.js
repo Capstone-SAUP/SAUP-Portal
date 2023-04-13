@@ -190,6 +190,7 @@ const ReportsList = () => {
                 >
                   <option value="All">All</option>
                   <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
                   <option value="Completed">Completed</option>
                   <option value="Ongoing">Ongoing</option>
                 </select>
@@ -219,10 +220,10 @@ const ReportsList = () => {
                   Department
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
-                  Status
+                  Date Implemented
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
-                  Date Created
+                  Report Created
                 </th>
                 <th scope="col" className="text-sm font-bold py-4 ">
                   Project Title

@@ -139,7 +139,7 @@ const ReportsView = () => {
 
   const content = (
     <>
-<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
+      <form className="h-full full grid gap-3 w-screen md:w-full md:px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>
@@ -838,7 +838,9 @@ const ReportsView = () => {
                               </div>
                             </div>
                             <div className="flex justify-center p-2">
-                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">{caption1}</div>
+                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
+                                {caption1}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -855,7 +857,9 @@ const ReportsView = () => {
                               </div>
                             </div>
                             <div className="flex justify-center p-2">
-                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">{caption2}</div>
+                              <div className="h-10 border mb-2 mt-1 rounded px-4 w-full">
+                                {caption2}
+                              </div>
                             </div>
                           </div>
                         </div>

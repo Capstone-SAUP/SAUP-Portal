@@ -181,6 +181,7 @@ const OutreachStudList = () => {
                 >
                   <option value="All">All</option>
                   <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
                   <option value="Completed">Completed</option>
                   <option value="Ongoing">Ongoing</option>
                 </select>

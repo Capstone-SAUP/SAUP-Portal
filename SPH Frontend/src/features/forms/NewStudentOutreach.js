@@ -20,22 +20,25 @@ function NewStudentOutreach() {
   let { user_id } = useAuth();
   let [addNewAnexA] = useAddNewAnexAMutation();
 
-  let { object_id, user_ids, listdepartment, lastname } = useGetUsersQuery("usersList", {
-    selectFromResult: ({ data }) => ({
-      object_id: data?.ids.map((id) => data?.entities[id].id),
-      user_ids: data?.ids.map(
-        (id) => data?.entities[id].user_id
-      ),
-      lastname: data?.ids.map(
-        (id) => data?.entities[id].lastname
-      ),
-      listdepartment: data?.ids.map(
-        (id) => data?.entities[id].department
-      ),
+  let { users } =
+    useGetUsersQuery("usersList", {
+      selectFromResult: ({ data }) => ({
+        users: data?.ids.map((id) => data?.entities[id]),
+      }),
+    });
 
-    }),
-  });
-
+  let currentUser = null;
+  if(users){
+  currentUser = users.find((user) => user.user_id === user_id);
+  }
+  let currentUserId = null;
+  if (users) {
+    currentUserId = currentUser.id;
+  }
+  let currentDepartment = [];
+  if (users) {
+    currentDepartment = currentUser.department;
+  }
   const [createStudentOutreach, { isSuccess, isError, error }] =
   useAddNewAnexAMutation();
 
@@ -46,21 +49,27 @@ function NewStudentOutreach() {
 //     (localStorage.getItem("mode") as Mode) ?? "form"
 //   );
 
-  let getCurrentUser = () => {
-    try {
-      let currentUser = user_ids.indexOf(user_id);
-      let currentUserObjectId = object_id[currentUser];
-      return currentUserObjectId;
-    } catch (error) {}
-  };
-const currentuser = getCurrentUser();
-  let getCurrentDept = () => {
-    try {
-      let currentUser = user_ids.indexOf(user_id);
-      let currentDeptID = listdepartment[currentUser];
-      return currentDeptID[0];
-    } catch (error) {}
-  };
+  let options = null;
+  if(users){
+  options = users.map((user) => {
+    return (
+      <option
+        className=""
+        key={user.lastname + ", " + user.firstname}
+        value={user.lastname + ", " + user.firstname}
+      >
+        {user.user_id + " | " + user.lastname + ", " + user.firstname}
+      </option>
+    );
+  });
+
+  options.unshift(
+    <option key="none" value="">
+      None
+    </option>
+  );
+  }
+
 
   //     let { users } = useGetUsersQuery("usersList", {
   //       selectFromResult: ({ data }) => ({
@@ -91,8 +100,8 @@ const currentuser = getCurrentUser();
 //     }
 //   };
 
-  const [user] = useState(getCurrentUser())
-  const [department] = useState(getCurrentDept())
+  const user = currentUserId;
+  const department = currentDepartment[0];
   const [name_org, setname_org] = useState("");
   // const [date_est, setdate_est] = useState("");
   const [date_est, setdate_est] = useState(new Date());
@@ -197,6 +206,7 @@ const ontime_frameChanged = (e) => settime_frame(e.target.value);
 const onbeneficiariesChanged = (e) => setbeneficiaries(e.target.value);
 const onbudgetChanged = (e) => setbudget(e.target.value);
 const onprog_indicatorChanged = (e) => setprog_indicator(e.target.value);
+console.log(class_dev);
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -256,10 +266,13 @@ const content = (
         alt="background"
       ></img> */}
     <p className={errClass}>{errContent}</p>
-    <form className="h-full full grid gap-3 px-20 text-black">
+    <form
+      className="h-full full w-screen md:w-full grid gap-3 px-20 text-black"
+      onSubmit={onSaveReportClicked}
+    >
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
         <div className="container max-w-screen-lg mx-auto">
-          <div>
+          <div className="">
             <h2 className="font-semibold text-xl">
               Student Organization Intake Form
             </h2>
@@ -296,6 +309,7 @@ const content = (
                     <div className="md:col-span-7">
                       <label htmlFor="name_org">Name of Organization:</label>
                       <input
+                        required
                         type="text"
                         name="name_org"
                         id="name_org"
@@ -306,9 +320,15 @@ const content = (
                     </div>
                     <div className="md:col-span-7">
                       <label htmlFor="date_est">Date Established :</label>
-                      <DatePicker type="text"
+                      <DatePicker
+                        type="text"
                         name="date_est"
-                        id="date_est" className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50" selected={date_est} onChange={(date) => setdate_est(date)} dateFormat="MMMM d, yyyy"/>
+                        id="date_est"
+                        className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                        selected={date_est}
+                        onChange={(date) => setdate_est(date)}
+                        dateFormat="MMMM d, yyyy"
+                      />
                     </div>
                     <div className="md:col-span-4 text-base font-semibold text-gray-600">
                       {" "}
@@ -317,42 +337,42 @@ const content = (
                     <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                       <div className="md:col-span-2">
                         <label htmlFor="country">Name :</label>
-                        <input
+                        <select
                           id="prep_per1"
                           name="prep_per1"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={designated_per1}
                           onChange={ondesignated_per1Changed}
                         >
-                          {/* {options} */}
-                        </input>
-                        <input
+                          {options}
+                        </select>
+                        <select
                           id="prep_per2"
                           name="prep_per2"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={designated_per2}
                           onChange={ondesignated_per2Changed}
                         >
-                          {/* {options} */}
-                        </input>
-                        <input
+                          {options}
+                        </select>
+                        <select
                           id="prep_per3"
                           name="prep_per3"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={designated_per3}
                           onChange={ondesignated_per3Changed}
                         >
-                          {/* {options} */}
-                        </input>
-                        <input
+                          {options}
+                        </select>
+                        <select
                           id="prep_per4"
                           name="prep_per4"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={designated_per4}
                           onChange={ondesignated_per4Changed}
                         >
-                          {/* {options} */}
-                        </input>
+                          {options}
+                        </select>
                       </div>
                       <div className="md:col-span-1">
                         <label htmlFor="country">Designation/Position :</label>
@@ -363,6 +383,7 @@ const content = (
                           value={position_per1}
                           onChange={onposition_per1Changed}
                         >
+                          <option value="">None</option>
                           <option value="Facilitator">Facilitator</option>
                           <option value="Participant">Participant</option>
                           <option value="Student">Student</option>
@@ -375,6 +396,7 @@ const content = (
                           value={position_per2}
                           onChange={onposition_per2Changed}
                         >
+                          <option value="">None</option>
                           <option value="Facilitator">Facilitator</option>
                           <option value="Participant">Participant</option>
                           <option value="Student">Student</option>
@@ -387,6 +409,7 @@ const content = (
                           value={position_per3}
                           onChange={onposition_per3Changed}
                         >
+                          <option value="">None</option>
                           <option value="Facilitator">Facilitator</option>
                           <option value="Participant">Participant</option>
                           <option value="Student">Student</option>
@@ -399,6 +422,7 @@ const content = (
                           value={position_per4}
                           onChange={onposition_per4Changed}
                         >
+                          <option value="">None</option>
                           <option value="Facilitator">Facilitator</option>
                           <option value="Participant">Participant</option>
                           <option value="Student">Student</option>
@@ -408,11 +432,15 @@ const content = (
                       <div className="md:col-span-1">
                         <label htmlFor="country">Contact Number :</label>
                         <input
+                          required
                           id="user1"
                           name="user1"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={contact_per1}
                           onChange={oncontact_per1Changed}
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
                         ></input>
                         <input
                           id="user1"
@@ -420,6 +448,9 @@ const content = (
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={contact_per2}
                           onChange={oncontact_per2Changed}
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
                         ></input>
                         <input
                           id="user1"
@@ -427,6 +458,9 @@ const content = (
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={contact_per3}
                           onChange={oncontact_per3Changed}
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
                         ></input>
                         <input
                           id="user1"
@@ -434,6 +468,9 @@ const content = (
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={contact_per4}
                           onChange={oncontact_per4Changed}
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
                         ></input>
                       </div>
                     </div>
@@ -441,20 +478,23 @@ const content = (
                       <div className="md:col-span-1">
                         <label htmlFor="country">No. of Members :</label>
                         <input
+                          required
                           id="prep_per1"
                           name="prep_per1"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={no_members}
                           onChange={onno_membersChanged}
-                        >
-                          {/* {options} */}
-                        </input>
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
+                        ></input>
                       </div>
                       <div className="md:col-span-3">
                         <label htmlFor="country">
                           Organizational Expertise/Skills :
                         </label>
                         <input
+                          required
                           id="user1"
                           name="user1"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -475,6 +515,7 @@ const content = (
                         Title of Activity :
                       </label>
                       <input
+                        required
                         type="text"
                         name="target_beneficiary"
                         id="target_beneficiary"
@@ -488,6 +529,7 @@ const content = (
                         Purpose of Activity :
                       </label>
                       <input
+                        required
                         type="text"
                         name="purpose_activity"
                         id="purpose_activity"
@@ -501,6 +543,7 @@ const content = (
                         Reason for Choosing the Community/Sector :
                       </label>
                       <input
+                        required
                         type="text"
                         name="reason_community"
                         id="reason_community"
@@ -512,13 +555,20 @@ const content = (
                     <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
                       <div>
                         <label htmlFor="target_date">Target Date/s :</label>
-                        <DatePicker type="text"
+                        <DatePicker
+                          type="text"
                           name="target_date"
-                          id="target_date" className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50" selected={target_date} onChange={(date) => settarget_date(date)} dateFormat="MMMM d, yyyy"/>
+                          id="target_date"
+                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                          selected={target_date}
+                          onChange={(date) => settarget_date(date)}
+                          dateFormat="MMMM d, yyyy"
+                        />
                       </div>
                       <div>
                         <label htmlFor="venue">Target Area/s :</label>
                         <input
+                          required
                           type="text"
                           name="venue"
                           id="venue"
@@ -532,6 +582,7 @@ const content = (
                       <div className="md:col-span-3">
                         <label htmlFor="country">Target Beneficiary :</label>
                         <input
+                          required
                           id="target_beneficiary"
                           name="target_beneficiary"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -544,11 +595,15 @@ const content = (
                           No. of Beneficiaries :
                         </label>
                         <input
+                          required
                           id="no_beneficiaries"
                           name="no_beneficiaries"
                           className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
                           value={no_beneficiaries}
                           onChange={onno_beneficiariesChanged}
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
                         ></input>
                       </div>
                     </div>
@@ -557,7 +612,7 @@ const content = (
                         <p className="font-medium text-lg">
                           Classification of Community Extension Project
                         </p>
-                        <p>Put x on the chosen classification</p>
+                        <p>Put ✓ on the chosen classification</p>
                       </div>
                     </div>
                     <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
@@ -566,34 +621,40 @@ const content = (
                           Outreach/Dole out :
                         </label>
                         <input
+                          type="checkbox"
+                          checked={class_outreachdole}
                           id="class_outreachdole"
                           name="class_outreachdole"
-                          className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                          value={class_outreachdole}
+                          className={`h-7 bg-gray-50 border-2 w-7 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value="X"
                           onChange={onclass_outreachdoleChanged}
-                        ></input>
+                        />
                       </div>
                       <div className="md:col-span-1">
                         <label htmlFor="class_semi_dev">
                           Semi-Developmental :
                         </label>
                         <input
+                          checked={class_semi_dev}
+                          type="checkbox"
                           id="class_semi_dev"
                           name="class_semi_dev"
-                          className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                          value={class_semi_dev}
+                          className={`h-7 bg-gray-50 border-2 w-7 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value="X"
                           onChange={onclass_semi_devChanged}
-                        ></input>
+                        />
                       </div>
                       <div className="md:col-span-1">
                         <label htmlFor="class_dev">Developmental :</label>
                         <input
+                          checked={class_dev}
+                          type="checkbox"
                           id="class_dev"
                           name="class_dev"
-                          className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
-                          value={class_dev}
+                          className={`h-7 bg-gray-50 border-2 w-7 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          value="X"
                           onChange={onclass_devChanged}
-                        ></input>
+                        />
                       </div>
                     </div>
                     <div className="md:col-span-2 md:row-span-4 text-gray-600">
@@ -605,6 +666,7 @@ const content = (
                       <div className="">
                         <label htmlFor="target_obj">Targets/Objectives :</label>
                         <textarea
+                          required
                           type="textarea"
                           name="target_obj"
                           id="target_obj"
@@ -619,6 +681,7 @@ const content = (
                       <div className="">
                         <label htmlFor="activities">Activities :</label>
                         <textarea
+                          required
                           type="textarea"
                           name="activities"
                           id="activities"
@@ -632,6 +695,7 @@ const content = (
                     <div className="md:col-span-7">
                       <label htmlFor="time_frame">Time Frame:</label>
                       <input
+                        required
                         type="text"
                         name="time_frame"
                         id="time_frame"
@@ -644,6 +708,7 @@ const content = (
                       <div className="">
                         <label htmlFor="beneficiaries">Beneficiaries :</label>
                         <textarea
+                          required
                           type="textarea"
                           name="beneficiaries"
                           id="beneficiaries"
@@ -659,13 +724,17 @@ const content = (
                       <div className="">
                         <label htmlFor="budget">Budget :</label>
                         <input
+                          required
                           type="textarea"
                           name="budget"
                           id="budget"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={budget}
                           onChange={onbudgetChanged}
-                          placeholder=""
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
+                          placeholder="Php"
                         />
                       </div>
                     </div>
@@ -675,6 +744,7 @@ const content = (
                           Progress Indicators :
                         </label>
                         <textarea
+                          required
                           type="textarea"
                           name="prog_indicator"
                           id="prog_indicator"
@@ -693,7 +763,6 @@ const content = (
                   <button
                     className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                     title="Save"
-                    onClick={onSaveReportClicked}
                   >
                     Submit Report
                   </button>

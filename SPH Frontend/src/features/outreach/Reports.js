@@ -19,14 +19,18 @@ const Reports = ({ reportId }) => {
 
   if (allReport) {
     const created = new Date(allReport.createdAt).toLocaleString("en-US", {
-      day: "numeric",
-      month: "long",
-    });
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
-    const updated = new Date(allReport.updatedAt).toLocaleString("en-US", {
-      day: "numeric",
-      month: "long",
-    });
+    const implemented = new Date(allReport.date_implement).toLocaleString(
+      "en-US",
+      {
+        day: "numeric",
+        month: "long",
+      }
+    );
     // const handleEdit = () => navigate(`/dash/report/${reportId}`)
     return (
       <tr className="text-left border px-8">
@@ -40,7 +44,7 @@ const Reports = ({ reportId }) => {
           {allReport.sponsor_dept}
         </td>
         <td className="whitespace-nowrap text-sm font-medium text-gray-900">
-          {allReport.date_implement}
+          {implemented}
         </td>
         <td className="text-sm font-medium text-gray-900">{created}</td>
         <td className="text-sm font-medium text-gray-900">

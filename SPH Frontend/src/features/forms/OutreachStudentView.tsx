@@ -53,6 +53,9 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   const [status, setCompleted] = useState(filteredOutreach["filteredOutreach"].status);
   const [originalStatus] = useState(filteredOutreach["filteredOutreach"].status);
   const [outreachId, setOutreach_id] = useState(filteredOutreach["filteredOutreach"]._id);
+  const currentStatusIndex = Object.values(STATUS).indexOf(
+    filteredOutreach["filteredOutreach"].status
+  );
   // console.log(outreachId);
 
   const onCompletedChanged = (e: { target: { value: any; }; }) => setCompleted(e.target.value);
@@ -86,7 +89,9 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   };
   
 
-  const list = Object.values(STATUS).map((status) => {
+const list = Object.values(STATUS)
+  .slice(currentStatusIndex)
+  .map((status) => {
     return (
       <option key={status} value={status}>
         {" "}
@@ -95,8 +100,8 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
     );
   });
 
-  let StatusButton = null;
-  if (roles == "Admin") {
+    let StatusButton = null;
+  if (roles == "Admin" && originalStatus != "Completed") {
     StatusButton = (
             <div className="w-full inline">
             <label className="text-base align-middle" htmlFor="user_id">
@@ -203,37 +208,41 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   });
 
   return (
-<div>
-        {StatusButton}
-        &nbsp;
-        <button
-            className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 ${status == originalStatus && "hidden"}`}            
-            title="Save"
-            onClick={onSaveOutreachClicked}
-          >
-            Save
-          </button>
-          &nbsp;
-          <button className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
-            onClick={onGeneratePDF}
-            disabled={!canSave}
-          >
-            Generate PDF
-          </button>
+    <div>
+      {StatusButton}
+      &nbsp;
+      <button
+        className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 ${
+          status == originalStatus && "hidden"
+        }`}
+        title="Save"
+        onClick={onSaveOutreachClicked}
+      >
+        Save
+      </button>
+      &nbsp;
+      <button
+        className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+        title="Save"
+        onClick={onGeneratePDF}
+        disabled={!canSave}
+      >
+        Generate PDF
+      </button>
       <br></br>
       <br></br>
       <br></br>
-      <div className='hidden' ref={uiRef}/>
-<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
+      <div className="hidden" ref={uiRef} />
+      <form className="h-full full grid gap-3 w-screen md:w-full md:px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>
               <h2 className="font-semibold text-xl">
-                Implementation Report Form
+                Student Organization Intake Form
               </h2>
               <p className="mb-6 text-base">
-                The form is both for student and employee initiated activities
-                and should be submitted within one (1) month after the activity.
+                This is intended for student initiated activities and should be
+                submitted a week before the activity.
               </p>
 
               <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
@@ -262,14 +271,16 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                         </div>
                       </div>
                       <div className="md:col-span-7">
-                        <label htmlFor="name_org">
-                          Name of Organization:
-                        </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{name_org}</div>
+                        <label htmlFor="name_org">Name of Organization:</label>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {name_org}
+                        </div>
                       </div>
                       <div className="md:col-span-7">
                         <label htmlFor="date_est">Date Established :</label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{formatDateEst}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {formatDateEst}
+                        </div>
                       </div>
                       <div className="md:col-span-4 text-base font-semibold text-gray-600">
                         {" "}
@@ -278,43 +289,94 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-2">
                           <label htmlFor="country">Name :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
                             {designated_per1}
                           </div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
                             {designated_per2}
                           </div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
                             {designated_per3}
                           </div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
                             {designated_per4}
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                          <label htmlFor="country">Designation/Position :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{position_per1}</div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{position_per2}</div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{position_per3}</div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{position_per4}</div>
+                          <label htmlFor="country">
+                            Designation/Position :
+                          </label>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {position_per1}
+                          </div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {position_per2}
+                          </div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {position_per3}
+                          </div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {position_per4}
+                          </div>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Contact Number :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{contact_per1}</div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{contact_per2}</div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{contact_per3}</div>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{contact_per4}</div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {contact_per1}
+                          </div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {contact_per2}
+                          </div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {contact_per3}
+                          </div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {contact_per4}
+                          </div>
                         </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
                           <label htmlFor="country">No. of Members :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>
-                          {no_members}</div>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {no_members}
+                          </div>
                         </div>
                         <div className="md:col-span-3">
-                          <label htmlFor="country">Organizational Expertise/Skills :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{org_skills}</div>
+                          <label htmlFor="country">
+                            Organizational Expertise/Skills :
+                          </label>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {org_skills}
+                          </div>
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-5 text-gray-600">
@@ -328,42 +390,57 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                         <label htmlFor="target_beneficiary">
                           Title of Activity :
                         </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{project_title}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {project_title}
+                        </div>
                       </div>
                       <div className="md:col-span-7">
                         <label htmlFor="purpose_activity">
                           Purpose of Activity :
                         </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{purpose_activity}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {purpose_activity}
+                        </div>
                       </div>
                       <div className="md:col-span-7">
-                        <label htmlFor="reason_community">Reason for Choosing the Community/Sector :</label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{reason_community}</div>
+                        <label htmlFor="reason_community">
+                          Reason for Choosing the Community/Sector :
+                        </label>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {reason_community}
+                        </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
                         <div>
-                        <label htmlFor="target_date">
-                        Target Date/s :
-                        </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{formatTargetDate}</div>
+                          <label htmlFor="target_date">Target Date/s :</label>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {formatTargetDate}
+                          </div>
                         </div>
                         <div>
-                        <label htmlFor="venue">
-                        Target Area/s :
-                        </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{venue}</div>
+                          <label htmlFor="venue">Target Area/s :</label>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {venue}
+                          </div>
                         </div>
-
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-3">
                           <label htmlFor="country">Target Beneficiary :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{target_beneficiary}
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {target_beneficiary}
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                          <label htmlFor="no_beneficiaries">No. of Beneficiaries :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{no_beneficiaries}
+                          <label htmlFor="no_beneficiaries">
+                            No. of Beneficiaries :
+                          </label>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {no_beneficiaries}
                           </div>
                         </div>
                       </div>
@@ -377,74 +454,87 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-1">
-                          <label htmlFor="class_outreachdole">Outreach/Dole out :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}>{class_outreachdole}
+                          <label htmlFor="class_outreachdole">
+                            Outreach/Dole out :
+                          </label>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {class_outreachdole}
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                          <label htmlFor="class_semi_dev">Semi-Developmental :</label>
-                          <div className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}>{class_semi_dev}
+                          <label htmlFor="class_semi_dev">
+                            Semi-Developmental :
+                          </label>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {class_semi_dev}
                           </div>
                         </div>
                         <div className="md:col-span-1">
-                        <label htmlFor="class_dev">Developmental :</label>
-                        <div className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}>{class_dev}
+                          <label htmlFor="class_dev">Developmental :</label>
+                          <div
+                            className={`h-10 bg-gray-50 border-2 w-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {class_dev}
                           </div>
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-4 text-gray-600">
                         <p className="font-medium text-lg">
-                        Community Outreach Proposal
+                          Community Outreach Proposal
                         </p>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
                         <div className="">
-                          <label htmlFor="target_obj">Targets/Objectives :</label>
-                          <div
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                          >{target_obj}</div>
+                          <label htmlFor="target_obj">
+                            Targets/Objectives :
+                          </label>
+                          <div className="h-44 border mt-1 rounded px-4 w-full bg-gray-50">
+                            {target_obj}
+                          </div>
                         </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
                         <div className="">
                           <label htmlFor="activities">Activities :</label>
-                          <div
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                          >{activities}</div>
+                          <div className="h-44 border mt-1 rounded px-4 w-full bg-gray-50">
+                            {activities}
+                          </div>
                         </div>
                       </div>
                       <div className="md:col-span-7">
-                        <label htmlFor="time_frame">
-                        Time Frame:
-                        </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{time_frame}</div>
+                        <label htmlFor="time_frame">Time Frame:</label>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {time_frame}
+                        </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
                         <div className="">
                           <label htmlFor="beneficiaries">Beneficiaries :</label>
-                          <div
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                          >{beneficiaries}</div>
+                          <div className="h-44 border mt-1 rounded px-4 w-full bg-gray-50">
+                            {beneficiaries}
+                          </div>
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-4 text-gray-600"></div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
                         <div className="">
                           <label htmlFor="budget">Budget :</label>
-                          <div
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          >{budget}</div>
+                          <div className="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                            {budget}
+                          </div>
                         </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1">
                         <div className="">
-                          <label htmlFor="prog_indicator">Progress Indicators :</label>
-                          <div
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                          >{prog_indicator}</div>
-                        </div>
-                      </div>
-                      
+                          <label htmlFor="prog_indicator">
+                            Progress Indicators :
+                          </label>
+                          <div className="h-44 border mt-1 rounded px-4 w-full bg-gray-50">
+                            {prog_indicator}
                           </div>
                         </div>
                       </div>
@@ -452,9 +542,11 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
       </form>
-</div>
-  
+    </div>
   );
   
 }

@@ -1,273 +1,172 @@
 import { useState, useEffect } from "react";
 import { useAddNewAnexCMutation } from "./anexC_ApiSlice";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { STATUS } from "../../config/status";
+import { useGetAnexBQuery } from "./anexB_ApiSlice";
+import { useGetAnexAQuery } from "./anexA_ApiSlice";
 import { useGetUsersQuery } from "../users/usersApiSlice";
-import { current } from "@reduxjs/toolkit";
+import { STATUS } from "../../config/status";
 import DatePicker from "react-datepicker";
 
-const OutreachReportForm = ({ filteredOutreach, users }) => {
-  // window.addEventListener("beforeunload", function (event) {
-  //   event.returnValue = "The information in the document will reset.";
-  // });
+const OutreachReportForm = () => {
+  const { users } = useGetUsersQuery("usersList", {
+    selectFromResult: ({ data }) => ({
+      users: data?.ids.map((id) => data?.entities[id]),
+    }),
+  });
 
   const navigate = useNavigate();
   const { user_id } = useAuth();
   const { id } = useParams();
 
-  const { object_id, user_ids, department, lastname } = useGetUsersQuery(
-    "usersList",
-    {
-      selectFromResult: ({ data }) => ({
-        object_id: data?.ids.map((id) => data?.entities[id].id),
-        user_ids: data?.ids.map((id) => data?.entities[id].user_id),
-        lastname: data?.ids.map((id) => data?.entities[id].lastname),
-        department: data?.ids.map((id) => data?.entities[id].department),
-      }),
-    }
-  );
+  const { anexA } = useGetAnexAQuery("outreachList", {
+    selectFromResult: ({ data }) => ({
+      anexA: data?.entities[id],
+    }),
+  });
 
-  const getCurrentUser = () => {
-    try {
-      const currentUser = user_ids.indexOf(user_id);
-      const currentUserObjectId = object_id[currentUser];
-      return currentUserObjectId;
-    } catch (error) {}
-  };
-  // console.log(getCurrentUser());
+  const { anexB } = useGetAnexBQuery("outreachList", {
+    selectFromResult: ({ data }) => ({
+      anexB: data?.entities[id],
+    }),
+  });
 
-  const current_user = getCurrentUser();
-  const [createReport, { isSuccess, isError, error }] =
-    useAddNewAnexCMutation();
+  const unfilteredOutreach = { ...anexA, ...anexB };
+  delete unfilteredOutreach.user_role;
+  delete unfilteredOutreach.status;
+  delete unfilteredOutreach.updatedAt;
+  delete unfilteredOutreach.createdAt;
+  delete unfilteredOutreach.__v;
+  const filteredOutreach = unfilteredOutreach;
 
-  // const currentUserObjectId = object_id[currentUser];
-  //     const [prepPhase, setInputFields] = useState([{
-  //         fullName:'',
-  //         emailAddress:'',
-  //         salary:''
-  //     } ]);
-  //     const addInputField = ()=>{
-  //         setInputFields([...prepPhase, {
-  //             fullName:'',
-  //             emailAddress:'',
-  //             salary:''
-  //         } ])
+  console.log(filteredOutreach);
+  
+  let currentUser = null;
+  if (users) {
+    currentUser = users.find((user) => user.user_id === user_id);
+  }
+  let currentUserId = null;
+  if (users && currentUser) {
+    currentUserId = currentUser.id;
+  }
 
-  //     }
-  //     const removeInputFields = (index)=>{
-  //         const rows = [...prepPhase];
-  //         rows.splice(index, 1);
-  //         setInputFields(rows);
-  //     }
-  //     const handleChange = (index, evnt)=>{
+  const [createReport, { isSuccess, isError, error }] = useAddNewAnexCMutation();
 
-  //     const { name, value } = evnt.target;
-  //     const list = [...prepPhase];
-  //     list[index][name] = value;
-  //     setInputFields(list);
-  // }
-
-  // const [title, setTitle] = useState(outreach.title);
-
-  const [user] = useState(current_user);
-  const [fullname] = useState(filteredOutreach.fullname);
-  const [sponsor_dept, setSponsor_Dept] = useState(
-    filteredOutreach.sponsor_dept
-  );
-  const [project_title, setProject_Title] = useState(
-    filteredOutreach.project_title
-  );
-  const [target_beneficiary, setBeneficiaries] = useState(
-    filteredOutreach.target_beneficiary
-  );
-  const [accomp_obj, setAccomp_Obj] = useState(filteredOutreach.accomp_obj);
-  const [venue, setVenue] = useState(filteredOutreach.venue);
+  const user = currentUserId;
+  const [fullname, setFullname] = useState(filteredOutreach.fullname || "");
+  const [sponsor_dept, setSponsor_Dept] = useState(filteredOutreach.sponsor_dept || filteredOutreach.name_org || "");
+  const [project_title, setProject_Title] = useState(filteredOutreach.project_title || "");
+  const [target_beneficiary, setBeneficiaries] = useState(filteredOutreach.target_beneficiary || "");
+  const [accomp_obj, setAccomp_Obj] = useState(filteredOutreach.accomp_obj || "");
+  const [venue, setVenue] = useState(filteredOutreach.venue || "");
   const [date_implement, setDate_Implement] = useState(new Date());
-  const [brief_narrative, setBrief_Narrative] = useState(filteredOutreach.brief_narrative);
-  const [topics, setTopics] = useState(filteredOutreach.topics);
-  const [speakers, setSpeakers] = useState(filteredOutreach.speakers);
-  // const [prep_person, setPrep_Person] = useState([]);
-  // const [prep_pos, setPrep_Position] = useState([]);
-  // const [prep_type, setPrep_Type] = useState([]);
-  // const [prep_start, setPrep_Start] = useState([]);
-  // const [prep_end, setPrep_End] = useState([]);
-  const [prep_per1, setPrep_Per1] = useState(filteredOutreach.prep_per1);
-  const [prep_per2, setPrep_Per2] = useState(filteredOutreach.prep_per2);
-  const [prep_per3, setPrep_Per3] = useState(filteredOutreach.prep_per3);
-  const [prep_per4, setPrep_Per4] = useState(filteredOutreach.prep_per4);
-  const [prep_pos1, setPrep_Pos1] = useState(filteredOutreach.prep_pos1);
-  const [prep_pos2, setPrep_Pos2] = useState(filteredOutreach.prep_pos2);
-  const [prep_pos3, setPrep_Pos3] = useState(filteredOutreach.prep_pos3);
-  const [prep_pos4, setPrep_Pos4] = useState(filteredOutreach.prep_pos4);
-  const [prep_type1, setPrep_Type1] = useState(filteredOutreach.prep_type1);
-  const [prep_type2, setPrep_Type2] = useState(filteredOutreach.prep_type2);
-  const [prep_type3, setPrep_Type3] = useState(filteredOutreach.prep_type3);
-  const [prep_type4, setPrep_Type4] = useState(filteredOutreach.prep_type4);
-  const [prep_start1, setPrep_Start1] = useState(filteredOutreach.prep_start1);
-  const [prep_start2, setPrep_Start2] = useState(filteredOutreach.prep_start2);
-  const [prep_star3, setPrep_Star3] = useState(filteredOutreach.prep_star3);
-  const [prep_star4, setPrep_Star4] = useState(filteredOutreach.prep_star4);
-  const [prep_end1, setPrep_End1] = useState(filteredOutreach.prep_end1);
-  const [prep_end2, setPrep_End2] = useState(filteredOutreach.prep_end2);
-  const [prep_end3, setPrep_End3] = useState(filteredOutreach.prep_end3);
-  const [prep_end4, setPrep_End4] = useState(filteredOutreach.prep_end4);
-  const [implement_per1, setImplement_Per1] = useState(
-    filteredOutreach.implement_per1
-  );
-  const [implement_per2, setImplement_Per2] = useState(
-    filteredOutreach.implement_per2
-  );
-  const [implement_per3, setImplement_Per3] = useState(
-    filteredOutreach.implement_per3
-  );
-  const [implement_per4, setImplement_Per4] = useState(
-    filteredOutreach.implement_per4
-  );
-  const [implement_pos1, setImplement_Pos1] = useState(
-    filteredOutreach.implement_pos1
-  );
-  const [implement_pos2, setImplement_Pos2] = useState(
-    filteredOutreach.implement_pos2
-  );
-  const [implement_pos3, setImplement_Pos3] = useState(
-    filteredOutreach.implement_pos3
-  );
-  const [implement_type1, setImplement_Type1] = useState(
-    filteredOutreach.implement_type1
-  );
-  const [implement_type2, setImplement_Type2] = useState(
-    filteredOutreach.implement_type2
-  );
-  const [implement_pos4, setImplement_Pos4] = useState(
-    filteredOutreach.implement_pos4
-  );
-  const [implement_type3, setImplement_Type3] = useState(
-    filteredOutreach.implement_type3
-  );
-  const [implement_type4, setImplement_Type4] = useState(
-    filteredOutreach.implement_type4
-  );
-  const [implement_start1, setImplement_Start1] = useState(
-    filteredOutreach.implement_start1
-  );
-  const [implement_start2, setImplement_Start2] = useState(
-    filteredOutreach.implement_start2
-  );
-  const [implement_star3, setImplement_Star3] = useState(
-    filteredOutreach.implement_star3
-  );
-  const [implement_star4, setImplement_Star4] = useState(
-    filteredOutreach.implement_star4
-  );
-  const [implement_end1, setImplement_End1] = useState(
-    filteredOutreach.implement_end1
-  );
-  const [implement_end2, setImplement_End2] = useState(
-    filteredOutreach.implement_end2
-  );
-  const [implement_end3, setImplement_End3] = useState(
-    filteredOutreach.implement_end3
-  );
-  const [implement_end4, setImplement_End4] = useState(
-    filteredOutreach.implement_end4
-  );
-  const [post_per1, setPost_Per1] = useState(filteredOutreach.post_per1);
-  const [post_per2, setPost_Per2] = useState(filteredOutreach.post_per2);
-  const [post_per3, setPost_Per3] = useState(filteredOutreach.post_per3);
-  const [post_per4, setPost_Per4] = useState(filteredOutreach.post_per4);
-  const [post_pos1, setPost_Pos1] = useState(filteredOutreach.post_pos1);
-  const [post_pos2, setPost_Pos2] = useState(filteredOutreach.post_pos2);
-  const [post_pos3, setPost_Pos3] = useState(filteredOutreach.post_pos3);
-  const [post_type1, setPost_Type1] = useState(filteredOutreach.post_type1);
-  const [post_type2, setPost_Type2] = useState(filteredOutreach.post_type2);
-  const [post_pos4, setPost_Pos4] = useState(filteredOutreach.post_pos4);
-  const [post_type3, setPost_Type3] = useState(filteredOutreach.post_type3);
-  const [post_type4, setPost_Type4] = useState(filteredOutreach.post_type4);
-  const [post_start1, setPost_Start1] = useState(filteredOutreach.post_start1);
-  const [post_start2, setPost_Start2] = useState(filteredOutreach.post_start2);
-  const [post_star3, setPost_Star3] = useState(filteredOutreach.post_star3);
-  const [post_star4, setPost_Star4] = useState(filteredOutreach.post_star4);
-  const [post_end1, setPost_End1] = useState(filteredOutreach.post_end1);
-  const [post_end2, setPost_End2] = useState(filteredOutreach.post_end2);
-  const [post_end3, setPost_End3] = useState(filteredOutreach.post_end3);
-  const [post_end4, setPost_End4] = useState(filteredOutreach.post_end4);
-  const [learnings1, setLearnings1] = useState(filteredOutreach.learnings1);
-  const [learnings2, setLearnings2] = useState(filteredOutreach.learnings2);
-  const [learnings3, setLearnings3] = useState(filteredOutreach.learnings3);
-  const [learnings4, setLearnings4] = useState(filteredOutreach.learnings4);
-  const [learnings5, setLearnings5] = useState(filteredOutreach.learnings5);
-  const [strengths1, setStrengths1] = useState(filteredOutreach.strengths1);
-  const [strengths2, setStrengths2] = useState(filteredOutreach.strengths2);
-  const [strengths3, setStrengths3] = useState(filteredOutreach.strengths3);
-  const [strengths4, setStrengths4] = useState(filteredOutreach.strengths4);
-  const [strengths5, setStrengths5] = useState(filteredOutreach.strengths5);
-  const [weakness1, setWeakness1] = useState(filteredOutreach.weakness1);
-  const [weakness2, setWeakness2] = useState(filteredOutreach.weakness2);
-  const [weakness3, setWeakness3] = useState(filteredOutreach.weakness3);
-  const [weakness4, setWeakness4] = useState(filteredOutreach.weakness4);
-  const [weakness5, setWeakness5] = useState(filteredOutreach.weakness5);
-  const [improvement1, setImprovement1] = useState(
-    filteredOutreach.improvement1
-  );
-  const [improvement2, setImprovement2] = useState(
-    filteredOutreach.improvement2
-  );
-  const [improvement3, setImprovement3] = useState(
-    filteredOutreach.improvement3
-  );
-  const [improvement4, setImprovement4] = useState(
-    filteredOutreach.improvement4
-  );
-  const [improvement5, setImprovement5] = useState(
-    filteredOutreach.improvement5
-  );
-  const [act_partici1, setAct_Partici1] = useState(
-    filteredOutreach.act_partici1
-  );
-  const [act_partici2, setAct_Partici2] = useState(
-    filteredOutreach.act_partici2
-  );
-  const [act_partici3, setAct_Partici3] = useState(
-    filteredOutreach.act_partici3
-  );
-  const [particulars1, setParticulars1] = useState(
-    filteredOutreach.particulars1
-  );
-  const [particulars2, setParticulars2] = useState(
-    filteredOutreach.particulars2
-  );
-  const [particulars3, setParticulars3] = useState(
-    filteredOutreach.particulars3
-  );
-  const [amount1, setAmount1] = useState(filteredOutreach.amount1);
-  const [amount2, setAmount2] = useState(filteredOutreach.amount2);
-  const [amount3, setAmount3] = useState(filteredOutreach.amount3);
-  const [amount_total, setAmount_Total] = useState(
-    filteredOutreach.amount_total
-  );
-
-  const [proj_rep, setProj_rep] = useState(filteredOutreach.proj_rep);
-  const [designation1, setDesignation1] = useState(
-    filteredOutreach.designation1
-  );
-  const [adviser_name, setAdviser_name] = useState(
-    filteredOutreach.adviser_name
-  );
-  const [stud_org, setStud_org] = useState(filteredOutreach.stud_org);
-  const [cscb_rep, setCscb_rep] = useState(filteredOutreach.cscb_rep);
-  const [dept_rep, setDept_rep] = useState(filteredOutreach.dept_rep);
-  const [dean, setDean] = useState(filteredOutreach.dean);
-  const [designation2, setDesignation2] = useState(
-    filteredOutreach.designation2
-  );
-  const [image1, setImage1] = useState(filteredOutreach.image1);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [caption1, setCaption1] = useState(filteredOutreach.caption1);
-  const [caption2, setCaption2] = useState(filteredOutreach.caption2);
-  const [image2, setImage2] = useState(filteredOutreach.image2);
-  const [previewImage2, setPreviewImage2] = useState(null);
+  const [brief_narrative, setBrief_Narrative] = useState(filteredOutreach.brief_narrative || "");
+  const [topics, setTopics] = useState(filteredOutreach.topics || "");
+  const [speakers, setSpeakers] = useState(filteredOutreach.speakers || "" || "");
+  const [prep_per1, setPrep_Per1] = useState(filteredOutreach.prep_per1 || "");
+  const [prep_per2, setPrep_Per2] = useState(filteredOutreach.prep_per2 || "");
+  const [prep_per3, setPrep_Per3] = useState(filteredOutreach.prep_per3 || "");
+  const [prep_per4, setPrep_Per4] = useState(filteredOutreach.prep_per4 || "");
+  const [prep_pos1, setPrep_Pos1] = useState(filteredOutreach.prep_pos1 || "");
+  const [prep_pos2, setPrep_Pos2] = useState(filteredOutreach.prep_pos2 || "");
+  const [prep_pos3, setPrep_Pos3] = useState(filteredOutreach.prep_pos3 || "");
+  const [prep_pos4, setPrep_Pos4] = useState(filteredOutreach.prep_pos4 || "");
+  const [prep_type1, setPrep_Type1] = useState(filteredOutreach.prep_type1 || "");
+  const [prep_type2, setPrep_Type2] = useState(filteredOutreach.prep_type2 || "");
+  const [prep_type3, setPrep_Type3] = useState(filteredOutreach.prep_type3 || "");
+  const [prep_type4, setPrep_Type4] = useState(filteredOutreach.prep_type4 || "");
+  const [prep_start1, setPrep_Start1] = useState(filteredOutreach.prep_start1 || "");
+  const [prep_start2, setPrep_Start2] = useState(filteredOutreach.prep_start2 || "");
+  const [prep_star3, setPrep_Star3] = useState(filteredOutreach.prep_star3 || "");
+  const [prep_star4, setPrep_Star4] = useState(filteredOutreach.prep_star4 || "");
+  const [prep_end1, setPrep_End1] = useState(filteredOutreach.prep_end1 || "");
+  const [prep_end2, setPrep_End2] = useState(filteredOutreach.prep_end2 || "");
+  const [prep_end3, setPrep_End3] = useState(filteredOutreach.prep_end3 || "");
+  const [prep_end4, setPrep_End4] = useState(filteredOutreach.prep_end4 || "");
+  const [implement_per1, setImplement_Per1] = useState(filteredOutreach.implement_per1 || "");
+  const [implement_per2, setImplement_Per2] = useState(filteredOutreach.implement_per2 || "");
+  const [implement_per3, setImplement_Per3] = useState(filteredOutreach.implement_per3 || "");
+  const [implement_per4, setImplement_Per4] = useState(filteredOutreach.implement_per4 || "");
+  const [implement_pos1, setImplement_Pos1] = useState(filteredOutreach.implement_pos1 || "");
+  const [implement_pos2, setImplement_Pos2] = useState(filteredOutreach.implement_pos2 || "");
+  const [implement_pos3, setImplement_Pos3] = useState(filteredOutreach.implement_pos3 || "");
+  const [implement_type1, setImplement_Type1] = useState(filteredOutreach.implement_type1 || "");
+  const [implement_type2, setImplement_Type2] = useState(filteredOutreach.implement_type2 || "");
+  const [implement_pos4, setImplement_Pos4] = useState(filteredOutreach.implement_pos4 || "");
+  const [implement_type3, setImplement_Type3] = useState(filteredOutreach.implement_type3 || "");
+  const [implement_type4, setImplement_Type4] = useState(filteredOutreach.implement_type4 || "");
+  const [implement_start1, setImplement_Start1] = useState(filteredOutreach.implement_start1 || "");
+  const [implement_start2, setImplement_Start2] = useState(filteredOutreach.implement_start2 || "");
+  const [implement_star3, setImplement_Star3] = useState(filteredOutreach.implement_star3 || "");
+  const [implement_star4, setImplement_Star4] = useState(filteredOutreach.implement_star4 || "");
+  const [implement_end1, setImplement_End1] = useState(filteredOutreach.implement_end1 || "");
+  const [implement_end2, setImplement_End2] = useState(filteredOutreach.implement_end2 || "");
+  const [implement_end3, setImplement_End3] = useState(filteredOutreach.implement_end3 || "");
+  const [implement_end4, setImplement_End4] = useState(filteredOutreach.implement_end4 || "");
+  const [post_per1, setPost_Per1] = useState(filteredOutreach.post_per1 || "");
+  const [post_per2, setPost_Per2] = useState(filteredOutreach.post_per2 || "");
+  const [post_per3, setPost_Per3] = useState(filteredOutreach.post_per3 || "");
+  const [post_per4, setPost_Per4] = useState(filteredOutreach.post_per4 || "");
+  const [post_pos1, setPost_Pos1] = useState(filteredOutreach.post_pos1 || "");
+  const [post_pos2, setPost_Pos2] = useState(filteredOutreach.post_pos2 || "");
+  const [post_pos3, setPost_Pos3] = useState(filteredOutreach.post_pos3 || "");
+  const [post_type1, setPost_Type1] = useState(filteredOutreach.post_type1 || "");
+  const [post_type2, setPost_Type2] = useState(filteredOutreach.post_type2 || "");
+  const [post_pos4, setPost_Pos4] = useState(filteredOutreach.post_pos4 || "");
+  const [post_type3, setPost_Type3] = useState(filteredOutreach.post_type3 || "");
+  const [post_type4, setPost_Type4] = useState(filteredOutreach.post_type4 || "");
+  const [post_start1, setPost_Start1] = useState(filteredOutreach.post_start1 || "");
+  const [post_start2, setPost_Start2] = useState(filteredOutreach.post_start2 || "");
+  const [post_star3, setPost_Star3] = useState(filteredOutreach.post_star3 || "");
+  const [post_star4, setPost_Star4] = useState(filteredOutreach.post_star4 || "");
+  const [post_end1, setPost_End1] = useState(filteredOutreach.post_end1 || "");
+  const [post_end2, setPost_End2] = useState(filteredOutreach.post_end2 || "");
+  const [post_end3, setPost_End3] = useState(filteredOutreach.post_end3 || "");
+  const [post_end4, setPost_End4] = useState(filteredOutreach.post_end4 || "");
+  const [learnings1, setLearnings1] = useState(filteredOutreach.learnings1 || "");
+  const [learnings2, setLearnings2] = useState(filteredOutreach.learnings2 || "");
+  const [learnings3, setLearnings3] = useState(filteredOutreach.learnings3 || "");
+  const [learnings4, setLearnings4] = useState(filteredOutreach.learnings4 || "");
+  const [learnings5, setLearnings5] = useState(filteredOutreach.learnings5 || "");
+  const [strengths1, setStrengths1] = useState(filteredOutreach.strengths1 || "");
+  const [strengths2, setStrengths2] = useState(filteredOutreach.strengths2 || "");
+  const [strengths3, setStrengths3] = useState(filteredOutreach.strengths3 || "");
+  const [strengths4, setStrengths4] = useState(filteredOutreach.strengths4 || "");
+  const [strengths5, setStrengths5] = useState(filteredOutreach.strengths5 || "");
+  const [weakness1, setWeakness1] = useState(filteredOutreach.weakness1 || "");
+  const [weakness2, setWeakness2] = useState(filteredOutreach.weakness2 || "");
+  const [weakness3, setWeakness3] = useState(filteredOutreach.weakness3 || "");
+  const [weakness4, setWeakness4] = useState(filteredOutreach.weakness4 || "");
+  const [weakness5, setWeakness5] = useState(filteredOutreach.weakness5 || "");
+  const [improvement1, setImprovement1] = useState(filteredOutreach.improvement1 || "");
+  const [improvement2, setImprovement2] = useState(filteredOutreach.improvement2 || "");
+  const [improvement3, setImprovement3] = useState(filteredOutreach.improvement3 || "");
+  const [improvement4, setImprovement4] = useState(filteredOutreach.improvement4 || "");
+  const [improvement5, setImprovement5] = useState(filteredOutreach.improvement5 || "");
+  const [act_partici1, setAct_Partici1] = useState(filteredOutreach.act_partici1 || "");
+  const [act_partici2, setAct_Partici2] = useState(filteredOutreach.act_partici2 || "");
+  const [act_partici3, setAct_Partici3] = useState(filteredOutreach.act_partici3 || "");
+  const [particulars1, setParticulars1] = useState(filteredOutreach.particulars1 || "");
+  const [particulars2, setParticulars2] = useState(filteredOutreach.particulars2 || "");
+  const [particulars3, setParticulars3] = useState(filteredOutreach.particulars3 || "");
+  const [amount1, setAmount1] = useState(0);
+  const [amount2, setAmount2] = useState(0);
+  const [amount3, setAmount3] = useState(0);
+  const [amount_total, setAmount_Total] = useState(filteredOutreach.amount_total || "");
+  const [proj_rep, setProj_rep] = useState(filteredOutreach.proj_rep || "");
+  const [designation1, setDesignation1] = useState(filteredOutreach.designation1 || "");
+  const [adviser_name, setAdviser_name] = useState(filteredOutreach.adviser_name || "");
+  const [stud_org, setStud_org] = useState(filteredOutreach.stud_org || "");
+  const [cscb_rep, setCscb_rep] = useState(filteredOutreach.cscb_rep || "");
+  const [dept_rep, setDept_rep] = useState(filteredOutreach.dept_rep || "");
+  const [dean, setDean] = useState(filteredOutreach.dean || "");
+  const [designation2, setDesignation2] = useState(filteredOutreach.designation2 || "");
+  const [image1, setImage1] = useState(filteredOutreach.image1 || "");
+  const [previewImage, setPreviewImage] = useState(null || "");
+  const [caption1, setCaption1] = useState(filteredOutreach.caption1 || "");
+  const [caption2, setCaption2] = useState(filteredOutreach.caption2 || "");
+  const [image2, setImage2] = useState(filteredOutreach.image2 || "");
+  const [previewImage2, setPreviewImage2] = useState(null || "");
 
 
   useEffect(() => {
@@ -281,11 +180,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setBrief_Narrative("");
       setTopics("");
       setSpeakers("");
-      // setPrep_Person([])
-      // setPrep_Position([])
-      // setPrep_Type([])
-      // setPrep_Start([])
-      // setPrep_End([])
       setPrep_Per1("");
       setPrep_Per2("");
       setPrep_Per3("");
@@ -372,10 +266,10 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
       setParticulars1("");
       setParticulars2("");
       setParticulars3("");
-      setAmount1("");
-      setAmount2("");
-      setAmount3("");
-      setAmount_Total("");
+      setAmount1(0);
+      setAmount2(0);
+      setAmount3(0);
+      setAmount_Total(0);
       setProj_rep("");
       setDesignation1("");
       setAdviser_name("");
@@ -819,14 +713,6 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     navigate("/dash/employee");
   };
 
-  const list = Object.values(STATUS).map((status) => {
-    return (
-      <option key={status} value={status}>
-        {" "}
-        {status}
-      </option>
-    );
-  });
 
   const created = new Date(filteredOutreach.createdAt).toLocaleString("en-US", {
     day: "numeric",
@@ -844,17 +730,26 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
     minute: "numeric",
     second: "numeric",
   });
-  const options = users.map((user) => {
-    return (
-      <option
-        className=""
-        key={user.lastname + ", " + user.firstname}
-        value={user.lastname + ", " + user.firstname}
-      >
-        {user.user_id + " | " + user.lastname + ", " + user.firstname}
+  let options = null;
+  if (users) {
+    options = users.map((user) => {
+      return (
+        <option
+          className=""
+          key={user.lastname + ", " + user.firstname}
+          value={user.lastname + ", " + user.firstname}
+        >
+          {user.user_id + " | " + user.lastname + ", " + user.firstname}
+        </option>
+      );
+    });
+
+    options.unshift(
+      <option key="none" value="">
+        None
       </option>
     );
-  });
+  }
 
   // const addInput = () => {
   //   setPrep_Person([...prep_person, '']); // add a new input with an empty string value
@@ -892,30 +787,30 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
   //     </button>
   //   );
   // }
-
-  const content = (
-    <>
-      {/* <img
+    const content = (
+      <>
+        {/* <img
         className=" w-1/2 h-screen float-right mix-blend-multiply object-cover "
         src={require("../../img/background.jpg")}
         alt="background"
       ></img> */}
-      <p className={errClass}>{errContent}</p>
-<form className="h-full full grid gap-3 w-screen md:px-20 text-black">
-        <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-          <div className="container max-w-screen-lg mx-auto">
-            <div>
-              <h2 className="font-semibold text-xl">
-                Implementation Report Form
-              </h2>
-              <p className="mb-6 text-base">
-                The form is both for student and employee initiated activities
-                and should be submitted within one (1) month after the activity.
-              </p>
+        <p className={errClass}>{errContent}</p>
+        <form onSubmit={onSaveReportClicked} className="h-full full grid gap-3 md:px-20 text-black">
+          <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+            <div className="container max-w-screen-lg mx-auto">
+              <div>
+                <h2 className="font-semibold text-xl">
+                  Implementation Report Form
+                </h2>
+                <p className="mb-6 text-base">
+                  The form is both for student and employee initiated activities
+                  and should be submitted within one (1) month after the
+                  activity.
+                </p>
 
-              <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                  {/* <div className="text-gray-600">
+                <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                  <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                    {/* <div className="text-gray-600">
                     <div className="mb-[756px]">
                       <p className="font-medium text-lg">Outreach Details</p>
                       <p>Please fill out all the blank fields.</p>
@@ -929,310 +824,334 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
 
                   </div> */}
 
-                  <div className="lg:col-span-3">
-                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
-                      <div className="md:col-span-2 md:row-span-6 text-gray-600">
-                        <div className="">
+                    <div className="lg:col-span-3">
+                      <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
+                        <div className="md:col-span-2 md:row-span-6 text-gray-600">
+                          <div className="">
+                            <p className="font-medium text-lg">
+                              Outreach Details
+                            </p>
+                            <p>Please fill out all the blank fields.</p>
+                          </div>
+                        </div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="sponsor_dept">
+                            Sponsoring Department(s)/ Proponent(s) :
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            name="sponsor_dept"
+                            id="sponsor_dept"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={sponsor_dept}
+                            onChange={onSponsor_DeptChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="project_title">Project Title :</label>
+                          <input
+                            required
+                            type="text"
+                            name="project_title"
+                            id="project_title"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={project_title}
+                            onChange={onProject_TitleChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="target_beneficiary">
+                            Beneficiaries :
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            name="target_beneficiary"
+                            id="target_beneficiary"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={target_beneficiary}
+                            onChange={onBeneficiariesChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="accomp_obj">
+                            Accomplished Objectives :
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            name="accomp_obj"
+                            id="accomp_obj"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={accomp_obj}
+                            onChange={onAccomp_ObjChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="venue">Venue of CES Activity :</label>
+                          <input
+                            required
+                            type="text"
+                            name="venue"
+                            id="venue"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={venue}
+                            onChange={onVenueChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="date_implement">
+                            Date/Time Implemented :
+                          </label>
+                          <DatePicker
+                            required
+                            type="text"
+                            name="date_implement"
+                            id="date_implement"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            selected={date_implement}
+                            onChange={(date) => setDate_Implement(date)}
+                            dateFormat="MMMM d, yyyy"
+                          />
+                        </div>
+                        <div className="md:col-span-2"></div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="brief_narrative">
+                            Brief Narrative :
+                          </label>
+                          <textarea
+                            required
+                            type="text"
+                            name="brief_narrative"
+                            id="brief_narrative"
+                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={brief_narrative}
+                            onChange={onBrief_NarrativeChanged}
+                          />
+                        </div>
+                        <div className="md:col-span-2 text-gray-600">
                           <p className="font-medium text-lg">
-                            Outreach Details
+                            Topic(s) Discussed and Resource
+                            Speaker(s)/Facilitator(s),
                           </p>
-                          <p>Please fill out all the blank fields.</p>
+                          <p>(if applicable)</p>
                         </div>
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="sponsor_dept">
-                          Sponsoring Department(s)/ Proponent(s) :
-                        </label>
-                        <input
-                          type="text"
-                          name="sponsor_dept"
-                          id="sponsor_dept"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={sponsor_dept}
-                          onChange={onSponsor_DeptChanged}
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="project_title">Project Title :</label>
-                        <input
-                          type="text"
-                          name="project_title"
-                          id="project_title"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={project_title}
-                          onChange={onProject_TitleChanged}
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="target_beneficiary">
-                          Beneficiaries :
-                        </label>
-                        <input
-                          type="text"
-                          name="target_beneficiary"
-                          id="target_beneficiary"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={target_beneficiary}
-                          onChange={onBeneficiariesChanged}
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="accomp_obj">
-                          Accomplished Objectives :
-                        </label>
-                        <input
-                          type="text"
-                          name="accomp_obj"
-                          id="accomp_obj"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={accomp_obj}
-                          onChange={onAccomp_ObjChanged}
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="venue">Venue of CES Activity :</label>
-                        <input
-                          type="text"
-                          name="venue"
-                          id="venue"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={venue}
-                          onChange={onVenueChanged}
-                        />
-                      </div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="date_implement">
-                          Date/Time Implemented :
-                        </label>
-                        <DatePicker type="text"
-                          name="date_implement"
-                          id="date_implement" className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50" selected={date_implement} onChange={(date) => setDate_Implement(date)} dateFormat="MMMM d, yyyy"/>
-                      </div>
-                      <div className="md:col-span-2"></div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="brief_narrative">
-                          Brief Narrative :
-                        </label>
-                        <textarea
-                          type="text"
-                          name="brief_narrative"
-                          id="brief_narrative"
-                          className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={brief_narrative}
-                          onChange={onBrief_NarrativeChanged}
-                        />
-                      </div>
-                      <div className="md:col-span-2 text-gray-600">
-                        <p className="font-medium text-lg">
-                          Topic(s) Discussed and Resource
-                          Speaker(s)/Facilitator(s),
-                        </p>
-                        <p>(if applicable)</p>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div className="">
-                          <label htmlFor="topics">Topics</label>
-                          <textarea
-                            type="textarea"
-                            name="topics"
-                            id="topics"
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={topics}
-                            onChange={onTopicsChanged}
-                            placeholder=""
-                          />
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
+                          <div className="">
+                            <label htmlFor="topics">Topics</label>
+                            <textarea
+                              type="textarea"
+                              name="topics"
+                              id="topics"
+                              className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={topics}
+                              onChange={onTopicsChanged}
+                              placeholder=""
+                            />
+                          </div>
+                          <div className="">
+                            <label htmlFor="speakers">Speakers</label>
+                            <textarea
+                              type="textarea"
+                              name="speakers"
+                              id="speakers"
+                              className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={speakers}
+                              onChange={onSpeakersChanged}
+                              placeholder=""
+                            />
+                          </div>
                         </div>
-                        <div className="">
-                          <label htmlFor="speakers">Speakers</label>
-                          <textarea
-                            type="textarea"
-                            name="speakers"
-                            id="speakers"
-                            className="h-44 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={speakers}
-                            onChange={onSpeakersChanged}
-                            placeholder=""
-                          />
+                        <div className="md:col-span-2 md:row-span-6 text-gray-600">
+                          <p className="font-medium text-lg">
+                            List of Actual Volunteers and Type of Participation:
+                          </p>
                         </div>
-                      </div>
-                      <div className="md:col-span-2 md:row-span-6 text-gray-600">
-                        <p className="font-medium text-lg">
-                          List of Actual Volunteers and Type of Participation:
-                        </p>
-                      </div>
-                      <div className="md:col-span-2 text-base font-semibold text-gray-600">
-                        {" "}
-                        Preparatory Phase
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Name of Volunteer</label>
-                          <select
-                            id="prep_per2"
-                            name="prep_per2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            required
-                            value={prep_per1}
-                            onChange={onPrep_Per1Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="prep_per2"
-                            name="prep_per2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            required
-                            value={prep_per2}
-                            onChange={onPrep_Per2Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="prep_per3"
-                            name="prep_per3"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            required
-                            value={prep_per3}
-                            onChange={onPrep_Per3Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="prep_per4"
-                            name="prep_per4"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            required
-                            value={prep_per4}
-                            onChange={onPrep_Per4Changed}
-                          >
-                            {options}
-                          </select>
+                        <div className="md:col-span-2 text-base font-semibold text-gray-600">
+                          {" "}
+                          Preparatory Phase
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Position/Designation</label>
-                          <select
-                            id="user2"
-                            name="user2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_pos1}
-                            onChange={onPrep_Pos1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user2"
-                            name="user2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_pos2}
-                            onChange={onPrep_Pos2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user3"
-                            name="user3"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_pos3}
-                            onChange={onPrep_Pos3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user4"
-                            name="user4"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_pos4}
-                            onChange={onPrep_Pos4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                        </div>
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">Name of Volunteer</label>
+                            <select
+                              id="prep_per2"
+                              name="prep_per2"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              required
+                              value={prep_per1}
+                              onChange={onPrep_Per1Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="prep_per2"
+                              name="prep_per2"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_per2}
+                              onChange={onPrep_Per2Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="prep_per3"
+                              name="prep_per3"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_per3}
+                              onChange={onPrep_Per3Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="prep_per4"
+                              name="prep_per4"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_per4}
+                              onChange={onPrep_Per4Changed}
+                            >
+                              {options}
+                            </select>
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">
+                              Position/Designation
+                            </label>
+                            <select
+                              required
+                              id="user2"
+                              name="user2"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_pos1}
+                              onChange={onPrep_Pos1Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user2"
+                              name="user2"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_pos2}
+                              onChange={onPrep_Pos2Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user3"
+                              name="user3"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_pos3}
+                              onChange={onPrep_Pos3Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user4"
+                              name="user4"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_pos4}
+                              onChange={onPrep_Pos4Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                          </div>
 
-                        <div className="md:col-span-1 md:text-">
-                          <label htmlFor="country">Type of Participation</label>
-                          <select
-                            id="user2"
-                            name="user2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_type1}
-                            onChange={onPrep_Type1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user2"
-                            name="user2"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_type2}
-                            onChange={onPrep_Type2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user3"
-                            name="user3"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_type3}
-                            onChange={onPrep_Type3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user4"
-                            name="user4"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={prep_type4}
-                            onChange={onPrep_Type4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                        </div>
+                          <div className="md:col-span-1 md:text-">
+                            <label htmlFor="country">
+                              Type of Participation
+                            </label>
+                            <select
+                              required
+                              id="user2"
+                              name="user2"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_type1}
+                              onChange={onPrep_Type1Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user2"
+                              name="user2"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_type2}
+                              onChange={onPrep_Type2Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user3"
+                              name="user3"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_type3}
+                              onChange={onPrep_Type3Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user4"
+                              name="user4"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={prep_type4}
+                              onChange={onPrep_Type4Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                          </div>
 
-                        {/* <label htmlFor="country">Position/Designation</label>
+                          {/* <label htmlFor="country">Position/Designation</label>
                           {prep_pos.map((prep_pos, index) => (
                             <select
                             id="prep_pos"
@@ -1243,6 +1162,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                             key={index}
                             onChange={(event) => onPrep_PositionChanged(event, index)}
                           >
+                            <option value="">None</option>
                             <option value="Facilitator">Facilitator</option>
                             <option value="Participant">Participant</option>
                             <option value="Student">Student</option>
@@ -1252,1095 +1172,1157 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
                           <button type="button" onClick={addPosition}>Add Input</button>
                           </div> */}
 
-                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div className="md:col-span-1">
-                            <label htmlFor="country">Start Time</label>
-                            <input
-                              type="time"
-                              id="prep_start1"
-                              name="prep_start1"
-                              value={prep_start1}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_Start1Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="prep_start2"
-                              name="prep_start2"
-                              value={prep_start2}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_Start2Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="prep_star3"
-                              name="sprep_star3"
-                              value={prep_star3}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_Star3Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="prep_star4"
-                              name="sprep_star4"
-                              value={prep_star4}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_Star4Changed}
-                            ></input>
-                          </div>
+                          <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                            <div className="md:col-span-1">
+                              <label htmlFor="country">Start Time</label>
+                              <input
+                                required
+                                type="time"
+                                id="prep_start1"
+                                name="prep_start1"
+                                value={prep_start1}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_Start1Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="prep_start2"
+                                name="prep_start2"
+                                value={prep_start2}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_Start2Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="prep_star3"
+                                name="sprep_star3"
+                                value={prep_star3}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_Star3Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="prep_star4"
+                                name="sprep_star4"
+                                value={prep_star4}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_Star4Changed}
+                              ></input>
+                            </div>
 
+                            <div className="md:col-span-1">
+                              <label htmlFor="country">End Time</label>
+                              <input
+                                required
+                                type="time"
+                                id="prep_end2"
+                                name="prep_end2"
+                                value={prep_end1}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_End1Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="prep_end2"
+                                name="prep_end2"
+                                value={prep_end2}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_End2Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="prep_end3"
+                                name="prep_end3"
+                                value={prep_end3}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_End3Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="prep_end4"
+                                name="prep_end4"
+                                value={prep_end4}
+                                className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPrep_End4Changed}
+                              ></input>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                          {" "}
+                          Implementation Phase/Actual Conduct of CES
+                        </div>
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                           <div className="md:col-span-1">
-                            <label htmlFor="country">End Time</label>
-                            <input
-                              type="time"
-                              id="prep_end2"
-                              name="prep_end2"
-                              value={prep_end1}
+                            <label htmlFor="country">Name of Volunteer</label>
+                            <select
+                              required
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_End1Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="prep_end2"
-                              name="prep_end2"
-                              value={prep_end2}
+                              value={implement_per1}
+                              onChange={onImplement_Per1Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_End2Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="prep_end3"
-                              name="prep_end3"
-                              value={prep_end3}
+                              value={implement_per2}
+                              onChange={onImplement_Per2Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_End3Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="prep_end4"
-                              name="prep_end4"
-                              value={prep_end4}
+                              value={implement_per3}
+                              onChange={onImplement_Per3Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={implement_per4}
+                              onChange={onImplement_Per4Changed}
+                            >
+                              {options}
+                            </select>
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">
+                              Position/Designation
+                            </label>
+                            <select
+                              required
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={implement_pos1}
+                              onChange={onImplement_Pos1Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={implement_pos2}
+                              onChange={onImplement_Pos2Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={implement_pos3}
+                              onChange={onImplement_Pos3Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPrep_End4Changed}
-                            ></input>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
-                        {" "}
-                        Implementation Phase/Actual Conduct of CES
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Name of Volunteer</label>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_per1}
-                            onChange={onImplement_Per1Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_per2}
-                            onChange={onImplement_Per2Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_per3}
-                            onChange={onImplement_Per3Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_per4}
-                            onChange={onImplement_Per4Changed}
-                          >
-                            {options}
-                          </select>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Position/Designation</label>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_pos1}
-                            onChange={onImplement_Pos1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_pos2}
-                            onChange={onImplement_Pos2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_pos3}
-                            onChange={onImplement_Pos3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 mb-2 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_pos4}
-                            onChange={onImplement_Pos4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Type of Participation</label>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_type1}
-                            onChange={onImplement_Type1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_type2}
-                            onChange={onImplement_Type2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_type3}
-                            onChange={onImplement_Type3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={implement_type4}
-                            onChange={onImplement_Type4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                        </div>
-                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div className="md:col-span-1">
-                            <label htmlFor="country">Start Time</label>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_start1}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_Start1Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_start2}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_Start2Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_star3}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_Star3Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_star4}
-                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_Star4Changed}
-                            ></input>
+                              value={implement_pos4}
+                              onChange={onImplement_Pos4Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
                           </div>
                           <div className="md:col-span-1">
-                            <label htmlFor="country">End Time</label>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_end1}
+                            <label htmlFor="country">
+                              Type of Participation
+                            </label>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_End1Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_end2}
+                              value={implement_type1}
+                              onChange={onImplement_Type1Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_End2Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_end3}
+                              value={implement_type2}
+                              onChange={onImplement_Type2Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_End3Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={implement_end4}
+                              value={implement_type3}
+                              onChange={onImplement_Type3Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onImplement_End4Changed}
-                            ></input>
+                              value={implement_type4}
+                              onChange={onImplement_Type4Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                          </div>
+                          <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                            <div className="md:col-span-1">
+                              <label htmlFor="country">Start Time</label>
+                              <input 
+                                required
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_start1}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_Start1Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_start2}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_Start2Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_star3}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_Star3Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_star4}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_Star4Changed}
+                              ></input>
+                            </div>
+                            <div className="md:col-span-1">
+                              <label htmlFor="country">End Time</label>
+                              <input
+                                required
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_end1}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_End1Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_end2}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_End2Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_end3}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_End3Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={implement_end4}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onImplement_End4Changed}
+                              ></input>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
-                        {" "}
-                        Post Implementation (Includes Report Writing and
-                        Evaluation)
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Name of Volunteer</label>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_per1}
-                            onChange={onPost_Per1Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_per2}
-                            onChange={onPost_Per2Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_per3}
-                            onChange={onPost_Per3Changed}
-                          >
-                            {options}
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_per4}
-                            onChange={onPost_Per4Changed}
-                          >
-                            {options}
-                          </select>
+                        <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                          {" "}
+                          Post Implementation (Includes Report Writing and
+                          Evaluation)
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Position/Designation</label>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_pos1}
-                            onChange={onPost_Pos1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_pos2}
-                            onChange={onPost_Pos2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_pos3}
-                            onChange={onPost_Pos3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_pos4}
-                            onChange={onPost_Pos4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Student">Student</option>
-                            <option value="Employee">Employee</option>
-                          </select>
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Type of Participation</label>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_type1}
-                            onChange={onPost_Type1Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_type2}
-                            onChange={onPost_Type2Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_type3}
-                            onChange={onPost_Type3Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                          <select
-                            id="user"
-                            name="user"
-                            className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                            value={post_type4}
-                            onChange={onPost_Type4Changed}
-                          >
-                            <option value="Facilitator">Facilitator</option>
-                            <option value="Participant">Participant</option>
-                            <option value="Game Facilitator">
-                              Game Facilitator
-                            </option>
-                            <option value="Donor">Donor</option>
-                            <option value="Resource Speaker">
-                              Resource Speaker
-                            </option>
-                          </select>
-                        </div>
-                        <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                           <div className="md:col-span-1">
-                            <label htmlFor="country">Start Time</label>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_start1}
+                            <label htmlFor="country">Name of Volunteer</label>
+                            <select
+                              required
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_Start1Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_start2}
+                              value={post_per1}
+                              onChange={onPost_Per1Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_Start2Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_star3}
+                              value={post_per2}
+                              onChange={onPost_Per2Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_Star3Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_star4}
+                              value={post_per3}
+                              onChange={onPost_Per3Changed}
+                            >
+                              {options}
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_Star4Changed}
-                            ></input>
+                              value={post_per4}
+                              onChange={onPost_Per4Changed}
+                            >
+                              {options}
+                            </select>
                           </div>
                           <div className="md:col-span-1">
-                            <label htmlFor="country">End Time</label>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_end1}
+                            <label htmlFor="country">
+                              Position/Designation
+                            </label>
+                            <select
+                              required
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_End1Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_end2}
+                              value={post_pos1}
+                              onChange={onPost_Pos1Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_End2Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_end3}
+                              value={post_pos2}
+                              onChange={onPost_Pos2Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_End3Changed}
-                            ></input>
-                            <input
-                              type="time"
-                              id="start-time"
-                              name="start-time"
-                              value={post_end4}
+                              value={post_pos3}
+                              onChange={onPost_Pos3Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
                               className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
-                              onChange={onPost_End4Changed}
-                            ></input>
+                              value={post_pos4}
+                              onChange={onPost_Pos4Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Student">Student</option>
+                              <option value="Employee">Employee</option>
+                            </select>
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">
+                              Type of Participation
+                            </label>
+                            <select
+                              required
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={post_type1}
+                              onChange={onPost_Type1Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={post_type2}
+                              onChange={onPost_Type2Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={post_type3}
+                              onChange={onPost_Type3Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                            <select
+                              id="user"
+                              name="user"
+                              className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                              value={post_type4}
+                              onChange={onPost_Type4Changed}
+                            >
+                              <option value="">None</option>
+                              <option value="Facilitator">Facilitator</option>
+                              <option value="Participant">Participant</option>
+                              <option value="Game Facilitator">
+                                Game Facilitator
+                              </option>
+                              <option value="Donor">Donor</option>
+                              <option value="Resource Speaker">
+                                Resource Speaker
+                              </option>
+                            </select>
+                          </div>
+                          <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
+                            <div className="md:col-span-1">
+                              <label htmlFor="country">Start Time</label>
+                              <input
+                                required
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_start1}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_Start1Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_start2}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_Start2Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_star3}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_Star3Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_star4}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_Star4Changed}
+                              ></input>
+                            </div>
+                            <div className="md:col-span-1">
+                              <label htmlFor="country">End Time</label>
+                              <input
+                                required
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_end1}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_End1Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_end2}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_End2Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_end3}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_End3Changed}
+                              ></input>
+                              <input
+                                type="time"
+                                id="start-time"
+                                name="start-time"
+                                value={post_end4}
+                                className={`bg-gray-50 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                                onChange={onPost_End4Changed}
+                              ></input>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="md:col-span-2 md:row-span-1"></div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="country">Learnings/Insights:</label>
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={learnings1}
-                          onChange={onLearnings1Changed}
-                        />
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={learnings2}
-                          onChange={onLearnings2Changed}
-                        />
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={learnings3}
-                          onChange={onLearnings3Changed}
-                        />
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={learnings4}
-                          onChange={onLearnings4Changed}
-                        />
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={learnings5}
-                          onChange={onLearnings5Changed}
-                        />
-                      </div>
-                      <div className="md:col-span-2 text-gray-600">
-                        <p className="font-medium text-lg">
-                          Strengths, Weaknesses, Areas for Improvement:
-                        </p>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Strengths</label>
+                        <div className="md:col-span-2 md:row-span-1"></div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="country">Learnings/Insights:</label>
                           <input
+                            required
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={strengths1}
-                            onChange={onStrengths1Changed}
+                            value={learnings1}
+                            onChange={onLearnings1Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={strengths2}
-                            onChange={onStrengths2Changed}
+                            value={learnings2}
+                            onChange={onLearnings2Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={strengths3}
-                            onChange={onStrengths3Changed}
+                            value={learnings3}
+                            onChange={onLearnings3Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={strengths4}
-                            onChange={onStrengths4Changed}
+                            value={learnings4}
+                            onChange={onLearnings4Changed}
                           />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={strengths5}
-                            onChange={onStrengths5Changed}
+                            value={learnings5}
+                            onChange={onLearnings5Changed}
                           />
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Weaknesses</label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={weakness1}
-                            onChange={onWeakness1Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={weakness2}
-                            onChange={onWeakness2Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={weakness3}
-                            onChange={onWeakness3Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={weakness4}
-                            onChange={onWeakness4Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={weakness5}
-                            onChange={onWeakness5Changed}
-                          />
-                        </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Areas for Improvement</label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={improvement1}
-                            onChange={onImprovement1Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={improvement2}
-                            onChange={onImprovement2Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={improvement3}
-                            onChange={onImprovement3Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={improvement4}
-                            onChange={onImprovement4Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={improvement5}
-                            onChange={onImprovement5Changed}
-                          />
-                        </div>
-                      </div>
-                      <div className="md:col-span-2 md:row-span-1"></div>
-                      <div className="md:col-span-7">
-                        <label htmlFor="country">
-                          Actual Participation/Counterpart of the Partner
-                          Community Served:
-                        </label>
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={act_partici1}
-                          onChange={onAct_Partici1Changed}
-                        />
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={act_partici2}
-                          onChange={onAct_Partici2Changed}
-                        />
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                          value={act_partici3}
-                          onChange={onAct_Partici3Changed}
-                        />
-                      </div>
-
-                      <div className="md:col-span-2 md:row-span-6 text-gray-600">
-                        <p className="font-medium text-lg">Financial Report:</p>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-2">
-                          <label htmlFor="country">Particulars</label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={particulars1}
-                            onChange={onParticulars1Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={particulars2}
-                            onChange={onParticulars2Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={particulars3}
-                            onChange={onParticulars3Changed}
-                          />
-                          <p className="text-right pt-3 text-base alig">
-                            TOTAL:
+                        <div className="md:col-span-2 text-gray-600">
+                          <p className="font-medium text-lg">
+                            Strengths, Weaknesses, Areas for Improvement:
                           </p>
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Amount</label>
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">Strengths</label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={strengths1}
+                              onChange={onStrengths1Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={strengths2}
+                              onChange={onStrengths2Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={strengths3}
+                              onChange={onStrengths3Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={strengths4}
+                              onChange={onStrengths4Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={strengths5}
+                              onChange={onStrengths5Changed}
+                            />
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">Weaknesses</label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={weakness1}
+                              onChange={onWeakness1Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={weakness2}
+                              onChange={onWeakness2Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={weakness3}
+                              onChange={onWeakness3Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={weakness4}
+                              onChange={onWeakness4Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={weakness5}
+                              onChange={onWeakness5Changed}
+                            />
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">
+                              Areas for Improvement
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={improvement1}
+                              onChange={onImprovement1Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={improvement2}
+                              onChange={onImprovement2Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={improvement3}
+                              onChange={onImprovement3Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                              value={improvement4}
+                              onChange={onImprovement4Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={improvement5}
+                              onChange={onImprovement5Changed}
+                            />
+                          </div>
+                        </div>
+                        <div className="md:col-span-2 md:row-span-1"></div>
+                        <div className="md:col-span-7">
+                          <label htmlFor="country">
+                            Actual Participation/Counterpart of the Partner
+                            Community Served:
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={act_partici1}
+                            onChange={onAct_Partici1Changed}
+                          />
                           <input
                             type="text"
                             name="email"
                             id="email"
                             className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={amount1}
-                            placeholder="Php"
-                            inputMode="numeric"
+                            value={act_partici2}
+                            onChange={onAct_Partici2Changed}
+                          />
+                          <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                            value={act_partici3}
+                            onChange={onAct_Partici3Changed}
+                          />
+                        </div>
 
-                            onChange={onAmount1Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={amount2}
-                            placeholder="Php"
-                            inputMode="numeric"
-                            onChange={onAmount2Changed}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={amount3}
-                            placeholder="Php"
-                            inputMode="numeric"
-                            onChange={onAmount3Changed}                    
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={amount_total}
-                            readOnly
-                            placeholder="Php"
-                            onChange={onAmountTotalChanged}
-                          />
+                        <div className="md:col-span-2 md:row-span-6 text-gray-600">
+                          <p className="font-medium text-lg">
+                            Financial Report:
+                          </p>
                         </div>
-                      </div>
-                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
-                        Prepared by:
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-2">
-                          <label htmlFor="country">
-                            Name of Project Organizer or CSCB Representative
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={proj_rep}
-                            onChange={OnProj_repChanged}
-                          />
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                          <div className="md:col-span-2">
+                            <label htmlFor="country">Particulars</label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={particulars1}
+                              onChange={onParticulars1Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={particulars2}
+                              onChange={onParticulars2Changed}
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={particulars3}
+                              onChange={onParticulars3Changed}
+                            />
+                            <p className="text-right pt-3 text-base alig">
+                              TOTAL:
+                            </p>
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">Amount</label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={amount1}
+                              placeholder="Php"
+                              inputMode="numeric"
+                              onChange={onAmount1Changed}
+                              onKeyPress={(e) =>
+                                !/[0-9]/.test(e.key) && e.preventDefault()
+                              }
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={amount2}
+                              placeholder="Php"
+                              inputMode="numeric"
+                              onChange={onAmount2Changed}
+                              onKeyPress={(e) =>
+                                !/[0-9]/.test(e.key) && e.preventDefault()
+                              }
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={amount3}
+                              placeholder="Php"
+                              inputMode="numeric"
+                              onChange={onAmount3Changed}
+                              onKeyPress={(e) =>
+                                !/[0-9]/.test(e.key) && e.preventDefault()
+                              }
+                            />
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={amount_total}
+                              readOnly
+                              placeholder="Php"
+                              onChange={onAmountTotalChanged}
+                            />
+                          </div>
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Designation</label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={designation1}
-                            onChange={OnDesignation1Changed}
-                          />
+                        <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                          Prepared by:
                         </div>
-                      </div>
-                      <div className="md:col-span-3 text-base font-semibold text-gray-600">
-                        Noted by:
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-2">
-                          <label htmlFor="country">
-                            Name of Adviser for Student Organizations
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={adviser_name}
-                            onChange={OnAdviser_nameChanged}
-                          />
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                          <div className="md:col-span-2">
+                            <label htmlFor="country">
+                              Name of Project Organizer or CSCB Representative
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={proj_rep}
+                              onChange={OnProj_repChanged}
+                            />
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">Designation</label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={designation1}
+                              onChange={OnDesignation1Changed}
+                            />
+                          </div>
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">
-                            Name of Student Organization
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={stud_org}
-                            onChange={OnStud_orgChanged}
-                          />
+                        <div className="md:col-span-3 text-base font-semibold text-gray-600">
+                          Noted by:
                         </div>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-2">
-                          <label htmlFor="country">
-                            Name of CSCB Representative for Departmental CES
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={cscb_rep}
-                            onChange={OnCscb_repChanged}
-                          />
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                          <div className="md:col-span-2">
+                            <label htmlFor="country">
+                              Name of Adviser for Student Organizations
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={adviser_name}
+                              onChange={OnAdviser_nameChanged}
+                            />
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">
+                              Name of Student Organization
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={stud_org}
+                              onChange={OnStud_orgChanged}
+                            />
+                          </div>
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">
-                            Department Represented
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={dept_rep}
-                            onChange={OnDept_repChanged}
-                          />
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                          <div className="md:col-span-2">
+                            <label htmlFor="country">
+                              Name of CSCB Representative for Departmental CES
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={cscb_rep}
+                              onChange={OnCscb_repChanged}
+                            />
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">
+                              Department Represented
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={dept_rep}
+                              onChange={OnDept_repChanged}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="md:col-span-2 md:row-span-1"></div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
-                        <div className="md:col-span-2">
-                          <label htmlFor="country">
-                            Name of Dean or Cluster Head
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={dean}
-                            onChange={OnDeanChanged}
-                          />
+                        <div className="md:col-span-2 md:row-span-1"></div>
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-3">
+                          <div className="md:col-span-2">
+                            <label htmlFor="country">
+                              Name of Dean or Cluster Head
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={dean}
+                              onChange={OnDeanChanged}
+                            />
+                          </div>
+                          <div className="md:col-span-1">
+                            <label htmlFor="country">Designation</label>
+                            <input
+                              required
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                              value={designation2}
+                              onChange={OnDesignation2Changed}
+                            />
+                          </div>
                         </div>
-                        <div className="md:col-span-1">
-                          <label htmlFor="country">Designation</label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                            value={designation2}
-                            onChange={OnDesignation2Changed}
-                          />
+                        <div className="md:col-span-2 text-gray-600">
+                          <p className="font-medium text-lg">
+                            Upload Documentation
+                          </p>
                         </div>
-                      </div>
-                      <div className="md:col-span-2 text-gray-600">
-                        <p className="font-medium text-lg">
-                          Upload Documentation
-                        </p>
-                      </div>
-                      <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
-                        <div className="flex justify-center mt-8">
-                          <div className="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
-                            <div className="m-4">
-                              <label className="inline-block mb-2 text-gray-500">
-                                File Upload
-                              </label>
-                              <div className="flex items-center justify-center w-full">
-                                <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                  <div className="flex flex-col items-center justify-center pt-7">
-                                    {previewImage ? (
-                                      <img
-                                        src={previewImage}
-                                        alt="Preview"
-                                        className="h-20"
-                                      />
-                                    ) : (
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth="2"
-                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                        />
-                                      </svg>
-                                    )}
-                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                      Photo Here
-                                    </p>
-                                  </div>
-                                  <input
-                                    type="file"
-                                    className="opacity-0"
-                                    accept="image/*"
-                                    onChange={onImage1Changed}
-                                  />
+                        <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-2">
+                          <div className="flex justify-center mt-8">
+                            <div className="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
+                              <div className="m-4">
+                                <label className="inline-block mb-2 text-gray-500">
+                                  File Upload
                                 </label>
+                                <div className="flex items-center justify-center w-full">
+                                  <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                    <div className="flex flex-col items-center justify-center pt-7">
+                                      {previewImage ? (
+                                        <img
+                                          src={previewImage}
+                                          alt="Preview"
+                                          className="h-20"
+                                        />
+                                      ) : (
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                          />
+                                        </svg>
+                                      )}
+                                      <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                        Photo Here
+                                      </p>
+                                    </div>
+                                    <input
+                                      type="file"
+                                      className="opacity-0"
+                                      accept="image/*"
+                                      onChange={onImage1Changed}
+                                    />
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="flex justify-center p-2">
+                                <input
+                                  type="text"
+                                  name="email"
+                                  id="email"
+                                  className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                                  value={caption1}
+                                  placeholder="Caption"
+                                  onChange={onCaption1Changed}
+                                />
                               </div>
                             </div>
-                            <div className="flex justify-center p-2">
-                              <input
-                                type="text"
-                                name="email"
-                                id="email"
-                                className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                                value={caption1}
-                                placeholder="Caption"
-                                onChange={onCaption1Changed}
-                              />
+                          </div>
+                          <div className="flex justify-center mt-8">
+                            <div className="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
+                              <div className="m-4">
+                                <label className="inline-block mb-2 text-gray-500">
+                                  File Upload
+                                </label>
+                                <div className="flex items-center justify-center w-full">
+                                  <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                    <div className="flex flex-col items-center justify-center pt-7">
+                                      {previewImage2 ? (
+                                        <img
+                                          src={previewImage2}
+                                          alt="Preview"
+                                          className="h-20"
+                                        />
+                                      ) : (
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                          />
+                                        </svg>
+                                      )}
+                                      <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                        Photo Here
+                                      </p>
+                                    </div>
+                                    <input
+                                      type="file"
+                                      className="opacity-0"
+                                      accept="image/*"
+                                      onChange={onImage2Changed}
+                                    />
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="flex justify-center p-2">
+                                <input
+                                  type="text"
+                                  name="email"
+                                  id="email"
+                                  className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
+                                  value={caption2}
+                                  placeholder="Caption"
+                                  onChange={onCaption2Changed}
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="flex justify-center mt-8">
-                          <div className="max-w-2xl rounded-lg shadow-xl border bg-gray-50">
-                            <div className="m-4">
-                              <label className="inline-block mb-2 text-gray-500">
-                                File Upload
-                              </label>
-                              <div className="flex items-center justify-center w-full">
-                              <label className="flex flex-col w-full h-32 border-4 border-red-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                  <div className="flex flex-col items-center justify-center pt-7">
-                                    {previewImage2 ? (
-                                      <img
-                                        src={previewImage2}
-                                        alt="Preview"
-                                        className="h-20"
-                                      />
-                                    ) : (
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth="2"
-                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                        />
-                                      </svg>
-                                    )}
-                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                      Photo Here
-                                    </p>
-                                  </div>
-                                  <input
-                                    type="file"
-                                    className="opacity-0"
-                                    accept="image/*"
-                                    onChange={onImage2Changed}
-                                  />
-                                </label>
-                              </div>
-                            </div>
-                            <div className="flex justify-center p-2">
-                              <input
-                                type="text"
-                                name="email"
-                                id="email"
-                                className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50"
-                                value={caption2}
-                                placeholder="Caption"
-                                onChange={onCaption2Changed}
-                              />
-                            </div>
+                        <div className="md:col-span-9 mt-5 text-right">
+                          <div className="text-center">
+                            <button
+                              className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                              title="Save"
+                            >
+                              Submit Report
+                            </button>
                           </div>
-                        </div>
-                      </div>
-                      <div className="md:col-span-9 mt-5 text-right">
-                        <div className="text-center">
-                          <button
-                            className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                            title="Save"
-                            onClick={onSaveReportClicked}
-                          >
-                            Submit Report
-                          </button>
                         </div>
                       </div>
                     </div>
@@ -2349,10 +2331,11 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
               </div>
             </div>
           </div>
-        </div>
-      </form>
-    </>
-  );
+        </form>
+      </>
+    );
+
+
   // console.log(image1);
 
   {
@@ -2383,6 +2366,7 @@ const OutreachReportForm = ({ filteredOutreach, users }) => {
             Description:
           </label>
           <textarea
+            required
             className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-full h-40 `}
             id="text"
             name="text"

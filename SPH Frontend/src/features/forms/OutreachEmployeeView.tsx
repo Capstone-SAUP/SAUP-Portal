@@ -53,6 +53,7 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
   const [status, setCompleted] = useState(filteredOutreach["filteredOutreach"].status);
   const [originalStatus] = useState(filteredOutreach["filteredOutreach"].status);
   const [outreachId, setOutreach_id] = useState(filteredOutreach["filteredOutreach"]._id);
+  const currentStatusIndex = Object.values(STATUS).indexOf(filteredOutreach["filteredOutreach"].status);
   // console.log(outreachId);
 
   const onCompletedChanged = (e: { target: { value: any; }; }) => setCompleted(e.target.value);
@@ -85,17 +86,19 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
     }
   };
 
-  const list = Object.values(STATUS).map((status) => {
-    return (
-      <option key={status} value={status}>
-        {" "}
-        {status}
-      </option>
-    );
-  });
+  const list = Object.values(STATUS)
+    .slice(currentStatusIndex)
+    .map((status) => {
+      return (
+        <option key={status} value={status}>
+          {" "}
+          {status}
+        </option>
+      );
+    });
 
-  let StatusButton = null;
-  if (roles == "Admin") {
+    let StatusButton = null;
+  if (roles == "Admin" && originalStatus != "Completed") {
     StatusButton = (
             <div className="w-full inline">
             <label className="text-base align-middle" htmlFor="user_id">
@@ -189,29 +192,32 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
 
   
   return (
-<div>
-        {StatusButton}
-        &nbsp;
-        <button
-            className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 ${status == originalStatus && "hidden"}`}            
-            title="Save"
-            onClick={onSaveOutreachClicked}
-          >
-            Save
-          </button>
-          &nbsp;
-          <button
-className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"            title="Save"
-            onClick={onGeneratePDF}
-            disabled={!canSave}
-          >
-            Generate PDF
-          </button>
+    <div>
+      {StatusButton}
+      &nbsp;
+      <button
+        className={`text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 ${
+          status == originalStatus && "hidden"
+        }`}
+        title="Save"
+        onClick={onSaveOutreachClicked}
+      >
+        Save
+      </button>
+      &nbsp;
+      <button
+        className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  rounded-lg text-sm px-8 py-3 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+        title="Save"
+        onClick={onGeneratePDF}
+        disabled={!canSave}
+      >
+        Generate PDF
+      </button>
       <br></br>
       <br></br>
       <br></br>
-      <div className='hidden' ref={uiRef}/>
-      <form className="h-full full grid gap-3 w-screen md:px-20 text-black">
+      <div className="hidden" ref={uiRef} />
+      <form className="h-full full grid gap-3 w-screen md:w-full md:px-20 text-black">
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>
@@ -239,64 +245,132 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
                         <label htmlFor="sponsor_dept">
                           Sponsoring Department(s)/ Proponent(s) :
                         </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{sponsor_dept}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {sponsor_dept}
+                        </div>
                       </div>
                       <div className="md:col-span-7">
                         <label htmlFor="project_title">Project Title :</label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{project_title}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {project_title}
+                        </div>
                       </div>
                       <div className="md:col-span-7">
                         <label htmlFor="target_beneficiary">
                           Target Beneficiaries :
                         </label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{target_beneficiary}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {target_beneficiary}
+                        </div>
                       </div>
                       <div className="md:col-span-7">
                         <label htmlFor="venue">Venue of CES Activity :</label>
-                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{venue}</div>
+                        <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                          {venue}
+                        </div>
                       </div>
 
                       <div className="md:col-span-2 md:row-span-5 text-gray-600">
                         <div className="">
                           <p className="font-medium text-lg">
                             Proposed Action Plan:
-                            </p>
+                          </p>
                         </div>
                       </div>
                       <div className="grid gap-4 gap-y-2 text-sm md:col-span-7 grid-cols-1 md:grid-cols-4">
                         <div className="md:col-span-1">
                           <label htmlFor="country">Objectives</label>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{obj1}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{ojb2}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{obj3}</div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {obj1}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {ojb2}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {obj3}
+                          </div>
                         </div>
 
                         <div className="md:col-span-1">
                           <label htmlFor="country">Activities</label>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{act1}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{act2}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{act3}</div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {act1}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {act2}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {act3}
+                          </div>
                         </div>
 
                         <div className="md:col-span-1">
                           <label htmlFor="country">Responsible Person(s)</label>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{respon_per1}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{respon_per2}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{respon_per3}</div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {respon_per1}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {respon_per2}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {respon_per3}
+                          </div>
                         </div>
 
                         <div className="md:col-span-1">
                           <label htmlFor="country">Time Frame</label>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{time_frame1}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{time_frame2}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{time_frame3}</div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {time_frame1}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {time_frame2}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {time_frame3}
+                          </div>
                         </div>
 
                         <div className="md:col-span-1">
                           <label htmlFor="country">Output</label>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{output1}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{output2}</div>
-                          <div className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}>{output3}</div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {output1}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {output2}
+                          </div>
+                          <div
+                            className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
+                          >
+                            {output3}
+                          </div>
                         </div>
                       </div>
 
@@ -309,11 +383,15 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
                           <label htmlFor="country">
                             Name of Project Organizer or CSCB Representative
                           </label>
-                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{proj_rep}</div>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {proj_rep}
+                          </div>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Designation</label>
-                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{designation1}</div>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {designation1}
+                          </div>
                         </div>
                       </div>
                       <div className="md:col-span-3 text-base font-semibold text-gray-600">
@@ -324,13 +402,17 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
                           <label htmlFor="country">
                             Name of CSCB Representative for Departmental CES
                           </label>
-                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{cscb_rep}</div>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {cscb_rep}
+                          </div>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">
                             Department Represented
                           </label>
-                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{dept_rep}</div>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {dept_rep}
+                          </div>
                         </div>
                       </div>
                       <div className="md:col-span-2 md:row-span-1"></div>
@@ -339,11 +421,15 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
                           <label htmlFor="country">
                             Name of Dean or Cluster Head
                           </label>
-                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{dean}</div>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {dean}
+                          </div>
                         </div>
                         <div className="md:col-span-1">
                           <label htmlFor="country">Designation</label>
-                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">{designation2}</div>
+                          <div className="h-10 border mb-2 mt-1 rounded px-4 w-full bg-gray-50">
+                            {designation2}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -354,8 +440,7 @@ className="text-white inline-flex bg-red-900 hover:bg-red-800 font-medium  round
           </div>
         </div>
       </form>
-</div>
-  
+    </div>
   );
   
 }

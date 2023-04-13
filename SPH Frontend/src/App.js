@@ -80,7 +80,7 @@ function App() {
                     <Route path=":id" element={<ViewStudentOutreach />} />
                   </Route>
                   <Route path="reports">
-                    <Route path=":id" element={<ReportOutreach />} />
+                    <Route path=":id" element={<OutreachReportForm />} />
                   </Route>
                   <Route path="new" element={<NewOutreach />} />
                 </Route>

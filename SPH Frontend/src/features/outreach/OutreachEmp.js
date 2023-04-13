@@ -29,6 +29,7 @@ const OutreachEmp = ({ outreachId }) => {
   const [status, setCompleted] = useState(allOutreach.status);
   const [originalStatus] = useState(allOutreach.status);
   const [outreach_id, setOutreach_id] = useState(allOutreach.id);
+  const currentStatusIndex = Object.values(STATUS).indexOf(allOutreach.status);
   // console.log(outreach_id);
   useEffect(() => {
     if (isSuccess) {
@@ -49,15 +50,16 @@ const OutreachEmp = ({ outreachId }) => {
     }
   };
 
-  const list = Object.values(STATUS).map((status) => {
-    return (
-      <option key={status} value={status}>
-        {" "}
-        {status}
-      </option>
-    );
-  });
-
+  const list = Object.values(STATUS)
+    .slice(currentStatusIndex)
+    .map((status) => {
+      return (
+        <option key={status} value={status}>
+          {" "}
+          {status}
+        </option>
+      );
+    });
   let ReportButton = null;
   if (allOutreach.status == "Completed") {
     ReportButton = (
@@ -71,26 +73,27 @@ const OutreachEmp = ({ outreachId }) => {
   }
 
   let StatusButton = null;
-  if (roles == "Admin") {
+  if (roles == "Admin" && originalStatus != "Completed") {
     StatusButton = (
       <select
-            id="roles"
-            name="roles"
-            className={`w-3/4 bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
-            value={status}
-            onChange={onCompletedChanged}
-          >
-            {list}
-          </select>
+        id="roles"
+        name="roles"
+        className={`w-3/4 bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg`}
+        value={status}
+        onChange={onCompletedChanged}
+      >
+        {list}
+      </select>
     );
-  }else{
-    StatusButton = (status)
+  } else {
+    StatusButton = status;
   }
   
   if (allOutreach) {
     const created = new Date(allOutreach.createdAt).toLocaleString("en-US", {
       day: "numeric",
       month: "long",
+      year: "numeric",
     });
 
     const updated = new Date(allOutreach.updatedAt).toLocaleString("en-US", {

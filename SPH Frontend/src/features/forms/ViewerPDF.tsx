@@ -50,10 +50,11 @@ const ViewerPDF = (filteredOutreach:any) =>  {
 
   const [status, setCompleted] = useState(filteredOutreach["filteredOutreach"].status);
   const [outreachId, setOutreach_id] = useState(filteredOutreach["filteredOutreach"]._id);
-  console.log(outreachId);
+  const currentStatusIndex = Object.values(STATUS).indexOf(filteredOutreach["filteredOutreach"].status);
 
   const onCompletedChanged = (e: { target: { value: any; }; }) => setCompleted(e.target.value);
   const onOutreach_idChanged = (e: { target: { value: any; }; }) => setOutreach_id(e.target.value);
+
 
   const canSave = [status].every(Boolean);
 
@@ -82,9 +83,9 @@ const ViewerPDF = (filteredOutreach:any) =>  {
     }
   };
 
-
-
-  const list = Object.values(STATUS).map((status) => {
+const list = Object.values(STATUS)
+  .slice(currentStatusIndex)
+  .map((status) => {
     return (
       <option key={status} value={status}>
         {" "}
