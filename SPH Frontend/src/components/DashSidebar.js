@@ -192,7 +192,12 @@ const DashSidebar = ({ ids }) => {
   }
 
     let reportsButton = null;
-    if (roles == "Employee" || isAdmin || roles == "Facilitator") {
+    if (
+      roles == "Employee" ||
+      isAdmin ||
+      roles == "Facilitator" ||
+      roles == "Student"
+    ) {
       if (pathname.includes("/dash")) {
         reportsButton = (
           <button
