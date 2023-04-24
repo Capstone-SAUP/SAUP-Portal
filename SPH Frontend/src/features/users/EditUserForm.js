@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
 import { DEPT } from "../../config/department";
 import { TENURE } from "../../config/tenure";
+import { EMPSTATUS } from "../../config/empstatus";
 
 const USER_REGEX = /^[0-9]{3,20}$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
@@ -30,6 +31,7 @@ const EditUserForm = ({ user }) => {
     const [roles, setRoles] = useState(user.roles);
     const [department, setDept] = useState(user.department);
     const [tenure, setTenure] = useState(user.tenure);
+    const [empstatus, setEmpStatus] = useState(user.empstatus);
     const [active, setActive] = useState(user.active);
 
     useEffect(() => {
@@ -53,6 +55,7 @@ const EditUserForm = ({ user }) => {
             setRoles([]);
             setDept([]);
             setTenure([]);
+            setEmpStatus([]);
             navigate("/dash/users");
         }
     }, [isSuccess, isDelSuccess, navigate]);
@@ -85,6 +88,14 @@ const EditUserForm = ({ user }) => {
         setTenure(values);
     };
 
+    const onEmpStatusChanged = (e) => {
+        const values = Array.from(
+            e.target.selectedOptions,
+            (option) => option.value
+        );
+        setEmpStatus(values);
+    };
+
     const onActiveChanged = () => setActive((prev) => !prev);
 
     const onSaveUserClicked = async (e) => {
@@ -97,10 +108,11 @@ const EditUserForm = ({ user }) => {
                 roles,
                 department,
                 tenure,
+                empstatus,
                 active,
             });
         } else {
-            await updateUser({ id: user.id, user_id, email, roles, department, tenure, active });
+            await updateUser({ id: user.id, user_id, email, roles, department, tenure, empstatus, active });
         }
     };
 
@@ -135,6 +147,14 @@ const EditUserForm = ({ user }) => {
         );
     });
         
+    const optionEmpStatus = Object.values(EMPSTATUS).map((empstatus) => {
+        return (
+            <option key={empstatus} value={empstatus}>
+                {" "}
+                {empstatus}
+            </option>
+        );
+    });
         
 
     let canSave;
@@ -164,6 +184,9 @@ const EditUserForm = ({ user }) => {
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
     const validTenure = !Boolean(tenure.length)
+        ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
+        : "";
+    const validEmpStatus = !Boolean(empstatus.length)
         ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
         : "";
         
@@ -300,6 +323,23 @@ const EditUserForm = ({ user }) => {
                                 onChange={onTenureChanged}
                             >
                                 {optionTenure}
+                            </select>
+                        </div>
+                        <div className="w-full grid">
+                            <label
+                                className="text-base align-middle"
+                                htmlFor="dept"
+                            >
+                                 Employment Status:
+                            </label>
+                            <select
+                                id="empstatus"
+                                name="empstatus"
+                                className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validEmpStatus}`}
+                                value={empstatus}
+                                onChange={onEmpStatusChanged}
+                            >
+                                {optionEmpStatus}
                             </select>
                         </div>
                 <span className="">
