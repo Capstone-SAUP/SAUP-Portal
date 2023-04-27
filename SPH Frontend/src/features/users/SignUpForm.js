@@ -349,6 +349,13 @@ const SignUpForm = () => {
               Create Account
             </button>
           </div>
+          <br/>
+          <label className="flex items-center justify-center w-full gap-2 text-base">
+            <p>Already have an account?</p>
+            <a href="/login" className="text-red-900">
+              Log in
+            </a>
+          </label>
         </form>
       </main>
     </section>

@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Public from "./components/Public";
 import Login from "./features/auth/Login";
+import ForgotPass from "./features/auth/ForgotPass";
+import ResetPass from "./features/auth/ResetPass";
 import DashLayout from "./components/DashLayout";
 import Welcome from "./features/auth/Welcome";
 import UsersList from "./features/users/UsersList";
@@ -45,6 +47,8 @@ function App() {
         <Route index element={<Public />} />
         <Route path="signup" element={<SignUpForm />} />
         <Route path="login" element={<Login />} />
+        <Route path="forgotPass" element={<ForgotPass />} />
+        <Route exact path="resetPass/:token" element={<ResetPass />} />
 
         {/* Protected Routes */}
         <Route element={<PersistLogin />}>
