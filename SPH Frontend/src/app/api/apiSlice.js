@@ -50,5 +50,22 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Outreach', 'User'],
-    endpoints: builder => ({})
+    endpoints: (builder) => ({
+        forgotPassword: builder.mutation({
+            query: (email) => ({
+                url: '/auth/forgotPass',
+                method: 'POST',
+                body: { email },
+            }),
+        }),
+        resetPassword: builder.mutation({
+            query: ({ token, newPassword }) => ({
+                url: '/auth/resetPass',
+                method: 'PUT',
+                body: { token, newPassword },
+            })
+        })
+    })
 })
+
+export const { useForgotPasswordMutation, useResetPasswordMutation } = apiSlice;

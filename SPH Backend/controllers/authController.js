@@ -1,6 +1,9 @@
 const User = require('../models/User')
+const PasswordResetToken = require('../models/PasswordResetToken')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
+const sendEmail = require('../services/emailService')
 
 // @desc Login
 // @route POST /auth
@@ -100,8 +103,77 @@ const logout = (req, res) => {
     res.json({ message: 'Cookie cleared' })
 }
 
+const forgotPass = async (req, res) => {
+    const user = await User.findOne({ email: req.body.email })
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' })
+    }
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString("hex")
+    const resetPasswordExpires = Date.now() + 900000 // milliseconds (15 mins from now)
+
+    // Save the reset token and expiration date in the PasswordResetToken collection
+    const passwordResetToken = new PasswordResetToken({
+        userId: user._id,
+        token: resetToken,
+        expires: resetPasswordExpires,
+    })
+    await passwordResetToken.save()
+
+    // Send the reset password email
+    try {
+        const resetURL = `${process.env.APP_URL}/resetPass/${resetToken}`
+
+        await sendEmail({
+            to: user.email,
+            subject: 'Reset Password Request - Holy Angel University SAUP Portal',
+            html: `<p>Your reset password request will expire in 15 mins.
+                    <br/>Reset your password by clicking the following link:</p><a href=${resetURL}>Reset Password</a><br/>`,
+        })
+        res.status(200).json({ message: "Password reset email sent"})
+    } catch (err) {
+        console.log(err)
+        await PasswordResetToken.deleteOne({ userId: user._id })
+        res.status(500).json({ message: "Email could not be sent"})
+    }
+}
+
+const resetPass = async (req, res) => {
+    const passwordResetToken = await PasswordResetToken.findOne({
+        token: req.body.token,
+        expires: { $gt: Date.now() },
+    })
+
+    if (!passwordResetToken) {
+        return res.status(500).json({ message: "Reset token is invalid or has expired" })
+    }
+
+    const user = await User.findById(passwordResetToken.userId)
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' })
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, salt)
+
+    // Update the user's password
+    user.password = hashedPassword
+    await user.save()
+
+    // Remove the password reset token from the PasswordResetToken collection
+    await PasswordResetToken.deleteOne({ userId: user._id })
+
+    res.status(200).json({ message: "Password successfully reset" })
+}
+
 module.exports = {
     login,
     refresh,
-    logout
+    logout,
+    forgotPass,
+    resetPass,
 }

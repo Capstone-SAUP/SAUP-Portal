@@ -111,13 +111,12 @@ const Login = () => {
               value={password}
               required
             />
-            <br></br>
+            <br/>
 
             <button className="form__submit-button bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl focus:outline-none focus:shadow-outline justify-center">
               Sign In
             </button>
-
-            <br></br>
+            <br/>
             <label
               htmlFor="persist"
               className="flex items-center w-full gap-2 text-sm mb-3"
@@ -130,6 +129,11 @@ const Login = () => {
                 checked={persist}
               />
               Trust This Device
+            </label>
+            <label className="flex items-center justify-center w-full gap-2 text-base mb-3">
+              <a href="/forgotPass" className="text-red-900">
+                Forgot Password?
+              </a>
             </label>
             <label className="flex items-center justify-center w-full gap-2 text-base">
               <p>No Account?</p>
