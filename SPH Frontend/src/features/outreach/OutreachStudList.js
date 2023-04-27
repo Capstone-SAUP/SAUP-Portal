@@ -129,13 +129,7 @@ const OutreachStudList = () => {
     content = (
       <>
         <div className="text-2xl font-semibold">
-          Outreach Projects
-          <p className="text-sm font-bold float-right">
-            <button className="pr-2">
-              <FontAwesomeIcon icon={faNavicon} />
-            </button>
-            View
-          </p>
+          Student Outreach Projects
         </div>
 
         <nav className="border shadow-md shadow-gray-400 mb-4 p-3 border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -145,7 +139,7 @@ const OutreachStudList = () => {
                 <div className=" px-4 text-sm font-bold">Name of User</div>
                 <header>
                   <input
-                    className="z-1 block ml-4 bg-gray-300 border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900"
+                    className="z-1 block ml-4 pl-2 bg-gray-300 border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900"
                     onChange={(e) => setSearch(e.target.value.toLowerCase())}
                     placeholder="Search"
                   ></input>
@@ -197,7 +191,7 @@ const OutreachStudList = () => {
             </ul>
           </div>
         </nav>
-        <div className="w-full border rounded-lg shadow-md  shadow-gray-400">
+        <div className="w-full border rounded-lg shadow-md overflow-hidden shadow-gray-400">
           {/* <div className="">
                     <button className="text-white bg-red-900 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 m-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
                     onClick={handleOutreach}> 
@@ -207,31 +201,31 @@ const OutreachStudList = () => {
           <table className="w-full text-sm text-left table-fixed">
             <thead className="bg-gray-300">
               <tr>
-                <th scope="col" className="text-sm font-bold px-6 py-4 ">
+                <th scope="col" className="text-sm font-bold py-2 px-1 ">
                   ID
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 pr-14">
+                <th scope="col" className="text-sm font-bold py-2 px-1 pr-14">
                   Full Name
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-2 px-1 ">
                   Department
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 w-40">
+                <th scope="col" className="text-sm font-bold py-2 px-1 w-40">
                   Status
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-2 px-1 ">
                   Date Created
                 </th>
-                <th scope="col" className="text-sm font-bold  py-4 ">
+                <th scope="col" className="text-sm font-bold  py-2 px-1 ">
                   Project Title
                 </th>
-                <th scope="col" className="text-sm font-bold  py-4 ">
+                <th scope="col" className="text-sm font-bold  py-2 px-1 ">
                   Beneficiaries
                 </th>
-                <th scope="col" className="text-sm font-bold  py-4 ">
+                <th scope="col" className="text-sm font-bold  py-2 px-1 ">
                   Venue
                 </th>
-                <th scope="col" className="text-center py-4 w-36">
+                <th scope="col" className="text-center py-2 px-1 w-36">
                   Option
                 </th>
               </tr>

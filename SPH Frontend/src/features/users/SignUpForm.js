@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/signupRoles";
 import { DEPT } from "../../config/department";
 import { TENURE } from "../../config/tenure";
+import { EMPSTATUS } from "../../config/empstatus";
 import useTitle from "../../hooks/useTitle";
 
 const USER_REGEX = /^[0-9]{3,20}$/;
@@ -35,6 +36,8 @@ const SignUpForm = () => {
   const [roles, setRoles] = useState(["Student"]);
   const [department, setDept] = useState(["N/A"]);
   const [tenure, setTenure] = useState(["Non"]);
+  const [empstatus, setEmpStatus] = useState(["Full-Time"]);
+
 
   useEffect(() => {
     setValiduser_id(USER_REGEX.test(user_id));
@@ -66,6 +69,7 @@ const SignUpForm = () => {
       setRoles([]);
       setDept([]);
       setTenure([]);
+      setEmpStatus([]);
       alert("Account Created!");
       navigate("/login");
     }
@@ -101,8 +105,17 @@ const SignUpForm = () => {
     setTenure(values);
   };
 
+  const onEmpStatusChanged = (e) => {
+    const values = Array.from(
+      e.target.selectedOptions, //HTMLCollection
+      (optionEmpStatus) => optionEmpStatus.value
+    );
+    setEmpStatus(values);
+  };
+
   const canSave =
     [
+      empstatus.length,
       tenure.length,
       department.length,
       roles.length,
@@ -125,6 +138,7 @@ const SignUpForm = () => {
         roles,
         department,
         tenure,
+        empstatus,
       });
     }
   };
@@ -156,6 +170,15 @@ const SignUpForm = () => {
     );
   });
 
+  const optionEmpStatus = Object.values(EMPSTATUS).map((empstatus) => {
+    return (
+      <option key={empstatus} value={empstatus}>
+        {" "}
+        {empstatus}
+      </option>
+    );
+  });
+
   const errClass = isError ? "errmsg" : "offscreen";
   const validUserClass = !validuser_id
     ? "bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-1/2"
@@ -179,6 +202,9 @@ const SignUpForm = () => {
     ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
     : "";
   const validTenureClass = !Boolean(tenure.length)
+    ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
+    : "";
+  const validEmpStatusClass = !Boolean(empstatus.length)
     ? '"bg-gray-50 border-2 border-rose-500 text-gray-900 text-sm rounded-lg w-full"'
     : "";
 
@@ -335,6 +361,21 @@ const SignUpForm = () => {
                 className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validTenureClass}`}
                 value={tenure}
                 onChange={onTenureChanged}
+                required
+              >
+                {optionTenure}
+              </select>
+            </div>
+            <div className="w-full grid">
+              <label className="text-base align-middle" htmlFor="dept">
+                Employment Status:
+              </label>
+              <select
+                id="empstatus"
+                name="empstatus"
+                className={`bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-1/2 ${validEmpStatusClass}`}
+                value={empstatus}
+                onChange={onEmpStatusChanged}
                 required
               >
                 {optionTenure}

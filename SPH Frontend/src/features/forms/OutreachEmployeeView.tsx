@@ -235,9 +235,6 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
                       <div className="md:col-span-2 md:row-span-4 text-gray-600">
                         <div className="">
-                          <p className="font-medium text-lg">
-                            Community Extension Service Project Proposal Form
-                          </p>
                           <p>Please fill out all the blank fields.</p>
                         </div>
                       </div>
@@ -316,7 +313,7 @@ const OutreachStudentView = (filteredOutreach:any) =>  {
                           </div>
                         </div>
 
-                        <div className="md:col-span-1">
+                        <div className="md:col-span-1 text-xs">
                           <label htmlFor="country">Responsible Person(s)</label>
                           <div
                             className={`bg-gray-50 h-10 border-2 w-full border-gray-300 text-gray-900 text-sm rounded-lg`}
