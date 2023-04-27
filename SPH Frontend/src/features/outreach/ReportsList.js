@@ -138,13 +138,7 @@ const ReportsList = () => {
     content = (
       <>
         <div className="text-2xl font-semibold">
-          Outreach Projects
-          <p className="text-sm font-bold float-right">
-            <button className="pr-2">
-              <FontAwesomeIcon icon={faNavicon} />
-            </button>
-            View
-          </p>
+          Implementation Reports
         </div>
 
         <nav className="border shadow-md shadow-gray-400 mb-4 p-3 border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -154,7 +148,7 @@ const ReportsList = () => {
                 <div className=" px-4 text-sm font-bold">Name of User</div>
                 <header>
                   <input
-                    className="z-1 block ml-4 bg-gray-300 border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900"
+                    className="z-1 block ml-4 pl-2 bg-gray-300 border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900"
                     onChange={(e) => setSearch(e.target.value.toLowerCase())}
                     placeholder="Search"
                   ></input>
@@ -206,35 +200,35 @@ const ReportsList = () => {
             </ul>
           </div>
         </nav>
-        <div className="w-full border rounded-lg shadow-md  shadow-gray-400">
+        <div className="w-full border rounded-lg shadow-md overflow-hidden shadow-gray-400">
           <table className="w-full text-sm text-left table-fixed">
             <thead className="bg-gray-300">
               <tr>
-                <th scope="col" className="text-sm font-bold px-6 py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   ID
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 pr-14">
+                <th scope="col" className="text-sm font-bold py-1 px-3 pr-14">
                   Full Name
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   Department
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   Date Implemented
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   Report Created
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   Project Title
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   Beneficiaries
                 </th>
-                <th scope="col" className="text-sm font-bold py-4 ">
+                <th scope="col" className="text-sm font-bold py-1 px-3 ">
                   Venue
                 </th>
-                <th scope="col" className="py-4 w-40">
+                <th scope="col" className="py-1 px-3 w-40">
                   Option
                 </th>
               </tr>

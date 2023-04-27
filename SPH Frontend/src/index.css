@@ -7,12 +7,12 @@
 
 /* Scrollbar Design */
 /* Firefox */
-/* * {
+* {
   scrollbar-width: thin;
   scrollbar-color: white black;
 }
 
-/* Chrome, Edge, and Safari 
+/* Chrome, Edge, and Safari  */
 *::-webkit-scrollbar {
   width: 15px;
 }
@@ -26,7 +26,10 @@
   background-color: maroon;
   border-radius: 14px;
   border: 3px solid white;
-} */
+}
+
+
+
 @tailwind components;
 @tailwind utilities;
 

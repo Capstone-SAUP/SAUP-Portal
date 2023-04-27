@@ -115,13 +115,13 @@ const ReportsView = () => {
   const [accomp_obj] = useState(filteredOutreach?.accomp_obj);
   const [venue] = useState(filteredOutreach?.venue);
   const [date_implement] = useState(new Date(filteredOutreach?.date_implement).toLocaleString(
-     "en-US",
-     {
-       day: "numeric",
-       month: "long",
-       year: "numeric",
-     }
-   ));
+      "en-US",
+      {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }
+    ));
   const [brief_narrative] = useState(filteredOutreach?.brief_narrative);
   const [topics] = useState(filteredOutreach?.topics);
   const [speakers] = useState(filteredOutreach?.speakers);
@@ -320,7 +320,7 @@ const ReportsView = () => {
                       <div className="md:col-span-2 text-gray-600">
                         <p className="font-medium text-lg">
                           Topic(s) Discussed and Resource
-                          Speaker(s)/Facilitator(s),
+                          Speaker(s) or Facilitator(s),
                         </p>
                         <p>(if applicable)</p>
                       </div>
@@ -394,7 +394,7 @@ const ReportsView = () => {
                             {prep_pos4}
                           </div>
                         </div>
-                        <div className="md:col-span-1">
+                        <div className="md:col-span-1 md:text-xs">
                           <label htmlFor="country">Type of Participation</label>
                           <div
                             className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -418,7 +418,7 @@ const ReportsView = () => {
                           </div>
                         </div>
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">Start Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -441,7 +441,7 @@ const ReportsView = () => {
                               {prep_star4}
                             </div>
                           </div>
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">End Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -517,7 +517,7 @@ const ReportsView = () => {
                             {implement_pos4}
                           </div>
                         </div>
-                        <div className="md:col-span-1">
+                        <div className="md:col-span-1 md:text-xs">
                           <label htmlFor="country">Type of Participation</label>
                           <div
                             className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -541,7 +541,7 @@ const ReportsView = () => {
                           </div>
                         </div>
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">Start Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -564,7 +564,7 @@ const ReportsView = () => {
                               {implement_star4}
                             </div>
                           </div>
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">End Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -641,7 +641,7 @@ const ReportsView = () => {
                             {post_pos4}
                           </div>
                         </div>
-                        <div className="md:col-span-1">
+                        <div className="md:col-span-1 md:text-xs">
                           <label htmlFor="country">Type of Participation</label>
                           <div
                             className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -665,7 +665,7 @@ const ReportsView = () => {
                           </div>
                         </div>
                         <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">Start Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}
@@ -688,7 +688,7 @@ const ReportsView = () => {
                               {post_star4}
                             </div>
                           </div>
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">End Time</label>
                             <div
                               className={`bg-gray-50 border-2 w-full h-10 border-gray-300 text-gray-900 text-sm rounded-lg`}

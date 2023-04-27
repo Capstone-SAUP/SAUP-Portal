@@ -10,6 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import LebronStretch from "../../img/certificate/header.png";
 
+
 Font.register({
   family: "Oswald",
   src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     fontFamily: "Oswald",
   },
   text: {
-    margin: 12,
+    margin: 24,
     fontSize: 13,
     textAlign: "justify",
     fontFamily: "Times-Roman",
@@ -74,8 +75,9 @@ const styles = StyleSheet.create({
     color: "black",
   },
   table: {
+    margin: 24,
     display: "table",
-    width: "auto",
+    width: "90%",
     borderStyle: "solid",
     borderWidth: 1,
     borderRightWidth: 0,
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
   tableCell: {
     margin: "auto",
     marginTop: 5,
+    marginBottom: 5,
     fontSize: 10,
   },
   opening: {
@@ -159,7 +162,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFFile = () => {
+const CertiGen = ({ fullname, role, department, titles, natInv, date, points, total }) => {
+  const rows = [];
+    for (let i = 0; i < points.length; i++) {
+      const dates = date[i];
+      const natInvs = natInv[i];
+      const point = points[i];
+      const title = titles[i];
+      rows.push(
+        <View style={styles.tableRow}>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{i + 1}</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{date[i]}</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{natInv[i]}</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{title}</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{point}</Text>
+          </View>
+        </View>
+      );
+    }
   return (
     <Document>
       <Page style={styles.body}>
@@ -169,20 +198,17 @@ const PDFFile = () => {
           This University
         </Text>
         <Text style={styles.opening2}>
-           Thru: Dr. Gertrude P. Tuazon {"\n"}
-           &nbsp;&nbsp;&nbsp;       Director, Human Resource Management Office{"\n"}
-           &nbsp;&nbsp;&nbsp;       This University 
+            Thru: Dr. Gertrude P. Tuazon {"\n"}
+            &nbsp;&nbsp;&nbsp;       Director, Human Resource Management Office{"\n"}
+            &nbsp;&nbsp;&nbsp;       This University 
         </Text>
         <Text style={styles.text}>
         Dear Sirs/Mesdames:
         </Text>
         <Text style={styles.text}>
-          This is to certify that " " a " " 
-          of the " ", was involved in the
-          following community extension service activities within the period " "
-          to " " with corresponding ratings, to which:
+          This is to certify that {fullname} a {role} of the {department} department, was involved in the
+          following community extension service activities with corresponding ratings, to which:
         </Text>
-
         <View style={styles.table}>
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>
@@ -202,30 +228,9 @@ const PDFFile = () => {
             </View>
 
           </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>2019-2020</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>June 10, 2019</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Facilitator</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>
-                HAUndog-Kalinga Tugon sa Kalamidad
-              </Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}></Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}></Text>
-            </View>
-          </View>
+          <View>{rows}</View>
         </View>
-        <Text style={styles.total}>TOTAL: <Text style={styles.sum}>" "</Text> </Text>
+        <Text style={styles.total}>TOTAL: <Text style={styles.sum}>{total}</Text> </Text>
         <Text style={styles.note}>
           Note: Has exceeded maximum rating (participant category)
         </Text>
@@ -255,4 +260,4 @@ const PDFFile = () => {
   );
 };
 
-export default PDFFile;
+export default CertiGen;

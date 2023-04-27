@@ -933,7 +933,7 @@ const OutreachReportForm = () => {
                         <div className="md:col-span-2 text-gray-600">
                           <p className="font-medium text-lg">
                             Topic(s) Discussed and Resource
-                            Speaker(s)/Facilitator(s),
+                            Speaker(s) or Facilitator(s),
                           </p>
                           <p>(if applicable)</p>
                         </div>
@@ -1072,7 +1072,7 @@ const OutreachReportForm = () => {
                             </select>
                           </div>
 
-                          <div className="md:col-span-1 md:text-">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">
                               Type of Participation
                             </label>
@@ -1173,7 +1173,7 @@ const OutreachReportForm = () => {
                           </div> */}
 
                           <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                            <div className="md:col-span-1">
+                            <div className="md:col-span-1 md:text-xs">
                               <label htmlFor="country">Start Time</label>
                               <input
                                 required
@@ -1210,7 +1210,7 @@ const OutreachReportForm = () => {
                               ></input>
                             </div>
 
-                            <div className="md:col-span-1">
+                            <div className="md:col-span-1 md:text-xs">
                               <label htmlFor="country">End Time</label>
                               <input
                                 required
@@ -1351,7 +1351,7 @@ const OutreachReportForm = () => {
                               <option value="Employee">Employee</option>
                             </select>
                           </div>
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">
                               Type of Participation
                             </label>
@@ -1429,7 +1429,7 @@ const OutreachReportForm = () => {
                             </select>
                           </div>
                           <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                            <div className="md:col-span-1">
+                            <div className="md:col-span-1 md:text-xs">
                               <label htmlFor="country">Start Time</label>
                               <input 
                                 required
@@ -1465,7 +1465,7 @@ const OutreachReportForm = () => {
                                 onChange={onImplement_Star4Changed}
                               ></input>
                             </div>
-                            <div className="md:col-span-1">
+                            <div className="md:col-span-1 md:text-xs">
                               <label htmlFor="country">End Time</label>
                               <input
                                 required
@@ -1607,7 +1607,7 @@ const OutreachReportForm = () => {
                               <option value="Employee">Employee</option>
                             </select>
                           </div>
-                          <div className="md:col-span-1">
+                          <div className="md:col-span-1 md:text-xs">
                             <label htmlFor="country">
                               Type of Participation
                             </label>
@@ -1686,7 +1686,7 @@ const OutreachReportForm = () => {
                             </select>
                           </div>
                           <div className="grid md:col-span-1 grid-cols-1 md:grid-cols-2">
-                            <div className="md:col-span-1">
+                            <div className="md:col-span-1 md:text-xs">
                               <label htmlFor="country">Start Time</label>
                               <input
                                 required
@@ -1722,7 +1722,7 @@ const OutreachReportForm = () => {
                                 onChange={onPost_Star4Changed}
                               ></input>
                             </div>
-                            <div className="md:col-span-1">
+                            <div className="md:col-span-1 md:text-xs">
                               <label htmlFor="country">End Time</label>
                               <input
                                 required

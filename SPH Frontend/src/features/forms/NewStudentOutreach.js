@@ -300,9 +300,6 @@ const content = (
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-9">
                     <div className="md:col-span-2 md:row-span-5 text-gray-600">
                       <div className="">
-                        <p className="font-medium text-lg">
-                          Student Organization Intake Form
-                        </p>
                         <p>Please fill out all the blank fields.</p>
                       </div>
                     </div>
@@ -374,7 +371,7 @@ const content = (
                           {options}
                         </select>
                       </div>
-                      <div className="md:col-span-1">
+                      <div className="md:col-span-1 text-xs">
                         <label htmlFor="country">Designation/Position :</label>
                         <select
                           id="user1"

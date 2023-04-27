@@ -45,6 +45,7 @@ function App() {
         <Route index element={<Public />} />
         <Route path="signup" element={<SignUpForm />} />
         <Route path="login" element={<Login />} />
+        
 
         {/* Protected Routes */}
         <Route element={<PersistLogin />}>
@@ -60,6 +61,9 @@ function App() {
                     <Route index element={<UsersList />} />
                     <Route path=":id" element={<EditUser />} />
                     <Route path="new" element={<NewUserForm />} />
+                  </Route>
+                  <Route path="certify">
+                    <Route path=":id" element={<GenerateCertificate />} />
                   </Route>
                 </Route>
 
@@ -132,31 +136,10 @@ function App() {
                     />
                   }
                 >
-                  {/* <Route path="generate-certificate">
-                    <Route index element={<GenerateCertificate />} />
-                  </Route> */}
                   <Route path="view-anex-B">
                     <Route index element={<NewEmployeeOutreach />} />
                   </Route>
                 </Route>
-                {/* <Route path="view-anex-C">
-                  <Route index element={<FormAndViewer />} />
-                </Route> */}
-
-                {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                  <Route path="design-anex-A">
-                    <Route index element={<Designer />} />
-                  </Route>
-                  <Route path="design-anex-B">
-                    <Route index element={<Designer />} />
-                  </Route>
-                  <Route path="design-anex-C">
-                    <Route index element={<Designer />} />
-                  </Route>
-                  <Route path="design-anex-D">
-                    <Route index element={<Designer />} />
-                  </Route>
-                </Route> */}
               </Route>
               {/* End Dash */}
             </Route>
