@@ -22,7 +22,7 @@ const App = () => {
         allReports: data?.ids.map((id) => data?.entities[id])
       })
   })
-
+  
   
   if (!user || allReports.length == 0) return <PulseLoader color={"#FFF"} />
   const fullname = (user.lastname + ", " + user.firstname)
@@ -37,7 +37,10 @@ const App = () => {
     if (report.prep_per1 === fullname) {
       natInv.push(report.prep_type1);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.prep_type1 === "Participant" || report.prep_type1 === "Donor") {
         points.push(2);
       } else if (report.prep_type1 === "Game Facilitator") {
@@ -51,7 +54,10 @@ const App = () => {
     if (report.prep_per2 === fullname) {
       natInv.push(report.prep_type2);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.prep_type2 === "Participant" || report.prep_type2 === "Donor") {
         points.push(2);
       } else if (report.prep_type2 === "Game Facilitator") {
@@ -65,7 +71,10 @@ const App = () => {
     if (report.prep_per3 === fullname) {
       natInv.push(report.prep_type3);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.prep_type3 === "Participant" || report.prep_type3 === "Donor") {
         points.push(2);
       } else if (report.prep_type3 === "Game Facilitator") {
@@ -79,7 +88,10 @@ const App = () => {
     if (report.prep_per4 === fullname) {
       natInv.push(report.prep_type4);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.prep_type4 === "Participant" || report.prep_type4 === "Donor") {
         points.push(2);
       } else if (report.prep_type4 === "Game Facilitator") {
@@ -93,7 +105,10 @@ const App = () => {
     if (report.implement_per1 === fullname) {
       natInv.push(report.implement_type1);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.implement_type1 === "Participant" || report.implement_type1 === "Donor") {
         points.push(2);
       } else if (report.implement_type1 === "Game Facilitator") {
@@ -107,7 +122,10 @@ const App = () => {
     if (report.implement_per2 === fullname) {
       natInv.push(report.implement_type2);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.implement_type2 === "Participant" || report.implement_type2 === "Donor") {
         points.push(2);
       } else if (report.implement_type2 === "Game Facilitator") {
@@ -121,7 +139,10 @@ const App = () => {
     if (report.implement_per3 === fullname) {
       natInv.push(report.implement_type3);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.implement_type3 === "Participant" || report.implement_type3 === "Donor") {
         points.push(2);
       } else if (report.implement_type3 === "Game Facilitator") {
@@ -135,7 +156,10 @@ const App = () => {
     if (report.implement_per4 === fullname) {
       natInv.push(report.implement_type4);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.implement_type4 === "Participant" || report.implement_type4 === "Donor") {
         points.push(2);
       } else if (report.implement_type4 === "Game Facilitator") {
@@ -149,7 +173,10 @@ const App = () => {
     if (report.post_per1 === fullname) {
       natInv.push(report.post_type1);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.post_type1 === "Participant" || report.post_type1 === "Donor") {
         points.push(2);
       } else if (report.post_type1 === "Game Facilitator") {
@@ -163,7 +190,10 @@ const App = () => {
     if (report.post_per2 === fullname) {
       natInv.push(report.post_type2);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.post_type2 === "Participant" || report.post_type2 === "Donor") {
         points.push(2);
       } else if (report.post_type2 === "Game Facilitator") {
@@ -177,7 +207,10 @@ const App = () => {
     if (report.post_per3 === fullname) {
       natInv.push(report.post_type3);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.post_type3 === "Participant" || report.post_type3 === "Donor") {
         points.push(2);
       } else if (report.post_type3 === "Game Facilitator") {
@@ -191,7 +224,10 @@ const App = () => {
     if (report.post_per4 === fullname) {
       natInv.push(report.post_type4);
       titles.push(report.project_title)
-      date.push(report.date_implement)
+      const unformattedDate = new Date(report.date_implement);
+      const formattedDate = unformattedDate.toLocaleString("en-US", { day: "numeric", month: "long", year: "numeric" });
+      console.log(formattedDate);
+      date.push(formattedDate)
       if (report.post_type4 === "Participant" || report.post_type4 === "Donor") {
         points.push(2);
       } else if (report.post_type4 === "Game Facilitator") {
@@ -214,10 +250,6 @@ const App = () => {
     return array;
   }
   const total = getSum()
-  console.log(total);
-  console.log(date);
-  console.log(natInv);
-  console.log(points);
   return (
   <PDFViewer className='w-screen h-screen'>
     <CertiGen fullname={fullname} role={role} department={department} titles={titles} natInv={natInv} points={points} date={date} total={total}/>

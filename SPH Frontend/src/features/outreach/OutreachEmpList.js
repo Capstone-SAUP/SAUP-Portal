@@ -32,15 +32,6 @@ const OutreachEmpList = () => {
   }
   );
 
-  const { test, name, outreach_status, user_dept,  } = useGetAnexBQuery("outreachList", {
-    selectFromResult: ({ data }) => ({
-      test: data?.ids.map((id) => data?.entities[id]).id,
-      name: data?.ids.map((id) => data?.entities[id].fullname),
-      outreach_status: data?.ids.map((id) => data?.entities[id].status),
-      user_dept: data?.ids.map((id) => data?.entities[id].department),
-    }),
-  });
-
   let content;
 
   if (isLoading) content = <PulseLoader color={"#FFF"} />;

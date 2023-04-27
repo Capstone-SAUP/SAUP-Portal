@@ -34,52 +34,85 @@ const DataOverview = () => {
     }),
   });
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [department, setDepartment] = useState("All");
+
   const unfilteredOutreach = { ...anexA, ...anexB };
+  const outreachArray = Object.values(unfilteredOutreach);
+  let filteredOutreach = unfilteredOutreach;
+  if (startDate && endDate){
+    filteredOutreach = outreachArray.filter((item) => {
+      const itemDate = new Date(item.createdAt);
+      return itemDate >= startDate && itemDate <= endDate;
+    });
+  }
+  const totalOutreach = Object.keys(filteredOutreach).length;
 
-  const totalOutreach = Object.keys(unfilteredOutreach).length;
-
-  const allDepartments = Object.values(unfilteredOutreach).map(
-    (item) => item.department
-  );
-
-  const NotApplicable = Object.values(unfilteredOutreach).reduce(
+  let NotApplicable;
+  if (department === "NotApplicable" || department === "All"){
+  NotApplicable = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "N/A" ? acc + 1 : acc),
     0
   );
-  const SOC = Object.values(unfilteredOutreach).reduce(
+  }
+  let SOC;
+  if (department === "SOC" || department === "All"){
+  SOC = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "SOC" ? acc + 1 : acc),
     0
   );
-  const SBA = Object.values(unfilteredOutreach).reduce(
+  }
+  let SBA;
+  if (department === "SBA" || department === "All"){
+  SBA = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "SBA" ? acc + 1 : acc),
     0
   );
-  const SAS = Object.values(unfilteredOutreach).reduce(
+  }
+  let SAS;
+  if (department === "SAS" || department === "All"){
+  SAS = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "SAS" ? acc + 1 : acc),
     0
   );
-  const SEA = Object.values(unfilteredOutreach).reduce(
+  }
+  let SEA;
+  if (department === "SEA" || department === "All"){
+  SEA = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "SEA" ? acc + 1 : acc),
     0
   );
-  const SHTM = Object.values(unfilteredOutreach).reduce(
+  }
+  let SHTM;
+  if (department === "SHTM" || department === "All"){
+  SHTM = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "SHTM" ? acc + 1 : acc),
     0
   );
-  const SED = Object.values(unfilteredOutreach).reduce(
+  }
+  let SED;
+  if (department === "SED" || department === "All"){
+  SED = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "SED" ? acc + 1 : acc),
     0
   );
-  const CCJEF = Object.values(unfilteredOutreach).reduce(
+  }
+  let CCJEF;
+  if (department === "CCJEF" || department === "All"){
+  CCJEF = Object.values(filteredOutreach).reduce(
     (acc, curr) => (curr.department === "CCJEF" ? acc + 1 : acc),
     0
   );
-  const SNAMS = Object.values(unfilteredOutreach).reduce(
-    (acc, curr) => (curr.department === "SNAMS" ? acc + 1 : acc),
-    0
-  );
+  }
+  let SNAMS;
+  if (department === "SNAMS" || department === "All"){
+    SNAMS = Object.values(filteredOutreach).reduce(
+      (acc, curr) => (curr.department === "SNAMS" ? acc + 1 : acc),
+      0
+    );
+  }
 
-  const count = 30;
   const data = [
     { name: "N/A", entries: NotApplicable },
     { name: "SOC", entries: SOC },
@@ -130,9 +163,6 @@ const DataOverview = () => {
     );
   };
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-
   return (
     <>
       <h1 className="font-bold text-2xl pb-5">Database Overview</h1>
@@ -145,6 +175,7 @@ const DataOverview = () => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 dateFormat="MMMM d, yyyy"
+                placeholderText={startDate === null ? "All" : undefined}
                 className="mr-20 w-3/4 z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
             </li>
@@ -154,18 +185,25 @@ const DataOverview = () => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 dateFormat="MMMM d, yyyy"
+                placeholderText={endDate === null ? "All" : undefined}
                 className="mr-20 w-3/4 z-1 block ml-4 bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
             </li>
             <li>
               <label className="py-10 text-sm font-bold">Department</label>
-              <select className="mr-20 w-full z-1 block bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>ALL</option>
-                <option value="SOC">SOC</option>
-                <option value="SEA">SEA</option>
-                <option value="SBA">SBA</option>
-                <option value="SNAMS">SNAMS</option>
-              </select>
+              <select className="mr-20 w-full z-1 block bg-white border py-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-rose-900 focus:border-rose-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={(e) => setDepartment(e.target.value)}>
+                  <option value="All">All</option>
+                  <option value="NA">N/A</option>
+                  <option value="SOC">SOC</option>
+                  <option value="SAS">SAS</option>
+                  <option value="SEA">SEA</option>
+                  <option value="SED">SED</option>
+                  <option value="SBA">SBA</option>
+                  <option value="SNAMS">SNAMS</option>
+                  <option value="CCJEF">CCJEF</option>
+                  <option value="SHTM">SHTM</option>
+                </select>
             </li>
           </ul>
         </div>

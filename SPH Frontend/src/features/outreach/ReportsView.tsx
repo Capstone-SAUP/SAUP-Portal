@@ -39,11 +39,6 @@ const ReportsView = () => {
   const [mode, setMode] = useState<Mode>(
     (localStorage.getItem("mode") as Mode) ?? "viewer"
   );
-
-  // window.addEventListener("beforeunload", function (event) {
-  //   event.returnValue = "The information in the document will reset.";
-  // });
-
   const { user_id } = useAuth();
   const { id } = useParams();
 
