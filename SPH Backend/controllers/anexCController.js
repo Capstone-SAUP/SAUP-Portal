@@ -20,6 +20,16 @@ const getAllAnexC = async (req, res) => {
     const outreachWithUser = await Promise.all(
       anexC.map(async (anexC) => {
         const user = await User.findById(anexC.user).lean().exec();
+        
+        // Check if user exists before accessing its properties
+        if (!user) {
+          return {
+            ...anexC,
+            user: "Unknown",
+            // No fullname or user_role since they're commented out in the original
+          };
+        }
+        
         return {
           ...anexC,
           user: user.user_id,

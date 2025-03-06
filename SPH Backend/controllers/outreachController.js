@@ -18,6 +18,12 @@ const getAllOutreach = async (req, res) => {
     // You could also do this with a for...of loop
     const outreachWithUser = await Promise.all(outreach.map(async (outreach) => {
         const user = await User.findById(outreach.user).lean().exec()
+        
+        // Check if user exists before accessing its properties
+        if (!user) {
+            return { ...outreach, user_id: "Unknown" }
+        }
+        
         return { ...outreach, user_id: user.user_id }
     }))
 

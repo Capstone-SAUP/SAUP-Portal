@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 
 const Public = () => {
     const content = (
-      <div className="w-screen">
+      <div>
         <header className="lg:sticky top-0 z-20">
           <nav className="bg-red-900 sticky border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">

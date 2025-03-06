@@ -18,7 +18,23 @@ const getAllAnexA = async (req, res) => {
     // You could also do this with a for...of loop
     const outreachWithUser = await Promise.all(anexA.map(async (anexA) => {
         const user = await User.findById(anexA.user).lean().exec()
-        return { ...anexA, user: user.user_id, fullname: user.firstname + " " + user.lastname, user_role: user.roles[0]}
+        
+        // Check if user exists before accessing its properties
+        if (!user) {
+            return { 
+                ...anexA, 
+                user: "Unknown", 
+                fullname: "Unknown User", 
+                user_role: "Unknown"
+            }
+        }
+        
+        return { 
+            ...anexA, 
+            user: user.user_id, 
+            fullname: user.firstname + " " + user.lastname, 
+            user_role: user.roles[0]
+        }
     }))
 
     res.json(outreachWithUser)
